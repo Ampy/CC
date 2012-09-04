@@ -13,6 +13,7 @@
 		050CECE415F600410044CCB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 050CECE215F600410044CCB9 /* InfoPlist.strings */; };
 		050CECE615F600410044CCB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE515F600410044CCB9 /* main.m */; };
 		050CECEA15F600410044CCB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE915F600410044CCB9 /* AppDelegate.m */; };
+		054BB5FA15F60347004F341E /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 054BB5F915F60347004F341E /* test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		050CECE715F600410044CCB9 /* CC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CC-Prefix.pch"; sourceTree = "<group>"; };
 		050CECE815F600410044CCB9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		050CECE915F600410044CCB9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		054BB5F815F60347004F341E /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		054BB5F915F60347004F341E /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,8 @@
 				050CECE815F600410044CCB9 /* AppDelegate.h */,
 				050CECE915F600410044CCB9 /* AppDelegate.m */,
 				050CECE015F600410044CCB9 /* Supporting Files */,
+				054BB5F815F60347004F341E /* test.h */,
+				054BB5F915F60347004F341E /* test.m */,
 			);
 			path = CC;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 			files = (
 				050CECE615F600410044CCB9 /* main.m in Sources */,
 				050CECEA15F600410044CCB9 /* AppDelegate.m in Sources */,
+				054BB5FA15F60347004F341E /* test.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +269,7 @@
 				050CECEF15F600410044CCB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
