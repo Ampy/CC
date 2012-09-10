@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LoginViewController.h"
-
+#import "Update.h"
 
 @interface WelcomeViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UIWebView *webView;

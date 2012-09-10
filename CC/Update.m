@@ -43,4 +43,13 @@
     [db CloseDB];
 }
 
+-(void)UpdateAll:(NSArray *)tableNames
+{
+    for(id name in tableNames)
+    {
+        [self GetTableStruct:name];
+        [self GetTableData:name];
+    }
+}
+
 @end

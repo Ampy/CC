@@ -22,7 +22,7 @@
 		A6790F8A15FD8EBF00F2655E /* dqjc_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A6790F7515FD8EBF00F2655E /* dqjc_1.png */; };
 		A6790F8B15FD8EBF00F2655E /* fc_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A6790F7615FD8EBF00F2655E /* fc_1.png */; };
 		A6790F8C15FD8EBF00F2655E /* home_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A6790F7715FD8EBF00F2655E /* home_bg.png */; };
-		A6790F8D15FD8EBF00F2655E /* icon_inspect_edit .png in Resources */ = {isa = PBXBuildFile; fileRef = A6790F7815FD8EBF00F2655E /* icon_inspect_edit .png */; };
+		A6790F8D15FD8EBF00F2655E /* icon_inspect_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A6790F7815FD8EBF00F2655E /* icon_inspect_edit.png */; };
 		A6790F8E15FD8EBF00F2655E /* icon_inspect.png in Resources */ = {isa = PBXBuildFile; fileRef = A6790F7915FD8EBF00F2655E /* icon_inspect.png */; };
 		A6790F8F15FD8EBF00F2655E /* inspect_0.png in Resources */ = {isa = PBXBuildFile; fileRef = A6790F7A15FD8EBF00F2655E /* inspect_0.png */; };
 		A6790F9015FD8EBF00F2655E /* inspect_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A6790F7B15FD8EBF00F2655E /* inspect_bg.png */; };
@@ -52,6 +52,7 @@
 		A6790FD415FD9A1E00F2655E /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = A6790FD315FD9A1E00F2655E /* Update.m */; };
 		A6A8F5FA15FDA93800E29A1E /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8F5F915FDA93800E29A1E /* DatabaseHelper.m */; };
 		A6A8F5FD15FDA98300E29A1E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */; };
+		A6A8F60815FDB4FA00E29A1E /* LogicBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8F60715FDB4FA00E29A1E /* LogicBase.m */; };
 		A6C684AE15FD896100814CBD /* update.gif in Resources */ = {isa = PBXBuildFile; fileRef = A6C684AD15FD896100814CBD /* update.gif */; };
 		A6C684B315FD8CBE00814CBD /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */; };
 		A6C684B415FD8CBE00814CBD /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C684B215FD8CBE00814CBD /* WelcomeViewController.xib */; };
@@ -77,7 +78,7 @@
 		A6790F7515FD8EBF00F2655E /* dqjc_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dqjc_1.png; sourceTree = "<group>"; };
 		A6790F7615FD8EBF00F2655E /* fc_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fc_1.png; sourceTree = "<group>"; };
 		A6790F7715FD8EBF00F2655E /* home_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_bg.png; sourceTree = "<group>"; };
-		A6790F7815FD8EBF00F2655E /* icon_inspect_edit .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inspect_edit .png"; sourceTree = "<group>"; };
+		A6790F7815FD8EBF00F2655E /* icon_inspect_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_inspect_edit.png; sourceTree = "<group>"; };
 		A6790F7915FD8EBF00F2655E /* icon_inspect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_inspect.png; sourceTree = "<group>"; };
 		A6790F7A15FD8EBF00F2655E /* inspect_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inspect_0.png; sourceTree = "<group>"; };
 		A6790F7B15FD8EBF00F2655E /* inspect_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inspect_bg.png; sourceTree = "<group>"; };
@@ -119,6 +120,8 @@
 		A6A8F5F915FDA93800E29A1E /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
 		A6A8F5FB15FDA95A00E29A1E /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseHelper.h; sourceTree = "<group>"; };
 		A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		A6A8F60615FDB4F900E29A1E /* LogicBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogicBase.h; sourceTree = "<group>"; };
+		A6A8F60715FDB4FA00E29A1E /* LogicBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogicBase.m; sourceTree = "<group>"; };
 		A6C684AD15FD896100814CBD /* update.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = update.gif; sourceTree = "<group>"; };
 		A6C684B015FD8CBE00814CBD /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
@@ -204,7 +207,7 @@
 				A6790F7515FD8EBF00F2655E /* dqjc_1.png */,
 				A6790F7615FD8EBF00F2655E /* fc_1.png */,
 				A6790F7715FD8EBF00F2655E /* home_bg.png */,
-				A6790F7815FD8EBF00F2655E /* icon_inspect_edit .png */,
+				A6790F7815FD8EBF00F2655E /* icon_inspect_edit.png */,
 				A6790F7915FD8EBF00F2655E /* icon_inspect.png */,
 				A6790F7A15FD8EBF00F2655E /* inspect_0.png */,
 				A6790F7B15FD8EBF00F2655E /* inspect_bg.png */,
@@ -263,6 +266,8 @@
 				A6790FBE15FD916000F2655E /* Common.m */,
 				A6790FCC15FD942F00F2655E /* Settings.h */,
 				A6790FCD15FD942F00F2655E /* Settings.m */,
+				A6A8F60615FDB4F900E29A1E /* LogicBase.h */,
+				A6A8F60715FDB4FA00E29A1E /* LogicBase.m */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -330,7 +335,7 @@
 				A6790F8A15FD8EBF00F2655E /* dqjc_1.png in Resources */,
 				A6790F8B15FD8EBF00F2655E /* fc_1.png in Resources */,
 				A6790F8C15FD8EBF00F2655E /* home_bg.png in Resources */,
-				A6790F8D15FD8EBF00F2655E /* icon_inspect_edit .png in Resources */,
+				A6790F8D15FD8EBF00F2655E /* icon_inspect_edit.png in Resources */,
 				A6790F8E15FD8EBF00F2655E /* icon_inspect.png in Resources */,
 				A6790F8F15FD8EBF00F2655E /* inspect_0.png in Resources */,
 				A6790F9015FD8EBF00F2655E /* inspect_bg.png in Resources */,
@@ -372,6 +377,7 @@
 				A6790FD115FD98BE00F2655E /* CellService.m in Sources */,
 				A6790FD415FD9A1E00F2655E /* Update.m in Sources */,
 				A6A8F5FA15FDA93800E29A1E /* DatabaseHelper.m in Sources */,
+				A6A8F60815FDB4FA00E29A1E /* LogicBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

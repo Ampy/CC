@@ -4,7 +4,7 @@
 <dict>
 	<key>DataBaseName</key>
 	<string>Info.sqlite</string>
-	<key>ServerUrl</key>
+	<key>ServiceUrl</key>
 	<string>http://192.168.1.139:8083/</string>
 	<key>LoginName</key>
 	<string>测试人员</string>

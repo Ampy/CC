@@ -15,21 +15,13 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *_path = [documentsDirectory stringByAppendingPathComponent:dbName];
-    //测试使用
-    _path = [NSString stringWithFormat:@"/Users/renfy/Desktop/%@",dbName];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];  
-    BOOL find = [fileManager fileExistsAtPath:_path];  
-    if(!find)
-    {
-        NSLog(@"File no Find : %@",_path);
-    }
-    else
-    {
-        sqlite3_open([_path UTF8String], &database);
-        sqlite3_exec(database, "PRAGMA synchronous = OFF;", 0,0,0);
-    }	
-    
+
+    if (sqlite3_open([_path UTF8String], &database) != SQLITE_OK) {  
+        sqlite3_close(database);  
+        NSLog(@"数据库打开失败");  
+    }  
+    //sqlite3_open([_path UTF8String], &database);
+    sqlite3_exec(database, "PRAGMA synchronous = OFF;", 0,0,0);
 }
 
 -(sqlite3_stmt *)ExecSql:(NSString *)sql

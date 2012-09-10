@@ -10,9 +10,9 @@
 #import "Config.h"
 
 @interface Settings : NSObject
-@property (nonatomic, assign) NSString* ServiceUrl;
-@property (nonatomic, assign) NSString* DatabaseName;
-@property (nonatomic, assign) NSString* LoginName;
+@property (nonatomic, retain) NSString* ServiceUrl;
+@property (nonatomic, strong) NSString* DatabaseName;
+@property (nonatomic, strong) NSString* LoginName;
 +(Settings *)Instance;
 +Add:(NSString *)Name KeyName:(NSString *)Key;
 @end

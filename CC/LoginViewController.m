@@ -83,14 +83,16 @@
         [Config SetPlistInfo:@"LoginIsRemember" Value:@"F"];
     }
     
-    if(false)
+    NSString *loginName = [NSString stringWithString:[LogicBase Login:name.text Password:password.text]];
+    
+    if([loginName isEqualToString:@"F"])
     {
         UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"登陆提示" message:@"用户名或密码错误！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alert show];
     }
     else 
     {
-        [Config SetPlistInfo:@"LoginName" Value:name.text];
+        [Config SetPlistInfo:@"LoginName" Value:loginName];
         HomeViewController *view = [[HomeViewController alloc] init];
         //[self.navigationController pushViewController:view animated:YES];
         [UIView  beginAnimations:nil context:NULL];  

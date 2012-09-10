@@ -36,14 +36,18 @@
     
     //NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     //[queue addOperationWithBlock:UpdateAndGoto];
-    dispatch_queue_t newThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(newThread, ^{ [self UpdateAndGoto]; }); 
-    
+    //dispatch_queue_t newThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //dispatch_async(newThread, ^{ [self UpdateAndGoto]; }); 
+     [self performSelectorInBackground: @selector(UpdateAndGoto) withObject: nil];
     }
 
 -(void) UpdateAndGoto
 {
     //[NSThread sleepForTimeInterval:1];
+    NSArray * arr = [NSArray arrayWithObjects:@"Line",@"Site",@"Segment",@"Sys_User",@"Inspect",@"InspectActivity",@"InspectItem",@"InspectScore",@"InspItemTemp",@"InspScoreTemp",@"InspTemp",@"UserLine",nil];
+    Update *u = [[Update alloc] init];
+    [u UpdateAll:arr];
+
     
     LoginViewController *ctrl = [[LoginViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];

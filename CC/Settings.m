@@ -1,4 +1,4 @@
-//
+		//
 //  Settings.m
 //  CC
 //
@@ -31,7 +31,7 @@ static Settings *globalSettings = nil;
             //读取配置表Settings.plist
             NSDictionary *dictionary = [Config GetPlist];
             globalSettings.ServiceUrl = [NSString stringWithFormat:@"%@", [dictionary objectForKey: @"ServiceUrl"]];               
-            globalSettings.DatabaseName = [NSString stringWithFormat:@"%@", [dictionary objectForKey: @"DatabaseName"]];
+            globalSettings.DatabaseName = [NSString stringWithFormat:@"%@", [dictionary objectForKey: @"DataBaseName"]];
             return  globalSettings;
         }
     }

@@ -14,4 +14,5 @@
 @interface Update : NSObject
 -(void)GetTableStruct:(NSString *)tableName;
 -(void)GetTableData:(NSString *)tableName;
+-(void)UpdateAll:(NSArray *)tableNames;
 @end

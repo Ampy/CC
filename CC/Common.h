@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface Common : NSObject
 //Char*转NSString
 +(NSString *) CStringToNSString:(char *) string;
 +(NSString *)MD5:(NSString *)value;
+
+
+
 @end
