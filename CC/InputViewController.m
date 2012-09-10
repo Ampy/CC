@@ -1,0 +1,194 @@
+//
+//  InputViewController.m
+//  WMSG
+//
+//  Created by fy ren on 12-9-6.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import "InputViewController.h"
+
+@interface InputViewController ()
+
+@end
+
+@implementation InputViewController
+
+@synthesize checkType;
+@synthesize tableView;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(20, 10, 68, 26)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
+    [self.view addSubview:backButton];
+    [backButton addTarget:self  action:@selector(backButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *beginButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    [beginButton setFrame:CGRectMake(400, 620, 221, 52)];
+    [beginButton setBackgroundImage:[UIImage imageNamed:@"btn_inspect.png"] forState:UIControlStateNormal];
+    [beginButton addTarget:self  action:@selector(beginCheck:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:beginButton];
+    
+    self.view.userInteractionEnabled = YES;
+    
+
+    listArr = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *list1 = [[NSMutableArray alloc] init];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init]; 
+    [formatter setDateFormat:@"YYYY年MM月dd日"]; 
+    NSString *locationString=[formatter stringFromDate: [NSDate date]]; 
+
+    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkType,nil]];
+    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Config GetPlistInfo:@"LoginName"],nil]];
+    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查时间",locationString,nil]];
+    
+    [listArr addObject:list1];
+    
+    NSMutableArray *list2 = [[NSMutableArray alloc] init];
+    [list2 addObject:[[NSMutableArray alloc]initWithObjects:@"检查标段",@"未选标段",@"",@"",nil]];
+    [list2 addObject:[[NSMutableArray alloc]initWithObjects:@"检查工程",@"未选工程",@"",@"",nil]];
+    
+    [listArr addObject:list2];
+    
+    NSMutableArray *list3 = [[NSMutableArray alloc] init];
+    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"建设单位",@"未选单位",@"",@"",nil]];
+    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"施工单位",@"未选单位",@"",@"",nil]];
+    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"监理单位",@"未选单位",@"",@"",nil]];
+    
+    [listArr addObject:list3];
+    
+    [tableView setBackgroundView:nil];
+}
+
+-(void)backButton:(id)sender 
+{
+    //[self.navigationController popViewControllerAnimated:YES];
+    HomeViewController *ctrl = [[HomeViewController alloc] init];
+    [UIView  beginAnimations:nil context:NULL];  
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];  
+    [UIView setAnimationDuration:0.75];  
+    [self.navigationController pushViewController:ctrl animated:NO];  
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];  
+    [UIView commitAnimations];
+}
+
+-(void)beginCheck:(id)sender 
+{
+}
+
+- (void)viewDidUnload
+{
+    [self setTableView:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return YES;
+}
+
+#pragma mark -- Table view
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [listArr count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return [[listArr objectAtIndex:section] count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @""] ;
+    
+    NSMutableArray * arr = [[listArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell.textLabel.text= [arr objectAtIndex:0];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    if(indexPath.section==0)
+    {
+        UILabel *tLable= [[UILabel alloc] initWithFrame:CGRectMake(140,5,200,30)];
+        tLable.text = [arr objectAtIndex:1];
+        tLable.font = [UIFont fontWithName: @"Helvetica" size: 14 ];
+        tLable.textColor = [ UIColor redColor ];
+        tLable.textAlignment = UITextAlignmentRight;
+        [tLable setBackgroundColor:[UIColor clearColor]];
+        [cell.contentView addSubview:tLable];
+    }
+    else 
+    {
+        UILabel *tLable= [[UILabel alloc] initWithFrame:CGRectMake(140,5,200,30)];
+        if([[arr objectAtIndex:2] isEqualToString: @""])
+        {
+            tLable.text = [arr objectAtIndex:1];
+            tLable.textColor = [ UIColor grayColor ];
+            
+        }
+        else 
+        {
+            tLable.text = [arr objectAtIndex:2];
+            tLable.textColor = [ UIColor redColor ];
+        }
+        //tLable.text = [arr objectAtIndex:1];
+        tLable.font = [UIFont fontWithName: @"Helvetica" size: 14 ];
+        
+        tLable.textAlignment = UITextAlignmentRight;
+        [tLable setBackgroundColor:[UIColor clearColor]];
+        [cell.contentView addSubview:tLable];
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section==1)
+    {
+        int iRow = indexPath.row;
+        int iHeight = 160;
+        if(iRow==0)
+        {
+            iHeight = 110;
+        }
+
+        subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420)];
+        subView.delegate = self;
+        subView.index = iRow;
+        [self.view addSubview:subView];
+    }
+}
+
+-(void)passValue:(NSString *)value arrayIndex:(int) index
+{
+    [[[listArr objectAtIndex:1] objectAtIndex:index] setObject:value atIndex:2];
+    [tableView reloadData];
+    [subView removeFromSuperview];
+}
+
+
+
+
+
+
+
+
+
+@end

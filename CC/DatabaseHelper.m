@@ -1,0 +1,82 @@
+//
+//  DBOP.m
+//  文明施工
+//
+//  Created by fy ren on 12-8-6.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import "DatabaseHelper.h"
+
+@implementation DatabaseHelper
+
+-(void)OpenDB:(NSString*)dbName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *_path = [documentsDirectory stringByAppendingPathComponent:dbName];
+    //测试使用
+    _path = [NSString stringWithFormat:@"/Users/renfy/Desktop/%@",dbName];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];  
+    BOOL find = [fileManager fileExistsAtPath:_path];  
+    if(!find)
+    {
+        NSLog(@"File no Find : %@",_path);
+    }
+    else
+    {
+        sqlite3_open([_path UTF8String], &database);
+        sqlite3_exec(database, "PRAGMA synchronous = OFF;", 0,0,0);
+    }	
+    
+}
+
+-(sqlite3_stmt *)ExecSql:(NSString *)sql
+{
+    char * csql = (char*)[sql UTF8String];
+    if(sqlite3_prepare_v2(database, csql, -1, &statement,nil) != SQLITE_OK)
+    {
+        NSLog(@"Error: failed to prepare statement");
+    }
+    return statement;
+}
+
+-(void) ExecuteNonQuery:(NSString *)sql
+{
+    char *errorMsg;
+    char *cssql = (char *)[sql UTF8String];
+    if (sqlite3_exec(database, cssql, NULL, NULL, &errorMsg)==SQLITE_OK) {
+        ;
+    }else {
+        NSLog(@"error: %s",errorMsg);
+        sqlite3_free(errorMsg);
+    }
+}
+
+-(void)Setp
+{
+    sqlite3_step(statement);
+}
+
+-(void) BeginTransaction
+{
+    sqlite3_exec(database,"BEGIN TRANSACTION",0,0,0); 
+}
+-(int) Commit
+{
+    char *error;
+    int i= sqlite3_exec(database,"COMMIT",0,0,&error); //COMMIT
+    //NSString *err = [[NSString alloc] initWithCString:error encoding:NSUTF8StringEncoding];
+    //NSLog(@"%@",err);
+    return  i;
+}
+
+-(void)CloseDB
+{
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+}
+
+@end
+

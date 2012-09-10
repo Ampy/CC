@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DataBaseName</key>
+	<string>Info.sqlite</string>
+	<key>ServerUrl</key>
+	<string>http://192.168.1.139:8083/</string>
+	<key>LoginName</key>
+	<string>测试人员</string>
+	<key>LoginPassword</key>
+	<string></string>
+	<key>LoginIsRemember</key>
+	<string>T</string>
+</dict>
+</plist>
