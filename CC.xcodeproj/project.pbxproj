@@ -15,6 +15,8 @@
 		050CECEA15F600410044CCB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE915F600410044CCB9 /* AppDelegate.m */; };
 		054BB5FA15F60347004F341E /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 054BB5F915F60347004F341E /* test.m */; };
 		A6C684AE15FD896100814CBD /* update.gif in Resources */ = {isa = PBXBuildFile; fileRef = A6C684AD15FD896100814CBD /* update.gif */; };
+		A6C684B315FD8CBE00814CBD /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */; };
+		A6C684B415FD8CBE00814CBD /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C684B215FD8CBE00814CBD /* WelcomeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,9 @@
 		054BB5F815F60347004F341E /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		054BB5F915F60347004F341E /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		A6C684AD15FD896100814CBD /* update.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = update.gif; sourceTree = "<group>"; };
+		A6C684B015FD8CBE00814CBD /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		A6C684B215FD8CBE00814CBD /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,9 @@
 		050CECDF15F600410044CCB9 /* CC */ = {
 			isa = PBXGroup;
 			children = (
+				A6C684B015FD8CBE00814CBD /* WelcomeViewController.h */,
+				A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */,
+				A6C684B215FD8CBE00814CBD /* WelcomeViewController.xib */,
 				A6C684AD15FD896100814CBD /* update.gif */,
 				050CECE815F600410044CCB9 /* AppDelegate.h */,
 				050CECE915F600410044CCB9 /* AppDelegate.m */,
@@ -151,6 +159,7 @@
 			files = (
 				050CECE415F600410044CCB9 /* InfoPlist.strings in Resources */,
 				A6C684AE15FD896100814CBD /* update.gif in Resources */,
+				A6C684B415FD8CBE00814CBD /* WelcomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +173,7 @@
 				050CECE615F600410044CCB9 /* main.m in Sources */,
 				050CECEA15F600410044CCB9 /* AppDelegate.m in Sources */,
 				054BB5FA15F60347004F341E /* test.m in Sources */,
+				A6C684B315FD8CBE00814CBD /* WelcomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
