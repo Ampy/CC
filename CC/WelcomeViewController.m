@@ -47,9 +47,7 @@
     
     if([Common CheckNetworkStatus])
     {
-        NSArray * arr = [NSArray arrayWithObjects:@"Line",@"Site",@"Segment",@"Sys_User",@"Inspect",@"InspectActivity",@"InspectItem",@"InspectScore",@"InspItemTemp",@"InspScoreTemp",@"InspTemp",@"UserLine",@"V_Inspect",nil];
-        Update *u = [[Update alloc] init];
-        [u UpdateAll:arr];
+        [LogicBase UpdateByService];
     }
     else 
     {

@@ -58,6 +58,10 @@
 		A6C684AE15FD896100814CBD /* update.gif in Resources */ = {isa = PBXBuildFile; fileRef = A6C684AD15FD896100814CBD /* update.gif */; };
 		A6C684B315FD8CBE00814CBD /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */; };
 		A6C684B415FD8CBE00814CBD /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C684B215FD8CBE00814CBD /* WelcomeViewController.xib */; };
+		A6C7CBA115FF2D510042598F /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C7CB9D15FF2D510042598F /* down.png */; };
+		A6C7CBA215FF2D510042598F /* down2.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C7CB9E15FF2D510042598F /* down2.png */; };
+		A6C7CBA315FF2D510042598F /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C7CB9F15FF2D510042598F /* up.png */; };
+		A6C7CBA415FF2D510042598F /* up2.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C7CBA015FF2D510042598F /* up2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +135,10 @@
 		A6C684B015FD8CBE00814CBD /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		A6C684B215FD8CBE00814CBD /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		A6C7CB9D15FF2D510042598F /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = ../../ipad/ipad2/down.png; sourceTree = "<group>"; };
+		A6C7CB9E15FF2D510042598F /* down2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down2.png; path = ../../ipad/ipad2/down2.png; sourceTree = "<group>"; };
+		A6C7CB9F15FF2D510042598F /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = ../../ipad/ipad2/up.png; sourceTree = "<group>"; };
+		A6C7CBA015FF2D510042598F /* up2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up2.png; path = ../../ipad/ipad2/up2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +160,6 @@
 		050CECCA15F600410044CCB9 = {
 			isa = PBXGroup;
 			children = (
-				A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */,
 				050CECDF15F600410044CCB9 /* CC */,
 				050CECD815F600410044CCB9 /* Frameworks */,
 				050CECD615F600410044CCB9 /* Products */,
@@ -171,9 +178,10 @@
 			isa = PBXGroup;
 			children = (
 				A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */,
-				050CECD915F600410044CCB9 /* UIKit.framework */,
-				050CECDB15F600410044CCB9 /* Foundation.framework */,
 				050CECDD15F600410044CCB9 /* CoreGraphics.framework */,
+				050CECDB15F600410044CCB9 /* Foundation.framework */,
+				A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */,
+				050CECD915F600410044CCB9 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,6 +213,10 @@
 		A6790F6C15FD8DCE00F2655E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A6C7CB9D15FF2D510042598F /* down.png */,
+				A6C7CB9E15FF2D510042598F /* down2.png */,
+				A6C7CB9F15FF2D510042598F /* up.png */,
+				A6C7CBA015FF2D510042598F /* up2.png */,
 				A6790F6F15FD8EBF00F2655E /* alt_bg.png */,
 				A6790F7015FD8EBF00F2655E /* arrow.png */,
 				A6790F7115FD8EBF00F2655E /* bottom.png */,
@@ -362,6 +374,10 @@
 				A6790FAC15FD8F0D00F2655E /* LoginViewController.xib in Resources */,
 				A6790FAE15FD8F0D00F2655E /* ManageViewController.xib in Resources */,
 				A6790FB815FD8FC900F2655E /* config.plist in Resources */,
+				A6C7CBA115FF2D510042598F /* down.png in Resources */,
+				A6C7CBA215FF2D510042598F /* down2.png in Resources */,
+				A6C7CBA315FF2D510042598F /* up.png in Resources */,
+				A6C7CBA415FF2D510042598F /* up2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

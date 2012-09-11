@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @protocol ViewDelegate <NSObject>
--(void)passValue:(NSString *)value arrayIndex:(int) index;
+-(void)passValue:(NSMutableArray *)valueArr arrayIndex:(int) index;
+-(void)SubVewClose;
 @end
 
 

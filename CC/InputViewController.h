@@ -17,6 +17,7 @@
     NSMutableArray *listArr;
     NSString *checkType;
     InputSubView *subView;
+    bool IsOpenSubView;
 }
 @property (nonatomic,retain) NSString *checkType;
 

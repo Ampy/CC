@@ -122,7 +122,11 @@
     
     NSMutableArray * arr = [[listArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.textLabel.text= [arr objectAtIndex:0];
+    
+    if(indexPath.section==1)
+    {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     
     if(indexPath.section==0)
     {
@@ -160,30 +164,67 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(IsOpenSubView) 
+    {
+        [subView removeFromSuperview];
+    }
     if(indexPath.section==1)
     {
         int iRow = indexPath.row;
+        if([[Config GetPlistInfo:@"SegmentID"] isEqualToString:@""])
+        {
+            iRow = 0;
+        }
+        
         int iHeight = 160;
         if(iRow==0)
         {
             iHeight = 110;
         }
 
-        subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420)];
+        subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
         subView.delegate = self;
-        subView.index = iRow;
+        //subView.index = iRow;
         [self.view addSubview:subView];
+        IsOpenSubView = YES;
     }
 }
 
--(void)passValue:(NSString *)value arrayIndex:(int) index
+-(void)passValue:(NSMutableArray *)valueArr arrayIndex:(int) index
 {
-    [[[listArr objectAtIndex:1] objectAtIndex:index] setObject:value atIndex:2];
+    //[LogicBase SetArrayLevel3:listArr Value:[valueArr objectAtIndex:0] Level1:1 Level2:index Level3:2];
+    [[[listArr objectAtIndex:1] objectAtIndex:index] setObject:[valueArr objectAtIndex:0] atIndex:2];
+    [[[listArr objectAtIndex:1] objectAtIndex:index] setObject:[valueArr objectAtIndex:1] atIndex:3];
+    
+    if(index==0)
+    {
+        [[[listArr objectAtIndex:2] objectAtIndex:0] setObject:[valueArr objectAtIndex:2] atIndex:2];
+        [[[listArr objectAtIndex:2] objectAtIndex:0] setObject:[valueArr objectAtIndex:3] atIndex:3];
+        
+        [[[listArr objectAtIndex:1] objectAtIndex:1] setObject:@"" atIndex:2];
+        [[[listArr objectAtIndex:1] objectAtIndex:1] setObject:@"" atIndex:3];
+        [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:@"" atIndex:2];
+        [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:@"" atIndex:3];
+        [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:@"" atIndex:2];
+        [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:@"" atIndex:3];
+    }
+    else 
+    {
+        [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:[valueArr objectAtIndex:2] atIndex:2];
+        [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:[valueArr objectAtIndex:3] atIndex:3];
+        [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:[valueArr objectAtIndex:4] atIndex:2];
+        [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:[valueArr objectAtIndex:5] atIndex:3];
+    }
+    
     [tableView reloadData];
-    [subView removeFromSuperview];
+    
 }
 
-
+-(void)SubVewClose
+{
+    IsOpenSubView = NO;
+    [subView removeFromSuperview];
+}
 
 
 

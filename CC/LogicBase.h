@@ -10,10 +10,21 @@
 #import "DatabaseHelper.h"
 #import "Settings.h"
 #import "Common.h"
+#import "Update.h"
 
 @interface LogicBase : NSObject
-+(NSMutableArray *)Login:(NSString *)name Password:(NSString *)pwd;
+
 +(NSMutableArray *)SqlToArray:(NSString *)sql FieldCount:(int) count;
++(void)SetArrayLevel3:(NSMutableArray *)arr Value:(NSString *)value Level1:(int)l1 Level2:(int)l2 Level3:(int)l3;
+//
++(void)UpdateByService;
+//
++(NSMutableArray *)Login:(NSString *)name Password:(NSString *)pwd;
+//
 +(NSMutableArray *)GetInspectList1;
 +(NSMutableArray *)GetInspectList2;
+//
++(NSMutableArray *)GetLine;
++(NSMutableArray *)GetSegment;
++(NSMutableArray *)GetSite;
 @end

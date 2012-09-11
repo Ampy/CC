@@ -12,5 +12,7 @@
 	<string>123456</string>
 	<key>LoginIsRemember</key>
 	<string>T</string>
+	<key>SegmentID</key>
+	<string></string>
 </dict>
 </plist>

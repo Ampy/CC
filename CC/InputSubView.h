@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewDelegate.h"
+#import "LogicBase.h"
 
 @interface InputSubView : UIView
 {
     NSObject<ViewDelegate> * delegate;
     int index;
+    NSMutableArray *lists;
+    NSMutableArray *listSegment;
+    
 }
-
+- (id)initWithFrame:(CGRect)frame index:(int)i;
 @property(nonatomic, retain) NSObject<ViewDelegate> * delegate;
 @property int index;
 @end
