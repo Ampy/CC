@@ -53,6 +53,8 @@
 		A6A8F5FA15FDA93800E29A1E /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8F5F915FDA93800E29A1E /* DatabaseHelper.m */; };
 		A6A8F5FD15FDA98300E29A1E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */; };
 		A6A8F60815FDB4FA00E29A1E /* LogicBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8F60715FDB4FA00E29A1E /* LogicBase.m */; };
+		A6A8F61315FDDDEC00E29A1E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8F61215FDDDEC00E29A1E /* Reachability.m */; };
+		A6A8F61515FDDE0800E29A1E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */; };
 		A6C684AE15FD896100814CBD /* update.gif in Resources */ = {isa = PBXBuildFile; fileRef = A6C684AD15FD896100814CBD /* update.gif */; };
 		A6C684B315FD8CBE00814CBD /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */; };
 		A6C684B415FD8CBE00814CBD /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C684B215FD8CBE00814CBD /* WelcomeViewController.xib */; };
@@ -122,6 +124,9 @@
 		A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A6A8F60615FDB4F900E29A1E /* LogicBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogicBase.h; sourceTree = "<group>"; };
 		A6A8F60715FDB4FA00E29A1E /* LogicBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogicBase.m; sourceTree = "<group>"; };
+		A6A8F61115FDDDEC00E29A1E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../../ipad/CC/CivilizedConstruction/Services/Reachability.h; sourceTree = "<group>"; };
+		A6A8F61215FDDDEC00E29A1E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../../ipad/CC/CivilizedConstruction/Services/Reachability.m; sourceTree = "<group>"; };
+		A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A6C684AD15FD896100814CBD /* update.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = update.gif; sourceTree = "<group>"; };
 		A6C684B015FD8CBE00814CBD /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		A6C684B115FD8CBE00814CBD /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
@@ -133,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A8F61515FDDE0800E29A1E /* SystemConfiguration.framework in Frameworks */,
 				A6A8F5FD15FDA98300E29A1E /* libsqlite3.0.dylib in Frameworks */,
 				050CECDA15F600410044CCB9 /* UIKit.framework in Frameworks */,
 				050CECDC15F600410044CCB9 /* Foundation.framework in Frameworks */,
@@ -146,6 +152,7 @@
 		050CECCA15F600410044CCB9 = {
 			isa = PBXGroup;
 			children = (
+				A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */,
 				050CECDF15F600410044CCB9 /* CC */,
 				050CECD815F600410044CCB9 /* Frameworks */,
 				050CECD615F600410044CCB9 /* Products */,
@@ -252,6 +259,8 @@
 		A6790FB615FD8F9A00F2655E /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				A6A8F61115FDDDEC00E29A1E /* Reachability.h */,
+				A6A8F61215FDDDEC00E29A1E /* Reachability.m */,
 				A6A8F5FB15FDA95A00E29A1E /* DatabaseHelper.h */,
 				A6A8F5F915FDA93800E29A1E /* DatabaseHelper.m */,
 				A6790FD215FD9A1E00F2655E /* Update.h */,
@@ -378,6 +387,7 @@
 				A6790FD415FD9A1E00F2655E /* Update.m in Sources */,
 				A6A8F5FA15FDA93800E29A1E /* DatabaseHelper.m in Sources */,
 				A6A8F60815FDB4FA00E29A1E /* LogicBase.m in Sources */,
+				A6A8F61315FDDDEC00E29A1E /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +462,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CC/CC-Prefix.pch";
 				INFOPLIST_FILE = "CC/CC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -463,6 +474,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CC/CC-Prefix.pch";
 				INFOPLIST_FILE = "CC/CC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

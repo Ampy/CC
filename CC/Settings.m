@@ -13,6 +13,7 @@ static Settings *globalSettings = nil;
 @synthesize ServiceUrl;
 @synthesize DatabaseName;
 @synthesize LoginName;
+@synthesize dic;
 
 +(Settings *)Instance{
     @synchronized(self){
@@ -38,9 +39,19 @@ static Settings *globalSettings = nil;
     return nil;
 }
 
-+Add:(NSString *)Name KeyName:(NSString *)Key
++(void)AddLoginName:(NSString *)Name
 {
-    
+    globalSettings.LoginName = Name;
+}
+
++(void)Add:(NSString *)Name KeyName:(NSString *)Key
+{
+    [globalSettings.dic setObject:Name forKey:Key];
+}
+
++(NSString *)GetNameByKey:(NSString *)Key
+{
+    return [globalSettings.dic objectForKey:Key];
 }
 
 @end

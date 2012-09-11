@@ -53,6 +53,11 @@
     {
         [remember setOn:false animated:NO];
     }
+    
+    
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidUnload
@@ -72,6 +77,7 @@
 }
 
 - (IBAction)UserLogin:(id)sender {
+    
     if(remember.isOn)
     {
         [Config SetPlistInfo:@"LoginName" Value:name.text];
@@ -83,16 +89,18 @@
         [Config SetPlistInfo:@"LoginIsRemember" Value:@"F"];
     }
     
-    NSString *loginName = [NSString stringWithString:[LogicBase Login:name.text Password:password.text]];
+    NSMutableArray *loginArr = [LogicBase Login:name.text Password:password.text];
     
-    if([loginName isEqualToString:@"F"])
+    if(loginArr.count==0)
     {
         UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"登陆提示" message:@"用户名或密码错误！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alert show];
     }
     else 
     {
-        [Config SetPlistInfo:@"LoginName" Value:loginName];
+        
+        [Config SetPlistInfo:@"LoginUserId" Value:[loginArr objectAtIndex:0] ];
+        [Config SetPlistInfo:@"LoginUserName" Value:[loginArr objectAtIndex:1] ];
         HomeViewController *view = [[HomeViewController alloc] init];
         //[self.navigationController pushViewController:view animated:YES];
         [UIView  beginAnimations:nil context:NULL];  
@@ -104,4 +112,51 @@
     }
     
 }
+- (IBAction)textFieldDoneEditing:(id)sender {
+    [sender resignFirstResponder];
+    
+    //[textField resignFirstResponder];
+}
+
+-(void) keyboardWillHide:(NSNotification *)note
+{
+    NSTimeInterval animationDuration = 0.30f;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    CGRect rect = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = rect;
+    [UIView commitAnimations];
+}
+
+-(void) keyboardWillShow:(NSNotification *)note
+{           
+    float width = self.view.frame.size.width;
+    float height = self.view.frame.size.height;
+    
+    [UIView beginAnimations:nil context:NULL]; 
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:0.3f];   
+    CGRect rect = CGRectMake(0.0f, -100,width,height);
+    self.view.frame = rect;
+    [UIView commitAnimations];
+ 
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    CGRect frame = textField.frame;
+    int offset = frame.origin.y +422 - (self.view.frame.size.height - 220);
+    NSTimeInterval animationDuration = 0.30f;
+    [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    float width = self.view.frame.size.width;
+    float height = self.view.frame.size.height;
+    if(offset>0)
+    {
+    CGRect rect = CGRectMake(0.0f, -100,width,height);
+    self.view.frame = rect;
+    }
+    [UIView commitAnimations];
+}
+
 @end

@@ -13,6 +13,9 @@
 @property (nonatomic, retain) NSString* ServiceUrl;
 @property (nonatomic, strong) NSString* DatabaseName;
 @property (nonatomic, strong) NSString* LoginName;
+@property (nonatomic, strong) NSMutableDictionary * dic;
 +(Settings *)Instance;
-+Add:(NSString *)Name KeyName:(NSString *)Key;
++(void)Add:(NSString *)Name KeyName:(NSString *)Key;
++(NSString *)GetNameByKey:(NSString *)Key;
++(void)AddLoginName:(NSString *)Name;
 @end

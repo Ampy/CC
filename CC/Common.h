@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Reachability.h"
+#import "Settings.h"
 
 @interface Common : NSObject
 //Char*转NSString
 +(NSString *) CStringToNSString:(char *) string;
 +(NSString *)MD5:(NSString *)value;
-
-
++(BOOL) CheckNetworkStatus;
 
 @end

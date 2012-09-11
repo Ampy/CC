@@ -44,19 +44,9 @@
     
     self.view.userInteractionEnabled = YES;
 
-    
-    
-    lists = [[NSMutableArray alloc]init];
+    lists = [LogicBase GetInspectList1];
+    lists2 = [LogicBase GetInspectList2];
 
-    [lists addObject:[[NSMutableArray alloc]initWithObjects:@"apple",@"F",@"L",nil]];
-    [lists addObject:[[NSMutableArray alloc]initWithObjects:@"banana",@"F",@"L",nil]];
-    [lists addObject:[[NSMutableArray alloc]initWithObjects:@"cup",@"F",@"L",nil]];
-    [lists addObject:[[NSMutableArray alloc]initWithObjects:@"desk",@"F",@"L",nil]];
-    
-    //[self setExtraCellLineHidden:DataTable];
-    
-    //[DataTable setBackgroundView:nil];
-    //[DataTable setBackgroundView:[[[UIView alloc] init] autorelease]];
 }
 
 -(void)clickButton:(id)sender 
@@ -79,16 +69,12 @@
 
 -(void)backButton:(id)sender 
 {
-    //HomeViewController *ctrl = [[HomeViewController alloc] init];
-    //[self.navigationController pushViewController:ctrl animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -103,41 +89,42 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [lists count];
+    if(tableView.tag==2)
+    {
+        return [lists2 count];
+    }
+    else 
+    {
+        return [lists count];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    //    static NSString *SimpleTableIdentifier = @"SimpleTableIdentifier";
-    //    
-    //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
-    //    if (cell == nil) 
-    //    {  
-    //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: SimpleTableIdentifier] ;
-    //    }
-    //cell.imageView.image=image;//未选cell时的图片
-    //cell.imageView.highlightedImage=highlightImage;//选中cell后的图片
+
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @""] ;
     
-    NSMutableArray * arr = [lists objectAtIndex:indexPath.row];
-//    cell.text= [arr objectAtIndex:0];
-//    if([arr objectAtIndex:1]==@"T")
-//        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    
-    UILabel *CellLabel= [[UILabel alloc] initWithFrame:CGRectMake(50,0,200,30)];
-    //cell.accessoryView= CellLabel 
-    //CellLabel.numberOfLines= 2;
-    CellLabel.text = [arr objectAtIndex:0];
-    CellLabel.font = [UIFont fontWithName: @"Helvetica-Bold" size: 20.0 ]; 
+    NSMutableArray * arr;
+    if(tableView.tag==2)
+    {
+        arr= [lists2 objectAtIndex:indexPath.row];
+    }
+    else 
+    {
+        arr= [lists objectAtIndex:indexPath.row];
+    }
 
-    //CellLabel.shadowColor = [ UIColor grayColor ]; 
-    //CellLabel.shadowOffset = CGSizeMake(0, 2); 
+    
+    UILabel *CellLabel= [[UILabel alloc] initWithFrame:CGRectMake(50,3,280,30)];
+
+    CellLabel.text = [[[[arr objectAtIndex:3] stringByAppendingString:@"  "] stringByAppendingString:[arr objectAtIndex:4]] stringByReplacingOccurrencesOfString:@"0:00:00" withString:@""];
+    CellLabel.font = [UIFont fontWithName: @"Helvetica-Bold" size: 14.0 ]; 
    
     [cell.contentView addSubview:CellLabel];
     
-    UILabel *bLabel= [[UILabel alloc] initWithFrame:CGRectMake(50,30,200,20)];
-    bLabel.text = @"XXXXX-XXXXX-XXXXXXX";
+    UILabel *bLabel= [[UILabel alloc] initWithFrame:CGRectMake(50,30,300,20)];
+    bLabel.text = [[[arr objectAtIndex:0] stringByAppendingString:[arr objectAtIndex:1]] stringByAppendingString:[arr objectAtIndex:2]];
     bLabel.font = [UIFont fontWithName: @"Helvetica" size: 12 ];
     bLabel.textColor = [ UIColor grayColor ];
     [cell.contentView addSubview:bLabel];
@@ -146,11 +133,11 @@
     {
         cell.imageView.image = [ UIImage imageNamed: @"icon_inspect_edit.png" ];
         
-        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(360,15,15,11)];
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(380,20,15,11)];
         img.image = [UIImage imageNamed:@"arrow.png"];
         [cell.contentView addSubview:img];
         
-        UILabel *imgLabel= [[UILabel alloc] initWithFrame:CGRectMake(380,5,100,30)];
+        UILabel *imgLabel= [[UILabel alloc] initWithFrame:CGRectMake(400,10,100,30)];
         imgLabel.text = @"继续";
         imgLabel.textColor = [ UIColor redColor ];
         [cell.contentView addSubview:imgLabel];
@@ -159,12 +146,12 @@
     {
         cell.imageView.image = [UIImage imageNamed:@"icon_inspect.png"];
         
-        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(340,15,16,14)];
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(380,20,16,14)];
         img.image = [UIImage imageNamed:@"ok.png"];
         [cell.contentView addSubview:img];
         
-        UILabel *imgLabel= [[UILabel alloc] initWithFrame:CGRectMake(360,5,100,30)];
-        imgLabel.text = @"2012-9-5";
+        UILabel *imgLabel= [[UILabel alloc] initWithFrame:CGRectMake(400,10,100,30)];
+        imgLabel.text = [arr objectAtIndex:5];
         [cell.contentView addSubview:imgLabel];
     }
     
@@ -173,7 +160,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 60;
 }
 
 

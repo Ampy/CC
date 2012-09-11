@@ -12,5 +12,8 @@
 #import "Common.h"
 
 @interface LogicBase : NSObject
-+(NSString *)Login:(NSString *)name Password:(NSString *)pwd;
++(NSMutableArray *)Login:(NSString *)name Password:(NSString *)pwd;
++(NSMutableArray *)SqlToArray:(NSString *)sql FieldCount:(int) count;
++(NSMutableArray *)GetInspectList1;
++(NSMutableArray *)GetInspectList2;
 @end

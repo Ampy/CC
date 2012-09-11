@@ -7,9 +7,9 @@
 	<key>ServiceUrl</key>
 	<string>http://192.168.1.139:8083/</string>
 	<key>LoginName</key>
-	<string>测试人员</string>
+	<string>TestUser</string>
 	<key>LoginPassword</key>
-	<string></string>
+	<string>123456</string>
 	<key>LoginIsRemember</key>
 	<string>T</string>
 </dict>

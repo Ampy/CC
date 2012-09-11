@@ -28,5 +28,17 @@
 			];
 }
 
++(BOOL) CheckNetworkStatus
+{
+    Reachability *r = [Reachability reachabilityWithHostname:[Settings Instance].ServiceUrl ];
+    if ([r currentReachabilityStatus]==NotReachable)
+    {
+        return NO;
+    }
+    else 
+    {	
+        return YES;
+    }
+}
 
 @end

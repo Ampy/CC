@@ -15,5 +15,7 @@
 @property (retain, nonatomic) IBOutlet UITextField *name;
 @property (retain, nonatomic) IBOutlet UITextField *password;
 @property (retain, nonatomic) IBOutlet UISwitch *remember;
+- (IBAction)textFieldDoneEditing:(id)sender;
+- (IBAction)textFieldDidBeginEditing:(id)sender;
 
 @end

@@ -35,8 +35,10 @@
     CellService * cs = [[CellService alloc] init];
     NSString * sqls = [cs CellWeb:[@"IOS/GetTableData?tableName=" stringByAppendingString:tableName]];
     NSArray * array = [sqls componentsSeparatedByString:@"|$|"];
+    int i=1;
     for(id sql in array)
     {
+        i++;
         [db ExecSql:sql];
         [db Setp];
     }

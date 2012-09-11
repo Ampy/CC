@@ -44,10 +44,18 @@
 -(void) UpdateAndGoto
 {
     //[NSThread sleepForTimeInterval:1];
-    NSArray * arr = [NSArray arrayWithObjects:@"Line",@"Site",@"Segment",@"Sys_User",@"Inspect",@"InspectActivity",@"InspectItem",@"InspectScore",@"InspItemTemp",@"InspScoreTemp",@"InspTemp",@"UserLine",nil];
-    Update *u = [[Update alloc] init];
-    [u UpdateAll:arr];
-
+    
+    if([Common CheckNetworkStatus])
+    {
+        NSArray * arr = [NSArray arrayWithObjects:@"Line",@"Site",@"Segment",@"Sys_User",@"Inspect",@"InspectActivity",@"InspectItem",@"InspectScore",@"InspItemTemp",@"InspScoreTemp",@"InspTemp",@"UserLine",@"V_Inspect",nil];
+        Update *u = [[Update alloc] init];
+        [u UpdateAll:arr];
+    }
+    else 
+    {
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"网络提示" message:@"无网络连接，暂不更新！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+        [alert show];
+    }
     
     LoginViewController *ctrl = [[LoginViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];

@@ -12,7 +12,6 @@
 @interface ManageViewController : UIViewController
 {
     NSMutableArray *lists;
-    
-
+    NSMutableArray *lists2;
 }
 @end
