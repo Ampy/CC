@@ -53,6 +53,9 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init]; 
     [formatter setDateFormat:@"YYYY年MM月dd日"]; 
     NSString *locationString=[formatter stringFromDate: [NSDate date]]; 
+    
+    [Config SetPlistInfo:@"InspectWay" Value:checkType];
+    [Config SetPlistInfo:@"InspectDate" Value:locationString];
 
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkType,nil]];
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Config GetPlistInfo:@"LoginUserName"],nil]];
@@ -90,6 +93,9 @@
 
 -(void)beginCheck:(id)sender 
 {
+    [LogicBase BuildCheckData];
+    //开始检查
+    
 }
 
 - (void)viewDidUnload
@@ -102,7 +108,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return YES;
+	return ((interfaceOrientation ==UIDeviceOrientationLandscapeLeft)||(interfaceOrientation ==UIDeviceOrientationLandscapeRight));
 }
 
 #pragma mark -- Table view
@@ -190,6 +196,8 @@
     }
 }
 
+
+//
 -(void)passValue:(NSMutableArray *)valueArr arrayIndex:(int) index
 {
     //[LogicBase SetArrayLevel3:listArr Value:[valueArr objectAtIndex:0] Level1:1 Level2:index Level3:2];

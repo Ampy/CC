@@ -28,6 +28,15 @@
 			];
 }
 
++(NSString *) GetGuid
+{
+    CFUUIDRef uuidObj = CFUUIDCreate(nil);
+    CFStringRef uuid = CFUUIDCreateString(nil, uuidObj);
+    NSString *uuidString = (__bridge NSString *)uuid;
+    CFRelease(uuidObj);
+    return uuidString;
+}
+
 +(BOOL) CheckNetworkStatus
 {
     Reachability *r = [Reachability reachabilityWithHostname:[Settings Instance].ServiceUrl ];

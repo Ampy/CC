@@ -15,5 +15,5 @@
 +(NSString *) CStringToNSString:(char *) string;
 +(NSString *)MD5:(NSString *)value;
 +(BOOL) CheckNetworkStatus;
-
++(NSString *) GetGuid;
 @end

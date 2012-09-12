@@ -14,8 +14,9 @@
 {
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings Instance].DatabaseName];
+    //[db BeginTransaction];
     
-    NSString *delSql = [[NSString alloc] initWithFormat:@"drop table %@ ",tableName];
+    NSString *delSql = [[NSString alloc] initWithFormat:@"DROP TABLE IF EXISTS %@ ",tableName];
     [db ExecSql:delSql];
     [db Setp];
     
@@ -24,6 +25,7 @@
     
     [db ExecSql:sql];
     [db Setp];
+    [db Commit];
     [db CloseDB];
 }
 
@@ -31,6 +33,7 @@
 {
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings Instance].DatabaseName];
+    [db BeginTransaction];
     
     CellService * cs = [[CellService alloc] init];
     NSString * sqls = [cs CellWeb:[@"IOS/GetTableData?tableName=" stringByAppendingString:tableName]];
@@ -42,7 +45,16 @@
         [db ExecSql:sql];
         [db Setp];
     }
+    [db Commit];
     [db CloseDB];
+}
+
+-(void)GetTableStructs:(NSArray *)tableNames
+{
+    for(id name in tableNames)
+    {
+        [self GetTableStruct:name];
+    }
 }
 
 -(void)UpdateAll:(NSArray *)tableNames

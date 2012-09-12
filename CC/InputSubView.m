@@ -174,6 +174,10 @@
         {
             [Config SetPlistInfo:@"SegmentID" Value:[arr objectAtIndex:1]];
         }
+        else 
+        {
+            [Config SetPlistInfo:@"SiteID" Value:[arr objectAtIndex:1]];
+        }
         
         [delegate passValue:arr arrayIndex:index];
         [delegate SubVewClose];

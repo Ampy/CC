@@ -29,7 +29,7 @@
     char * csql = (char*)[sql UTF8String];
     if(sqlite3_prepare_v2(database, csql, -1, &statement,nil) != SQLITE_OK)
     {
-        NSLog(@"Error: failed to prepare statement");
+        NSLog(@"SQL错误：%@",[[NSString alloc] initWithCString:csql encoding:NSUTF8StringEncoding]);
     }
     return statement;
 }

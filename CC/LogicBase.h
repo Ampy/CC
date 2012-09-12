@@ -27,4 +27,6 @@
 +(NSMutableArray *)GetLine;
 +(NSMutableArray *)GetSegment;
 +(NSMutableArray *)GetSite;
+//
++(void)BuildCheckData;
 @end
