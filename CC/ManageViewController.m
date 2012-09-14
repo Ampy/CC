@@ -13,6 +13,9 @@
 @end
 
 @implementation ManageViewController
+@synthesize updateTableView;
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +44,13 @@
     [backButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
     [self.view addSubview:backButton];
     [backButton addTarget:self  action:@selector(backButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    [outButton setFrame:CGRectMake(400, 60, 54, 31)];
+    [outButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
+    [outButton setTitle:@"同步" forState:UIControlStateNormal];
+    [self.view addSubview:outButton];
+    [outButton addTarget:self  action:@selector(updateToService:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
 
@@ -72,8 +82,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)updateToService:(id)sender 
+{
+    [LogicBase UpdateToService];
+    lists = [LogicBase GetInspectList1];
+    [updateTableView reloadData];
+}
+
 - (void)viewDidUnload
 {
+    [self setUpdateTableView:nil];
     [super viewDidUnload];
 }
 

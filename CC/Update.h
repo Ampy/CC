@@ -12,8 +12,8 @@
 #import "Settings.h"
 
 @interface Update : NSObject
--(void)GetTableStruct:(NSString *)tableName;
--(void)GetTableStructs:(NSArray *)tableNames;
--(void)GetTableData:(NSString *)tableName;
--(void)UpdateAll:(NSArray *)tableNames;
+-(int)GetTableStruct:(NSString *)tableName;
+-(int)GetTableStructs:(NSArray *)tableNames;
+-(int)GetTableData:(NSString *)tableName;
+-(int)UpdateAll:(NSArray *)tableNames;
 @end

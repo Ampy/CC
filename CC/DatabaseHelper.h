@@ -22,6 +22,7 @@
 -(void)Setp;
 -(void) BeginTransaction;
 -(int) Commit;
+-(void)Final;
 -(void)CloseDB;
 
 @end

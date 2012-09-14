@@ -37,17 +37,36 @@
     return uuidString;
 }
 
-+(BOOL) CheckNetworkStatus
++(int) CheckNetworkStatus
 {
     Reachability *r = [Reachability reachabilityWithHostname:[Settings Instance].ServiceUrl ];
     if ([r currentReachabilityStatus]==NotReachable)
     {
-        return NO;
+        return 21;
     }
     else 
     {	
+        return 1;
+    }
+}
+
++(bool)ExceptionHandler:(int)returnCode
+{
+    if(returnCode==1)
+    {
+        return NO;
+    }
+    else 
+    {
+        [self Alert:[Config GetPlistInfo:[NSString stringWithFormat:@"%d",returnCode]]];
         return YES;
     }
+}
+
++(void)Alert:(NSString *) message
+{
+    UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

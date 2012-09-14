@@ -93,9 +93,20 @@
 
 -(void)beginCheck:(id)sender 
 {
-    [LogicBase BuildCheckData];
+    if([[[[listArr objectAtIndex:1] objectAtIndex:0] objectAtIndex:2] isEqualToString:@""])
+    {
+        [Common Alert:@"请选择标段！"];
+        return;
+    }
+    if([[[[listArr objectAtIndex:1] objectAtIndex:1] objectAtIndex:2] isEqualToString:@""])
+    {
+        [Common Alert:@"请选择工程！"];
+        return;
+    }
+    if([Common ExceptionHandler:[LogicBase BuildCheckData]])
+        return;
     //开始检查
-    
+    [Common Alert:@"开始检查"];
 }
 
 - (void)viewDidUnload

@@ -49,24 +49,32 @@
 -(void)Setp
 {
     sqlite3_step(statement);
+    
 }
 
 -(void) BeginTransaction
 {
-    sqlite3_exec(database,"BEGIN TRANSACTION",0,0,0); 
+    sqlite3_exec(database,"BEGIN TRANSACTION",nil,nil,nil); 
 }
 -(int) Commit
 {
     char *error;
-    int i= sqlite3_exec(database,"COMMIT",0,0,&error); //COMMIT
-    //NSString *err = [[NSString alloc] initWithCString:error encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@",err);
+    int i= sqlite3_exec(database,"COMMIT",nil,nil,&error); //COMMIT
+    if(error)
+    {
+        NSString *err = [[NSString alloc] initWithCString:error encoding:NSUTF8StringEncoding];
+        NSLog(@"Commit 异常：%@",err);
+    }
     return  i;
+}
+
+-(void)Final
+{
+    sqlite3_finalize(statement);
 }
 
 -(void)CloseDB
 {
-    sqlite3_finalize(statement);
     sqlite3_close(database);
 }
 

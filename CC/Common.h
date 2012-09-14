@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
 #import "Settings.h"
+#import "Config.h"
 
 @interface Common : NSObject
 //Char*转NSString
 +(NSString *) CStringToNSString:(char *) string;
 +(NSString *)MD5:(NSString *)value;
-+(BOOL) CheckNetworkStatus;
++(int) CheckNetworkStatus;
 +(NSString *) GetGuid;
++(void)Alert:(NSString *) message;
++(bool)ExceptionHandler:(int)returnCode;
 @end

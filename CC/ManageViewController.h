@@ -14,4 +14,7 @@
     NSMutableArray *lists;
     NSMutableArray *lists2;
 }
+@property (strong, nonatomic) IBOutlet UITableView *updateTableView;
+
+
 @end

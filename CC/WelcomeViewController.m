@@ -45,16 +45,11 @@
 {
     //[NSThread sleepForTimeInterval:1];
     
-    if([Common CheckNetworkStatus])
+    if(![Common ExceptionHandler:[Common CheckNetworkStatus]])
     {
-        [LogicBase UpdateByService];
+        [Common ExceptionHandler:[LogicBase UpdateByService]];
     }
-    else 
-    {
-        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"网络提示" message:@"无网络连接，暂不更新！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
-        [alert show];
-    }
-    
+        
     LoginViewController *ctrl = [[LoginViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];
     //HomeViewController *ctrl = [[HomeViewController alloc] init];

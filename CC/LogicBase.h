@@ -17,7 +17,7 @@
 +(NSMutableArray *)SqlToArray:(NSString *)sql FieldCount:(int) count;
 +(void)SetArrayLevel3:(NSMutableArray *)arr Value:(NSString *)value Level1:(int)l1 Level2:(int)l2 Level3:(int)l3;
 //
-+(void)UpdateByService;
++(int)UpdateByService;
 //
 +(NSMutableArray *)Login:(NSString *)name Password:(NSString *)pwd;
 //
@@ -28,5 +28,7 @@
 +(NSMutableArray *)GetSegment;
 +(NSMutableArray *)GetSite;
 //
-+(void)BuildCheckData;
++(int)BuildCheckData;
+//
++(void)UpdateToService;
 @end
