@@ -8,6 +8,7 @@
 
 #import "RTString.h"
 
+
 @implementation RTString
 +(NSString *) CStringToNSString:(char *) string
 {
