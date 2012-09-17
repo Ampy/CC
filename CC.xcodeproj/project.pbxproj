@@ -95,6 +95,7 @@
 		A6D3E0F716032D8C0013BF4C /* inspect_bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D3E0EA16032D8C0013BF4C /* inspect_bg1.png */; };
 		A6D3E0F816032D8C0013BF4C /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D3E0EB16032D8C0013BF4C /* close.png */; };
 		A6D3E0F916032D8C0013BF4C /* inspect.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D3E0EC16032D8C0013BF4C /* inspect.png */; };
+		A6E1141916033A2B0014E6AD /* inspect2.png in Resources */ = {isa = PBXBuildFile; fileRef = A6E1141816033A2B0014E6AD /* inspect2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,6 +221,7 @@
 		A6D3E0EA16032D8C0013BF4C /* inspect_bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inspect_bg1.png; sourceTree = "<group>"; };
 		A6D3E0EB16032D8C0013BF4C /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		A6D3E0EC16032D8C0013BF4C /* inspect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inspect.png; sourceTree = "<group>"; };
+		A6E1141816033A2B0014E6AD /* inspect2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inspect2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,15 +274,15 @@
 		050CECDF15F600410044CCB9 /* CC */ = {
 			isa = PBXGroup;
 			children = (
-				A6D3E09F1603226A0013BF4C /* Common */,
-				A6D3E0A21603226A0013BF4C /* Controls */,
-				A6D3E0AF1603226A0013BF4C /* Inspect */,
-				A6D3E0C01603226A0013BF4C /* Models */,
-				A6D3E0C71603226A0013BF4C /* Services */,
 				050CECE815F600410044CCB9 /* AppDelegate.h */,
 				050CECE915F600410044CCB9 /* AppDelegate.m */,
 				A6790FB615FD8F9A00F2655E /* Class */,
+				A6D3E09F1603226A0013BF4C /* Common */,
+				A6D3E0A21603226A0013BF4C /* Controls */,
 				A6790F6C15FD8DCE00F2655E /* Images */,
+				A6D3E0AF1603226A0013BF4C /* Inspect */,
+				A6D3E0C01603226A0013BF4C /* Models */,
+				A6D3E0C71603226A0013BF4C /* Services */,
 				050CECE015F600410044CCB9 /* Supporting Files */,
 				A6790F6E15FD8DE100F2655E /* View */,
 			);
@@ -301,6 +303,7 @@
 		A6790F6C15FD8DCE00F2655E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A6E1141816033A2B0014E6AD /* inspect2.png */,
 				A6D3E0E016032D8C0013BF4C /* bg_inst.png */,
 				A6D3E0E116032D8C0013BF4C /* bottom.png */,
 				A6D3E0E216032D8C0013BF4C /* btn_submit.png */,
@@ -573,6 +576,7 @@
 				A6D3E0F716032D8C0013BF4C /* inspect_bg1.png in Resources */,
 				A6D3E0F816032D8C0013BF4C /* close.png in Resources */,
 				A6D3E0F916032D8C0013BF4C /* inspect.png in Resources */,
+				A6E1141916033A2B0014E6AD /* inspect2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
