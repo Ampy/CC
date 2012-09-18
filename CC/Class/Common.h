@@ -10,6 +10,7 @@
 #import "Reachability.h"
 #import "Settings.h"
 #import "Config.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @interface Common : NSObject
 //Char*转NSString

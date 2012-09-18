@@ -15,6 +15,10 @@
 @implementation SecondItemViewController
 @synthesize SecondItemTableView;
 @synthesize ItemList;
+@synthesize SwitcherList;
+@synthesize CancelSwitchDelegate;
+
+static NSString *CellIdentifier = @"SecondItem";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +32,9 @@
 - (void)viewDidLoad
 {
         SecondItemTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    if(SwitcherList==nil)
+        SwitcherList = [[NSMutableArray alloc] initWithCapacity:0];
+
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -40,11 +47,13 @@
 
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
 {
+    CellIdentifier=parentItemId;
     InspectService * inspectService = [[InspectService alloc] init];
     
     ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
-
+    [SwitcherList removeAllObjects];
     [SecondItemTableView reloadData];
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -65,18 +74,15 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *CellIdentifier = @"SecondItem";
     
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //if (cell == nil) {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    //}
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
       cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins3.png"]];
     InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
-    //cell.textLabel.text=model.Name;
-    //cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-    //cell.textLabel.numberOfLines=0;
-    
+
     //添加Label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(100, 10,370, 60)];
     label.text = model.Name;
@@ -90,17 +96,17 @@
     CancelSwitch.onText=@"跳过";
     CancelSwitch.offText=@"未跳过";
     
-    [CancelSwitch removeTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
+    [CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
     CancelSwitch.object=model;
     
     [CancelSwitch setOn:model.IsCancel.integerValue==1 animated:YES ignoreControlEvents:true];
     
-    [CancelSwitch addTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
+    [CancelSwitch addTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
+    
+    [SwitcherList addObject:CancelSwitch];
+    
     [cell.contentView addSubview:CancelSwitch];
  
-    
-
-    
     return cell;
     
 }
@@ -109,16 +115,17 @@
 {    
     InspectItemModel *model = [ItemList objectAtIndex:indexPath.row];
     
-    //[secondItemViewController LoadData:model.InspectID ParentItemId:model.ItemTempID];
-    
     if(pop==nil)
     {
-    pop = [[PopViewController alloc] initWithParentFrame:self.view.superview.superview.frame];
+    pop = [[PopViewController alloc] initWithParentFrame:self.view.superview.superview.superview.frame];
         pop.closeDelegate=self;
+        pop.CancelSwitchDelegate=self;
     }
     pop.PopTitleLabel.text = model.Name;
     [pop LoadData:model.InspectID ParentItemId:model.ItemTempID];
     [self.view.superview.superview addSubview:pop.view];
+    
+    SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
 }
 
 
@@ -126,14 +133,23 @@
     [pop.view removeFromSuperview];
 }
 
--(void) SingleSelected:(id)sender
+-(void) CancelSwitchChange:(id)sender
 {
+    
     DCRoundSwitch * switcher =(DCRoundSwitch *)sender;
     InspectItemModel *model =(InspectItemModel *) switcher.object;
     InspectService *service = [[InspectService alloc] init];
     int value = switcher.isOn?1:0;
     [service SetInspectItemCancel:model.InspectID ItemId:model.InspectItemID value:value Level:2];
-    
+    if(CancelSwitchDelegate)
+        [CancelSwitchDelegate DoSwitchChange];
+}
+
+-(void)DoSwitchChange
+{
+    [SelectedSwitch setOn:false animated:NO ignoreControlEvents:YES];
+    if(CancelSwitchDelegate)
+        [CancelSwitchDelegate DoSwitchChange];
 }
 
 @end

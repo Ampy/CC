@@ -17,15 +17,16 @@
 @synthesize ThirdItemTableView;
 @synthesize ContentView;
 @synthesize closeButton;
-@synthesize ItemList;
 
 @synthesize closeDelegate;
+@synthesize CancelSwitchDelegate;
 
 static NSString *CellIdentifier = @"ThridItemCell";
 
 
 -(id) initWithParentFrame:(CGRect )parentFrame
 {
+    NSLog(@"开始");
     self=[super init];
     if(self)
     {
@@ -49,6 +50,8 @@ static NSString *CellIdentifier = @"ThridItemCell";
 		self.closeButton.layer.shadowColor = [[UIColor blackColor] CGColor];
 		self.closeButton.layer.shadowOffset = CGSizeMake(0,4);
 		self.closeButton.layer.shadowOpacity = 0.3;
+        
+   
     }
     
     return self;
@@ -69,7 +72,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
+NSLog(@"结束");
     
 }
 
@@ -102,6 +105,8 @@ static NSString *CellIdentifier = @"ThridItemCell";
 #pragma mark - 类实例方法
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
 {
+    
+    CellIdentifier=parentItemId;
     InspectService * inspectService = [[InspectService alloc] init];
     
     ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
@@ -123,12 +128,12 @@ static NSString *CellIdentifier = @"ThridItemCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
-    
-    ThirdLevelTableViewCell *cell = (ThirdLevelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if(cell == nil)
-    {
-         cell = [[ThirdLevelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    ThirdLevelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[ThirdLevelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
+    cell.opaque=YES;
     
     cell.ScoreTableView.scrollEnabled=NO;
     cell.ScoreTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -146,7 +151,6 @@ static NSString *CellIdentifier = @"ThridItemCell";
     else
     {
         cell.ItemRemarks.hidden=true;
-        //cell.ScoreTableView.frame=CGRectMake(cell.ScoreTableView.frame.origin.x, cell.ScoreTableView.frame.origin.y-21, cell.ScoreTableView.frame.size.width, cell.ScoreTableView.frame.size.height+21);
     }
     
     cell.CancelSwitch.onText=@"跳过";
@@ -155,24 +159,20 @@ static NSString *CellIdentifier = @"ThridItemCell";
     [cell.CancelSwitch removeTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
     cell.CancelSwitch.object=model;
     
-    [cell.CancelSwitch setOn:model.IsCancel.integerValue==1 animated:YES ignoreControlEvents:true];
+    [cell.CancelSwitch setOn:model.IsCancel.integerValue==1 animated:NO ignoreControlEvents:true];
     
     [cell.CancelSwitch addTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
     
     
     cell.ScoreSegmentedControl.hidden=model.IsCancel.integerValue==1;
     
-    //[cell.ScoreTableView beginUpdates];
-    
-    //[cell LoadScoreItem:model];
     
     InspectService *inspectService = [[InspectService alloc] init];
     
-
     NSArray * ScoreItems = [inspectService GetInspectScoreItems:model.InspectItemID];
-     cell.ScoreItems = [[NSArray alloc] initWithArray:ScoreItems];
+    cell.ScoreItems = [[NSArray alloc] initWithArray:ScoreItems];
     [cell.ScoreSegmentedControl removeAllSegments];
-
+    cell.ScoreSegmentedControl.tintColor = [UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
     int i=0;
     int Count = [ScoreItems count];
     cell.ScoreLable.numberOfLines=0;
@@ -182,8 +182,11 @@ static NSString *CellIdentifier = @"ThridItemCell";
     for(ScoreItemModel *si in ScoreItems)
     {
         [cell.ScoreSegmentedControl insertSegmentWithTitle:si.Name atIndex:i animated:YES];
+
         if(si.Selected.integerValue==1)
+        {
             cell.ScoreSegmentedControl.selectedSegmentIndex=i;
+        }
         cell.ScoreLable.text = [cell.ScoreLable.text stringByAppendingFormat:@"%@\n",si.Caption];
         cell.ScoreName.text = [cell.ScoreName.text stringByAppendingFormat:@"%@:\n",si.Name];
         i++;
@@ -191,11 +194,13 @@ static NSString *CellIdentifier = @"ThridItemCell";
    
     
     CGRect tmp = cell.ScoreSegmentedControl.frame;
-    cell.ScoreSegmentedControl.frame = CGRectMake(tmp.origin.x, tmp.origin.y,Count*40, tmp.size.height);
-
+    int x = self.ContentView.frame.size.width-Count*40-40;
+    cell.ScoreSegmentedControl.frame = CGRectMake(x, tmp.origin.y,Count*40, tmp.size.height);
+    
     [cell.ScoreTableView reloadData];
   
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
     
 }
@@ -223,9 +228,10 @@ static NSString *CellIdentifier = @"ThridItemCell";
     model.IsCancel  = [NSNumber numberWithInt:value];
     ThirdLevelTableViewCell *  cell =(ThirdLevelTableViewCell * )switcher.superview.superview;
     cell.ScoreSegmentedControl.hidden=value==1;
-    //[cell LoadScoreItem:model];
-    //[cell.ScoreTableView reloadData];
-}
 
+    
+    if(CancelSwitchDelegate)
+        [CancelSwitchDelegate DoSwitchChange];
+}
 
 @end

@@ -15,16 +15,12 @@
 @implementation InspectViewController
 @synthesize firstItemViewController;
 @synthesize secondItemViewController;
-@synthesize SecondItemViewContainer;
 @synthesize InspectTableView;
-@synthesize FirstItemViewContainer;
-//@synthesize InspectsTableView;
-
 @synthesize InspectList;
 
 static NSString *CellIdentifier = @"Inspects";
 
-
+#pragma mark Controller默认函数
 -(InspectViewController *)initWithInspectActivityId:(NSString *)inspectActivityId
 {
     self = [super init];
@@ -48,52 +44,28 @@ static NSString *CellIdentifier = @"Inspects";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.InspectTableView registerNib:[UINib nibWithNibName:@"InspectTableViewCell" bundle:nil]
+                forCellReuseIdentifier:CellIdentifier];
     InspectService * inspectService = [[InspectService alloc] init];
     InspectTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
     InspectList = [inspectService GetInspects:InspectActivityId];
-    firstItemViewController.view.frame = CGRectMake(0, 0, FirstItemViewContainer.frame.size.width, 707);
-    [self.FirstItemViewContainer addSubview:firstItemViewController.view];
-    
-    secondItemViewController.view.frame = CGRectMake(0, 0, SecondItemViewContainer.frame.size.width, 707);
-    [self.SecondItemViewContainer addSubview:secondItemViewController.view];
-    
-
-    [self.InspectTableView registerNib:[UINib nibWithNibName:@"InspectTableViewCell" bundle:nil]
-         forCellReuseIdentifier:CellIdentifier];
-    
-    //[InspectsTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionBottom];
-    //设置圆角边框
 
     InspectTableView.backgroundColor = [UIColor clearColor];
     InspectTableView.opaque = NO;
-    InspectTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inspect_bg1.png"]];
-
     
-    FirstItemViewContainer.backgroundColor = [UIColor clearColor];
-    FirstItemViewContainer.opaque = NO;
-    FirstItemViewContainer.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"inspect_bg2.png"]];
-    
-    FirstItemViewContainer.backgroundColor = [UIColor clearColor];
-    FirstItemViewContainer.opaque = NO;
-    FirstItemViewContainer.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"inspect_bg3.png"]];
 }
 
 - (void)viewDidUnload
 {
-    //[self setInspectsTableView:nil];
-    [self setFirstItemViewContainer:nil];
     [self setFirstItemViewController:nil];
     [self setSecondItemViewController:nil];
-    [self setSecondItemViewContainer:nil];
     [self setInspectTableView:nil];
-    [self setFirstItemViewController:nil];
-    [self setSecondItemViewController:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
+#pragma mark TableView事件
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
@@ -108,61 +80,18 @@ static NSString *CellIdentifier = @"Inspects";
     
     InspectModel *model = (InspectModel*)[InspectList objectAtIndex:indexPath.row];
     
-    //static NSString *CellIdentifier = @"Inspects";
-    
-    /********自定义Cell的写法***********/
-
     InspectTableViewCell *cell = (InspectTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     
     cell.TableName.text = model.Name;
-    cell.TableImage.image=[UIImage imageNamed:@"Inspect.png"];
-    //cell.Switcher.onText=@"跳过";
-    //cell.Switcher.offText=@"未跳过";
-    
-    //[cell.Switcher removeTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
-    //cell.Switcher.object=model;
-    
-    //[cell.Switcher setOn:model.IsCancel.integerValue==1 animated:YES ignoreControlEvents:true];
-    
-    //[cell.Switcher addTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
+    cell.TableImage.image=[UIImage imageNamed:@"InspectTable.png"];
     cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins1.png"]];
 
-    /*****另外一种方法
-     
-     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-     if (cell == nil) {
-     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-     }
-     
-    CGRect nameLabelRect=CGRectMake(0, 72, 70, 15);
-    
-    UILabel *nameLabel=[[UILabel alloc] initWithFrame:nameLabelRect];
-    
-    nameLabel.textAlignment=UITextAlignmentRight;
-    
-    nameLabel.text=model.Name;
-    
-    nameLabel.font=[UIFont boldSystemFontOfSize:12];
-    
-    [cell.contentView addSubview:nameLabel];
-    */
-    
-    //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     return cell;
     
-}
-
--(void) SingleSelected:(id)sender
-{
-//    DCRoundSwitch * switcher =(DCRoundSwitch *)sender;
-//    ScoreItemModel *scoreItem =(ScoreItemModel *) switcher.object;
-//    InspectService *service = [[InspectService alloc] init];
-//    int value = switcher.isOn?1:0;
-//    [service SetInspectItemCancel:scoreItem.ScoreID value:value];
-
 }
 
 
@@ -176,30 +105,10 @@ static NSString *CellIdentifier = @"Inspects";
 //选中行时
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSString *continent = [self tableView:tableView titleForHeaderInSection:indexPath.section];
     InspectModel *model = [InspectList objectAtIndex:indexPath.row];
     
     [firstItemViewController LoadData:model.InspectId ParentItemId:model.InspTempID];
-    
-    //InspectTableViewCell *cell = (InspectTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-
-    
-    //cell.BackgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins1.png"]];
-    
-    //cell.backgroundView  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins1.png"]];
-    
-    
-  //[InspectsTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionBottom];
-    
-    //[tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-- (IBAction)BackClick:(id)sender {
-    ManageViewController *ctrl = [[ManageViewController alloc] init];
-    [self.navigationController pushViewController:ctrl animated:YES];
 }
 
-- (IBAction)CommitClick:(id)sender {
-}
 
 @end

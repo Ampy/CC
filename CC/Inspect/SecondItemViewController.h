@@ -10,17 +10,27 @@
 #import "../Services/InspectService.h"
 #import "../Models/InspectItemModel.h"
 #import "PopViewController.h"
+#import "SwitchDelegate.h"
 
-@interface SecondItemViewController : UIViewController<CloseViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface SecondItemViewController : UIViewController<CloseViewDelegate,UITableViewDelegate,UITableViewDataSource,SwitchDelegate>
 {
+    //检查项数组，装载查询出来的检查项
     NSMutableArray *ItemList;
+    
+    //弹出页
     PopViewController *pop;
+    
+    //当前选中Cell里的Switch
+    DCRoundSwitch *SelectedSwitch;
+    
+    //Switch数组，装载TableView里的所有Cell里的Switch
+    NSMutableArray *SwitcherList;
 }
 
 @property(nonatomic,retain) NSMutableArray *ItemList;
-
-@property (strong, nonatomic) IBOutlet UITableView *SecondItemTableView;
-
+@property(nonatomic,strong) NSMutableArray *SwitcherList;
+@property (nonatomic, retain) id <SwitchDelegate> CancelSwitchDelegate;
+@property (weak, nonatomic) IBOutlet UITableView *SecondItemTableView;
 
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId;
 @end

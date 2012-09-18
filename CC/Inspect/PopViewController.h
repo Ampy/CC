@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "../Services/InspectService.h"
+#import "InspectService.h"
 #import "ThirdLevelTableViewCell.h"
+#import "MCSegmentedControl.h"
+#import "SwitchDelegate.h"
 
 @protocol CloseViewDelegate <NSObject>
 
@@ -21,23 +23,24 @@
 @interface PopViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 {
-        NSMutableArray *ItemList;
-
+    NSMutableArray *ItemList;
 }
 
 
 -(id) initWithParentFrame:(CGRect )parentFrame;
-@property (strong, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 
 @property (nonatomic, retain) id <CloseViewDelegate> closeDelegate;
 
 @property(nonatomic,retain) NSMutableArray *ItemList;
 
-@property (strong, nonatomic) IBOutlet UITableView *ThirdItemTableView;
-@property (strong, nonatomic) IBOutlet UIView *ContentView;
+@property (weak, nonatomic) IBOutlet UITableView *ThirdItemTableView;
+@property (weak, nonatomic) IBOutlet UIView *ContentView;
 
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId;
 
-@property (strong, nonatomic) IBOutlet UILabel *PopTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *PopTitleLabel;
+
+@property (nonatomic, retain) id <SwitchDelegate> CancelSwitchDelegate;
 
 @end

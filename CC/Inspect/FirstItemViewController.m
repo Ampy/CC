@@ -13,10 +13,12 @@
 @end
 
 @implementation FirstItemViewController
-@synthesize ItemList;
 @synthesize FirstItemTableView;
 @synthesize secondItemViewController;
 
+static NSString *CellIdentifier = @"FirstItem";
+
+#pragma mark Controller默认函数
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,8 +35,8 @@
 	// Do any additional setup after loading the view.
     
     FirstItemTableView.backgroundColor = [UIColor clearColor];
-    FirstItemTableView.opaque = NO;
-    FirstItemTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inspect_bg2.png"]];
+    secondItemViewController.CancelSwitchDelegate=self;
+    SwitcherList = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (void)viewDidUnload
@@ -43,6 +45,7 @@
     // Release any retained subviews of the main view.
 }
 
+#pragma mark TableView事件
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
@@ -55,53 +58,43 @@
 	
 }
 
-
--(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
-{
-    InspectService * inspectService = [[InspectService alloc] init];
-    [ItemList removeAllObjects];
-    
-    ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
-
-    [FirstItemTableView reloadData];
-    
-}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return ItemList.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *CellIdentifier = @"FirstItem";
     
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //if (cell == nil) {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    //}
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
     cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins2.png"]];
     
     InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
     
     //添加Label
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(85, 0,200, 60)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(88, 0,160, 60)];
+    label.numberOfLines=0;
     label.backgroundColor = [UIColor clearColor];
     label.text = model.Name;
     [cell.contentView addSubview:label];
     cell.textLabel.hidden=true;
     //添加跳过Switch
-    DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(5, 15, 80, 25)];
+    DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(5, 15, 78, 25)];
     CancelSwitch.onText=@"跳过";
     CancelSwitch.offText=@"未跳过";
     
-    [CancelSwitch removeTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
+    [CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
     CancelSwitch.object=model;
     
     [CancelSwitch setOn:model.IsCancel.integerValue==1 animated:YES ignoreControlEvents:true];
     
-    [CancelSwitch addTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
+    [CancelSwitch addTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
    
+    [SwitcherList addObject:CancelSwitch];
     
     [cell.contentView addSubview:CancelSwitch];
     
@@ -115,16 +108,49 @@
     InspectItemModel *model = [ItemList objectAtIndex:indexPath.row];
     
     [secondItemViewController LoadData:model.InspectID ParentItemId:model.ItemTempID];
+
+    
+    SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
+    
 }
 
--(void) SingleSelected:(id)sender
+
+#pragma mark UI事件
+-(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
+{
+    [SwitcherList removeAllObjects];
+    
+    InspectService * inspectService = [[InspectService alloc] init];
+    [ItemList removeAllObjects];
+    
+    ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
+    //为了缓存区分
+    CellIdentifier=parentItemId;
+    [FirstItemTableView reloadData];
+    
+}
+
+-(void) CancelSwitchChange:(id)sender
 {
     DCRoundSwitch * switcher =(DCRoundSwitch *)sender;
     InspectItemModel *model =(InspectItemModel *) switcher.object;
     InspectService *service = [[InspectService alloc] init];
         int value = switcher.isOn?1:0;
     [service SetInspectItemCancel:model.InspectID ItemId:model.InspectItemID value:value Level:1];
+   
+   if(switcher.on)
+   {
+   for(DCRoundSwitch *sw in secondItemViewController.SwitcherList)
+   {
+       [sw setOn:switcher.isOn animated:NO ignoreControlEvents:YES];
+   }
+   }
     
+}
+
+-(void) DoSwitchChange
+{
+    [SelectedSwitch setOn:false animated:NO ignoreControlEvents:YES];
 }
 
 

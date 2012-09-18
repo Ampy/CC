@@ -10,12 +10,9 @@
 #import "../Controls/Switch/DCRoundSwitch.h"
 
 @interface InspectTableViewCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UIImageView *TableImage;
-@property (strong, nonatomic) IBOutlet UILabel *TableName;
-
+@property (weak, nonatomic) IBOutlet UIImageView *TableImage;
+@property (weak, nonatomic) IBOutlet UILabel *TableName;
 
 -(void) initWithLeftRightName:(NSString *)leftText andRight:(NSString *)rightText;
-//+ (InspectTableViewCell *)cellFromNibNamed:(NSString *)nibName;
-
 
 @end

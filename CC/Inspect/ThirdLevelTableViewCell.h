@@ -7,30 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "../Services/InspectService.h"
-#import "../Controls/Switch/DCRoundSwitch.h"
-#import "../Models/InspectItemModel.h"
+#import "InspectService.h"
+#import "DCRoundSwitch.h"
+#import "InspectItemModel.h"
+#import "MCSegmentedControl.h"
 
 
 @interface ThirdLevelTableViewCell: UITableViewCell<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *ScoreItems;
     NSString * InspectItemId;
-    //NSMutableArray *ScoreSwitchItems;
-    //InspectItemModel *InspetItem;
+
 }
 
-@property (strong, nonatomic) IBOutlet UILabel *ItemName;
-@property (strong, nonatomic) IBOutlet UILabel *ItemRemarks;
+@property (weak, nonatomic) IBOutlet UILabel *ItemName;
+@property (weak, nonatomic) IBOutlet UILabel *ItemRemarks;
 
-//-(int) LoadScoreItem:(InspectItemModel *)item;
-@property (strong, nonatomic) IBOutlet DCRoundSwitch *CancelSwitch;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *ScoreSegmentedControl;
-@property (strong, nonatomic) IBOutlet UILabel *ScoreLable;
-@property (strong, nonatomic) IBOutlet UILabel *ScoreName;
-
-
+@property (weak, nonatomic) IBOutlet DCRoundSwitch *CancelSwitch;
+@property (strong, nonatomic) IBOutlet MCSegmentedControl *ScoreSegmentedControl;
+@property (weak, nonatomic)  UILabel *ScoreLable;
+@property (weak, nonatomic)  UILabel *ScoreName;
 @property (strong, nonatomic) NSArray *ScoreItems;
-@property (strong, nonatomic) IBOutlet UITableView *ScoreTableView;
+@property (weak, nonatomic) IBOutlet UITableView *ScoreTableView;
 
 @end

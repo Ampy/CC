@@ -7,34 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "../Models/InspectModel.h"
-#import "../Services/InspectService.h"
+#import "InspectModel.h"
+#import "InspectService.h"
 #import "FirstItemViewController.h"
 #import "SecondItemViewController.h"
 #import "InspectTableViewCell.h"
-#import "ManageViewController.h"
 
 @class SecondItemViewController;
 @class FirstItemViewController;
 
 @interface InspectViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
+    //检查表数组，装载查询出来的检查表
     NSMutableArray *InspectList;
+    
+    //当前检查活动ID
     NSString *InspectActivityId;
 }
-//@property (weak, nonatomic) IBOutlet UITableView *InspectsTableView;
 
 @property(nonatomic,retain) NSMutableArray *InspectList;
 
-@property (strong, nonatomic) IBOutlet UIView *FirstItemViewContainer;
-
--(InspectViewController *)initWithInspectActivityId:(NSString *)inspectActivityId;
 
 @property (strong, nonatomic) IBOutlet FirstItemViewController *firstItemViewController;
+
 @property (strong, nonatomic) IBOutlet SecondItemViewController *secondItemViewController;
 
+@property (weak, nonatomic) IBOutlet UITableView *InspectTableView;
 
-@property (strong, nonatomic) IBOutlet UIView *SecondItemViewContainer;
-@property (strong, nonatomic) IBOutlet UITableView *InspectTableView;
+-(InspectViewController *)initWithInspectActivityId:(NSString *)inspectActivityId;
 
 @end

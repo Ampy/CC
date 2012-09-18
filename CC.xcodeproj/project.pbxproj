@@ -13,6 +13,8 @@
 		050CECE415F600410044CCB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 050CECE215F600410044CCB9 /* InfoPlist.strings */; };
 		050CECE615F600410044CCB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE515F600410044CCB9 /* main.m */; };
 		050CECEA15F600410044CCB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE915F600410044CCB9 /* AppDelegate.m */; };
+		0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A4E4160810ED00309253 /* MCSegmentedControl.m */; };
+		0579A4E81608132100309253 /* inspectTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A4E71608132100309253 /* inspectTable.png */; };
 		05A08054160725B000EF52BC /* LogicBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08043160725B000EF52BC /* LogicBase.m */; };
 		05A08055160725B000EF52BC /* CellService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08044160725B000EF52BC /* CellService.m */; };
 		05A08056160725B000EF52BC /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08046160725B000EF52BC /* DatabaseHelper.m */; };
@@ -105,6 +107,9 @@
 		050CECE715F600410044CCB9 /* CC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CC-Prefix.pch"; sourceTree = "<group>"; };
 		050CECE815F600410044CCB9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		050CECE915F600410044CCB9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0579A4E3160810ED00309253 /* MCSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSegmentedControl.h; sourceTree = "<group>"; };
+		0579A4E4160810ED00309253 /* MCSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSegmentedControl.m; sourceTree = "<group>"; };
+		0579A4E71608132100309253 /* inspectTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = inspectTable.png; path = Images/inspectTable.png; sourceTree = "<group>"; };
 		05A08043160725B000EF52BC /* LogicBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogicBase.m; path = Class/LogicBase.m; sourceTree = "<group>"; };
 		05A08044160725B000EF52BC /* CellService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellService.m; path = Class/CellService.m; sourceTree = "<group>"; };
 		05A08045160725B000EF52BC /* LogicBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogicBase.h; path = Class/LogicBase.h; sourceTree = "<group>"; };
@@ -292,9 +297,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0579A4E2160810ED00309253 /* MCSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				0579A4E3160810ED00309253 /* MCSegmentedControl.h */,
+				0579A4E4160810ED00309253 /* MCSegmentedControl.m */,
+			);
+			path = MCSegmentedControl;
+			sourceTree = "<group>";
+		};
 		05A0806D160725FC00EF52BC /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				0579A4E2160810ED00309253 /* MCSegmentedControl */,
 				05A0806E160725FC00EF52BC /* Switch */,
 			);
 			path = Controls;
@@ -318,6 +333,7 @@
 		A6790F6C15FD8DCE00F2655E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0579A4E71608132100309253 /* inspectTable.png */,
 				05A08091160726FE00EF52BC /* inspect2.png */,
 				05A0807F160726F500EF52BC /* btn_submit.png */,
 				05A08080160726F500EF52BC /* btn_save.png */,
@@ -561,6 +577,7 @@
 				05A0808F160726F500EF52BC /* inspect_bg1.png in Resources */,
 				05A08090160726F500EF52BC /* close.png in Resources */,
 				05A08092160726FE00EF52BC /* inspect2.png in Resources */,
+				0579A4E81608132100309253 /* inspectTable.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +619,7 @@
 				05A08078160725FC00EF52BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				05A08079160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				05A0807A160725FC00EF52BC /* DCRoundSwitchToggleLayer.m in Sources */,
+				0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
