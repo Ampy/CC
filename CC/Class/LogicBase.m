@@ -61,7 +61,7 @@
         returnCode = [u GetTableStructs:structTables];
         if(returnCode!=1) return returnCode;
         
-        NSString *sql = [NSString stringWithString:@"CREATE view IF NOT EXISTS V_Inspect1 as select a.InspectID, a.InspTempID,a.InspectCode,a.Name,a.SiteID, a.InspType,a.InspectWay,a.InspectDate,a.Total,a.Score,a.Finished, a.Inspecter,a.Recorder,a.RecordDate, b.Name SiteName, c.SegmentID,c.Name SegmentName, d.LineID,d.Name LineName ,a.InspTempWeight,InspectActivityID from inspect a left join V_Site b on a.SiteID = b.SiteID left join V_Segment c on b.SegmentID = c.Segmentid left join V_Line d on c.LineID=d.LineID "];
+        NSString *sql = @"CREATE view IF NOT EXISTS V_Inspect1 as select a.InspectID, a.InspTempID,a.InspectCode,a.Name,a.SiteID, a.InspType,a.InspectWay,a.InspectDate,a.Total,a.Score,a.Finished, a.Inspecter,a.Recorder,a.RecordDate, b.Name SiteName, c.SegmentID,c.Name SegmentName, d.LineID,d.Name LineName ,a.InspTempWeight,InspectActivityID from inspect a left join V_Site b on a.SiteID = b.SiteID left join V_Segment c on b.SegmentID = c.Segmentid left join V_Line d on c.LineID=d.LineID ";
         
         DatabaseHelper *db = [[DatabaseHelper alloc] init];
         [db OpenDB:[Settings Instance].DatabaseName];
