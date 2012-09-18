@@ -23,7 +23,6 @@
 		05A08059160725B000EF52BC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0804E160725B000EF52BC /* Settings.m */; };
 		05A0805A160725B000EF52BC /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08050160725B000EF52BC /* Config.m */; };
 		05A0805B160725B000EF52BC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08053160725B000EF52BC /* Reachability.m */; };
-		05A0805E160725C300EF52BC /* RTString.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0805C160725C300EF52BC /* RTString.m */; };
 		05A08077160725FC00EF52BC /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08070160725FC00EF52BC /* DCRoundSwitch.m */; };
 		05A08078160725FC00EF52BC /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08072160725FC00EF52BC /* DCRoundSwitchKnobLayer.m */; };
 		05A08079160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08074160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m */; };
@@ -127,8 +126,6 @@
 		05A08051160725B000EF52BC /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = Class/Config.h; sourceTree = "<group>"; };
 		05A08052160725B000EF52BC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Class/Reachability.h; sourceTree = "<group>"; };
 		05A08053160725B000EF52BC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Class/Reachability.m; sourceTree = "<group>"; };
-		05A0805C160725C300EF52BC /* RTString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTString.m; sourceTree = "<group>"; };
-		05A0805D160725C300EF52BC /* RTString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTString.h; sourceTree = "<group>"; };
 		05A0806F160725FC00EF52BC /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
 		05A08070160725FC00EF52BC /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
 		05A08071160725FC00EF52BC /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
@@ -427,8 +424,6 @@
 		A6D3E09F1603226A0013BF4C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				05A0805C160725C300EF52BC /* RTString.m */,
-				05A0805D160725C300EF52BC /* RTString.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -614,7 +609,6 @@
 				05A08059160725B000EF52BC /* Settings.m in Sources */,
 				05A0805A160725B000EF52BC /* Config.m in Sources */,
 				05A0805B160725B000EF52BC /* Reachability.m in Sources */,
-				05A0805E160725C300EF52BC /* RTString.m in Sources */,
 				05A08077160725FC00EF52BC /* DCRoundSwitch.m in Sources */,
 				05A08078160725FC00EF52BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				05A08079160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m in Sources */,
