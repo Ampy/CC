@@ -272,7 +272,6 @@
 				050CECE815F600410044CCB9 /* AppDelegate.h */,
 				050CECE915F600410044CCB9 /* AppDelegate.m */,
 				A6790FB615FD8F9A00F2655E /* Class */,
-				A6D3E09F1603226A0013BF4C /* Common */,
 				A6790F6C15FD8DCE00F2655E /* Images */,
 				A6D3E0AF1603226A0013BF4C /* Inspect */,
 				A6D3E0C01603226A0013BF4C /* Models */,
@@ -419,13 +418,6 @@
 				05A0804C160725B000EF52BC /* ViewDelegate.h */,
 			);
 			name = Class;
-			sourceTree = "<group>";
-		};
-		A6D3E09F1603226A0013BF4C /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		A6D3E0AF1603226A0013BF4C /* Inspect */ = {
