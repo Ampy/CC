@@ -53,6 +53,9 @@ static NSString *CellIdentifier = @"Inspects";
     InspectTableView.backgroundColor = [UIColor clearColor];
     InspectTableView.opaque = NO;
     
+    NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self tableView:InspectTableView didSelectRowAtIndexPath:ip];
+    [InspectTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom]; 
 }
 
 - (void)viewDidUnload
@@ -109,6 +112,15 @@ static NSString *CellIdentifier = @"Inspects";
     
     [firstItemViewController LoadData:model.InspectId ParentItemId:model.InspTempID];
 }
+- (IBAction)SaveButtonClick:(id)sender {
+    ManageViewController *ctrl = [[ManageViewController alloc] init];
+    [self.navigationController pushViewController:ctrl animated:YES];
 
+}
+
+- (IBAction)CommitButtonClick:(id)sender {
+    ManageViewController *ctrl = [[ManageViewController alloc] init];
+    [self.navigationController pushViewController:ctrl animated:YES];
+}
 
 @end

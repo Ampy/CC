@@ -37,6 +37,8 @@ static NSString *CellIdentifier = @"FirstItem";
     FirstItemTableView.backgroundColor = [UIColor clearColor];
     secondItemViewController.CancelSwitchDelegate=self;
     SwitcherList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+
 }
 
 - (void)viewDidUnload
@@ -109,7 +111,7 @@ static NSString *CellIdentifier = @"FirstItem";
     
     [secondItemViewController LoadData:model.InspectID ParentItemId:model.ItemTempID];
 
-    
+    if(SwitcherList.count>0)
     SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
     
 }
@@ -128,6 +130,9 @@ static NSString *CellIdentifier = @"FirstItem";
     CellIdentifier=parentItemId;
     [FirstItemTableView reloadData];
     
+    NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self tableView:FirstItemTableView didSelectRowAtIndexPath:ip];
+    [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom]; 
 }
 
 -(void) CancelSwitchChange:(id)sender

@@ -12,6 +12,8 @@
 #import "FirstItemViewController.h"
 #import "SecondItemViewController.h"
 #import "InspectTableViewCell.h"
+#import "ManageViewController.h"
+
 
 @class SecondItemViewController;
 @class FirstItemViewController;
