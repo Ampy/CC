@@ -63,8 +63,8 @@
     }
     }
     @catch (NSException *exception) {
-        NSLog(exception.name);
-        NSLog(exception.reason);
+        NSLog(@"%@",exception.name);
+        NSLog(@"%@",exception.reason);
     }
     @finally {
         [db Commit];	
