@@ -1,11 +1,3 @@
-
-
-CC.xcodeproj/project.xcworkspace/xcuserdata/rtsafe02.xcuserdatad/UserInterfaceState.xcuserstate
-
-CC.xcodeproj/project.xcworkspace/xcuserdata/rtsafe02.xcuserdatad/xcdebugger/Expressions.xcexplist
-
-CC.xcodeproj/xcuserdata/rtsafe02.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist
-
 # Xcode
 build/*
 *.pbxuser
@@ -21,4 +13,3 @@ build/*
 xcuserdata
 profile
 *.moved-aside
-
