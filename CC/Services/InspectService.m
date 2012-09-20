@@ -280,7 +280,7 @@
     //NSString * CreateViewSql = @"CREATE  VIEW  IF NOT EXISTS V_VerifyInspect AS select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
     //[databaseHelper ExecuteNonQuery:CreateViewSql];
     
-    NSString * UnCompletedSql=[[NSString alloc] initWithFormat: @"select count(1) from V_VerifyInspect where InspectItemId in(select InspectItemId from inspectitem b where Exists(select * from inspectitem a where a.inspectItemId='%@' and a.ItemTempId=b.PItemTempId and a.inspectid=b.inspectid)) and selected+isCancel=0;",itemId ];
+    NSString * UnCompletedSql=[[NSString alloc] initWithFormat: @"select count(1) from V_VerifyInspect where InspectItemId in(select InspectItemId from inspectitem b where Exists(select inspectItemid from inspectitem a where a.inspectItemId='%@' and a.ItemTempId=b.PItemTempId and a.inspectid=b.inspectid)) and selected+isCancel=0;",itemId ];
     sqlite3_stmt * statement = [databaseHelper ExecSql:UnCompletedSql];
     
     int count = 0;
@@ -325,7 +325,7 @@
     //所有表中至少有一个打分项，即count(Selected=1)>0
     NSString * inspectWay=@"";
     if (sqlite3_step(statement2)==SQLITE_ROW) {
-        inspectWay=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 0) encoding:NSUTF8StringEncoding];
+        inspectWay=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement2, 0) encoding:NSUTF8StringEncoding];
     }
     
     sqlite3_finalize(statement2);
@@ -358,7 +358,7 @@
     }
 
     [databaseHelper CloseDB];
-    return  false;
+    return  true;
 }
 
 -(void) InspectActivityComplete:(NSString *)acitvityId

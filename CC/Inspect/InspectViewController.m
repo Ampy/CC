@@ -122,8 +122,10 @@ static NSString *CellIdentifier = @"Inspects";
     
     @try {
         InspectService * inspectService = [[InspectService alloc] init];
-        [inspectService CanCommitInspectActivity:InspectActivityId];
+        if([inspectService CanCommitInspectActivity:InspectActivityId])
+        {
         [inspectService InspectActivityComplete:InspectActivityId];
+        }
         
         ManageViewController *ctrl = [[ManageViewController alloc] init];
         [self.navigationController pushViewController:ctrl animated:YES];

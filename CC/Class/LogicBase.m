@@ -63,11 +63,20 @@
         
         NSString *sql = @"CREATE view IF NOT EXISTS V_Inspect1 as select a.InspectID, a.InspTempID,a.InspectCode,a.Name,a.SiteID, a.InspType,a.InspectWay,a.InspectDate,a.Total,a.Score,a.Finished, a.Inspecter,a.Recorder,a.RecordDate, b.Name SiteName, c.SegmentID,c.Name SegmentName, d.LineID,d.Name LineName ,a.InspTempWeight,InspectActivityID from inspect a left join V_Site b on a.SiteID = b.SiteID left join V_Segment c on b.SegmentID = c.Segmentid left join V_Line d on c.LineID=d.LineID ";
         
+        NSString *sql2=@"CREATE view IF NOT EXISTS  V_VerifyInspect as select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
+        
         DatabaseHelper *db = [[DatabaseHelper alloc] init];
         [db OpenDB:[Settings Instance].DatabaseName];
         [db ExecSql:sql];
         [db Setp];
         [db Final];
+        
+        [db ExecSql:sql2];
+        [db Setp];
+        [db Final];
+        
+
+        
         [db CloseDB];
         
         [Config SetPlistInfo:@"IsInit" Value:@"T"];
@@ -197,7 +206,7 @@
     sqlite3_stmt * stmt3= [db ExecSql:sql3];
     while(sqlite3_step(stmt3) == SQLITE_ROW)
     {
-        NSString * sql31 = [NSString stringWithFormat:@"insert into InspectItem (InspectItemID,InspectID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",[Common GetGuid],InspectID,
+        NSString * sql31 = [NSString stringWithFormat:@"insert into InspectItem (InspectItemID,InspectID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,isCancel) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',0)",[Common GetGuid],InspectID,
                           [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 0)],
                           [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 1)],
                           [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 2)],
@@ -221,7 +230,7 @@
     sqlite3_stmt * stmt4= [db ExecSql:sql4];
     while(sqlite3_step(stmt4) == SQLITE_ROW)
     {
-        NSString * sql41 = [NSString stringWithFormat:@"insert into InspectScore (ScoreID,InspectID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,Qualified) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",[Common GetGuid],InspectID,
+        NSString * sql41 = [NSString stringWithFormat:@"insert into InspectScore (ScoreID,InspectID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,Qualified,Selected) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',0)",[Common GetGuid],InspectID,
                           [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 0)],
                           [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 1)],
                           [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 2)],
