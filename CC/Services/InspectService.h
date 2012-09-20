@@ -29,4 +29,9 @@
 -(int) GetInspectSocreItemsCount:(NSString *)inspectItemId;
 -(void) SelectInspectScoreItem:(NSString *)inspectScoreId value:(int)value;
 -(void) SetInspectItemCancel:(NSString *)inspectid ItemId:(NSString *)itemId value:(int)value Level:(int)level;
+
+-(int) InspectItemScoreComplete:(NSString *) itemId;
+
+-(BOOL) CanCommitInspectActivity:(NSString *)acitvityId;
+-(void) InspectActivityComplete:(NSString *)acitvityId;
 @end

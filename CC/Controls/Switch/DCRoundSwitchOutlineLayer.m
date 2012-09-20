@@ -20,7 +20,7 @@
 	UIBezierPath *switchOutline = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.bounds.size.height / 2.0];
 	CGContextAddPath(context, switchOutline.CGPath);
 	CGContextClip(context);
-
+    
 	// inner gloss
 	CGContextSaveGState(context);
 	CGRect innerGlossPathRect = CGRectMake(self.frame.size.width * 0.05,
@@ -32,7 +32,7 @@
 															   cornerRadii:CGSizeMake(self.bounds.size.height * 0.3, self.bounds.size.height * 0.3)];
 	CGContextAddPath(context, innerGlossPath.CGPath);
 	CGContextClip(context);
-
+    
 	CGFloat colorStops[2] = {0.0, 1.0};
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 	CGFloat innerGlossStartColorComponents[] = {1.0, 1.0, 1.0, 0.14};
@@ -43,14 +43,14 @@
 	CFArrayRef colorsArray = CFArrayCreate(NULL, (const void**)colors, sizeof(colors) / sizeof(CGColorRef), &kCFTypeArrayCallBacks);
 	CGGradientRef innerGlossGradient = CGGradientCreateWithColors(colorSpace, colorsArray, colorStops);
 	CFRelease(colorsArray);
-
+    
 	CGContextDrawLinearGradient(context, innerGlossGradient, CGPointMake(0, CGRectGetMinY(innerGlossPathRect)), CGPointMake(0, CGRectGetMaxY(innerGlossPathRect)), 0);
 	CGContextRestoreGState(context);
 	CGColorSpaceRelease(colorSpace);
 	CGColorRelease(topColor);
 	CGColorRelease(bottomColor);
 	CGGradientRelease(innerGlossGradient);
-
+    
 	// outline and inner shadow
 	CGContextSetShadowWithColor(context, CGSizeMake(0.0, 1), 2.0, [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0].CGColor);
 	CGContextSetLineWidth(context, 0.5);
@@ -58,7 +58,7 @@
 	CGContextAddPath(context, outlinePath.CGPath);
 	CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.60 alpha:1.0].CGColor);
 	CGContextStrokePath(context);
-
+    
 	CGContextAddPath(context, outlinePath.CGPath);
 	CGContextStrokePath(context);
 }

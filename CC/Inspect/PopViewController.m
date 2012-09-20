@@ -162,6 +162,7 @@ NSLog(@"结束");
     [cell.CancelSwitch setOn:model.IsCancel.integerValue==1 animated:NO ignoreControlEvents:true];
     
     [cell.CancelSwitch addTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
+    cell.CancelSwitch.onTintColor=[UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
     
     
     cell.ScoreSegmentedControl.hidden=model.IsCancel.integerValue==1;

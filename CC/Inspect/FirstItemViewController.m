@@ -95,6 +95,8 @@ static NSString *CellIdentifier = @"FirstItem";
     [CancelSwitch setOn:model.IsCancel.integerValue==1 animated:YES ignoreControlEvents:true];
     
     [CancelSwitch addTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
+    
+    CancelSwitch.onTintColor=[UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
    
     [SwitcherList addObject:CancelSwitch];
     

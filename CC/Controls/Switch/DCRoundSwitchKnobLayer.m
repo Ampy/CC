@@ -21,13 +21,13 @@ CGGradientRef CreateGradientRefWithColors(CGColorSpaceRef colorSpace, CGColorRef
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
 	CGRect knobRect = CGRectInset(self.bounds, 2, 2);
 	CGFloat knobRadius = self.bounds.size.height - 2;
-
+    
 	// knob outline (shadow is drawn in the toggle layer)
 	CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.62 alpha:1.0].CGColor);
 	CGContextSetLineWidth(context, 1.5);
 	CGContextStrokeEllipseInRect(context, knobRect);
 	CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 0, NULL);
-
+    
 	// knob inner gradient
 	CGContextAddEllipseInRect(context, knobRect);
 	CGContextClip(context);
@@ -38,7 +38,7 @@ CGGradientRef CreateGradientRefWithColors(CGColorSpaceRef colorSpace, CGColorRef
 	CGGradientRef knobGradient = CreateGradientRefWithColors(colorSpace, knobStartColor, knobEndColor);
 	CGContextDrawLinearGradient(context, knobGradient, topPoint, bottomPoint, 0);
 	CGGradientRelease(knobGradient);
-
+    
 	// knob inner highlight
 	CGContextAddEllipseInRect(context, CGRectInset(knobRect, 0.5, 0.5));
 	CGContextAddEllipseInRect(context, CGRectInset(knobRect, 1.5, 1.5));
@@ -46,7 +46,7 @@ CGGradientRef CreateGradientRefWithColors(CGColorSpaceRef colorSpace, CGColorRef
 	CGGradientRef knobHighlightGradient = CreateGradientRefWithColors(colorSpace, [UIColor whiteColor].CGColor, [UIColor colorWithWhite:1.0 alpha:0.5].CGColor);
 	CGContextDrawLinearGradient(context, knobHighlightGradient, topPoint, bottomPoint, 0);
 	CGGradientRelease(knobHighlightGradient);
-
+    
 	CGColorSpaceRelease(colorSpace);
 }
 

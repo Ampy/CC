@@ -18,19 +18,20 @@
 
 @interface DCRoundSwitch : UIControl
 {
-	@private
-		DCRoundSwitchOutlineLayer *outlineLayer;
-		DCRoundSwitchToggleLayer *toggleLayer;
-		DCRoundSwitchKnobLayer *knobLayer;
-		CAShapeLayer *clipLayer;
-		BOOL ignoreTap;
+@private
+    DCRoundSwitchOutlineLayer *outlineLayer;
+    DCRoundSwitchToggleLayer *toggleLayer;
+    DCRoundSwitchKnobLayer *knobLayer;
+    CAShapeLayer *clipLayer;
+    id object;
+    BOOL ignoreTap;
 }
 
 @property (nonatomic, retain) UIColor *onTintColor;		// default: blue (matches normal UISwitch)
 @property (nonatomic, getter=isOn) BOOL on;				// default: NO
 @property (nonatomic, copy) NSString *onText;			// default: 'ON' - automatically localized
 @property (nonatomic, copy) NSString *offText;			// default: 'OFF' - automatically localized
-@property (nonatomic, retain) id object;
+@property (nonatomic,copy) id object;
 
 - (void)setOn:(BOOL)newOn animated:(BOOL)animated;
 - (void)setOn:(BOOL)newOn animated:(BOOL)animated ignoreControlEvents:(BOOL)ignoreControlEvents;
