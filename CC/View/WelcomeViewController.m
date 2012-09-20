@@ -49,7 +49,6 @@
     {
         [Common ExceptionHandler:[LogicBase UpdateByService]];
     }
-        
     LoginViewController *ctrl = [[LoginViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];
     //HomeViewController *ctrl = [[HomeViewController alloc] init];

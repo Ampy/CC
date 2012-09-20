@@ -87,7 +87,7 @@ static NSString *CellIdentifier = @"Inspects";
     
     
     cell.TableName.text = model.Name;
-    cell.TableImage.image=[UIImage imageNamed:@"InspectTable.png"];
+    //cell.TableImage.image=[UIImage imageNamed:@"InspectTable.png"];
     cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins1.png"]];
 
 
