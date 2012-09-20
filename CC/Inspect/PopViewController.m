@@ -17,7 +17,7 @@
 @synthesize ThirdItemTableView;
 @synthesize ContentView;
 @synthesize closeButton;
-
+@synthesize ItemList;
 @synthesize closeDelegate;
 @synthesize CancelSwitchDelegate;
 

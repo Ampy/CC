@@ -250,7 +250,7 @@
     sqlite3_finalize(stmt4);
     [db Commit];
     
-    NSString * sql = [NSString stringWithString:@"update InspectScore set InspectItemID=(select InspectItemID from InspectItem where InspectItem.InspectID=InspectScore.InspectID and InspectItem.SiteInspItemTempID=InspectScore.SiteInspItemTempID) "];
+    NSString * sql = @"update InspectScore set InspectItemID=(select InspectItemID from InspectItem where InspectItem.InspectID=InspectScore.InspectID and InspectItem.SiteInspItemTempID=InspectScore.SiteInspItemTempID) ";
     [db ExecSql:sql];
     [db Setp];
     [db Final];
@@ -274,7 +274,7 @@
 
 +(NSString *)UpdateToService:(NSString *)InspectActivityId
 {
-    NSString * updateSQL = [NSString stringWithString:@""];
+    NSString * updateSQL = @"";
     
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings Instance].DatabaseName];
@@ -287,7 +287,7 @@
         int count = 15;
         for(int i=0;i<count;i++)
         {
-            NSString * value = [NSString stringWithString:@"0"];
+            NSString * value = @"0";
             char * cValue = (char*)sqlite3_column_text(stmt, i);
             if(cValue)
                 value = [NSString stringWithUTF8String:cValue];
@@ -317,7 +317,7 @@
         int count = 23;
         for(int i=0;i<count;i++)
         {
-            NSString * value = [NSString stringWithString:@"0"];
+            NSString * value = @"0";
             char * cValue = (char*)sqlite3_column_text(stmt, i);
             if(cValue)
                 value = [NSString stringWithUTF8String:cValue];
@@ -346,7 +346,7 @@
         int count = 14;
         for(int i=0;i<count;i++)
         {
-            NSString * value = [NSString stringWithString:@"0"];
+            NSString * value = @"0";
             char * cValue = (char*)sqlite3_column_text(stmt, i);
             if(cValue)
                 value = [NSString stringWithUTF8String:cValue];
