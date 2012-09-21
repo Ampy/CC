@@ -61,7 +61,7 @@
         returnCode = [u GetTableStructs:structTables];
         if(returnCode!=1) return returnCode;
         
-        NSString *sql = @"CREATE view IF NOT EXISTS V_Inspect1 as select a.InspectID, a.InspTempID,a.InspectCode,a.Name,a.SiteID, a.InspType,a.InspectWay,a.InspectDate,a.Total,a.Score,a.Finished, a.Inspecter,a.Recorder,a.RecordDate, b.Name SiteName, c.SegmentID,c.Name SegmentName, d.LineID,d.Name LineName ,a.InspTempWeight,InspectActivityID from inspect a left join V_Site b on a.SiteID = b.SiteID left join V_Segment c on b.SegmentID = c.Segmentid left join V_Line d on c.LineID=d.LineID ";
+        NSString *sql = @"CREATE view IF NOT EXISTS V_InspectActivity as select a.InspectActivityID,a.InspectCode,a.Name,a.SiteID,a.InspectWay,a.InspectDate,a.Total,a.Score,a.Finished,a.Inspecter,a.Recorder,a.RecordDate,b.Name SiteName,c.SegmentID,c.Name SegmentName,d.LineID,d.Name LineName from inspectactivity a left join V_Site b on a.SiteID = b.SiteID left join V_segment c on b.SegmentID = c.segmentid left join V_Line d on c.LineID=d.LineID ";
         
         NSString *sql2=@"CREATE view IF NOT EXISTS  V_VerifyInspect as select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
         
@@ -106,13 +106,13 @@
 
 +(NSMutableArray *)GetInspectList1
 {
-    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_Inspect1 where Finished='1' and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
+    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished='1' and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
     return [self SqlToArray:sql FieldCount:7];
 }
 
 +(NSMutableArray *)GetInspectList2
 {
-    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_Inspect1 where Finished='0' and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
+    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished<>'1' and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
     return [self SqlToArray:sql FieldCount:7];
 }
 
