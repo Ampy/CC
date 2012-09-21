@@ -231,8 +231,8 @@ static NSString *CellIdentifier = @"ThridItemCell";
     [cell.ScoreSegmentedControl setNeedsDisplay];
 
     
-    //if(CancelSwitchDelegate)
-     //   [CancelSwitchDelegate DoSwitchChange];
+    if(CancelSwitchDelegate)
+        [CancelSwitchDelegate DoSwitchChange];
 }
 
 @end
