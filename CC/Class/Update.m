@@ -33,7 +33,7 @@
 -(int)GetTableData:(NSString *)tableName
 {
 
-   
+    NSLog(@"开始更新表：%@",tableName);
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings Instance].DatabaseName];
      @try {
@@ -51,6 +51,8 @@
     NSString * sqls = [cs CellWeb:[@"IOS/GetTableData?tableName=" stringByAppendingString:tableName]];
     
     if(!sqls) return 22;
+         
+    NSLog(@"insert开始表：%@",tableName);
     
     NSArray * array = [sqls componentsSeparatedByString:@"|$|"];
     int i=1;
@@ -71,6 +73,7 @@
         [db CloseDB];
     }
     //
+    NSLog(@"结束更新表：%@",tableName);
     return 1;
 }
 

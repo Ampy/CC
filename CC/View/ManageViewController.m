@@ -201,6 +201,13 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath { 
+    
+    if(tableView.tag==1)
+    {
+        NSString * mid = [[lists objectAtIndex:indexPath.row] objectAtIndex:6];
+        InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
+        [self.navigationController pushViewController:inspectview animated:YES];
+    }
     if(tableView.tag==2)
     {
         NSString * mid = [[lists2 objectAtIndex:indexPath.row] objectAtIndex:6];

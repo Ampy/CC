@@ -48,7 +48,7 @@
 {
     int returnCode = 1;
     
-    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",nil];
+    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",nil];//@"SiteInspItemTemp",@"SiteScoreTemp",
     
     NSArray * structTables = [NSArray arrayWithObjects:@"Inspect",@"InspectItem",@"InspectScore",@"InspectActivity",nil];
     
@@ -112,7 +112,7 @@
 
 +(NSMutableArray *)GetInspectList2
 {
-    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished<>'1' and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
+    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished is null and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
     return [self SqlToArray:sql FieldCount:7];
 }
 
@@ -275,6 +275,7 @@
 +(NSString *)UpdateToService:(NSString *)InspectActivityId
 {
     NSString * updateSQL = @"";
+    NSString * delSQL = @"";
     
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings Instance].DatabaseName];
@@ -304,7 +305,7 @@
 
         updateSQL = [updateSQL stringByAppendingString:@") "];
     }
-    
+    delSQL = [delSQL stringByAppendingFormat:@"delete from InspectActivity where InspectActivityId='%@' |$| ",InspectActivityId];
     [db Final];
     sqlite3_finalize(stmt);
     
@@ -334,6 +335,7 @@
         
         updateSQL = [updateSQL stringByAppendingString:@") "];
     }
+    delSQL = [delSQL stringByAppendingFormat:@"delete from Inspect where InspectActivityId='%@' |$| ",InspectActivityId];
     [db Final];
     sqlite3_finalize(stmt);
     
@@ -363,6 +365,7 @@
         
         updateSQL = [updateSQL stringByAppendingString:@") "];
     }
+    delSQL = [delSQL stringByAppendingFormat:@"delete from InspectItem where InspectID in (select InspectID from Inspect where InspectActivityID='%@') |$| ",InspectActivityId];
     [db Final];
     sqlite3_finalize(stmt);
     
@@ -392,15 +395,26 @@
         
         updateSQL = [updateSQL stringByAppendingString:@") "];
     }
+    delSQL = [delSQL stringByAppendingFormat:@"delete from InspectScore where InspectID in (select InspectID from Inspect where InspectActivityID='%@') ",InspectActivityId];
     [db Final];
     sqlite3_finalize(stmt);
     //
-    [db CloseDB];
     
     NSString * url = [NSString stringWithFormat:@"IOS/UpdateInspect?ID=%@",InspectActivityId];
     CellService *cs = [[CellService alloc]init];
     NSData * data =[cs CellWeb:url Data:updateSQL];
     NSString *result = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
+    
+    NSArray * array = [delSQL componentsSeparatedByString:@"|$|"];
+    for(int i=array.count-1;i>=0;i--)
+    {
+        [db ExecSql:[array objectAtIndex:i]];
+        [db Setp];
+        [db Final];
+    }
+
+    [db CloseDB];
+    
     return result;
 }
 
