@@ -204,6 +204,9 @@
         NSString * updatesql3=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d where PItemTempId in( select ItemTempId from InspectItem where PitemTempId in(select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@') and inspectid='%@') and inspectid='%@'",value,inspectid,itemId,inspectid,inspectid];
         [databaseHelper ExecuteNonQuery:updatesql3];
         
+        NSString * updateScoresql=[[NSString alloc] initWithFormat:@"update inspectscore set Selected=0  where InspectItemId in (select InspectItemid from InspectItem where PItemTempId in (select ItemTempId from inspectitem where PItemTempId in (select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@')))",inspectid,itemId];
+        [databaseHelper ExecuteNonQuery:updateScoresql];
+        
     }
     if(level==2)
     {
@@ -213,12 +216,18 @@
         
         NSString * updatesql2=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where PitemTempId in(select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@') and inspectid='%@'",value,inspectid,itemId,inspectid];
         [databaseHelper ExecuteNonQuery:updatesql2];
+        
+        NSString * updateScoresql=[[NSString alloc] initWithFormat:@"update inspectscore set Selected=0  where InspectItemId in (select inspectitemid from inspectitem where PItemTempId in (select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@'))",inspectid,itemId];
+        [databaseHelper ExecuteNonQuery:updateScoresql];
     }
     
     if(level==3)
     {
         NSString * updatesql1=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where InspectItemId='%@'",value,itemId];
         [databaseHelper ExecuteNonQuery:updatesql1];
+        
+        NSString * updateScoresql=[[NSString alloc] initWithFormat:@"update inspectscore set Selected=0  where InspectItemId='%@'",itemId];
+        [databaseHelper ExecuteNonQuery:updateScoresql];
     }
     
 }

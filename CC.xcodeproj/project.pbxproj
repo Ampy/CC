@@ -13,7 +13,7 @@
 		050CECE415F600410044CCB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 050CECE215F600410044CCB9 /* InfoPlist.strings */; };
 		050CECE615F600410044CCB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE515F600410044CCB9 /* main.m */; };
 		050CECEA15F600410044CCB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE915F600410044CCB9 /* AppDelegate.m */; };
-		0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A4E4160810ED00309253 /* MCSegmentedControl.m */; };
+		0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A4E4160810ED00309253 /* MCSegmentedControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0579A4E81608132100309253 /* inspectTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A4E71608132100309253 /* inspectTable.png */; };
 		05A08054160725B000EF52BC /* LogicBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08043160725B000EF52BC /* LogicBase.m */; };
 		05A08055160725B000EF52BC /* CellService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08044160725B000EF52BC /* CellService.m */; };

@@ -26,7 +26,6 @@ static NSString *CellIdentifier = @"ThridItemCell";
 
 -(id) initWithParentFrame:(CGRect )parentFrame
 {
-    NSLog(@"开始");
     self=[super init];
     if(self)
     {
@@ -72,8 +71,6 @@ static NSString *CellIdentifier = @"ThridItemCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-NSLog(@"结束");
-    
 }
 
 - (void)layoutSubviews {
@@ -222,13 +219,16 @@ NSLog(@"结束");
 {
     DCRoundSwitch * switcher =(DCRoundSwitch *)sender;
     InspectItemModel *model =(InspectItemModel *) switcher.object;
+    
     InspectService *service = [[InspectService alloc] init];
     int value = switcher.isOn?1:0;
     [service SetInspectItemCancel:model.InspectID ItemId:model.InspectItemID value:value Level:3];
     
     model.IsCancel  = [NSNumber numberWithInt:value];
     ThirdLevelTableViewCell *  cell =(ThirdLevelTableViewCell * )switcher.superview.superview;
+    cell.ScoreSegmentedControl.selectedSegmentIndex =UISegmentedControlNoSegment;
     cell.ScoreSegmentedControl.hidden=value==1;
+    [cell.ScoreSegmentedControl setNeedsDisplay];
 
     
     if(CancelSwitchDelegate)
