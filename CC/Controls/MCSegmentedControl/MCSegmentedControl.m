@@ -66,7 +66,7 @@
 		if (array) {
 			NSMutableArray *mutableArray = [array mutableCopy];
 			self.items = mutableArray;
-			//[mutableArray release];
+			[mutableArray release];
 		} else {
 			self.items = [NSMutableArray array];
 		}
@@ -77,28 +77,6 @@
 	return self;
 }
 
--(id) initWithFrame:(CGRect)frame
-{
-    self=[super initWithFrame:frame];
-    if(self)
-    {
-        
-        [self _initialize];
-    }
-    return self;
-}
-
--(id) init
-{
-    self = [super init];
-    if(self)
-    {
-        
-    }
-    [self _initialize];
-    return self;
-}
-
 - (void)dealloc
 {
 	self.items               = nil;
@@ -106,7 +84,7 @@
 	self.selectedItemColor   = nil;
 	self.unselectedItemColor = nil;
 	
-    //[super dealloc];
+    [super dealloc];
 }
 
 - (BOOL)_mustCustomize
@@ -128,9 +106,9 @@
 - (void)setFont:(UIFont *)aFont
 {
 	if (_font != aFont) {
-		//[_font release];
-		//_font = [aFont retain];
-		_font = aFont;
+		[_font release];
+		_font = [aFont retain];
+		
 		[self setNeedsDisplay];
 	}
 }
@@ -146,9 +124,9 @@
 - (void)setSelectedItemColor:(UIColor *)aColor
 {
 	if (aColor != _selectedItemColor) {
-		//[_selectedItemColor release];
-		//_selectedItemColor = [aColor retain];
-		_selectedItemColor = aColor;
+		[_selectedItemColor release];
+		_selectedItemColor = [aColor retain];
+		
 		[self setNeedsDisplay];
 	}
 }
@@ -164,9 +142,9 @@
 - (void)setUnselectedItemColor:(UIColor *)aColor
 {
 	if (aColor != _unselectedItemColor) {
-		//[_unselectedItemColor release];
-		//_unselectedItemColor = [aColor retain];
-		_unselectedItemColor = aColor;
+		[_unselectedItemColor release];
+		_unselectedItemColor = [aColor retain];
+		
 		[self setNeedsDisplay];
 	}
 }
@@ -179,9 +157,8 @@
 - (void)setItems:(NSMutableArray *)array
 {
 	if (_items != array) {
-		//[_items release];
-		//_items = [array retain];
-        _items=array;
+		[_items release];
+		_items = [array retain];
 	}
 }
 
@@ -209,12 +186,11 @@
 		NSLog(@"MCSegmentedControl WARNING: unSelectedItemBackgroundGradientColors must contain 2 colors");
 	}
 	else if (array != _unSelectedItemBackgroundGradientColors) {
-		//[_unSelectedItemBackgroundGradientColors release];
-		//_unSelectedItemBackgroundGradientColors = [array retain];
-        _unSelectedItemBackgroundGradientColors = array;
+		[_unSelectedItemBackgroundGradientColors release];
+		_unSelectedItemBackgroundGradientColors = [array retain];
         
 		if (_unSelectedItemBackgroundGradientColors) {
-			//[_unSelectedItemBackgroundGradientCGColors release];
+			[_unSelectedItemBackgroundGradientCGColors release];
 			_unSelectedItemBackgroundGradientCGColors = [[NSArray alloc] initWithObjects:
 														 (id)((UIColor *)[_unSelectedItemBackgroundGradientColors objectAtIndex:0]).CGColor,
 														 (id)((UIColor *)[_unSelectedItemBackgroundGradientColors objectAtIndex:1]).CGColor,
@@ -223,7 +199,7 @@
 			[self setNeedsDisplay];
 		}
 		else {
-			//[_unSelectedItemBackgroundGradientCGColors release], _unSelectedItemBackgroundGradientCGColors = nil;
+			[_unSelectedItemBackgroundGradientCGColors release], _unSelectedItemBackgroundGradientCGColors = nil;
 		}
 	}
 }
@@ -236,9 +212,9 @@
 - (void)setSelectedItemShadowColor:(UIColor *)selectedItemShadowColor
 {
 	if (selectedItemShadowColor != _selectedItemShadowColor) {
-		//[_selectedItemShadowColor release];
-		//_selectedItemShadowColor = [selectedItemShadowColor retain];
-		_selectedItemShadowColor = selectedItemShadowColor;
+		[_selectedItemShadowColor release];
+		_selectedItemShadowColor = [selectedItemShadowColor retain];
+		
 		[self setNeedsDisplay];
 	}
 }
@@ -251,9 +227,9 @@
 - (void)setUnselectedItemShadowColor:(UIColor *)unselectedItemShadowColor
 {
 	if (unselectedItemShadowColor != _unselectedItemShadowColor) {
-		//[_unselectedItemShadowColor release];
-		//_unselectedItemShadowColor = [unselectedItemShadowColor retain];
-		_unselectedItemShadowColor = unselectedItemShadowColor;
+		[_unselectedItemShadowColor release];
+		_unselectedItemShadowColor = [unselectedItemShadowColor retain];
+		
 		[self setNeedsDisplay];
 	}
 }
@@ -279,7 +255,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    
+	
 	// Only the bordered and plain style are customized
 	if (![self _mustCustomize]) {
 		[super drawRect:rect];
@@ -314,8 +290,7 @@
 	// Background gradient for non selected items
 	
 	if (_unSelectedItemBackgroundGradientCGColors) {
-		CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_unSelectedItemBackgroundGradientCGColors, NULL);
-        
+		CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)_unSelectedItemBackgroundGradientCGColors, NULL);
 		CGContextDrawLinearGradient(c, gradient, CGPointZero, CGPointMake(0, rect.size.height), kCGGradientDrawsBeforeStartLocation);
 		CFRelease(gradient);
 	}
@@ -616,14 +591,48 @@
 		CGContextSetStrokeColorWithColor(c,[UIColor blackColor].CGColor);
 		CGContextSetLineWidth(c, 1.0f);
 		CGContextStrokePath(c);
-        CFRelease(colorSpace);
 	} else {
-        self.layer.cornerRadius=10;    //设置弹出框为圆角视图
-        self.layer.masksToBounds = YES;
-        self.layer.borderWidth = 1;   //设置弹出框视图边框宽度
-        self.layer.borderColor = [[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1] CGColor];   //设置弹出框边框颜色
+		CGContextSaveGState(c);
+		
+		CGRect bottomHalfRect = CGRectMake(0,
+										   rect.size.height - _cornerRadius + 7,
+										   rect.size.width,
+										   _cornerRadius);
+		CGContextClearRect(c, CGRectMake(0,
+										 rect.size.height - 1,
+										 rect.size.width,
+										 1));
+		CGContextClipToRect(c, bottomHalfRect);
+		
+		CGContextMoveToPoint(c, minx + .5, midy - .5);
+		CGContextAddArcToPoint(c, minx + .5, miny - .5, midx - .5, miny - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, minx + .5, maxy - .5, minx - .5, midy - .5, _cornerRadius);
+		CGContextClosePath(c);
+		
+		CGContextSetBlendMode(c, kCGBlendModeLighten);
+		CGContextSetStrokeColorWithColor(c,[UIColor colorWithWhite:255/255.0 alpha:1.0].CGColor);
+		CGContextSetLineWidth(c, .5f);
+		CGContextStrokePath(c);
+		
+		CGContextRestoreGState(c);
+		midy--, maxy--;
+		CGContextMoveToPoint(c, minx - .5, midy - .5);
+		CGContextAddArcToPoint(c, minx - .5, miny - .5, midx - .5, miny - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, minx - .5, maxy - .5, minx - .5, midy - .5, _cornerRadius);
+		CGContextClosePath(c);
+		
+		CGContextSetBlendMode(c, kCGBlendModeMultiply);
+		CGContextSetStrokeColorWithColor(c,[UIColor colorWithWhite:30/255.0 alpha:.9].CGColor);
+		CGContextSetLineWidth(c, .5f);
+		CGContextStrokePath(c);
 	}
+    
 	
+	CFRelease(colorSpace);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -647,13 +656,13 @@
 	
 	[super setSelectedSegmentIndex:selectedSegmentIndex];
 	
-//#ifdef __IPHONE_5_0
-//	if ([self respondsToSelector:@selector(apportionsSegmentWidthsByContent)]
-//		&& [self _mustCustomize])
-//	{
-//		[self sendActionsForControlEvents:UIControlEventValueChanged];
-//	}
-//#endif
+#ifdef __IPHONE_5_0
+	if ([self respondsToSelector:@selector(apportionsSegmentWidthsByContent)]
+		&& [self _mustCustomize])
+	{
+		[self sendActionsForControlEvents:UIControlEventValueChanged];
+	}
+#endif
 }
 
 - (void)setSegmentedControlStyle:(UISegmentedControlStyle)aStyle
@@ -689,12 +698,34 @@
 	if (![self _mustCustomize]) {
 		[super insertSegmentWithTitle:title atIndex:segment animated:animated];
 	} else {
-		//if (segment >= self.numberOfSegments && segment != 0) return;
-        //if (segment >= self.numberOfSegments) return;
-		[super insertSegmentWithTitle:title atIndex:segment animated:animated];
-		[self.items insertObject:title atIndex:segment];
-		[self setNeedsDisplay];
-	}
+		//if (segment >= self.numberOfSegments /*&& segment != 0*/) return;
+        [super insertSegmentWithTitle:title atIndex:segment animated:animated];
+        [self.items insertObject:title atIndex:segment];
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)insertSegmentWithImage:(UIImage *)image atIndex:(NSUInteger)segment animated:(BOOL)animated
+{
+    if (![self _mustCustomize]) {
+        [super insertSegmentWithImage:image atIndex:segment animated:animated];
+    } else {
+        if (segment >= self.numberOfSegments) return;
+        [super insertSegmentWithImage:image atIndex:segment animated:animated];
+        [self.items insertObject:image atIndex:segment];
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)removeSegmentAtIndex:(NSUInteger)segment animated:(BOOL)animated
+{
+    if (![self _mustCustomize]) {
+        [super removeSegmentAtIndex:segment animated:animated];
+    } else {
+        if (segment >= self.numberOfSegments) return;
+        [self.items removeObjectAtIndex:segment];
+        [self setNeedsDisplay];
+    }
 }
 
 -(void) removeAllSegments
@@ -705,29 +736,4 @@
         [self.items removeAllObjects];
     }
 }
-
-- (void)insertSegmentWithImage:(UIImage *)image atIndex:(NSUInteger)segment animated:(BOOL)animated
-{
-	if (![self _mustCustomize]) {
-		[super insertSegmentWithImage:image atIndex:segment animated:animated];
-	} else {
-		//if (segment >= self.numberOfSegments) return;
-		[super insertSegmentWithImage:image atIndex:segment animated:animated];
-		[self.items insertObject:image atIndex:segment];
-		[self setNeedsDisplay];
-	}
-}
-
-- (void)removeSegmentAtIndex:(NSUInteger)segment animated:(BOOL)animated
-{
-	if (![self _mustCustomize]) {
-		[super removeSegmentAtIndex:segment animated:animated];
-	} else {
-		if (segment >= self.numberOfSegments) return;
-		[self.items removeObjectAtIndex:segment];
-		[self setNeedsDisplay];
-	}
-}
-
-
 @end

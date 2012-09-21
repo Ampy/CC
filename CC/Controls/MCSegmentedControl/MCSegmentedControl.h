@@ -6,16 +6,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
+
 
 @interface MCSegmentedControl : UISegmentedControl {
-
+    
 	NSMutableArray *_items;
 	
 	UIFont  *_font;
 	UIColor *_selectedItemColor;
 	UIColor *_unselectedItemColor;
-
+    
 	UIColor *_selectedItemShadowColor;
 	UIColor *_unselectedItemShadowColor;
 	
