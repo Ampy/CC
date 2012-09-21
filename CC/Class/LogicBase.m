@@ -46,9 +46,12 @@
 
 +(int)UpdateByService
 {
+    //不同步更新
+    return 1;
+    
     int returnCode = 1;
     
-    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",nil];//@"SiteInspItemTemp",@"SiteScoreTemp",
+    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",nil];
     
     NSArray * structTables = [NSArray arrayWithObjects:@"Inspect",@"InspectItem",@"InspectScore",@"InspectActivity",nil];
     
