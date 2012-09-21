@@ -647,13 +647,13 @@
 	
 	[super setSelectedSegmentIndex:selectedSegmentIndex];
 	
-#ifdef __IPHONE_5_0
-	if ([self respondsToSelector:@selector(apportionsSegmentWidthsByContent)]
-		&& [self _mustCustomize])
-	{
-		[self sendActionsForControlEvents:UIControlEventValueChanged];
-	}
-#endif
+//#ifdef __IPHONE_5_0
+//	if ([self respondsToSelector:@selector(apportionsSegmentWidthsByContent)]
+//		&& [self _mustCustomize])
+//	{
+//		[self sendActionsForControlEvents:UIControlEventValueChanged];
+//	}
+//#endif
 }
 
 - (void)setSegmentedControlStyle:(UISegmentedControlStyle)aStyle
