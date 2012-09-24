@@ -155,12 +155,12 @@ static NSString *CellIdentifier = @"ThridItemCell";
     cell.CancelSwitch.onText=@"跳过";
     cell.CancelSwitch.offText=@"未跳过";
     
-    [cell.CancelSwitch removeTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
+    [cell.CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
     cell.CancelSwitch.object=model;
     
     [cell.CancelSwitch setOn:model.IsCancel.integerValue==1 animated:NO ignoreControlEvents:true];
     
-    [cell.CancelSwitch addTarget:self action:@selector(SingleSelected:) forControlEvents:UIControlEventValueChanged];
+    [cell.CancelSwitch addTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
     cell.CancelSwitch.onTintColor=[UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
     
     
@@ -224,7 +224,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
 }
 
 
--(void) SingleSelected:(id)sender
+-(void) CancelSwitchChange:(id)sender
 {
     DCRoundSwitch * switcher =(DCRoundSwitch *)sender;
     InspectItemModel *model =(InspectItemModel *) switcher.object;

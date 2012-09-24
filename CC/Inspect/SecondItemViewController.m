@@ -16,6 +16,7 @@
 @synthesize SecondItemTableView;
 @synthesize ItemList;
 @synthesize SwitcherList;
+@synthesize ItemStatusList;
 @synthesize CancelSwitchDelegate;
 
 static NSString *CellIdentifier = @"SecondItem";
@@ -57,6 +58,12 @@ static NSString *CellIdentifier = @"SecondItem";
     [ItemStatusList removeAllObjects];
     [SecondItemTableView reloadData];
     
+    
+//    NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
+//    [self tableView:SecondItemTableView didSelectRowAtIndexPath:ip];
+//    [SecondItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
+//    
+//    SelectedSwitch=[SwitcherList objectAtIndex:0];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -173,6 +180,7 @@ static NSString *CellIdentifier = @"SecondItem";
     UITableViewCell *cell = (UITableViewCell *)switcher.superview;
     UILabel * label= [cell.subviews objectAtIndex:2];
     label.text= switcher.isOn?@"完成":@"未完成";
+    [label setNeedsDisplay];
     
     if(CancelSwitchDelegate)
         [CancelSwitchDelegate DoSwitchChange];

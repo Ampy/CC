@@ -38,7 +38,6 @@ static NSString *CellIdentifier = @"FirstItem";
     secondItemViewController.CancelSwitchDelegate=self;
     SwitcherList = [[NSMutableArray alloc] initWithCapacity:0];
     
-
 }
 
 - (void)viewDidUnload
@@ -132,9 +131,12 @@ static NSString *CellIdentifier = @"FirstItem";
     CellIdentifier=parentItemId;
     [FirstItemTableView reloadData];
     
+    
     NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
     [self tableView:FirstItemTableView didSelectRowAtIndexPath:ip];
-    [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom]; 
+    [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
+    
+    SelectedSwitch=[SwitcherList objectAtIndex:0];
 }
 
 -(void) CancelSwitchChange:(id)sender
@@ -151,6 +153,10 @@ static NSString *CellIdentifier = @"FirstItem";
    {
        [sw setOn:switcher.isOn animated:NO ignoreControlEvents:YES];
    }
+    for(UILabel *label in secondItemViewController.ItemStatusList)
+    {
+        label.text =switcher.isOn?@"完成":@"未完成";
+    }
    }
     
 }

@@ -33,7 +33,8 @@
 }
 
 @property(nonatomic,retain) NSMutableArray *ItemList;
-@property(nonatomic,strong) NSMutableArray *SwitcherList;
+@property(nonatomic,retain) NSMutableArray *SwitcherList;
+@property(nonatomic,retain) NSMutableArray *ItemStatusList;
 @property (nonatomic, retain) id <SwitchDelegate> CancelSwitchDelegate;
 @property (weak, nonatomic) IBOutlet UITableView *SecondItemTableView;
 
