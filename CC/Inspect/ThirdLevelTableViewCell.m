@@ -34,6 +34,16 @@ static NSString *simpleTableIdentifier=@"InspectScoreItem";
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+
+    }
+    return self;
+}
+
+-(id) initWithCoder:(NSCoder *)aDecoder
+{
+    self=[super initWithCoder:aDecoder];
+    if(self)
+    {
         self.RemarkContainer.backgroundColor=[UIColor colorWithRed:0.68 green:0.68 blue:0.68 alpha:1.0];
     }
     return self;

@@ -136,13 +136,13 @@ static NSString *CellIdentifier = @"SecondItem";
     
     if(pop==nil)
     {
-    pop = [[PopViewController alloc] initWithParentFrame:self.view.superview.superview.superview.frame];
+    pop = [[PopViewController alloc] initWithParentFrame:self.view.superview.superview.superview.superview.frame];
         pop.closeDelegate=self;
         pop.CancelSwitchDelegate=self;
     }
     pop.PopTitleLabel.text = model.Name;
     [pop LoadData:model.InspectID ParentItemId:model.ItemTempID];
-    [self.view.superview.superview addSubview:pop.view];
+    [self.view.superview.superview.superview addSubview:pop.view];
     
     SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
     ItemStatusLabel = [ItemStatusList objectAtIndex:[indexPath row]];
@@ -169,6 +169,11 @@ static NSString *CellIdentifier = @"SecondItem";
     InspectService *service = [[InspectService alloc] init];
     int value = switcher.isOn?1:0;
     [service SetInspectItemCancel:model.InspectID ItemId:model.InspectItemID value:value Level:2];
+    
+    UITableViewCell *cell = (UITableViewCell *)switcher.superview;
+    UILabel * label= [cell.subviews objectAtIndex:2];
+    label.text= switcher.isOn?@"完成":@"未完成";
+    
     if(CancelSwitchDelegate)
         [CancelSwitchDelegate DoSwitchChange];
 }

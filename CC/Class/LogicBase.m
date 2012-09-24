@@ -46,7 +46,6 @@
 
 +(int)UpdateByService
 {
-    //不同步更新
     return 1;
     
     int returnCode = 1;
