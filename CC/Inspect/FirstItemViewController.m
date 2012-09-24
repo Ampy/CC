@@ -85,9 +85,9 @@ static NSString *CellIdentifier = @"FirstItem";
     [cell.contentView addSubview:label];
     cell.textLabel.hidden=true;
     //添加跳过Switch
-    DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(5, 15, 78, 25)];
+    DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(5, 15, 78, 28)];
     CancelSwitch.onText=@"跳过";
-    CancelSwitch.offText=@"未跳过";
+    CancelSwitch.offText=@"打分";
     
     [CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
     CancelSwitch.object=model;

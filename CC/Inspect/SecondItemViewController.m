@@ -31,10 +31,12 @@ static NSString *CellIdentifier = @"SecondItem";
 
 - (void)viewDidLoad
 {
-        SecondItemTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    SecondItemTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if(SwitcherList==nil)
         SwitcherList = [[NSMutableArray alloc] initWithCapacity:0];
-
+    if(ItemStatusList==nil)
+        ItemStatusList=[[NSMutableArray alloc] initWithCapacity:0];
+        
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -52,6 +54,7 @@ static NSString *CellIdentifier = @"SecondItem";
     
     ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
     [SwitcherList removeAllObjects];
+    [ItemStatusList removeAllObjects];
     [SecondItemTableView reloadData];
     
 }
@@ -92,9 +95,9 @@ static NSString *CellIdentifier = @"SecondItem";
     label.numberOfLines=0;
     
     //添加跳过Switch
-    DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(8, 28, 80, 25)];
+    DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(8, 28, 80, 28)];
     CancelSwitch.onText=@"跳过";
-    CancelSwitch.offText=@"未跳过";
+    CancelSwitch.offText=@"打分";
     
     [CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
     CancelSwitch.object=model;
@@ -111,6 +114,7 @@ static NSString *CellIdentifier = @"SecondItem";
     InspectService *service = [[InspectService alloc] init];
     int count = [service InspectItemScoreComplete:model.InspectItemID];
     UILabel *ItemStatus = [[UILabel alloc] initWithFrame:CGRectMake(500, 10, 60, 25)];
+    ItemStatus.tag=999;
     ItemStatus.text=count==0?@"完成":@"未完成";
     ItemStatus.backgroundColor = [UIColor grayColor];
     ItemStatus.textColor = [UIColor yellowColor];
@@ -121,7 +125,7 @@ static NSString *CellIdentifier = @"SecondItem";
     ItemStatus.layer.masksToBounds = YES;
     ItemStatus.layer.borderWidth = 1;   //设置弹出框视图边框宽度
     ItemStatus.layer.borderColor = [[UIColor colorWithRed:0.50 green:0.10 blue:0.10 alpha:0.5] CGColor];
- 
+    [ItemStatusList addObject:ItemStatus];
     return cell;
     
 }
@@ -141,11 +145,20 @@ static NSString *CellIdentifier = @"SecondItem";
     [self.view.superview.superview addSubview:pop.view];
     
     SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
+    ItemStatusLabel = [ItemStatusList objectAtIndex:[indexPath row]];
 }
 
 
 -(void)DoCloserView{
     [pop.view removeFromSuperview];
+    InspectItemModel *model =(InspectItemModel *) SelectedSwitch.object;
+    if(model)
+    {
+        InspectService *service = [[InspectService alloc] init];
+        int count = [service InspectItemScoreComplete:model.InspectItemID];
+        ItemStatusLabel.text=count==0?@"完成":@"未完成";
+        [ItemStatusLabel setNeedsDisplay];
+    }
 }
 
 -(void) CancelSwitchChange:(id)sender
