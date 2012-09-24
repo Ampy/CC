@@ -71,6 +71,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
 }
 
 - (void)layoutSubviews {
@@ -124,12 +125,13 @@ static NSString *CellIdentifier = @"ThridItemCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
     ThirdLevelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[ThirdLevelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    //if (cell == nil) {
+    //    cell = [[ThirdLevelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
+    //}
     cell.opaque=YES;
     
     cell.ScoreTableView.scrollEnabled=NO;
@@ -140,14 +142,14 @@ static NSString *CellIdentifier = @"ThridItemCell";
     {
         
     cell.ItemRemarks.text = model.Remarks;
-    cell.ItemRemarks.layer.cornerRadius=10;
-    cell.ItemRemarks.layer.masksToBounds = YES;
-    cell.ItemRemarks.layer.borderWidth = 2;   //设置弹出框视图边框宽度
-    cell.ItemRemarks.layer.borderColor = [[UIColor colorWithRed:0.788 green:0.788 blue:0.788 alpha:0.5] CGColor];   //设置弹出框边框颜色
+    cell.RemarkContainer.layer.cornerRadius=10;
+    cell.RemarkContainer.layer.masksToBounds = YES;
+    cell.RemarkContainer.layer.borderWidth = 2;   //设置弹出框视图边框宽度
+    cell.RemarkContainer.layer.borderColor = [[UIColor colorWithRed:0.788 green:0.788 blue:0.788 alpha:0.5] CGColor];   //设置弹出框边框颜色
     }
     else
     {
-        cell.ItemRemarks.hidden=true;
+        cell.RemarkContainer.hidden=true;
     }
     
     cell.CancelSwitch.onText=@"跳过";
@@ -195,6 +197,11 @@ static NSString *CellIdentifier = @"ThridItemCell";
     int x = self.ContentView.frame.size.width-Count*40-40;
     cell.ScoreSegmentedControl.frame = CGRectMake(x, tmp.origin.y,Count*40, tmp.size.height);
     
+    if(model.Remarks.length==0)
+    {
+        CGRect tmp2 = cell.frame;
+    cell.ScoreTableView.frame=CGRectMake(30,60, tmp2.size.width, tmp2.size.height-80);
+    }
     [cell.ScoreTableView reloadData];
   
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -210,8 +217,10 @@ static NSString *CellIdentifier = @"ThridItemCell";
     InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
     InspectService *service = [[InspectService alloc] init];
     int count = [service GetInspectSocreItemsCount:model.InspectItemID];
-
-    return 100+count*40;
+    if([model.Remarks length]==0)
+        return 70+count*40;
+    else
+        return 100+count*40;
 }
 
 

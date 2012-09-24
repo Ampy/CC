@@ -29,5 +29,6 @@
 @property (weak, nonatomic)  UILabel *ScoreName;
 @property (strong, nonatomic) NSArray *ScoreItems;
 @property (weak, nonatomic) IBOutlet UITableView *ScoreTableView;
+@property (weak, nonatomic) IBOutlet UIView *RemarkContainer;
 
 @end
