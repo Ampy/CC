@@ -23,7 +23,7 @@
     //当前选中Cell里的Switch
     DCRoundSwitch *SelectedSwitch;
     
-    UILabel *ItemStatusLabel;
+    UIImageView *ItemStatusLabel;
     
     //Switch数组，装载TableView里的所有Cell里的Switch
     NSMutableArray *SwitcherList;

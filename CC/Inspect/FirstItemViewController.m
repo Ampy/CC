@@ -153,9 +153,9 @@ static NSString *CellIdentifier = @"FirstItem";
    {
        [sw setOn:switcher.isOn animated:NO ignoreControlEvents:YES];
    }
-    for(UILabel *label in secondItemViewController.ItemStatusList)
+    for(UIImageView *label in secondItemViewController.ItemStatusList)
     {
-        label.text =switcher.isOn?@"完成":@"未完成";
+        label.hidden =!switcher.isOn;
     }
    }
     

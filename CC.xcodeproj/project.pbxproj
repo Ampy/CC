@@ -40,6 +40,7 @@
 		05A08090160726F500EF52BC /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A08087160726F500EF52BC /* close.png */; };
 		05A08092160726FE00EF52BC /* inspect2.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A08091160726FE00EF52BC /* inspect2.png */; };
 		05AF33D9160ADBA400A8B64E /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05AF33D8160ADBA300A8B64E /* config.plist */; };
+		05E03D1A16105BCF00BA0367 /* ItemComplete.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E03D1916105BCF00BA0367 /* ItemComplete.png */; };
 		A6A8F5FD15FDA98300E29A1E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */; };
 		A6A8F61515FDDE0800E29A1E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */; };
 		A6C6FCDE160721F600AA3685 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C6FCDA160721F600AA3685 /* down.png */; };
@@ -149,6 +150,7 @@
 		05A08087160726F500EF52BC /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = Images/close.png; sourceTree = "<group>"; };
 		05A08091160726FE00EF52BC /* inspect2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = inspect2.png; path = Images/inspect2.png; sourceTree = "<group>"; };
 		05AF33D8160ADBA300A8B64E /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		05E03D1916105BCF00BA0367 /* ItemComplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ItemComplete.png; path = Images/ItemComplete.png; sourceTree = "<group>"; };
 		A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A6C6FCDA160721F600AA3685 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = Images/down.png; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 		A6790F6C15FD8DCE00F2655E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				05E03D1916105BCF00BA0367 /* ItemComplete.png */,
 				0579A4E71608132100309253 /* inspectTable.png */,
 				05A08091160726FE00EF52BC /* inspect2.png */,
 				05A0807F160726F500EF52BC /* btn_submit.png */,
@@ -573,6 +576,7 @@
 				0579A4E81608132100309253 /* inspectTable.png in Resources */,
 				05AF33D9160ADBA400A8B64E /* config.plist in Resources */,
 				A6E42F07160C0F5C002FE59C /* icon.png in Resources */,
+				05E03D1A16105BCF00BA0367 /* ItemComplete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

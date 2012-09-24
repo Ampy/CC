@@ -120,18 +120,24 @@ static NSString *CellIdentifier = @"SecondItem";
     
     InspectService *service = [[InspectService alloc] init];
     int count = [service InspectItemScoreComplete:model.InspectItemID];
-    UILabel *ItemStatus = [[UILabel alloc] initWithFrame:CGRectMake(500, 10, 60, 25)];
-    ItemStatus.tag=999;
-    ItemStatus.text=count==0?@"完成":@"未完成";
-    ItemStatus.backgroundColor = [UIColor grayColor];
-    ItemStatus.textColor = [UIColor yellowColor];
-    ItemStatus.textAlignment=UITextAlignmentCenter;
+    
+    UIImageView *ItemStatus=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ItemComplete.png"]];
+    
+    ItemStatus.frame=CGRectMake(500, 10, 40, 40);
+    
+    //UILabel *ItemStatus = [[UILabel alloc] initWithFrame:CGRectMake(500, 10, 60, 25)];
+    //ItemStatus.tag=999;
+    ItemStatus.hidden=count!=0;
+    //ItemStatus.backgroundColor = [UIColor grayColor];
+    //ItemStatus.textColor = [UIColor yellowColor];
+    //ItemStatus.textAlignment=UITextAlignmentCenter;
+    
     [cell.contentView addSubview:ItemStatus];
     
-    ItemStatus.layer.cornerRadius=10;    //设置弹出框为圆角视图
-    ItemStatus.layer.masksToBounds = YES;
-    ItemStatus.layer.borderWidth = 1;   //设置弹出框视图边框宽度
-    ItemStatus.layer.borderColor = [[UIColor colorWithRed:0.50 green:0.10 blue:0.10 alpha:0.5] CGColor];
+    //ItemStatus.layer.cornerRadius=10;    //设置弹出框为圆角视图
+    //ItemStatus.layer.masksToBounds = YES;
+    //ItemStatus.layer.borderWidth = 1;   //设置弹出框视图边框宽度
+    //ItemStatus.layer.borderColor = [[UIColor colorWithRed:0.50 green:0.10 blue:0.10 alpha:0.5] CGColor];
     [ItemStatusList addObject:ItemStatus];
     return cell;
     
@@ -163,7 +169,7 @@ static NSString *CellIdentifier = @"SecondItem";
     {
         InspectService *service = [[InspectService alloc] init];
         int count = [service InspectItemScoreComplete:model.InspectItemID];
-        ItemStatusLabel.text=count==0?@"完成":@"未完成";
+        ItemStatusLabel.hidden=count!=0;
         [ItemStatusLabel setNeedsDisplay];
     }
 }
@@ -178,8 +184,8 @@ static NSString *CellIdentifier = @"SecondItem";
     [service SetInspectItemCancel:model.InspectID ItemId:model.InspectItemID value:value Level:2];
     
     UITableViewCell *cell = (UITableViewCell *)switcher.superview;
-    UILabel * label= [cell.subviews objectAtIndex:2];
-    label.text= switcher.isOn?@"完成":@"未完成";
+    UIImageView * label= [cell.subviews objectAtIndex:2];
+    label.hidden= !switcher.isOn;
     [label setNeedsDisplay];
     
     if(CancelSwitchDelegate)
