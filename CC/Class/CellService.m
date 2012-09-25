@@ -29,20 +29,20 @@
 //NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
 
 
--(NSData *) CellWeb:(NSString *)url Data:(NSString *) data
+-(NSData *) CellWeb:(NSString *)url Data:(NSData *) postData
 {
     NSString * fullUrl = [[Settings Instance].ServiceUrl stringByAppendingString:url];
     //NSString *data = [[NSString alloc] initWithFormat:@"message=%@",@"hello,world."];
     //NSData *postData = [data dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSData* postData = [data dataUsingEncoding:NSUTF8StringEncoding]; 
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];  
+    //NSData* postData = [data dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:fullUrl]];
-    [request setHTTPMethod:@"POST"]; 
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];  
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];  
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
-    //[NSURLConnection connectionWithRequest:request delegate:self ];  
+    //[NSURLConnection connectionWithRequest:request delegate:self ];
     
     return [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 }
