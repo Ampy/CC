@@ -57,6 +57,7 @@
     lists = [LogicBase GetInspectList1];
     lists2 = [LogicBase GetInspectList2];
     
+    
 }
 
 //-(void)clickButton:(id)sender
@@ -86,6 +87,15 @@
 
 -(void)updateToService:(id)sender
 {
+    UIButton *bgButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    [bgButton setFrame:CGRectMake(0, 0, 1024, 768)];
+    [self.view addSubview:bgButton];
+    
+    UIWebView * webView = [[UIWebView alloc]initWithFrame:CGRectMake(100, 200, 100, 100)];
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"update" ofType:@"gif"]];
+    webView.userInteractionEnabled = NO;//用户不可交互
+    [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    
     for(int i=0;i<lists.count;i++)
     {
         NSString *strI = [NSString stringWithFormat:@"%d",i];
@@ -203,12 +213,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    if(tableView.tag==1)
-    {
-        NSString * mid = [[lists objectAtIndex:indexPath.row] objectAtIndex:6];
-        InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
-        [self.navigationController pushViewController:inspectview animated:YES];
-    }
+//    if(tableView.tag==1)
+//    {
+//        NSString * mid = [[lists objectAtIndex:indexPath.row] objectAtIndex:6];
+//        InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
+//        [self.navigationController pushViewController:inspectview animated:YES];
+//    }
     
     if(tableView.tag==2)
     {
