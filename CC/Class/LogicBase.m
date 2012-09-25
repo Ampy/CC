@@ -46,6 +46,7 @@
 
 +(int)UpdateByService
 {
+    return 1;
     int returnCode = 1;
     
     NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",nil];

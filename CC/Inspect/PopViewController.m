@@ -153,7 +153,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
     }
     
     cell.CancelSwitch.onText=@"跳过";
-    cell.CancelSwitch.offText=@"未跳过";
+    cell.CancelSwitch.offText=@"打分";
     
     [cell.CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
     cell.CancelSwitch.object=model;
@@ -220,7 +220,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
     if([model.Remarks length]==0)
         return 70+count*40;
     else
-        return 100+count*40;
+        return 135+count*40;
 }
 
 
