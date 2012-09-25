@@ -107,13 +107,16 @@ static NSString *CellIdentifier = @"FirstItem";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
+    if([ItemList count]>0)
+    {
     InspectItemModel *model = [ItemList objectAtIndex:indexPath.row];
     
     [secondItemViewController LoadData:model.InspectID ParentItemId:model.ItemTempID];
 
     if(SwitcherList.count>0)
     SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
+    }
     
 }
 
@@ -131,11 +134,13 @@ static NSString *CellIdentifier = @"FirstItem";
     CellIdentifier=parentItemId;
     [FirstItemTableView reloadData];
     
-    
+    if([ItemList count]>0)
+    {
     NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
     [self tableView:FirstItemTableView didSelectRowAtIndexPath:ip];
     [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
-    
+    }
+    if([SwitcherList count]>0)
     SelectedSwitch=[SwitcherList objectAtIndex:0];
 }
 
