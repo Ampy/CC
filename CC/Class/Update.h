@@ -16,4 +16,6 @@
 -(int)GetTableStructs:(NSArray *)tableNames;
 -(int)GetTableData:(NSString *)tableName;
 -(int)UpdateAll:(NSArray *)tableNames;
+
+-(int)GetSiteInspect:(NSString *)sID;
 @end

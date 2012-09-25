@@ -17,7 +17,7 @@
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings Instance].DatabaseName];
     sqlite3_stmt * stmt= [db ExecSql:sql];
-    while (sqlite3_step(stmt) == SQLITE_ROW) 
+    while (sqlite3_step(stmt) == SQLITE_ROW)
     {
         NSMutableArray *arr = [[NSMutableArray alloc]init];
         for(int i=0;i<count;i++)
@@ -46,20 +46,25 @@
 
 +(int)UpdateByService
 {
-    return 1;
-    
     int returnCode = 1;
     
-    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",nil];
+    NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",nil];
     
-    NSArray * structTables = [NSArray arrayWithObjects:@"Inspect",@"InspectItem",@"InspectScore",@"InspectActivity",nil];
-    
+    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",nil];
+    //struct
+    NSArray * structTables = [NSArray arrayWithObjects:@"Inspect",@"InspectItem",@"InspectScore",@"InspectActivity",@"V_Site_H",nil];
     Update *u = [[Update alloc] init];
-    returnCode = [u UpdateAll:arr];
-    if(returnCode!=1) return returnCode;
     
+    DatabaseHelper *db = [[DatabaseHelper alloc] init];
+    [db OpenDB:[Settings Instance].DatabaseName];
+    
+    //init db
     if([@"F" isEqualToString:[Config GetPlistInfo:@"IsInit"]])
     {
+        
+        returnCode = [u UpdateAll:fullArr];
+        if(returnCode!=1) return returnCode;
+        
         returnCode = [u GetTableStructs:structTables];
         if(returnCode!=1) return returnCode;
         
@@ -67,8 +72,6 @@
         
         NSString *sql2=@"CREATE view IF NOT EXISTS  V_VerifyInspect as select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
         
-        DatabaseHelper *db = [[DatabaseHelper alloc] init];
-        [db OpenDB:[Settings Instance].DatabaseName];
         [db ExecSql:sql];
         [db Setp];
         [db Final];
@@ -77,12 +80,46 @@
         [db Setp];
         [db Final];
         
-
-        
-        [db CloseDB];
-        
         [Config SetPlistInfo:@"IsInit" Value:@"T"];
     }
+    else
+    {
+        NSString *delbackSql = @"delete from V_Site_H ";
+        [db ExecSql:delbackSql];
+        [db Setp];
+        [db Final];
+        
+        NSString *backSql = @"insert into V_Site_H select * from V_Site";
+        [db ExecSql:backSql];
+        [db Setp];
+        [db Final];
+        
+        returnCode = [u UpdateAll:arr];
+        if(returnCode!=1) return returnCode;
+        
+        NSString *sql = @"select SiteID from V_Site where SiteID not in (select a.SiteID  from V_Site a inner join V_Site_H b on a.SiteID=b.SiteID and a.Version=b.Version )";
+        
+        NSMutableArray * arr = [self SqlToArray:sql FieldCount:1];
+        for(int i=arr.count-1;i>=0;i--)
+        {
+            NSString * sID = [[arr objectAtIndex:i] objectAtIndex:0];
+            NSString *delSQL = [NSString stringWithFormat:@"delete from SiteInspTemp where SiteID='%@' |$| delete from SiteInspItemTemp where SiteInspTempID in (select SiteInspTempID from SiteInspTemp where SiteID='%@') |$| delete from SiteScoreTemp where SiteInspTempID in (select SiteInspTempID from SiteInspTemp where SiteID='%@') ",sID,sID,sID];
+            
+            NSArray * array = [delSQL componentsSeparatedByString:@"|$|"];
+            for(int i=array.count-1;i>=0;i--)
+            {
+                [db ExecSql:[array objectAtIndex:i]];
+                [db Setp];
+                [db Final];
+            }
+            
+            returnCode = [u GetSiteInspect:sID];
+            if(returnCode!=1) return returnCode;
+        }
+        
+    }
+    
+    [db CloseDB];
     return 1;
 }
 
@@ -140,7 +177,7 @@
 +(int)BuildCheckData
 {
     int returnCode = 1;
-    //@try {  
+    //@try {
     
     NSString * SiteID = [NSString stringWithString:[Config GetPlistInfo:@"SiteID"]];
     NSString * InspectDate = [NSString stringWithString:[Config GetPlistInfo:@"InspectDate"]];
@@ -166,7 +203,7 @@
         return 41;
     }
     
-
+    
     [db BeginTransaction];
     //
     NSString * sql1 = [NSString stringWithFormat:@"insert into InspectActivity (InspectActivityID,InspectWay,SiteID,Inspecter,InspectDate,Recorder,RecordDate,RealInspectDate) values('%@','%@','%@','%@','%@','%@','%@','%@')",InspectActivityID,InspectWay,SiteID,Inspecter,InspectDate,Recorder,InspectDate,InspectDate];
@@ -175,82 +212,80 @@
     [db Commit];
     [db Final];
     
-
-    [db BeginTransaction];
     NSString * sql2 = [NSString stringWithFormat:@"select * from SiteInspTemp where SiteID='%@'",SiteID];
     sqlite3_stmt * stmt2= [db ExecSql:sql2];
-    if(sqlite3_step(stmt2) == SQLITE_ROW)
+    while(sqlite3_step(stmt2) == SQLITE_ROW)
     {
         InspectID = [Common GetGuid];
         SiteInspectID = [NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 0)]];
         NSString * sql21 = [NSString stringWithFormat:@"insert into Inspect (InspectID,InspectActivityID,SiteInspTempID,Finished,IsCancel,InspectWay,Inspecter,Recorder,InspectDate,RecordDate,SiteID,InspTempID,Name,Optional,InspType,Remarks,Sort,invalid,InspTempWeight,InspCategory) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",
-                          InspectID,InspectActivityID,SiteInspectID,@"0",@"0",InspectWay,Inspecter,Recorder,InspectDate,InspectDate,
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 1)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 2)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 3)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 4)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 5)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 6)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 7)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 8)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 9)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 10)]];
+                            InspectID,InspectActivityID,SiteInspectID,@"0",@"0",InspectWay,Inspecter,Recorder,InspectDate,InspectDate,
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 1)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 2)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 3)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 4)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 5)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 6)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 7)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 8)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 9)],
+                            [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt2, 10)]];
         [db ExecSql:sql21];
         [db Setp];
+        [db Final];
         
+        
+        
+        [db BeginTransaction];
+        NSString * sql3 = [NSString stringWithFormat:@"select * from SiteInspItemTemp where SiteInspTempID='%@'",SiteInspectID];
+        sqlite3_stmt * stmt3= [db ExecSql:sql3];
+        while(sqlite3_step(stmt3) == SQLITE_ROW)
+        {
+            NSString * sql31 = [NSString stringWithFormat:@"insert into InspectItem (InspectItemID,InspectID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,isCancel) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',0)",[Common GetGuid],InspectID,
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 0)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 1)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 2)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 3)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 4)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 5)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 6)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 7)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 8)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 9)]];
+            [db ExecSql:sql31];
+            [db Setp];
+            
+        }
+        [db Final];
+        sqlite3_finalize(stmt3);
+        [db Commit];
+        
+        [db BeginTransaction];
+        NSString * sql4 = [NSString stringWithFormat:@"select * from SiteScoreTemp where SiteInspTempID='%@'",SiteInspectID];
+        sqlite3_stmt * stmt4= [db ExecSql:sql4];
+        while(sqlite3_step(stmt4) == SQLITE_ROW)
+        {
+            NSString * sql41 = [NSString stringWithFormat:@"insert into InspectScore (ScoreID,InspectID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,Qualified,Selected) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',0)",[Common GetGuid],InspectID,
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 0)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 1)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 2)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 3)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 4)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 5)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 6)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 7)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 8)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 9)],
+                                [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 10)]];
+            [db ExecSql:sql41];
+            [db Setp];
+            
+        }
+        [db Final];
+        sqlite3_finalize(stmt4);
+        [db Commit];
     }
-    [db Final];
     sqlite3_finalize(stmt2);
-    [db Commit];
-
-    [db BeginTransaction];
-    NSString * sql3 = [NSString stringWithFormat:@"select * from SiteInspItemTemp where SiteInspTempID='%@'",SiteInspectID];
-    sqlite3_stmt * stmt3= [db ExecSql:sql3];
-    while(sqlite3_step(stmt3) == SQLITE_ROW)
-    {
-        NSString * sql31 = [NSString stringWithFormat:@"insert into InspectItem (InspectItemID,InspectID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,isCancel) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',0)",[Common GetGuid],InspectID,
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 0)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 1)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 2)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 3)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 4)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 5)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 6)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 7)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 8)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt3, 9)]];
-        [db ExecSql:sql31];
-        [db Setp];
-        
-    }
-    [db Final];
-    sqlite3_finalize(stmt3);
-    [db Commit];
-
-    [db BeginTransaction];
-    NSString * sql4 = [NSString stringWithFormat:@"select * from SiteScoreTemp where SiteInspTempID='%@'",SiteInspectID];
-    sqlite3_stmt * stmt4= [db ExecSql:sql4];
-    while(sqlite3_step(stmt4) == SQLITE_ROW)
-    {
-        NSString * sql41 = [NSString stringWithFormat:@"insert into InspectScore (ScoreID,InspectID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,Qualified,Selected) values('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',0)",[Common GetGuid],InspectID,
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 0)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 1)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 2)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 3)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 4)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 5)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 6)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 7)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 8)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 9)],
-                          [NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt4, 10)]];
-        [db ExecSql:sql41];
-        [db Setp];
-        
-    }
-    [db Final];
-    sqlite3_finalize(stmt4);
-    [db Commit];
     
     NSString * sql = @"update InspectScore set InspectItemID=(select InspectItemID from InspectItem where InspectItem.InspectID=InspectScore.InspectID and InspectItem.SiteInspItemTempID=InspectScore.SiteInspItemTempID) ";
     [db ExecSql:sql];
@@ -258,25 +293,27 @@
     [db Final];
     
     [db CloseDB];
-        
-//    }
-//    @catch (NSException *exception) {
-//        NSLog(exception.name);
-//        NSLog(exception.reason);
-//    }
-//    @finally {
-//        [db Commit];	
-//        [db CloseDB];
-//    }
-
-
+    
+    //    }
+    //    @catch (NSException *exception) {
+    //        NSLog(exception.name);
+    //        NSLog(exception.reason);
+    //    }
+    //    @finally {
+    //        [db Commit];
+    //        [db CloseDB];
+    //    }
+    
+    
     
     return returnCode;
 }
 
 +(NSString *)UpdateToService:(NSString *)InspectActivityId
 {
-    NSString * updateSQL = @"";
+    
+    NSMutableArray * sqlArray = [[NSMutableArray alloc]init];
+    
     NSString * delSQL = @"";
     
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
@@ -284,9 +321,9 @@
     
     NSString * sql = [NSString stringWithFormat:@"select * from InspectActivity where InspectActivityId='%@'",InspectActivityId];
     sqlite3_stmt * stmt= [db ExecSql:sql];
-    while (sqlite3_step(stmt) == SQLITE_ROW) 
+    while (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        updateSQL = [updateSQL stringByAppendingString:@" insert into InspectActivity VALUES("];
+        NSString * updateSQL = @" insert into InspectActivity VALUES(";
         int count = 15;
         for(int i=0;i<count;i++)
         {
@@ -294,18 +331,19 @@
             char * cValue = (char*)sqlite3_column_text(stmt, i);
             if(cValue)
                 value = [NSString stringWithUTF8String:cValue];
-
+            
             if(i==count-1)
             {
                 updateSQL = [updateSQL stringByAppendingFormat:@"'%@'",value];
             }
-            else 
+            else
             {
                 updateSQL = [updateSQL stringByAppendingFormat:@"'%@',",value];
             }
         }
-
+        
         updateSQL = [updateSQL stringByAppendingString:@") "];
+        [sqlArray addObject:updateSQL];
     }
     delSQL = [delSQL stringByAppendingFormat:@"delete from InspectActivity where InspectActivityId='%@' |$| ",InspectActivityId];
     [db Final];
@@ -314,9 +352,9 @@
     //Inspect
     sql = [NSString stringWithFormat:@"select * from Inspect where InspectActivityID='%@'",InspectActivityId];
     stmt= [db ExecSql:sql];
-    while (sqlite3_step(stmt) == SQLITE_ROW) 
+    while (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        updateSQL = [updateSQL stringByAppendingString:@" insert into Inspect VALUES("];
+        NSString * updateSQL = @" insert into Inspect VALUES(";
         int count = 23;
         for(int i=0;i<count;i++)
         {
@@ -329,13 +367,14 @@
             {
                 updateSQL = [updateSQL stringByAppendingFormat:@"'%@'",value];
             }
-            else 
+            else
             {
                 updateSQL = [updateSQL stringByAppendingFormat:@"'%@',",value];
             }
         }
         
         updateSQL = [updateSQL stringByAppendingString:@") "];
+        [sqlArray addObject:updateSQL];
     }
     delSQL = [delSQL stringByAppendingFormat:@"delete from Inspect where InspectActivityId='%@' |$| ",InspectActivityId];
     [db Final];
@@ -344,9 +383,9 @@
     //InspectItem
     sql = [NSString stringWithFormat:@"select * from InspectItem where InspectID in (select InspectID from Inspect where InspectActivityID='%@')",InspectActivityId];
     stmt= [db ExecSql:sql];
-    while (sqlite3_step(stmt) == SQLITE_ROW) 
+    while (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        updateSQL = [updateSQL stringByAppendingString:@" insert into InspectItem VALUES("];
+        NSString * updateSQL = @" insert into InspectItem VALUES(";
         int count = 14;
         for(int i=0;i<count;i++)
         {
@@ -359,13 +398,14 @@
             {
                 updateSQL = [updateSQL stringByAppendingFormat:@"'%@'",value];
             }
-            else 
+            else
             {
                 updateSQL = [updateSQL stringByAppendingFormat:@"'%@',",value];
             }
         }
         
         updateSQL = [updateSQL stringByAppendingString:@") "];
+        [sqlArray addObject:updateSQL];
     }
     delSQL = [delSQL stringByAppendingFormat:@"delete from InspectItem where InspectID in (select InspectID from Inspect where InspectActivityID='%@') |$| ",InspectActivityId];
     [db Final];
@@ -374,9 +414,9 @@
     //InspectScore
     sql = [NSString stringWithFormat:@"select * from InspectScore where InspectID in (select InspectID from Inspect where InspectActivityID='%@')",InspectActivityId];
     stmt= [db ExecSql:sql];
-    while (sqlite3_step(stmt) == SQLITE_ROW) 
+    while (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        updateSQL = [updateSQL stringByAppendingString:@" insert into InspectScore VALUES("];
+        NSString * updateSQL = @" insert into InspectScore VALUES(";
         int count = 15;
         for(int i=0;i<count;i++)
         {
@@ -389,22 +429,31 @@
             {
                 updateSQL = [updateSQL stringByAppendingFormat:@"'%@'",value];
             }
-            else 
+            else
             {
                 updateSQL = [updateSQL stringByAppendingFormat:@"'%@',",value];
             }
         }
         
         updateSQL = [updateSQL stringByAppendingString:@") "];
+        [sqlArray addObject:updateSQL];
     }
     delSQL = [delSQL stringByAppendingFormat:@"delete from InspectScore where InspectID in (select InspectID from Inspect where InspectActivityID='%@') ",InspectActivityId];
     [db Final];
     sqlite3_finalize(stmt);
     //
+    NSMutableData *sqlData = [[NSMutableData alloc] init];
+    for (int i = 0; i < [sqlArray count]; ++i ){
+        NSString *str = [sqlArray objectAtIndex:i];
+        NSData *temp = [str dataUsingEncoding:NSUTF8StringEncoding];
+        [sqlData appendData:temp];
+    }
+    //
+    //NSData *sqlData = [NSKeyedArchiver archivedDataWithRootObject:sqlArray];
     
     NSString * url = [NSString stringWithFormat:@"IOS/UpdateInspect?ID=%@",InspectActivityId];
     CellService *cs = [[CellService alloc]init];
-    NSData * data =[cs CellWeb:url Data:updateSQL];
+    NSData * data =[cs CellWeb:url Data:sqlData];
     NSString *result = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
     
     NSArray * array = [delSQL componentsSeparatedByString:@"|$|"];
@@ -414,7 +463,7 @@
         [db Setp];
         [db Final];
     }
-
+    
     [db CloseDB];
     
     return result;

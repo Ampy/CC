@@ -15,7 +15,7 @@
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings Instance].DatabaseName];
     //[db BeginTransaction];
- 
+    
     CellService * cs = [[CellService alloc] init];
     NSString * sql = [cs CellWeb:[@"IOS/GetTableStruct?tableName=" stringByAppendingString:tableName]];
     
@@ -32,48 +32,67 @@
 
 -(int)GetTableData:(NSString *)tableName
 {
-
-    NSLog(@"开始更新表：%@",tableName);
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings Instance].DatabaseName];
-     @try {
-    NSString *delSql = [[NSString alloc] initWithFormat:@"DROP TABLE IF EXISTS %@ ",tableName];
-    [db ExecSql:delSql];
-    [db Setp];
-    [db Final];
-         
-    int returnCode=[self GetTableStruct:tableName];
-    if(returnCode!=1) return returnCode;
-    
-    [db BeginTransaction];
-    
-    CellService * cs = [[CellService alloc] init];
-    NSString * sqls = [cs CellWeb:[@"IOS/GetTableData?tableName=" stringByAppendingString:tableName]];
-    
-    if(!sqls) return 22;
-         
-    NSLog(@"insert开始表：%@",tableName);
-    
-    NSArray * array = [sqls componentsSeparatedByString:@"|$|"];
-    int i=1;
-    for(id sql in array)
-    {
-        i++;
-        [db ExecSql:sql];
+    @try {
+        NSString *delSql = [[NSString alloc] initWithFormat:@"DROP TABLE IF EXISTS %@ ",tableName];
+        [db ExecSql:delSql];
         [db Setp];
         [db Final];
-    }
+        
+        int returnCode=[self GetTableStruct:tableName];
+        if(returnCode!=1) return returnCode;
+        
+        [db BeginTransaction];
+        
+        CellService * cs = [[CellService alloc] init];
+        NSString * sqls = [cs CellWeb:[@"IOS/GetTableData?tableName=" stringByAppendingString:tableName]];
+        
+        if(!sqls) return 22;
+        
+        NSArray * array = [sqls componentsSeparatedByString:@"|$|"];
+        int i=1;
+        for(id sql in array)
+        {
+            i++;
+            [db ExecSql:sql];
+            [db Setp];
+            [db Final];
+        }
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.name);
         NSLog(@"%@",exception.reason);
     }
     @finally {
-        [db Commit];	
+        [db Commit];
         [db CloseDB];
     }
     //
-    NSLog(@"结束更新表：%@",tableName);
+    return 1;
+}
+
+-(int)GetSiteInspect:(NSString *)sID
+{
+    DatabaseHelper *db = [[DatabaseHelper alloc] init];
+    [db OpenDB:[Settings Instance].DatabaseName];
+    [db BeginTransaction];
+    
+    CellService * cs = [[CellService alloc] init];
+    NSString * sqls = [cs CellWeb:[@"IOS/GetSiteInspect?ID=" stringByAppendingString:sID]];
+    
+    if(!sqls) return 22;
+    
+    NSArray * array = [sqls componentsSeparatedByString:@"|$|"];
+    for(id sql in array)
+    {
+        [db ExecSql:sql];
+        [db Setp];
+        [db Final];
+    }
+    [db Commit];
+    [db CloseDB];
+    
     return 1;
 }
 
