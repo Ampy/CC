@@ -15,11 +15,11 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *_path = [documentsDirectory stringByAppendingPathComponent:dbName];
-
-    if (sqlite3_open([_path UTF8String], &database) != SQLITE_OK) {  
-        sqlite3_close(database);  
-        NSLog(@"数据库打开失败");  
-    }  
+    
+    if (sqlite3_open([_path UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"数据库打开失败");
+    }
     //sqlite3_open([_path UTF8String], &database);
     sqlite3_exec(database, "PRAGMA synchronous = OFF;", 0,0,0);
 }
@@ -54,7 +54,7 @@
 
 -(void) BeginTransaction
 {
-    sqlite3_exec(database,"BEGIN TRANSACTION",nil,nil,nil); 
+    sqlite3_exec(database,"BEGIN TRANSACTION",nil,nil,nil);
 }
 -(int) Commit
 {

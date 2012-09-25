@@ -32,12 +32,12 @@
     //[self setupPrototypes];
     // Do any additional setup after loading the view from its nib.
     
-    UIButton *button1 =[UIButton buttonWithType:UIButtonTypeCustom];
-    button1.tag = 1;
-    [button1 setFrame:CGRectMake(0, 50, 16, 14)];
-    [button1 setBackgroundImage:[UIImage imageNamed:@"ok.png"] forState:UIControlStateNormal];
-    [self.view addSubview:button1];
-    [button1 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    //    UIButton *button1 =[UIButton buttonWithType:UIButtonTypeCustom];
+    //    button1.tag = 1;
+    //    [button1 setFrame:CGRectMake(0, 50, 16, 14)];
+    //    [button1 setBackgroundImage:[UIImage imageNamed:@"ok.png"] forState:UIControlStateNormal];
+    //    [self.view addSubview:button1];
+    //    [button1 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(20, 10, 68, 26)];
@@ -53,38 +53,38 @@
     [outButton addTarget:self  action:@selector(updateToService:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
-
+    
     lists = [LogicBase GetInspectList1];
     lists2 = [LogicBase GetInspectList2];
-
-}
-
--(void)clickButton:(id)sender 
-{
-    UIButton* btn =(UIButton*)sender;
-    if(btn.tag==1)
-    {
-        btn.tag = 2;
-        [btn setFrame:CGRectMake(20, 50, 15, 11)];
-        [btn setBackgroundImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        btn.tag = 1;
-        [btn setFrame:CGRectMake(20, 50, 16, 14)];
-        [btn setBackgroundImage:[UIImage imageNamed:@"ok.png"] forState:UIControlStateNormal];
-    }
     
 }
 
--(void)backButton:(id)sender 
+//-(void)clickButton:(id)sender
+//{
+//    UIButton* btn =(UIButton*)sender;
+//    if(btn.tag==1)
+//    {
+//        btn.tag = 2;
+//        [btn setFrame:CGRectMake(20, 50, 15, 11)];
+//        [btn setBackgroundImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
+//    }
+//    else
+//    {
+//        btn.tag = 1;
+//        [btn setFrame:CGRectMake(20, 50, 16, 14)];
+//        [btn setBackgroundImage:[UIImage imageNamed:@"ok.png"] forState:UIControlStateNormal];
+//    }
+//
+//}
+
+-(void)backButton:(id)sender
 {
     //[self.navigationController popViewControllerAnimated:YES];
     HomeViewController *ctrl = [[HomeViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];
 }
 
--(void)updateToService:(id)sender 
+-(void)updateToService:(id)sender
 {
     for(int i=0;i<lists.count;i++)
     {
@@ -125,15 +125,15 @@
     {
         return [lists2 count];
     }
-    else 
+    else
     {
         return [lists count];
     }
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @""] ;
     
@@ -142,17 +142,17 @@
     {
         arr= [lists2 objectAtIndex:indexPath.row];
     }
-    else 
+    else
     {
         arr= [lists objectAtIndex:indexPath.row];
     }
-
+    
     
     UILabel *CellLabel= [[UILabel alloc] initWithFrame:CGRectMake(50,3,280,30)];
-
+    
     CellLabel.text = [[[[arr objectAtIndex:3] stringByAppendingString:@"  "] stringByAppendingString:[arr objectAtIndex:4]] stringByReplacingOccurrencesOfString:@"0:00:00" withString:@""];
-    CellLabel.font = [UIFont fontWithName: @"Helvetica-Bold" size: 14.0 ]; 
-   
+    CellLabel.font = [UIFont fontWithName: @"Helvetica-Bold" size: 14.0 ];
+    
     [cell.contentView addSubview:CellLabel];
     
     UILabel *bLabel= [[UILabel alloc] initWithFrame:CGRectMake(50,30,300,20)];
@@ -174,7 +174,7 @@
         imgLabel.textColor = [ UIColor redColor ];
         [cell.contentView addSubview:imgLabel];
     }
-    else 
+    else
     {
         cell.imageView.image = [UIImage imageNamed:@"icon_inspect.png"];
         
@@ -200,7 +200,8 @@
 
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath { 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     
     if(tableView.tag==1)
     {
@@ -208,6 +209,7 @@
         InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
         [self.navigationController pushViewController:inspectview animated:YES];
     }
+    
     if(tableView.tag==2)
     {
         NSString * mid = [[lists2 objectAtIndex:indexPath.row] objectAtIndex:6];

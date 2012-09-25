@@ -12,7 +12,7 @@
 @interface CellService : NSObject
 
 -(NSString *) CellWeb:(NSString *)url;
--(NSData *) CellWeb:(NSString *)url Data:(NSString *) data;
+-(NSData *) CellWeb:(NSString *)url Data:(NSData *) postData;
 -(NSData *) CellWebData:(NSString *)url;
 -(NSString *) CheckLogin:(NSString *)name Password:(NSString *)pwd;
 
