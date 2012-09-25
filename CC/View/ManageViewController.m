@@ -87,14 +87,21 @@
 
 -(void)updateToService:(id)sender
 {
-    UIButton *bgButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [bgButton setFrame:CGRectMake(0, 0, 1024, 768)];
-    [self.view addSubview:bgButton];
-    
-    UIWebView * webView = [[UIWebView alloc]initWithFrame:CGRectMake(100, 200, 100, 100)];
-    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"update" ofType:@"gif"]];
-    webView.userInteractionEnabled = NO;//用户不可交互
-    [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    if(lists.count>0)
+    {
+        bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
+        bgView.backgroundColor = [UIColor whiteColor];
+        bgView.alpha = 0.6;
+        [self.view addSubview:bgView];
+        
+        webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 180, 198, 181)];
+        NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+        webView.userInteractionEnabled = NO;
+        webView.backgroundColor = [UIColor clearColor];
+        webView.opaque = NO;
+        [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+        [self.view addSubview:webView];
+    }
     
     for(int i=0;i<lists.count;i++)
     {
@@ -105,11 +112,15 @@
 
 -(void)updataByOne:(NSString *)strI
 {
-    
+    submitCount += 1;
     int i= [strI intValue];
-    sleep(i);
     NSString * total = [LogicBase UpdateToService:[[lists objectAtIndex:i]objectAtIndex:6]];
     [[lists objectAtIndex:i] setObject:total atIndex:5];
+    if(submitCount==lists.count)
+    {
+        [webView removeFromSuperview];
+        [bgView removeFromSuperview];
+    }
     [updateTableView reloadData];
 }
 

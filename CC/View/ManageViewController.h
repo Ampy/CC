@@ -13,6 +13,9 @@
 {
     NSMutableArray *lists;
     NSMutableArray *lists2;
+    int submitCount;
+    UIView *bgView;
+    UIWebView * webView;
 }
 @property (strong, nonatomic) IBOutlet UITableView *updateTableView;
 
