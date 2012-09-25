@@ -108,9 +108,13 @@ static NSString *CellIdentifier = @"Inspects";
 //选中行时
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [secondItemViewController.ItemList removeAllObjects];
+    [secondItemViewController.SecondItemTableView reloadData];
+
     InspectModel *model = [InspectList objectAtIndex:indexPath.row];
     
     [firstItemViewController LoadData:model.InspectId ParentItemId:model.InspTempID];
+
 }
 - (IBAction)SaveButtonClick:(id)sender {
     ManageViewController *ctrl = [[ManageViewController alloc] init];
