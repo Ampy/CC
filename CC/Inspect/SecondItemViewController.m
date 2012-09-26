@@ -145,12 +145,13 @@ static NSString *CellIdentifier = @"SecondItem";
             {
                 DCRoundSwitch * switcher = (DCRoundSwitch *)view;
                 [switcher setOn:model.IsCancel.integerValue==1?YES:NO animated:YES ignoreControlEvents:YES];
-                //[SwitcherList addObject:view];
+                [SwitcherList addObject:view];
             }
             if([view isKindOfClass:[UIImageView class]])
             {
                 UIImageView * image=(UIImageView *)view;
                 image.hidden=count!=0;
+                [ItemStatusList addObject:view];
             }
         }
     }
