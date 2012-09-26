@@ -157,6 +157,7 @@ static NSString *CellIdentifier = @"FirstItem";
     NSIndexPath *ip=[NSIndexPath indexPathForRow:switcher.tag inSection:0];
     [self tableView:FirstItemTableView didSelectRowAtIndexPath:ip];
     [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
+    [secondItemViewController SetIsCancelAll:switcher.on];
     [secondItemViewController.SecondItemTableView reloadData];
     
 }

@@ -47,6 +47,7 @@
 								<int key="NSvFlags">290</int>
 								<string key="NSFrameSize">{586, 59}</string>
 								<reference key="NSSuperview" ref="794158425"/>
+								<reference key="NSNextKeyView" ref="200300501"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -140,6 +141,7 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{0, 60}, {586, 352}}</string>
 								<reference key="NSSuperview" ref="794158425"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="995046436"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -155,7 +157,7 @@
 						</array>
 						<string key="NSFrame">{{16, 19}, {586, 412}}</string>
 						<reference key="NSSuperview" ref="618013825"/>
-						<reference key="NSNextKeyView" ref="200300501"/>
+						<reference key="NSNextKeyView" ref="154858943"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -328,7 +330,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">58</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

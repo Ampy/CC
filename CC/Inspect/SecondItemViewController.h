@@ -30,6 +30,8 @@
     
     NSMutableArray *ItemStatusList;
     
+    bool isCancelAll;
+    
 }
 
 @property(nonatomic,retain) NSMutableArray *ItemList;
@@ -38,5 +40,8 @@
 @property (nonatomic, retain) id <SwitchDelegate> CancelSwitchDelegate;
 @property (weak, nonatomic) IBOutlet UITableView *SecondItemTableView;
 
+
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId;
+
+-(void) SetIsCancelAll:(bool) isCancel;
 @end

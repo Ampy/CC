@@ -50,7 +50,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
 		self.closeButton.layer.shadowOffset = CGSizeMake(0,4);
 		self.closeButton.layer.shadowOpacity = 0.3;
         
-   
+        
     }
     
     return self;
@@ -59,10 +59,10 @@ static NSString *CellIdentifier = @"ThridItemCell";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-
+    
     if (self) {
-
-
+        
+        
     }
     return self;
 }
@@ -71,7 +71,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
+    
 }
 
 - (void)layoutSubviews {
@@ -83,7 +83,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
     [self setThirdItemTableView:nil];
     [self setContentView:nil];
     [self setPopTitleLabel:nil];
-    [super viewDidUnload];
+      [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -109,8 +109,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
     
     ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
     
-    [self.ThirdItemTableView registerNib:[UINib nibWithNibName:@"ThirdLevelTableViewCell" bundle:nil]
-                  forCellReuseIdentifier:CellIdentifier];
+    
     
     [ThirdItemTableView reloadData];
     
@@ -120,92 +119,98 @@ static NSString *CellIdentifier = @"ThridItemCell";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [ItemList count];
-
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
-    ThirdLevelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //if (cell == nil) {
-    //    cell = [[ThirdLevelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
-    //}
-    cell.opaque=YES;
-    
-    cell.ScoreTableView.scrollEnabled=NO;
-    cell.ScoreTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-   
-    cell.ItemName.text = model.Name;
-    if(model.Remarks.length>0)
-    {
+    ThirdLevelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.InspectItemID];
+    if (cell == nil) {
         
-    cell.ItemRemarks.text = model.Remarks;
-    cell.RemarkContainer.layer.cornerRadius=10;
-    cell.RemarkContainer.layer.masksToBounds = YES;
-    cell.RemarkContainer.layer.borderWidth = 2;   //设置弹出框视图边框宽度
-    cell.RemarkContainer.layer.borderColor = [[UIColor colorWithRed:0.788 green:0.788 blue:0.788 alpha:0.5] CGColor];   //设置弹出框边框颜色
+        NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"ThirdLevelTableViewCell" owner:self options:nil];
+        cell = [array objectAtIndex:0];
+        cell.ItemModel=model;
+        
+        cell.opaque=YES;
+        
+        cell.ScoreTableView.scrollEnabled=NO;
+        cell.ScoreTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        cell.ItemName.text = model.Name;
+        if(model.Remarks.length>0)
+        {
+            
+            cell.ItemRemarks.text = model.Remarks;
+            cell.RemarkContainer.layer.cornerRadius=10;
+            cell.RemarkContainer.layer.masksToBounds = YES;
+            cell.RemarkContainer.layer.borderWidth = 2;   //设置弹出框视图边框宽度
+            cell.RemarkContainer.layer.borderColor = [[UIColor colorWithRed:0.788 green:0.788 blue:0.788 alpha:0.5] CGColor];   //设置弹出框边框颜色
+        }
+        else
+        {
+            cell.RemarkContainer.hidden=true;
+        }
+        
+        cell.CancelSwitch.onText=@"跳过";
+        cell.CancelSwitch.offText=@"打分";
+        
+        [cell.CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
+        cell.CancelSwitch.object=model;
+        
+        [cell.CancelSwitch setOn:model.IsCancel.integerValue==1 animated:NO ignoreControlEvents:true];
+        
+        [cell.CancelSwitch addTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
+        cell.CancelSwitch.onTintColor=[UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
+        
+        
+        cell.ScoreSegmentedControl.hidden=model.IsCancel.integerValue==1;
+        
+        
+        InspectService *inspectService = [[InspectService alloc] init];
+        
+        NSArray * ScoreItems = [inspectService GetInspectScoreItems:model.InspectItemID];
+        cell.ScoreItems = [[NSArray alloc] initWithArray:ScoreItems];
+        [cell.ScoreSegmentedControl removeAllSegments];
+        cell.ScoreSegmentedControl.tintColor = [UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
+        int i=0;
+        int Count = [ScoreItems count];
+        cell.ScoreLable.numberOfLines=0;
+        cell.ScoreName.numberOfLines=0;
+        cell.ScoreLable.text=@"";
+        cell.ScoreName.text=@"";
+        for(ScoreItemModel *si in ScoreItems)
+        {
+            [cell.ScoreSegmentedControl insertSegmentWithTitle:si.Name atIndex:i animated:YES];
+            
+            if(si.Selected.integerValue==1)
+            {
+                cell.ScoreSegmentedControl.selectedSegmentIndex=i;
+            }
+            cell.ScoreLable.text = [cell.ScoreLable.text stringByAppendingFormat:@"%@\n",si.Caption];
+            cell.ScoreName.text = [cell.ScoreName.text stringByAppendingFormat:@"%@:\n",si.Name];
+            i++;
+        }
+        
+        
+        CGRect tmp = cell.ScoreSegmentedControl.frame;
+        int x = self.ContentView.frame.size.width-Count*40-40;
+        cell.ScoreSegmentedControl.frame = CGRectMake(x, tmp.origin.y,Count*40, tmp.size.height);
+        
+        if(model.Remarks.length==0)
+        {
+            CGRect tmp2 = cell.frame;
+            cell.ScoreTableView.frame=CGRectMake(30,60, tmp2.size.width, tmp2.size.height-80);
+        }
+        [cell.ScoreTableView reloadData];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     else
     {
-        cell.RemarkContainer.hidden=true;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
-    cell.CancelSwitch.onText=@"跳过";
-    cell.CancelSwitch.offText=@"打分";
-    
-    [cell.CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
-    cell.CancelSwitch.object=model;
-    
-    [cell.CancelSwitch setOn:model.IsCancel.integerValue==1 animated:NO ignoreControlEvents:true];
-    
-    [cell.CancelSwitch addTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
-    cell.CancelSwitch.onTintColor=[UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
-    
-    
-    cell.ScoreSegmentedControl.hidden=model.IsCancel.integerValue==1;
-    
-    
-    InspectService *inspectService = [[InspectService alloc] init];
-    
-    NSArray * ScoreItems = [inspectService GetInspectScoreItems:model.InspectItemID];
-    cell.ScoreItems = [[NSArray alloc] initWithArray:ScoreItems];
-    [cell.ScoreSegmentedControl removeAllSegments];
-    cell.ScoreSegmentedControl.tintColor = [UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
-    int i=0;
-    int Count = [ScoreItems count];
-    cell.ScoreLable.numberOfLines=0;
-    cell.ScoreName.numberOfLines=0;
-    cell.ScoreLable.text=@"";
-    cell.ScoreName.text=@"";
-    for(ScoreItemModel *si in ScoreItems)
-    {
-        [cell.ScoreSegmentedControl insertSegmentWithTitle:si.Name atIndex:i animated:YES];
-
-        if(si.Selected.integerValue==1)
-        {
-            cell.ScoreSegmentedControl.selectedSegmentIndex=i;
-        }
-        cell.ScoreLable.text = [cell.ScoreLable.text stringByAppendingFormat:@"%@\n",si.Caption];
-        cell.ScoreName.text = [cell.ScoreName.text stringByAppendingFormat:@"%@:\n",si.Name];
-        i++;
-    }
-   
-    
-    CGRect tmp = cell.ScoreSegmentedControl.frame;
-    int x = self.ContentView.frame.size.width-Count*40-40;
-    cell.ScoreSegmentedControl.frame = CGRectMake(x, tmp.origin.y,Count*40, tmp.size.height);
-    
-    if(model.Remarks.length==0)
-    {
-        CGRect tmp2 = cell.frame;
-    cell.ScoreTableView.frame=CGRectMake(30,60, tmp2.size.width, tmp2.size.height-80);
-    }
-    [cell.ScoreTableView reloadData];
-  
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
     
 }
@@ -238,7 +243,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
     cell.ScoreSegmentedControl.selectedSegmentIndex =UISegmentedControlNoSegment;
     cell.ScoreSegmentedControl.hidden=value==1;
     [cell.ScoreSegmentedControl setNeedsDisplay];
-
+    
     
     if(CancelSwitchDelegate)
         [CancelSwitchDelegate DoSwitchChange];

@@ -24,9 +24,8 @@
 @synthesize ItemRemarks;
 @synthesize ScoreItems;
 @synthesize ScoreTableView;
+@synthesize ItemModel;
 
-
-bool isLoaded=YES;
 static NSString *simpleTableIdentifier=@"InspectScoreItem";
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -34,13 +33,15 @@ static NSString *simpleTableIdentifier=@"InspectScoreItem";
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-
+        
     }
     return self;
 }
 
+
 -(id) initWithCoder:(NSCoder *)aDecoder
 {
+    
     self=[super initWithCoder:aDecoder];
     if(self)
     {
@@ -58,32 +59,30 @@ static NSString *simpleTableIdentifier=@"InspectScoreItem";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [ScoreItems count];
-    }
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    isLoaded = NO;
-
     
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if(cell==nil){
-         cell=[[UITableViewCell alloc] initWithFrame:CGRectZero];
-    
-    
-    cell.opaque=YES;
-    
-    int row = indexPath.row;
-    ScoreItemModel *model = (ScoreItemModel*)[ScoreItems objectAtIndex:row];
-    
-    //
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 600, 40)];
-    label.text = model.Caption;
-    [cell.contentView insertSubview:label aboveSubview:cell.textLabel];
-    
-    cell.textLabel.text=model.Name;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell=[[UITableViewCell alloc] initWithFrame:CGRectZero];
+        
+        
+        cell.opaque=YES;
+        
+        int row = indexPath.row;
+        ScoreItemModel *model = (ScoreItemModel*)[ScoreItems objectAtIndex:row];
+        
+        //
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 600, 40)];
+        label.text = model.Caption;
+        [cell.contentView insertSubview:label aboveSubview:cell.textLabel];
+        
+        cell.textLabel.text=model.Name;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-
+    
     return cell;
 }
 
@@ -95,9 +94,9 @@ static NSString *simpleTableIdentifier=@"InspectScoreItem";
 
 
 - (IBAction)ScoreItemSelected:(id)sender {
-
+    
     NSInteger Index = ScoreSegmentedControl.selectedSegmentIndex;
-
+    
     ScoreItemModel *scoreItem =[ScoreItems objectAtIndex:Index];
     InspectService *service = [[InspectService alloc] init];
     
@@ -105,5 +104,8 @@ static NSString *simpleTableIdentifier=@"InspectScoreItem";
     
 }
 
+- (NSString *) reuseIdentifier {
+    return ItemModel.InspectItemID;
+}
 
 @end

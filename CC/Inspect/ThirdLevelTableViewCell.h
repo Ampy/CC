@@ -17,7 +17,7 @@
 {
     NSArray *ScoreItems;
     NSString * InspectItemId;
-
+    InspectItemModel *ItemModel;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *ItemName;
@@ -30,5 +30,6 @@
 @property (strong, nonatomic) NSArray *ScoreItems;
 @property (weak, nonatomic) IBOutlet UITableView *ScoreTableView;
 @property (weak, nonatomic) IBOutlet UIView *RemarkContainer;
+@property(nonatomic,retain) InspectItemModel *ItemModel;
 
 @end

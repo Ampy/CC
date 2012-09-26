@@ -136,8 +136,8 @@ static NSString *CellIdentifier = @"SecondItem";
     else
     {
         InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
-        InspectService *service = [[InspectService alloc] init];
-        int count = [service InspectItemScoreComplete:model.InspectItemID];
+        //InspectService *service = [[InspectService alloc] init];
+        //int count = [service InspectItemScoreComplete:model.InspectItemID];
         
         for(UIView *view in cell.contentView.subviews)
         {
@@ -150,7 +150,10 @@ static NSString *CellIdentifier = @"SecondItem";
             if([view isKindOfClass:[UIImageView class]])
             {
                 UIImageView * image=(UIImageView *)view;
-                image.hidden=count!=0;
+                if(isCancelAll)
+                {
+                    image.hidden=model.IsCancel.integerValue!=1;
+                }
                 [ItemStatusList addObject:view];
             }
         }
@@ -188,6 +191,7 @@ static NSString *CellIdentifier = @"SecondItem";
         ItemStatusLabel.hidden=count!=0;
         [ItemStatusLabel setNeedsDisplay];
     }
+    isCancelAll=false;
 }
 
 -(void) CancelSwitchChange:(id)sender
@@ -213,6 +217,10 @@ static NSString *CellIdentifier = @"SecondItem";
     [SelectedSwitch setOn:false animated:NO ignoreControlEvents:YES];
     if(CancelSwitchDelegate)
         [CancelSwitchDelegate DoSwitchChange];
+}
+-(void) SetIsCancelAll:(bool) isCancel
+{
+    isCancelAll=isCancel;
 }
 
 @end
