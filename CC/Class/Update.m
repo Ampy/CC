@@ -61,8 +61,8 @@
         }
     }
     @catch (NSException *exception) {
-        NSLog(@"%@",exception.name);
-        NSLog(@"%@",exception.reason);
+        NSLog(@"更新异常：%@",exception.name);
+        NSLog(@"更新异常：%@",exception.reason);
     }
     @finally {
         [db Commit];

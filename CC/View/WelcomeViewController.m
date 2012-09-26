@@ -30,15 +30,18 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     // Do any additional setup after loading the view from its nib.
     NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"update" ofType:@"gif"]];
-    webView.userInteractionEnabled = NO;//用户不可交互
+    webView.userInteractionEnabled = NO;
     [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-    
     
     //NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     //[queue addOperationWithBlock:UpdateAndGoto];
     //dispatch_queue_t newThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //dispatch_async(newThread, ^{ [self UpdateAndGoto]; }); 
      [self performSelectorInBackground: @selector(UpdateAndGoto) withObject: nil];
+    if([@"F" isEqualToString:[Config GetPlistInfo:@"IsInit"]])
+    {
+        [Common Alert:@"数据初始化，不同的网络情况需要5~10分钟。请耐心等待！切勿关闭或退出！！！"];
+    }
     }
 
 -(void) UpdateAndGoto
