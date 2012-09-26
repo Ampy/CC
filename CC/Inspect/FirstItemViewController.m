@@ -65,16 +65,16 @@ static NSString *CellIdentifier = @"FirstItem";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
     
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.InspectItemID];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:model.InspectItemID];
     
     cell.tag=[indexPath row];
     cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins2.png"]];
     
-    InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
+
     
     //添加Label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(88, 0,160, 60)];
@@ -157,7 +157,7 @@ static NSString *CellIdentifier = @"FirstItem";
     NSIndexPath *ip=[NSIndexPath indexPathForRow:switcher.tag inSection:0];
     [self tableView:FirstItemTableView didSelectRowAtIndexPath:ip];
     [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
-    [secondItemViewController SetIsCancelAll:switcher.on];
+    [secondItemViewController SetIsCancelAll:true];
     [secondItemViewController.SecondItemTableView reloadData];
     
 }

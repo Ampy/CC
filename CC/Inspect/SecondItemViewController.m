@@ -84,14 +84,14 @@ static NSString *CellIdentifier = @"SecondItem";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+            InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
     
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.InspectItemID];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:model.InspectItemID];
         
         cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins3.png"]];
-        InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
+
         
         //添加Label
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(100, 10,370, 60)];
