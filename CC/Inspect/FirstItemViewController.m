@@ -70,8 +70,8 @@ static NSString *CellIdentifier = @"FirstItem";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
     
+    cell.tag=[indexPath row];
     cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins2.png"]];
     
     InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
@@ -85,6 +85,7 @@ static NSString *CellIdentifier = @"FirstItem";
     cell.textLabel.hidden=true;
     //添加跳过Switch
     DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(5, 15, 78, 28)];
+    CancelSwitch.tag=[indexPath row];
     CancelSwitch.onText=@"跳过";
     CancelSwitch.offText=@"打分";
     
@@ -100,7 +101,7 @@ static NSString *CellIdentifier = @"FirstItem";
     [SwitcherList addObject:CancelSwitch];
     
     [cell.contentView addSubview:CancelSwitch];
-    
+    }
     
     return cell;
     
@@ -148,21 +149,15 @@ static NSString *CellIdentifier = @"FirstItem";
 {
     DCRoundSwitch * switcher =(DCRoundSwitch *)sender;
     InspectItemModel *model =(InspectItemModel *) switcher.object;
+
     InspectService *service = [[InspectService alloc] init];
-        int value = switcher.isOn?1:0;
+    int value = switcher.isOn?1:0;
     [service SetInspectItemCancel:model.InspectID ItemId:model.InspectItemID value:value Level:1];
-   
-   if(switcher.on)
-   {
-   for(DCRoundSwitch *sw in secondItemViewController.SwitcherList)
-   {
-       [sw setOn:switcher.isOn animated:NO ignoreControlEvents:YES];
-   }
-    for(UIImageView *label in secondItemViewController.ItemStatusList)
-    {
-        label.hidden =!switcher.isOn;
-    }
-   }
+    
+    NSIndexPath *ip=[NSIndexPath indexPathForRow:switcher.tag inSection:0];
+    [self tableView:FirstItemTableView didSelectRowAtIndexPath:ip];
+    [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
+    [secondItemViewController.SecondItemTableView reloadData];
     
 }
 

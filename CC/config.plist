@@ -7,7 +7,7 @@
 	<key>ServiceUrl</key>
 	<string>http://192.168.1.139:8083/</string>
 	<key>IsInit</key>
-	<string>F</string>
+	<string>T</string>
 	<key>LoginName</key>
 	<string>TestUser</string>
 	<key>LoginPassword</key>
@@ -22,10 +22,10 @@
 	<string>系统异常</string>
 	<key>21</key>
 	<string>网络异常，暂不更新！</string>
-	<key>22</key>
-	<string>服务器异常，更新失败！</string>
 	<key>31</key>
 	<string>数据库异常</string>
+	<key>22</key>
+	<string>服务器异常，更新失败！</string>
 	<key>32</key>
 	<string>SQL语句异常</string>
 	<key>41</key>
