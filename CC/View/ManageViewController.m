@@ -45,12 +45,12 @@
     [self.view addSubview:backButton];
     [backButton addTarget:self  action:@selector(backButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [outButton setFrame:CGRectMake(400, 50, 54, 31)];
-    [outButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
-    [outButton setTitle:@"同步" forState:UIControlStateNormal];
-    [self.view addSubview:outButton];
-    [outButton addTarget:self  action:@selector(updateToService:) forControlEvents:UIControlEventTouchUpInside];
+    upButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    [upButton setFrame:CGRectMake(400, 50, 54, 31)];
+    [upButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
+    [upButton setTitle:@"同步" forState:UIControlStateNormal];
+    [self.view addSubview:upButton];
+    [upButton addTarget:self  action:@selector(updateToService:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
     
@@ -120,6 +120,7 @@
     {
         [webView removeFromSuperview];
         [bgView removeFromSuperview];
+        upButton.enabled = NO;
     }
     [updateTableView reloadData];
 }

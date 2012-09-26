@@ -14,6 +14,7 @@
     NSMutableArray *lists;
     NSMutableArray *lists2;
     int submitCount;
+    UIButton *upButton;
     UIView *bgView;
     UIWebView * webView;
 }
