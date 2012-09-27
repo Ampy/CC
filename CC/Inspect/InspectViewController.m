@@ -18,6 +18,7 @@
 @synthesize InspectTableView;
 @synthesize InspectList;
 
+
 static NSString *CellIdentifier = @"Inspects";
 
 #pragma mark Controller默认函数
@@ -44,18 +45,17 @@ static NSString *CellIdentifier = @"Inspects";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.InspectTableView registerNib:[UINib nibWithNibName:@"InspectTableViewCell" bundle:nil]
-                forCellReuseIdentifier:CellIdentifier];
+    
     InspectService * inspectService = [[InspectService alloc] init];
     InspectTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     InspectList = [inspectService GetInspects:InspectActivityId];
-
+    
     InspectTableView.backgroundColor = [UIColor clearColor];
     InspectTableView.opaque = NO;
     
     NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
     [self tableView:InspectTableView didSelectRowAtIndexPath:ip];
-    [InspectTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom]; 
+    [InspectTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
 }
 
 - (void)viewDidUnload
@@ -80,19 +80,24 @@ static NSString *CellIdentifier = @"Inspects";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     InspectModel *model = (InspectModel*)[InspectList objectAtIndex:indexPath.row];
     
-    InspectTableViewCell *cell = (InspectTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    
-    cell.TableName.text = model.Name;
-    //cell.TableImage.image=[UIImage imageNamed:@"InspectTable.png"];
-    cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins1.png"]];
-
-
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+    InspectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.InspectId];
+    if (cell == nil) {
+        
+        NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"InspectTableViewCell" owner:self options:nil];
+        cell = [array objectAtIndex:0];
+        cell.InspectId=model.InspectId;
+        
+        
+        
+        cell.TableName.text = model.Name;
+        //cell.TableImage.image=[UIImage imageNamed:@"InspectTable.png"];
+        cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins1.png"]];
+        
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     return cell;
     
 }
@@ -110,16 +115,16 @@ static NSString *CellIdentifier = @"Inspects";
 {
     [secondItemViewController.ItemList removeAllObjects];
     [secondItemViewController.SecondItemTableView reloadData];
-
+    
     InspectModel *model = [InspectList objectAtIndex:indexPath.row];
     
     [firstItemViewController LoadData:model.InspectId ParentItemId:model.InspTempID];
-
+    
 }
 - (IBAction)SaveButtonClick:(id)sender {
     ManageViewController *ctrl = [[ManageViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];
-
+    
 }
 
 - (IBAction)CommitButtonClick:(id)sender {
@@ -128,7 +133,7 @@ static NSString *CellIdentifier = @"Inspects";
         InspectService * inspectService = [[InspectService alloc] init];
         if([inspectService CanCommitInspectActivity:InspectActivityId])
         {
-        [inspectService InspectActivityComplete:InspectActivityId];
+            [inspectService InspectActivityComplete:InspectActivityId];
         }
         
         ManageViewController *ctrl = [[ManageViewController alloc] init];
@@ -141,7 +146,7 @@ static NSString *CellIdentifier = @"Inspects";
     @finally {
         
     }
-
+    
 }
 
 @end

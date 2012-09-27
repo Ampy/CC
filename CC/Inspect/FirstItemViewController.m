@@ -16,7 +16,6 @@
 @synthesize FirstItemTableView;
 @synthesize secondItemViewController;
 
-static NSString *CellIdentifier = @"FirstItem";
 
 #pragma mark Controller默认函数
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -75,7 +74,6 @@ static NSString *CellIdentifier = @"FirstItem";
     cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins2.png"]];
     
 
-    
     //添加Label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(88, 0,160, 60)];
     label.numberOfLines=0;
@@ -131,8 +129,7 @@ static NSString *CellIdentifier = @"FirstItem";
     [ItemList removeAllObjects];
     
     ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
-    //为了缓存区分
-    CellIdentifier=parentItemId;
+
     [FirstItemTableView reloadData];
     
     if([ItemList count]>0)

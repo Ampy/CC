@@ -19,7 +19,6 @@
 @synthesize ItemStatusList;
 @synthesize CancelSwitchDelegate;
 
-static NSString *CellIdentifier = @"SecondItem";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,7 +49,7 @@ static NSString *CellIdentifier = @"SecondItem";
 
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
 {
-    CellIdentifier=parentItemId;
+
     InspectService * inspectService = [[InspectService alloc] init];
     
     ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
@@ -58,12 +57,6 @@ static NSString *CellIdentifier = @"SecondItem";
     [ItemStatusList removeAllObjects];
     [SecondItemTableView reloadData];
     
-    
-    //    NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
-    //    [self tableView:SecondItemTableView didSelectRowAtIndexPath:ip];
-    //    [SecondItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
-    //
-    //    SelectedSwitch=[SwitcherList objectAtIndex:0];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -136,9 +129,7 @@ static NSString *CellIdentifier = @"SecondItem";
     else
     {
         InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
-        //InspectService *service = [[InspectService alloc] init];
-        //int count = [service InspectItemScoreComplete:model.InspectItemID];
-        
+ 
         for(UIView *view in cell.contentView.subviews)
         {
             if([view isKindOfClass:[DCRoundSwitch class]])

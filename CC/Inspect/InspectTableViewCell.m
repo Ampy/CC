@@ -15,6 +15,7 @@
 
 @synthesize TableImage;
 @synthesize TableName;
+@synthesize InspectId;
 
 
 -(void) initWithLeftRightName:(NSString *)leftText andRight:(NSString *)rightText
@@ -37,6 +38,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (NSString *) reuseIdentifier {
+    return InspectId;
 }
 
 @end

@@ -25,6 +25,8 @@
     
     //当前检查活动ID
     NSString *InspectActivityId;
+    
+
 }
 
 @property(nonatomic,retain) NSMutableArray *InspectList;
@@ -35,6 +37,8 @@
 @property (strong, nonatomic) IBOutlet SecondItemViewController *secondItemViewController;
 
 @property (weak, nonatomic) IBOutlet UITableView *InspectTableView;
+
+
 
 -(InspectViewController *)initWithInspectActivityId:(NSString *)inspectActivityId;
 
