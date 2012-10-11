@@ -95,6 +95,8 @@
 
 -(void)clickButton:(id)sender 
 {
+
+    
     UIButton* btn =(UIButton*)sender;
     
     if(btn.tag==4)

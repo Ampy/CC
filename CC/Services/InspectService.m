@@ -26,7 +26,7 @@
 -(NSMutableArray *)GetInspects:(NSString *)activityId
 {
     [databaseHelper OpenDB:dbName];
-    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectActivityId,InspectCode,Name,InspectId,InspTempId FROM INSPECT WHERE InspectActivityId='%@'",activityId];
+    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectActivityId,InspectCode,Name,InspectId,InspTempId FROM INSPECT WHERE InspectActivityId='%@' order by InspTempId",activityId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
     NSMutableArray *list = [NSMutableArray arrayWithCapacity:5];
