@@ -17,10 +17,12 @@
 {
     NSMutableArray *listArr;
     NSString *checkType;
+    NSString *checkTypeName;
     InputSubView *subView;
     bool IsOpenSubView;
 }
 @property (nonatomic,retain) NSString *checkType;
+@property (nonatomic,retain) NSString *checkTypeName;
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *MaskView;
