@@ -28,26 +28,26 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed: @"home_bg.png"]]];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed: @"home_bg.png"]]];
     
-    UIButton *button1 =[UIButton buttonWithType:UIButtonTypeCustom];
-    button1.tag = 1;
-    [button1 setFrame:CGRectMake(255, 245, 128, 130)];
-    [button1 setBackgroundImage:[UIImage imageNamed:@"sjcc_1.png"] forState:UIControlStateNormal];
-    [self.view addSubview:button1];
-    
-    UIButton *button2 =[UIButton buttonWithType:UIButtonTypeCustom];
-    button2.tag = 2;
-    [button2 setFrame:CGRectMake(450, 245, 128, 130)];
-    [button2 setBackgroundImage:[UIImage imageNamed:@"dqjc_1.png"] forState:UIControlStateNormal];
-    [self.view addSubview:button2];
-    
-    UIButton *button3 =[UIButton buttonWithType:UIButtonTypeCustom];
-    button3.tag = 3;
-    [button3 setFrame:CGRectMake(645, 245, 128, 130)];
-    [button3 setBackgroundImage:[UIImage imageNamed:@"fc_1.png"] forState:UIControlStateNormal];
-    [self.view addSubview:button3];
+//    UIButton *button1 =[UIButton buttonWithType:UIButtonTypeCustom];
+//    button1.tag = 1;
+//    [button1 setFrame:CGRectMake(255, 245, 128, 130)];
+//    [button1 setBackgroundImage:[UIImage imageNamed:@"sjcc_1.png"] forState:UIControlStateNormal];
+//    [self.view addSubview:button1];
+//    
+//    UIButton *button2 =[UIButton buttonWithType:UIButtonTypeCustom];
+//    button2.tag = 2;
+//    [button2 setFrame:CGRectMake(450, 245, 128, 130)];
+//    [button2 setBackgroundImage:[UIImage imageNamed:@"dqjc_1.png"] forState:UIControlStateNormal];
+//    [self.view addSubview:button2];
+//    
+//    UIButton *button3 =[UIButton buttonWithType:UIButtonTypeCustom];
+//    button3.tag = 3;
+//    [button3 setFrame:CGRectMake(645, 245, 128, 130)];
+//    [button3 setBackgroundImage:[UIImage imageNamed:@"fc_1.png"] forState:UIControlStateNormal];
+//    [self.view addSubview:button3];
     
     UIButton *button4 =[UIButton buttonWithType:UIButtonTypeCustom];
     button4.tag = 4;
@@ -61,10 +61,10 @@
     [outButton setTitle:@"登出" forState:UIControlStateNormal];
     [self.view addSubview:outButton];
     
-    [button1 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
-    [button2 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
-    [button3 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
-    [button4 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+//    [button1 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
+//    [button2 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
+//    [button3 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
+//    [button4 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     [outButton addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
@@ -83,6 +83,7 @@
 
 - (void)viewDidUnload
 {
+
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -109,12 +110,15 @@
         {
             case 1:
                 ctrl.checkType =  @"随机抽查";
+                ctrl.checkTypeName =  @"随机抽查";
                 break;
             case 2:
                 ctrl.checkType =  @"定期检查";
+                ctrl.checkTypeName =  @"全覆盖检查";
                 break;
             case 3:
                 ctrl.checkType =  @"督导队复查";
+                ctrl.checkTypeName =  @"复查";
                 break;         
             default:
                 break;
@@ -128,4 +132,6 @@
         [UIView commitAnimations];  
     }
 }
+
+
 @end

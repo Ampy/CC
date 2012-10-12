@@ -15,6 +15,7 @@
 @implementation InputViewController
 
 @synthesize checkType;
+@synthesize checkTypeName;
 @synthesize tableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,7 +58,7 @@
     [Config SetPlistInfo:@"InspectWay" Value:checkType];
     [Config SetPlistInfo:@"InspectDate" Value:locationString];
 
-    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkType,nil]];
+    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkTypeName,nil]];
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Config GetPlistInfo:@"LoginUserName"],nil]];
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查时间",locationString,nil]];
     

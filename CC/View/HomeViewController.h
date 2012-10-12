@@ -13,5 +13,8 @@
 
 @interface HomeViewController : UIViewController
 
+- (IBAction)clickButton:(id)sender;
+- (IBAction)clickButton:(id)sender;
+- (IBAction)clickButton:(id)sender;
 
 @end
