@@ -64,7 +64,7 @@
 //    [button1 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
 //    [button2 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
 //    [button3 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
-//    [button4 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    [button4 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     [outButton addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
