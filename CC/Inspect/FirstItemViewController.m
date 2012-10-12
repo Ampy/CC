@@ -15,6 +15,7 @@
 @implementation FirstItemViewController
 @synthesize FirstItemTableView;
 @synthesize secondItemViewController;
+@synthesize MaskWebView;
 
 
 #pragma mark Controller默认函数
@@ -30,13 +31,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        FirstItemTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    FirstItemTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	// Do any additional setup after loading the view.
     
     FirstItemTableView.backgroundColor = [UIColor clearColor];
     secondItemViewController.CancelSwitchDelegate=self;
     SwitcherList = [[NSMutableArray alloc] initWithCapacity:0];
     
+    //MaskWebView = [[UIWebView alloc]initWithFrame:CGRectMake(200, 180, 198, 181)];
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+    MaskWebView.userInteractionEnabled = NO;
+    MaskWebView.backgroundColor = [UIColor clearColor];
+    MaskWebView.opaque = NO;
+    [MaskWebView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    MaskWebView.hidden=false;
+    [MaskWebView setNeedsDisplay];
 }
 
 - (void)viewDidUnload
@@ -69,36 +78,36 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.InspectItemID];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:model.InspectItemID];
-    
-    cell.tag=[indexPath row];
-    cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins2.png"]];
-    
-
-    //添加Label
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(88, 0,160, 60)];
-    label.numberOfLines=0;
-    label.backgroundColor = [UIColor clearColor];
-    label.text = model.Name;
-    [cell.contentView addSubview:label];
-    cell.textLabel.hidden=true;
-    //添加跳过Switch
-    DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(5, 15, 78, 28)];
-    CancelSwitch.tag=[indexPath row];
-    CancelSwitch.onText=@"跳过";
-    CancelSwitch.offText=@"打分";
-    
-    [CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
-    CancelSwitch.object=model;
-    
-    [CancelSwitch setOn:model.IsCancel.integerValue==1 animated:YES ignoreControlEvents:true];
-    
-    [CancelSwitch addTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
-    
-    CancelSwitch.onTintColor=[UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
-   
-    [SwitcherList addObject:CancelSwitch];
-    
-    [cell.contentView addSubview:CancelSwitch];
+        
+        cell.tag=[indexPath row];
+        cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins2.png"]];
+        
+        
+        //添加Label
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(88, 0,160, 60)];
+        label.numberOfLines=0;
+        label.backgroundColor = [UIColor clearColor];
+        label.text = model.Name;
+        [cell.contentView addSubview:label];
+        cell.textLabel.hidden=true;
+        //添加跳过Switch
+        DCRoundSwitch *CancelSwitch =[[DCRoundSwitch alloc] initWithFrame:CGRectMake(5, 15, 78, 28)];
+        CancelSwitch.tag=[indexPath row];
+        CancelSwitch.onText=@"跳过";
+        CancelSwitch.offText=@"打分";
+        
+        [CancelSwitch removeTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
+        CancelSwitch.object=model;
+        
+        [CancelSwitch setOn:model.IsCancel.integerValue==1 animated:YES ignoreControlEvents:true];
+        
+        [CancelSwitch addTarget:self action:@selector(CancelSwitchChange:) forControlEvents:UIControlEventValueChanged];
+        
+        CancelSwitch.onTintColor=[UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
+        
+        [SwitcherList addObject:CancelSwitch];
+        
+        [cell.contentView addSubview:CancelSwitch];
     }
     
     return cell;
@@ -109,14 +118,17 @@
 {
     if([ItemList count]>0)
     {
-    InspectItemModel *model = [ItemList objectAtIndex:indexPath.row];
-    
-    [secondItemViewController LoadData:model.InspectID ParentItemId:model.ItemTempID];
 
-    if(SwitcherList.count>0)
-    SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
+        InspectItemModel *model = [ItemList objectAtIndex:indexPath.row];
+        
+        [secondItemViewController LoadData:model.InspectID ParentItemId:model.ItemTempID];
+        
+        if(SwitcherList.count>0)
+            SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
+        
+
+   
     }
-    
 }
 
 
@@ -129,24 +141,24 @@
     [ItemList removeAllObjects];
     
     ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
-
+    
     [FirstItemTableView reloadData];
     
     if([ItemList count]>0)
     {
-    NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
-    [self tableView:FirstItemTableView didSelectRowAtIndexPath:ip];
-    [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
+        NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
+        [self tableView:FirstItemTableView didSelectRowAtIndexPath:ip];
+        [FirstItemTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
     }
     if([SwitcherList count]>0)
-    SelectedSwitch=[SwitcherList objectAtIndex:0];
+        SelectedSwitch=[SwitcherList objectAtIndex:0];
 }
 
 -(void) CancelSwitchChange:(id)sender
 {
     DCRoundSwitch * switcher =(DCRoundSwitch *)sender;
     InspectItemModel *model =(InspectItemModel *) switcher.object;
-
+    
     InspectService *service = [[InspectService alloc] init];
     int value = switcher.isOn?1:0;
     [service SetInspectItemCancel:model.InspectID ItemId:model.InspectItemID value:value Level:1];

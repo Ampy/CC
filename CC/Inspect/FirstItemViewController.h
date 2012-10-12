@@ -28,5 +28,6 @@
 
 @property (weak, nonatomic) IBOutlet SecondItemViewController *secondItemViewController;
 
+@property (retain, nonatomic) IBOutlet UIWebView *MaskWebView;
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId;
 @end

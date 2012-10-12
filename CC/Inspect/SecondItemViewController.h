@@ -32,6 +32,9 @@
     
     bool isCancelAll;
     
+    dispatch_queue_t queue;
+    
+    bool popClean;
 }
 
 @property(nonatomic,retain) NSMutableArray *ItemList;
@@ -40,6 +43,7 @@
 @property (nonatomic, retain) id <SwitchDelegate> CancelSwitchDelegate;
 @property (weak, nonatomic) IBOutlet UITableView *SecondItemTableView;
 
+@property (weak, nonatomic) IBOutlet UIWebView *MaskWebView;
 
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId;
 

@@ -20,12 +20,13 @@
         databaseHelper = [[DatabaseHelper alloc] init];
     }
     dbName = [NSString stringWithString:[Settings Instance].DatabaseName];
+    [databaseHelper OpenDB:dbName];
     return self;
 }
 
 -(NSMutableArray *)GetInspects:(NSString *)activityId
 {
-    [databaseHelper OpenDB:dbName];
+
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectActivityId,InspectCode,Name,InspectId,InspTempId FROM INSPECT WHERE InspectActivityId='%@' order by InspTempId",activityId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
@@ -42,13 +43,13 @@
     }
     sqlite3_reset(statement);
     sqlite3_finalize(statement);
-    [databaseHelper CloseDB];
+
     return list;
 }
 
 -(NSMutableArray *)GetInspectItems:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
 {
-    [databaseHelper OpenDB:dbName];
+ 
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectItemID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,InspectID,Total,IsCancel FROM INSPECTITEM WHERE InspectId='%@' AND PItemTempID = '%@'",inspectId,parentItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
@@ -82,13 +83,13 @@
     }
     
     sqlite3_finalize(statement);
-    [databaseHelper CloseDB];
+
     return list;
 }
 
 -(NSMutableArray *)GetInspectScoreItems:(NSString *) inspectItemId
 {
-    [databaseHelper OpenDB:dbName];
+
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT ScoreID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,InspectItemID,InspectID,Selected,Qualified FROM INSPECTSCORE WHERE InspectItemId='%@' ORDER BY Sort",inspectItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
@@ -115,12 +116,12 @@
     }
     
     sqlite3_finalize(statement);
-    [databaseHelper CloseDB];
+
     return list;
 }
 
 -(int) GetInspectSocreItemsCount:(NSString *)inspectItemId{
-    [databaseHelper OpenDB:dbName];
+
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT count(1) FROM INSPECTSCORE WHERE InspectItemId='%@'",inspectItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     int count = 0;
@@ -129,13 +130,13 @@
     }
     
     sqlite3_finalize(statement);
-    [databaseHelper CloseDB];
+
     return count;
 }
 
 -(void) SelectInspectScoreItem:(NSString *)inspectScoreId value:(int)value
 {
-    [databaseHelper OpenDB:dbName];
+
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectItemId FROM INSPECTSCORE WHERE ScoreID='%@'",inspectScoreId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     NSString *inspectItemId;
@@ -155,16 +156,16 @@
     }
     
     sqlite3_finalize(statement);
-    [databaseHelper CloseDB];
+
         
 }
 
 -(void) SetInspectItemCancel:(NSString *)inspectid ItemId:(NSString *)itemId value:(int)value Level:(int)level;
 {
-    [databaseHelper OpenDB:dbName];
+  
     [self SetChildItemCancel:inspectid ItemId:itemId value:value Level:level];
     [self SetParentItemCancel:inspectid ItemId:itemId value:value Level:level];
-    [databaseHelper CloseDB];
+
 }
 
 -(void) SetParentItemCancel:(NSString *)inspectid ItemId:(NSString *)itemId value:(int)value Level:(int)level
@@ -281,25 +282,21 @@
 
 -(int) InspectItemScoreComplete:(NSString *) itemId
 {
-    
-    [databaseHelper OpenDB:dbName];
-    
-    
+
     //创建一个视图
     //NSString * CreateViewSql = @"CREATE  VIEW  IF NOT EXISTS V_VerifyInspect AS select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
     //[databaseHelper ExecuteNonQuery:CreateViewSql];
-    
+
     NSString * UnCompletedSql=[[NSString alloc] initWithFormat: @"select count(1) from V_VerifyInspect where InspectItemId in(select InspectItemId from inspectitem b where Exists(select inspectItemid from inspectitem a where a.inspectItemId='%@' and a.ItemTempId=b.PItemTempId and a.inspectid=b.inspectid)) and selected+isCancel=0;",itemId ];
     sqlite3_stmt * statement = [databaseHelper ExecSql:UnCompletedSql];
-    
+ 
     int count = 0;
     if (sqlite3_step(statement)==SQLITE_ROW) {
         count = sqlite3_column_int(statement, 0);
     }
-    
+               
     sqlite3_finalize(statement);
     
-    [databaseHelper CloseDB];
     return count;
 }
 
@@ -308,7 +305,6 @@
     NSMutableArray *Inspects =  [NSMutableArray arrayWithCapacity:0];
     Inspects = [self GetInspects:acitvityId];
     
-    [databaseHelper OpenDB:dbName];
     //var activity = dbContext.InspectActivity.GetEntity(activityId);
     /*提交前的校验检查*/
     
@@ -379,15 +375,19 @@
         }
     }
 
-    [databaseHelper CloseDB];
     return  true;
 }
 
 -(void) InspectActivityComplete:(NSString *)acitvityId
 {
-    [databaseHelper OpenDB:dbName];
+
     NSString * updateSql=[[NSString alloc] initWithFormat:@"UPDATE InspectActivity SET Finished=1 WHERE InspectActivityId='%@'",acitvityId];
     [databaseHelper ExecuteNonQuery:updateSql];
+
+}
+
+- (void)dealloc
+{
     [databaseHelper CloseDB];
 }
 @end

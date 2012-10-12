@@ -18,6 +18,7 @@
 @synthesize SwitcherList;
 @synthesize ItemStatusList;
 @synthesize CancelSwitchDelegate;
+@synthesize MaskWebView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,6 +32,8 @@
 
 - (void)viewDidLoad
 {
+    queue = dispatch_queue_create("ampy",nil);
+    
     SecondItemTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if(SwitcherList==nil)
         SwitcherList = [[NSMutableArray alloc] initWithCapacity:0];
@@ -38,26 +41,58 @@
         ItemStatusList=[[NSMutableArray alloc] initWithCapacity:0];
     
     [super viewDidLoad];
+    
+    UIButton *mp=[[UIButton alloc] initWithFrame:CGRectMake(100, 100, 80, 45)];
+    [mp setTitle:@"" forState:0];
+    [mp addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
+    [SecondItemTableView addSubview:mp];
 	// Do any additional setup after loading the view.
+}
+
+-(void)outButton:(id)sender
+{
+    [ItemList removeAllObjects];
+    [SecondItemTableView reloadData];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    dispatch_release(queue);
     // Release any retained subviews of the main view.
 }
 
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
 {
+    dispatch_async(queue, ^{
+        
+        dispatch_sync(dispatch_get_main_queue(),^{
+            MaskWebView.hidden=false;
+            [MaskWebView setNeedsDisplay];
+        });
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            InspectService * inspectService = [[InspectService alloc] init];
+            
+            ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
+            [SwitcherList removeAllObjects];
+            [ItemStatusList removeAllObjects];
+  
+            [SecondItemTableView reloadData];
+ 
+        });
+        
+        dispatch_async(dispatch_get_main_queue(),^{
+            //int i=[SecondItemTableView.visibleCells count];
+            MaskWebView.hidden=true;
+            [MaskWebView setNeedsDisplay];
+        });
+        
+    });
+    
 
-    InspectService * inspectService = [[InspectService alloc] init];
-    
-    ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
-    [SwitcherList removeAllObjects];
-    [ItemStatusList removeAllObjects];
-    [SecondItemTableView reloadData];
-    
 }
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -77,14 +112,14 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-            InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
+    InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.InspectItemID];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:model.InspectItemID];
         
         cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_ins3.png"]];
-
+        
         
         //添加Label
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(100, 10,370, 60)];
@@ -114,22 +149,22 @@
         InspectService *service = [[InspectService alloc] init];
         int count = [service InspectItemScoreComplete:model.InspectItemID];
         bool mp = !count==0;
-  
-            UIImageView *ItemStatus=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ItemComplete.png"]];
-            ItemStatus.frame=CGRectMake(500, 10, 40, 40);
-            
-            ItemStatus.hidden=mp;
-            [ItemStatus setNeedsDisplay];
-            
-            [cell.contentView addSubview:ItemStatus];
-            
-            [ItemStatusList addObject:ItemStatus];
+        
+        UIImageView *ItemStatus=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ItemComplete.png"]];
+        ItemStatus.frame=CGRectMake(500, 10, 40, 40);
+        
+        ItemStatus.hidden=mp;
+        [ItemStatus setNeedsDisplay];
+        
+        [cell.contentView addSubview:ItemStatus];
+        
+        [ItemStatusList addObject:ItemStatus];
         
     }
     else
     {
         InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
- 
+        
         for(UIView *view in cell.contentView.subviews)
         {
             if([view isKindOfClass:[DCRoundSwitch class]])
@@ -149,26 +184,48 @@
             }
         }
     }
+    
     return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    InspectItemModel *model = [ItemList objectAtIndex:indexPath.row];
+ 
+    dispatch_async(queue, ^{
+        
+        dispatch_sync(dispatch_get_main_queue(),^{
+            MaskWebView.hidden=false;
+            [MaskWebView setNeedsDisplay];
+        });
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            InspectItemModel *model = [ItemList objectAtIndex:indexPath.row];
+            
+            if(pop==nil)
+            {
+                pop = [[PopViewController alloc] initWithParentFrame:self.view.superview.superview.superview.superview.frame];
+                pop.closeDelegate=self;
+                pop.CancelSwitchDelegate=self;
+            }
+            pop.PopTitleLabel.text = model.Name;
+            [pop LoadData:model.InspectID ParentItemId:model.ItemTempID];
+            [self.view.superview.superview.superview addSubview:pop.view];
+            
+            SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
+            ItemStatusLabel = [ItemStatusList objectAtIndex:[indexPath row]];
+            
+        });
+        
+        dispatch_async(dispatch_get_main_queue(),^{
+            //int i=[SecondItemTableView.visibleCells count];
+            MaskWebView.hidden=true;
+            [MaskWebView setNeedsDisplay];
+        });
+        
+    });
     
-    if(pop==nil)
-    {
-        pop = [[PopViewController alloc] initWithParentFrame:self.view.superview.superview.superview.superview.frame];
-        pop.closeDelegate=self;
-        pop.CancelSwitchDelegate=self;
-    }
-    pop.PopTitleLabel.text = model.Name;
-    [pop LoadData:model.InspectID ParentItemId:model.ItemTempID];
-    [self.view.superview.superview.superview addSubview:pop.view];
-    
-    SelectedSwitch = [SwitcherList objectAtIndex:[indexPath row]];
-    ItemStatusLabel = [ItemStatusList objectAtIndex:[indexPath row]];
+
 }
 
 
@@ -187,7 +244,7 @@
 
 -(void) CancelSwitchChange:(id)sender
 {
-    
+    popClean=true;
     DCRoundSwitch * switcher =(DCRoundSwitch *)sender;
     InspectItemModel *model =(InspectItemModel *) switcher.object;
     InspectService *service = [[InspectService alloc] init];
