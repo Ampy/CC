@@ -99,77 +99,31 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<bool key="IBUIHasAttributedTitle">YES</bool>
-						<object class="NSAttributedString" key="IBUINormalAttributedTitle">
-							<string key="NSString">随即抽查</string>
-							<dictionary key="NSAttributes">
-								<object class="NSColor" key="NSColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC41MjE1Njg2Mjc1IDAuMDQ3MDU4ODIzNTMgMC4wNjI3NDUwOTgwNAA</bytes>
-								</object>
-								<object class="NSFont" key="NSFont" id="474772839">
-									<string key="NSName">HiraginoSansGB-W6</string>
-									<double key="NSSize">18</double>
-									<int key="NSfFlags">16</int>
-								</object>
-								<reference key="NSOriginalFont" ref="474772839"/>
-								<object class="NSMutableParagraphStyle" key="NSParagraphStyle">
-									<int key="NSAlignment">2</int>
-									<double key="NSLineHeightMultiple">4</double>
-									<double key="NSTighteningFactorForTruncation">0.05000000074505806</double>
-									<array key="NSTabStops">
-										<object class="NSTextTab" id="652490507">
-											<double key="NSLocation">28</double>
-										</object>
-										<object class="NSTextTab" id="675587341">
-											<double key="NSLocation">56</double>
-										</object>
-										<object class="NSTextTab" id="119676735">
-											<double key="NSLocation">84</double>
-										</object>
-										<object class="NSTextTab" id="533785680">
-											<double key="NSLocation">112</double>
-										</object>
-										<object class="NSTextTab" id="243826784">
-											<double key="NSLocation">140</double>
-										</object>
-										<object class="NSTextTab" id="562168114">
-											<double key="NSLocation">168</double>
-										</object>
-										<object class="NSTextTab" id="22504492">
-											<double key="NSLocation">196</double>
-										</object>
-										<object class="NSTextTab" id="1037539409">
-											<double key="NSLocation">224</double>
-										</object>
-										<object class="NSTextTab" id="616759140">
-											<double key="NSLocation">252</double>
-										</object>
-										<object class="NSTextTab" id="770568762">
-											<double key="NSLocation">280</double>
-										</object>
-										<object class="NSTextTab" id="554892272">
-											<double key="NSLocation">308</double>
-										</object>
-										<object class="NSTextTab" id="224101710">
-											<double key="NSLocation">336</double>
-										</object>
-									</array>
-								</object>
-							</dictionary>
+						<double key="IBUIContentEdgeInsets.top">60</double>
+						<double key="IBUIContentEdgeInsets.bottom">0.0</double>
+						<double key="IBUIContentEdgeInsets.left">0.0</double>
+						<double key="IBUIContentEdgeInsets.right">0.0</double>
+						<int key="IBUILineBreakMode">0</int>
+						<string key="IBUINormalTitle">随即抽查</string>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC41MjE1Njg2Mjc1IDAuMDQ3MDU4ODIzNTMgMC4wNjI3NDUwOTgwNAA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleShadowColor" id="258236215">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">sjcc_1.png</string>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="1007612355">
-							<int key="type">1</int>
-							<double key="pointSize">17</double>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="807748862">
+							<int key="type">2</int>
+							<double key="pointSize">18</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="333187875">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
+						<object class="NSFont" key="IBUIFont" id="50364309">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
@@ -186,43 +140,22 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<bool key="IBUIHasAttributedTitle">YES</bool>
-						<object class="NSAttributedString" key="IBUINormalAttributedTitle">
-							<string key="NSString">全覆盖检查</string>
-							<dictionary key="NSAttributes">
-								<object class="NSColor" key="NSColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC41MzcyNTQ5MDIgMC4wMjM1Mjk0MTE3NiAwLjA0NzA1ODgyMzUzAA</bytes>
-								</object>
-								<reference key="NSFont" ref="474772839"/>
-								<object class="NSMutableParagraphStyle" key="NSParagraphStyle">
-									<int key="NSAlignment">2</int>
-									<double key="NSLineHeightMultiple">4</double>
-									<double key="NSTighteningFactorForTruncation">0.05000000074505806</double>
-									<array key="NSTabStops">
-										<reference ref="652490507"/>
-										<reference ref="675587341"/>
-										<reference ref="119676735"/>
-										<reference ref="533785680"/>
-										<reference ref="243826784"/>
-										<reference ref="562168114"/>
-										<reference ref="22504492"/>
-										<reference ref="1037539409"/>
-										<reference ref="616759140"/>
-										<reference ref="770568762"/>
-										<reference ref="554892272"/>
-										<reference ref="224101710"/>
-									</array>
-								</object>
-							</dictionary>
+						<double key="IBUIContentEdgeInsets.top">60</double>
+						<double key="IBUIContentEdgeInsets.bottom">0.0</double>
+						<double key="IBUIContentEdgeInsets.left">0.0</double>
+						<double key="IBUIContentEdgeInsets.right">0.0</double>
+						<string key="IBUINormalTitle">全覆盖检查</string>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC41MzcyNTQ5MDIgMC4wMjM1Mjk0MTE3NiAwLjA0NzA1ODgyMzUzAA</bytes>
 						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="258236215"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">dqjc_1.png</string>
 						</object>
-						<reference key="IBUIFontDescription" ref="1007612355"/>
-						<reference key="IBUIFont" ref="333187875"/>
+						<reference key="IBUIFontDescription" ref="807748862"/>
+						<reference key="IBUIFont" ref="50364309"/>
 					</object>
 					<object class="IBUIButton" id="916190930">
 						<reference key="NSNextResponder" ref="766721923"/>
@@ -236,29 +169,22 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<bool key="IBUIHasAttributedTitle">YES</bool>
-						<object class="NSAttributedString" key="IBUINormalAttributedTitle">
-							<string key="NSString">复查</string>
-							<dictionary key="NSAttributes">
-								<object class="NSColor" key="NSColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC41MjE1Njg2NTYgMC4wMTc0NjcwNjkzNiAwLjAzNDQ0OTk1NzI1AA</bytes>
-								</object>
-								<reference key="NSFont" ref="474772839"/>
-								<object class="NSMutableParagraphStyle" key="NSParagraphStyle">
-									<int key="NSAlignment">2</int>
-									<double key="NSLineHeightMultiple">4</double>
-									<nil key="NSTabStops"/>
-								</object>
-							</dictionary>
+						<double key="IBUIContentEdgeInsets.top">60</double>
+						<double key="IBUIContentEdgeInsets.bottom">0.0</double>
+						<double key="IBUIContentEdgeInsets.left">0.0</double>
+						<double key="IBUIContentEdgeInsets.right">0.0</double>
+						<string key="IBUINormalTitle">复查</string>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC41MjE1Njg2NTYgMC4wMTc0NjcwNjkzNiAwLjAzNDQ0OTk1NzI1AA</bytes>
 						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="258236215"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">fc_1.png</string>
 						</object>
-						<reference key="IBUIFontDescription" ref="1007612355"/>
-						<reference key="IBUIFont" ref="333187875"/>
+						<reference key="IBUIFontDescription" ref="807748862"/>
+						<reference key="IBUIFont" ref="50364309"/>
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {1024, 748}}</string>
@@ -386,6 +312,7 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="0.0" key="14.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
