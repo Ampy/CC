@@ -16,6 +16,7 @@
 
 @synthesize checkType;
 @synthesize tableView;
+@synthesize MaskView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +31,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    MaskView.hidden=true;
+    
     UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(20, 10, 68, 26)];
     [backButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
@@ -44,18 +47,18 @@
     
     self.view.userInteractionEnabled = YES;
     
-
+    
     listArr = [[NSMutableArray alloc] init];
     
     NSMutableArray *list1 = [[NSMutableArray alloc] init];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init]; 
-    [formatter setDateFormat:@"YYYY-MM-dd"]; 
-    NSString *locationString=[formatter stringFromDate: [NSDate date]]; 
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    NSString *locationString=[formatter stringFromDate: [NSDate date]];
     
     [Config SetPlistInfo:@"InspectWay" Value:checkType];
     [Config SetPlistInfo:@"InspectDate" Value:locationString];
-
+    
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkType,nil]];
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Config GetPlistInfo:@"LoginUserName"],nil]];
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查时间",locationString,nil]];
@@ -78,19 +81,19 @@
     [tableView setBackgroundView:nil];
 }
 
--(void)backButton:(id)sender 
+-(void)backButton:(id)sender
 {
     //[self.navigationController popViewControllerAnimated:YES];
     HomeViewController *ctrl = [[HomeViewController alloc] init];
-    [UIView  beginAnimations:nil context:NULL];  
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];  
-    [UIView setAnimationDuration:0.75];  
-    [self.navigationController pushViewController:ctrl animated:NO];  
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];  
+    [UIView  beginAnimations:nil context:NULL];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.75];
+    [self.navigationController pushViewController:ctrl animated:NO];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
     [UIView commitAnimations];
 }
 
--(void)beginCheck:(id)sender 
+-(void)beginCheck:(id)sender
 {
     if([[[[listArr objectAtIndex:1] objectAtIndex:0] objectAtIndex:2] isEqualToString:@""])
     {
@@ -103,26 +106,28 @@
         return;
     }
     
-       
+    
     //开始检查
     //[Common Alert:@"开始检查"];
     
-
-            ((UIButton *) sender).enabled=false;
-            UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 280, 198, 135)];
-            NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
-            webView.userInteractionEnabled = NO;
-            webView.backgroundColor = [UIColor clearColor];
-            webView.opaque = NO;
-            [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-            [self.view addSubview:webView];
-  
-   
-
+    
+    MaskView.hidden=false;
+    ((UIButton *) sender).enabled=false;
+    
+    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 280, 198, 135)];
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+    webView.userInteractionEnabled = NO;
+    webView.backgroundColor = [UIColor clearColor];
+    webView.opaque = NO;
+    [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    [self.view addSubview:webView];
+    
+    
+    
     [self performSelectorInBackground:@selector(LoadInspectView) withObject:nil];
-
-
-
+    
+    
+    
     //[self presentModalViewController:inspectview animated:YES];
 }
 
@@ -133,13 +138,14 @@
     NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
     InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
     [self.navigationController pushViewController:inspectview animated:YES];
-    }
+}
 
 - (void)viewDidUnload
 {
     [self setTableView:nil];
+    [self setMaskView:nil];
     [super viewDidUnload];
-
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -160,7 +166,7 @@
     return [[listArr objectAtIndex:section] count];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @""] ;
     
@@ -169,7 +175,7 @@
     
     if(indexPath.section==1)
     {
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     if(indexPath.section==0)
@@ -182,7 +188,7 @@
         [tLable setBackgroundColor:[UIColor clearColor]];
         [cell.contentView addSubview:tLable];
     }
-    else 
+    else
     {
         UILabel *tLable= [[UILabel alloc] initWithFrame:CGRectMake(140,5,200,30)];
         if([[arr objectAtIndex:2] isEqualToString: @""])
@@ -191,7 +197,7 @@
             tLable.textColor = [ UIColor grayColor ];
             
         }
-        else 
+        else
         {
             tLable.text = [arr objectAtIndex:2];
             tLable.textColor = [ UIColor redColor ];
@@ -208,7 +214,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(IsOpenSubView) 
+    if(IsOpenSubView)
     {
         [subView removeFromSuperview];
     }
@@ -225,7 +231,7 @@
         {
             iHeight = 110;
         }
-
+        
         subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
         subView.delegate = self;
         //subView.index = iRow;
@@ -254,7 +260,7 @@
         [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:@"" atIndex:2];
         [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:@"" atIndex:3];
     }
-    else 
+    else
     {
         [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:[valueArr objectAtIndex:2] atIndex:2];
         [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:[valueArr objectAtIndex:3] atIndex:3];

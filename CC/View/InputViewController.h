@@ -23,5 +23,6 @@
 @property (nonatomic,retain) NSString *checkType;
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *MaskView;
 
 @end

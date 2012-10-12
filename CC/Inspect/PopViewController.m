@@ -106,11 +106,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
     
     CellIdentifier=parentItemId;
     InspectService * inspectService = [[InspectService alloc] init];
-    
     ItemList = [inspectService GetInspectItems:inspectId ParentItemId:parentItemId];
-    
-    
-    
     [ThirdItemTableView reloadData];
     
 }
@@ -127,7 +123,7 @@ static NSString *CellIdentifier = @"ThridItemCell";
     
     InspectItemModel *model = (InspectItemModel*)[ItemList objectAtIndex:indexPath.row];
     ThirdLevelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.InspectItemID];
-    if (cell == nil) {
+    //if (cell == nil) {
         
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"ThirdLevelTableViewCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
@@ -209,11 +205,11 @@ static NSString *CellIdentifier = @"ThridItemCell";
         [cell.ScoreTableView reloadData];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    else
-    {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+    //}
+    //else
+    //{
+    //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //}
     return cell;
     
 }
