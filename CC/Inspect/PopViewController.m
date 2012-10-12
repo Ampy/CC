@@ -139,6 +139,9 @@ static NSString *CellIdentifier = @"ThridItemCell";
         cell.ScoreTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         cell.ItemName.text = model.Name;
+        //cell.RemarkContainer.backgroundColor=[UIColor colorWithRed:0.68 green:0.68 blue:0.68 alpha:1.0];
+        cell.ItemName.textColor = [UIColor colorWithRed:0.69 green:0.015 blue:0.015 alpha:1.0];
+ 
         if(model.Remarks.length>0)
         {
             

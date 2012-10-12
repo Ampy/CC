@@ -26,7 +26,7 @@
 -(NSMutableArray *)GetInspects:(NSString *)activityId
 {
     [databaseHelper OpenDB:dbName];
-    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectActivityId,InspectCode,Name,InspectId,InspTempId FROM INSPECT WHERE InspectActivityId='%@'",activityId];
+    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectActivityId,InspectCode,Name,InspectId,InspTempId FROM INSPECT WHERE InspectActivityId='%@' order by InspTempId",activityId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
     NSMutableArray *list = [NSMutableArray arrayWithCapacity:5];
@@ -40,7 +40,7 @@
         model.InspTempID= [[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 4) encoding:NSUTF8StringEncoding];
         [list addObject:model];
     }
-    
+    sqlite3_reset(statement);
     sqlite3_finalize(statement);
     [databaseHelper CloseDB];
     return list;
@@ -305,6 +305,9 @@
 
 -(BOOL) CanCommitInspectActivity:(NSString *)acitvityId
 {
+    NSMutableArray *Inspects =  [NSMutableArray arrayWithCapacity:0];
+    Inspects = [self GetInspects:acitvityId];
+    
     [databaseHelper OpenDB:dbName];
     //var activity = dbContext.InspectActivity.GetEntity(activityId);
     /*提交前的校验检查*/
@@ -316,8 +319,9 @@
     if (sqlite3_step(statement)==SQLITE_ROW) {
         count = sqlite3_column_int(statement, 0);
     }
-    
+    sqlite3_reset(statement);
     sqlite3_finalize(statement);
+    
     
     if(count==0)
     {
@@ -336,34 +340,43 @@
     if (sqlite3_step(statement2)==SQLITE_ROW) {
         inspectWay=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement2, 0) encoding:NSUTF8StringEncoding];
     }
-    
+    sqlite3_reset(statement2);
     sqlite3_finalize(statement2);
 
     
-    if(inspectWay==@"定期检查")
+    if([inspectWay isEqualToString:@"定期检查"])
     {
+        
+
+        for(InspectModel *inspect in Inspects)
+        {
             //每一张表不能有未打分项，至少跳过。
-            NSString *Sql3=[[NSString alloc] initWithFormat:@"name from V_VerifyInspect where inspectactivityid='%@' group by name having  count(selected)>0 or count(isCancel)>0",acitvityId];
+            NSString *Sql3=[[NSString alloc] initWithFormat:@"select count(1) from V_VerifyInspect where inspectid='%@' and selected=0 and isCancel=0 ",inspect.InspectId];
             sqlite3_stmt * statement3 = [databaseHelper ExecSql:Sql3];
         
-            NSString *Names=@"请为这些表打分或跳过：";
-        count=0;
-            NSString *tablename;
-            while (sqlite3_step(statement3)==SQLITE_ROW) {
-                tablename=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 0) encoding:NSUTF8StringEncoding];
-                Names = [Names stringByAppendingFormat:@"%@,",tablename];
-                count++;
+            NSString *Names=@"请为%@表打分或跳过!";
+            Names=[NSString stringWithFormat:Names,inspect.Name];
+            //count=0;
+            //            NSString *tablename;
+            //            while (sqlite3_step(statement3)==SQLITE_ROW) {
+            //                tablename=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 0) encoding:NSUTF8StringEncoding];
+            //                Names = [Names stringByAppendingFormat:@"%@,",tablename];
+            //                count++;
+            //            }
+
+            if (sqlite3_step(statement3)==SQLITE_ROW) {
+                count=sqlite3_column_int(statement3, 0);
             }
-            
         if(count>0)
         {
             NSException *exception =[NSException exceptionWithName:@"提醒" reason:Names userInfo:nil];
             
             @throw exception;
         }
-        
+        sqlite3_reset(statement3);
         sqlite3_finalize(statement3);
-            
+
+        }
     }
 
     [databaseHelper CloseDB];

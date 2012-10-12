@@ -455,7 +455,13 @@
     NSString * url = [NSString stringWithFormat:@"IOS/UpdateInspect?ID=%@",InspectActivityId];
     CellService *cs = [[CellService alloc]init];
     NSData * data =[cs CellWeb:url Data:sqlData];
-    NSString *result = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
+    
+    //将NSData转成字符，然后再转成浮点，然后再格式化输出
+    NSString *tmp = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
+    float i = [tmp floatValue];
+
+    NSString *result = [[NSString alloc] initWithFormat:@"%.2f",i];
+    //NSString *result = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
     
     NSArray * array = [delSQL componentsSeparatedByString:@"|$|"];
     for(int i=array.count-1;i>=0;i--)

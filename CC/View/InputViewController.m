@@ -31,7 +31,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
     UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(20, 10, 68, 26)];
     [backButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
@@ -104,21 +103,44 @@
         [Common Alert:@"请选择工程！"];
         return;
     }
-    if([Common ExceptionHandler:[LogicBase BuildCheckData]])
-        return;
+    
+       
     //开始检查
     //[Common Alert:@"开始检查"];
     
+
+            ((UIButton *) sender).enabled=false;
+            UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 280, 198, 135)];
+            NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+            webView.userInteractionEnabled = NO;
+            webView.backgroundColor = [UIColor clearColor];
+            webView.opaque = NO;
+            [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+            [self.view addSubview:webView];
+  
+   
+
+    [self performSelectorInBackground:@selector(LoadInspectView) withObject:nil];
+
+
+
+    //[self presentModalViewController:inspectview animated:YES];
+}
+
+-(void) LoadInspectView
+{
+    if([Common ExceptionHandler:[LogicBase BuildCheckData]])
+        return;
     NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
     InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
     [self.navigationController pushViewController:inspectview animated:YES];
-    //[self presentModalViewController:inspectview animated:YES];
-}
+    }
 
 - (void)viewDidUnload
 {
     [self setTableView:nil];
     [super viewDidUnload];
+
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

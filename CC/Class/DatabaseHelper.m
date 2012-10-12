@@ -27,9 +27,10 @@
 -(sqlite3_stmt *)ExecSql:(NSString *)sql
 {
     char * csql = (char*)[sql UTF8String];
-    if(sqlite3_prepare_v2(database, csql, -1, &statement,nil) != SQLITE_OK)
+    int ret = sqlite3_prepare_v2(database, csql, -1, &statement,nil);
+    if( ret != SQLITE_OK)
     {
-        NSLog(@"SQL错误：%@",[[NSString alloc] initWithCString:csql encoding:NSUTF8StringEncoding]);
+        NSLog(@"SQL错误：%@,错误代码：%d",[[NSString alloc] initWithCString:csql encoding:NSUTF8StringEncoding],ret);
     }
     return statement;
 }
