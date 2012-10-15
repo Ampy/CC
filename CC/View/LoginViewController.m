@@ -31,8 +31,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed: @"login.jpg"]]];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed: @"login.jpg"]]];
     
     UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
     [outButton setFrame:CGRectMake(580, 474, 98, 32)];

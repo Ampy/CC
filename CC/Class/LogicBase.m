@@ -142,8 +142,6 @@
     return arr;
 }
 
-
-
 +(NSMutableArray *)GetInspectList1
 {
     NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished='1' and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
@@ -238,7 +236,7 @@
         
         
         [db BeginTransaction];
-        NSString * sql3 = [NSString stringWithFormat:@"select * from SiteInspItemTemp where SiteInspTempID='%@'",SiteInspectID];
+        NSString * sql3 = [NSString stringWithFormat:@"select * from SiteInspItemTemp where Conform<>'1' and  SiteInspTempID='%@'",SiteInspectID];
         sqlite3_stmt * stmt3= [db ExecSql:sql3];
         while(sqlite3_step(stmt3) == SQLITE_ROW)
         {
