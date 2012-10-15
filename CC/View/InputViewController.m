@@ -18,6 +18,7 @@
 @synthesize checkTypeName;
 @synthesize tableView;
 @synthesize MaskView;
+@synthesize WaitWebView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +33,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    queue = dispatch_queue_create("ampy",nil);
     MaskView.hidden=true;
+    
     
     UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(20, 10, 68, 26)];
@@ -59,7 +62,7 @@
     
     [Config SetPlistInfo:@"InspectWay" Value:checkType];
     [Config SetPlistInfo:@"InspectDate" Value:locationString];
-
+    
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkTypeName,nil]];
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Config GetPlistInfo:@"LoginUserName"],nil]];
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查时间",locationString,nil]];
@@ -80,6 +83,15 @@
     [listArr addObject:list3];
     
     [tableView setBackgroundView:nil];
+    
+
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+    WaitWebView.userInteractionEnabled = NO;
+    WaitWebView.backgroundColor = [UIColor clearColor];
+    WaitWebView.opaque = NO;
+    [WaitWebView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    WaitWebView.hidden=true;
+    [WaitWebView setNeedsDisplay];
 }
 
 -(void)backButton:(id)sender
@@ -112,24 +124,35 @@
     //[Common Alert:@"开始检查"];
     
     
-    MaskView.hidden=false;
-    ((UIButton *) sender).enabled=false;
+    dispatch_async(queue, ^{
+        
+        dispatch_sync(dispatch_get_main_queue(),^{
+            MaskView.hidden=false;
+            WaitWebView.hidden=false;
+            [WaitWebView setNeedsDisplay];
+            ((UIButton *) sender).enabled=false;
+            
+        });
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([Common ExceptionHandler:[LogicBase BuildCheckData]])
+                return;
+        });
+        
+        dispatch_async(dispatch_get_main_queue(),^{
+            MaskView.hidden=true;
+            WaitWebView.hidden=true;
+            NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
+            InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
+            [self.navigationController pushViewController:inspectview animated:YES];
+            //int i=[SecondItemTableView.visibleCells count];
+            //MaskWebView.hidden=true;
+            //MaskWebView setNeedsDisplay];
+        });
+        
+    });
     
-    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 280, 198, 135)];
-    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
-    webView.userInteractionEnabled = NO;
-    webView.backgroundColor = [UIColor clearColor];
-    webView.opaque = NO;
-    [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-    [self.view addSubview:webView];
     
-    
-    
-    [self performSelectorInBackground:@selector(LoadInspectView) withObject:nil];
-    
-    
-    
-    //[self presentModalViewController:inspectview animated:YES];
 }
 
 -(void) LoadInspectView
@@ -145,8 +168,9 @@
 {
     [self setTableView:nil];
     [self setMaskView:nil];
+    [self setWaitWebView:nil];
     [super viewDidUnload];
-    
+    dispatch_release(queue);
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

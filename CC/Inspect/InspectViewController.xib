@@ -77,6 +77,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{610, 707}</string>
 								<reference key="NSSuperview" ref="701799662"/>
+								<reference key="NSNextKeyView" ref="916787285"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -109,7 +110,7 @@
 						</array>
 						<string key="NSFrame">{{414, 0}, {610, 707}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
-						<reference key="NSNextKeyView" ref="916787285"/>
+						<reference key="NSNextKeyView" ref="744924500"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
@@ -173,7 +174,7 @@
 						<int key="NSvFlags">310</int>
 						<string key="NSFrame">{{1, 40}, {142, 567}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
-						<reference key="NSNextKeyView" ref="208021932"/>
+						<reference key="NSNextKeyView" ref="375552462"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -304,11 +305,12 @@
 						<reference key="IBUIFontDescription" ref="49890410"/>
 						<reference key="IBUIFont" ref="416048025"/>
 					</object>
-					<object class="IBUIWebView" id="995621477">
+					<object class="IBUIWebView" id="375552462">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{393, 310}, {148, 128}}</string>
+						<string key="NSFrame">{{371, 283.5}, {198, 181}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSNextKeyView" ref="208021932"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -4809,11 +4811,11 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">MaskWebView</string>
+						<string key="label">WaitWebView</string>
 						<reference key="source" ref="565961273"/>
-						<reference key="destination" ref="995621477"/>
+						<reference key="destination" ref="375552462"/>
 					</object>
-					<int key="connectionID">110</int>
+					<int key="connectionID">113</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -4833,11 +4835,11 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">MaskWebView</string>
+						<string key="label">WaitWebView</string>
 						<reference key="source" ref="1028531583"/>
-						<reference key="destination" ref="995621477"/>
+						<reference key="destination" ref="375552462"/>
 					</object>
-					<int key="connectionID">111</int>
+					<int key="connectionID">114</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -4922,7 +4924,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<reference ref="661315929"/>
 							<reference ref="208021932"/>
 							<reference ref="895683571"/>
-							<reference ref="995621477"/>
+							<reference ref="375552462"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -5012,8 +5014,8 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<reference key="parent" ref="701799662"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">109</int>
-						<reference key="object" ref="995621477"/>
+						<int key="objectID">112</int>
+						<reference key="object" ref="375552462"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
 				</array>
@@ -5028,7 +5030,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 				<string key="102.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="103.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="104.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="109.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="112.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="46.CustomClassName">FirstItemViewController</string>
@@ -5047,7 +5049,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">111</int>
+			<int key="maxID">114</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
