@@ -15,7 +15,7 @@
 @implementation FirstItemViewController
 @synthesize FirstItemTableView;
 @synthesize secondItemViewController;
-@synthesize MaskWebView;
+@synthesize WaitWebView;
 
 
 #pragma mark Controller默认函数
@@ -40,12 +40,12 @@
     
     //MaskWebView = [[UIWebView alloc]initWithFrame:CGRectMake(200, 180, 198, 181)];
     NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
-    MaskWebView.userInteractionEnabled = NO;
-    MaskWebView.backgroundColor = [UIColor clearColor];
-    MaskWebView.opaque = NO;
-    [MaskWebView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-    MaskWebView.hidden=false;
-    [MaskWebView setNeedsDisplay];
+    WaitWebView.userInteractionEnabled = NO;
+    WaitWebView.backgroundColor = [UIColor clearColor];
+    WaitWebView.opaque = NO;
+    [WaitWebView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    WaitWebView.hidden=false;
+    [WaitWebView setNeedsDisplay];
 }
 
 - (void)viewDidUnload

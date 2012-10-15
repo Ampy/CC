@@ -43,7 +43,7 @@
 @property (nonatomic, retain) id <SwitchDelegate> CancelSwitchDelegate;
 @property (weak, nonatomic) IBOutlet UITableView *SecondItemTableView;
 
-@property (weak, nonatomic) IBOutlet UIWebView *MaskWebView;
+@property (weak, nonatomic) IBOutlet UIWebView *WaitWebView;
 
 -(void) LoadData:(NSString *)inspectId ParentItemId:(NSString *)parentItemId;
 

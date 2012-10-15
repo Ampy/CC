@@ -20,11 +20,13 @@
     NSString *checkTypeName;
     InputSubView *subView;
     bool IsOpenSubView;
+    dispatch_queue_t queue;
 }
 @property (nonatomic,retain) NSString *checkType;
 @property (nonatomic,retain) NSString *checkTypeName;
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *MaskView;
+@property (retain, nonatomic) IBOutlet UIWebView *WaitWebView;
 
 @end
