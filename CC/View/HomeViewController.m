@@ -49,11 +49,11 @@
 //    [button3 setBackgroundImage:[UIImage imageNamed:@"fc_1.png"] forState:UIControlStateNormal];
 //    [self.view addSubview:button3];
     
-    UIButton *button4 =[UIButton buttonWithType:UIButtonTypeCustom];
-    button4.tag = 4;
-    [button4 setFrame:CGRectMake(400, 570, 221, 52)];
-    [button4 setBackgroundImage:[UIImage imageNamed:@"inspect2.png"] forState:UIControlStateNormal];
-    [self.view addSubview:button4];
+//    UIButton *button4 =[UIButton buttonWithType:UIButtonTypeCustom];
+//    button4.tag = 4;
+//    [button4 setFrame:CGRectMake(400, 570, 221, 52)];
+//    [button4 setBackgroundImage:[UIImage imageNamed:@"inspect2.png"] forState:UIControlStateNormal];
+//    [self.view addSubview:button4];
     
     UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
     [outButton setFrame:CGRectMake(950, 5, 54, 31)];
@@ -64,7 +64,7 @@
 //    [button1 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
 //    [button2 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
 //    [button3 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
-    [button4 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+//    [button4 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     [outButton addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
