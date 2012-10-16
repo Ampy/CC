@@ -7,7 +7,7 @@
 	<key>ServiceUrl</key>
 	<string>http://192.168.1.218:8077/</string>
 	<key>IsInit</key>
-	<string>F</string>
+	<string>T</string>
 	<key>LoginName</key>
 	<string>TestUser</string>
 	<key>LoginPassword</key>
