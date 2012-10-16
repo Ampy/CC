@@ -21,7 +21,7 @@
 	<key>0</key>
 	<string>系统异常</string>
 	<key>21</key>
-	<string>网络异常，暂不更新！</string>
+	<string>网络异常</string>
 	<key>31</key>
 	<string>数据库异常</string>
 	<key>22</key>

@@ -123,6 +123,8 @@
     //开始检查
     //[Common Alert:@"开始检查"];
     
+    if([Common ExceptionHandler:[LogicBase BuildCheckData]])
+        return;
     
     dispatch_async(queue, ^{
         

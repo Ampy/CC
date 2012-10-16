@@ -87,26 +87,29 @@
 
 -(void)updateToService:(id)sender
 {
-    if(lists.count>0)
+    if(![Common ExceptionHandler:[Common CheckNetworkStatus]])
     {
-        bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
-        bgView.backgroundColor = [UIColor whiteColor];
-        bgView.alpha = 0.6;
-        [self.view addSubview:bgView];
+        if(lists.count>0)
+        {
+            bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
+            bgView.backgroundColor = [UIColor whiteColor];
+            bgView.alpha = 0.6;
+            [self.view addSubview:bgView];
+            
+            webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 180, 198, 181)];
+            NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+            webView.userInteractionEnabled = NO;
+            webView.backgroundColor = [UIColor clearColor];
+            webView.opaque = NO;
+            [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+            [self.view addSubview:webView];
+        }
         
-        webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 180, 198, 181)];
-        NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
-        webView.userInteractionEnabled = NO;
-        webView.backgroundColor = [UIColor clearColor];
-        webView.opaque = NO;
-        [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-        [self.view addSubview:webView];
-    }
-    
-    for(int i=0;i<lists.count;i++)
-    {
-        NSString *strI = [NSString stringWithFormat:@"%d",i];
-        [self performSelectorInBackground: @selector(updataByOne:) withObject:strI];
+        for(int i=0;i<lists.count;i++)
+        {
+            NSString *strI = [NSString stringWithFormat:@"%d",i];
+            [self performSelectorInBackground: @selector(updataByOne:) withObject:strI];
+        }
     }
 }
 
