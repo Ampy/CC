@@ -134,10 +134,11 @@ static NSString *CellIdentifier = @"Inspects";
         if([inspectService CanCommitInspectActivity:InspectActivityId])
         {
             [inspectService InspectActivityComplete:InspectActivityId];
-        }
+        
         
         ManageViewController *ctrl = [[ManageViewController alloc] init];
         [self.navigationController pushViewController:ctrl animated:YES];
+        }
     }
     @catch (NSException *exception) {
         UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"提示" message: [exception reason] delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];

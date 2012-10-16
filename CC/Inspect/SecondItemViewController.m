@@ -42,18 +42,13 @@
     
     [super viewDidLoad];
     
-    UIButton *mp=[[UIButton alloc] initWithFrame:CGRectMake(100, 100, 80, 45)];
-    [mp setTitle:@"" forState:0];
-    [mp addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
-    [SecondItemTableView addSubview:mp];
+    //UIButton *mp=[[UIButton alloc] initWithFrame:CGRectMake(100, 100, 80, 45)];
+    //[mp setTitle:@"" forState:0];
+    //[mp addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
+    //[SecondItemTableView addSubview:mp];
 	// Do any additional setup after loading the view.
 }
 
--(void)outButton:(id)sender
-{
-    [ItemList removeAllObjects];
-    [SecondItemTableView reloadData];
-}
 
 - (void)viewDidUnload
 {
@@ -148,7 +143,7 @@
         
         InspectService *service = [[InspectService alloc] init];
         int count = [service InspectItemScoreComplete:model.InspectItemID];
-        bool mp = !count==0;
+        bool mp = count!=0;
         
         UIImageView *ItemStatus=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ItemComplete.png"]];
         ItemStatus.frame=CGRectMake(500, 10, 40, 40);
@@ -201,13 +196,16 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             InspectItemModel *model = [ItemList objectAtIndex:indexPath.row];
             
-            if(pop==nil)
+            //if(pop==nil)
             {
                 pop = [[PopViewController alloc] initWithParentFrame:self.view.superview.superview.superview.superview.frame];
                 pop.closeDelegate=self;
                 pop.CancelSwitchDelegate=self;
             }
             pop.PopTitleLabel.text = model.Name;
+            [pop.ItemList removeAllObjects];
+            [pop.ThirdItemTableView reloadData];
+            [pop.ThirdItemTableView.visibleCells count];
             [pop LoadData:model.InspectID ParentItemId:model.ItemTempID];
             [self.view.superview.superview.superview addSubview:pop.view];
             

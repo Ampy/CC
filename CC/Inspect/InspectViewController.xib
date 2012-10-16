@@ -96,7 +96,6 @@
 								<string key="NSFrame">{{14, 0}, {580, 707}}</string>
 								<reference key="NSSuperview" ref="701799662"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -4936,11 +4935,11 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<reference ref="701799662"/>
 							<reference ref="848248030"/>
 							<reference ref="907880322"/>
-							<reference ref="924914296"/>
 							<reference ref="661315929"/>
 							<reference ref="208021932"/>
 							<reference ref="895683571"/>
 							<reference ref="375552462"/>
+							<reference ref="924914296"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

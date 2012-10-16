@@ -26,7 +26,7 @@
 
 -(NSMutableArray *)GetInspects:(NSString *)activityId
 {
-
+    
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectActivityId,InspectCode,Name,InspectId,InspTempId FROM INSPECT WHERE InspectActivityId='%@' order by InspTempId",activityId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
@@ -43,13 +43,13 @@
     }
     sqlite3_reset(statement);
     sqlite3_finalize(statement);
-
+    
     return list;
 }
 
 -(NSMutableArray *)GetInspectItems:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
 {
- 
+    
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectItemID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,InspectID,Total,IsCancel FROM INSPECTITEM WHERE InspectId='%@' AND PItemTempID = '%@'",inspectId,parentItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
@@ -64,7 +64,7 @@
         model.Name = [[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 4) encoding:NSUTF8StringEncoding];
         if(sqlite3_column_text(statement, 5))
         {
-        model.Remarks = [[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 5) encoding:NSUTF8StringEncoding];
+            model.Remarks = [[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 5) encoding:NSUTF8StringEncoding];
         }
         else
         {
@@ -83,13 +83,13 @@
     }
     
     sqlite3_finalize(statement);
-
+    
     return list;
 }
 
 -(NSMutableArray *)GetInspectScoreItems:(NSString *) inspectItemId
 {
-
+    
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT ScoreID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,InspectItemID,InspectID,Selected,Qualified FROM INSPECTSCORE WHERE InspectItemId='%@' ORDER BY Sort",inspectItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
@@ -116,27 +116,27 @@
     }
     
     sqlite3_finalize(statement);
-
+    
     return list;
 }
 
 -(int) GetInspectSocreItemsCount:(NSString *)inspectItemId{
-
+    
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT count(1) FROM INSPECTSCORE WHERE InspectItemId='%@'",inspectItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     int count = 0;
     if (sqlite3_step(statement)==SQLITE_ROW) {
-         count = sqlite3_column_int(statement, 0);
+        count = sqlite3_column_int(statement, 0);
     }
     
     sqlite3_finalize(statement);
-
+    
     return count;
 }
 
 -(void) SelectInspectScoreItem:(NSString *)inspectScoreId value:(int)value
 {
-
+    
     NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectItemId FROM INSPECTSCORE WHERE ScoreID='%@'",inspectScoreId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     NSString *inspectItemId;
@@ -149,23 +149,23 @@
         [databaseHelper ExecuteNonQuery:sql2];
         //if(sqlite3_step(statement)==SQLITE_ROW)
         //{
-            NSString * sql3 = [[NSString alloc] initWithFormat:@"UPDATE INSPECTSCORE SET SELECTED=%d WHERE ScoreID='%@'",value,inspectScoreId];
-            //statement = [databaseHelper ExecSql:sql3];
+        NSString * sql3 = [[NSString alloc] initWithFormat:@"UPDATE INSPECTSCORE SET SELECTED=%d WHERE ScoreID='%@'",value,inspectScoreId];
+        //statement = [databaseHelper ExecSql:sql3];
         [databaseHelper ExecuteNonQuery:sql3];
         //}
     }
     
     sqlite3_finalize(statement);
-
-        
+    
+    
 }
 
 -(void) SetInspectItemCancel:(NSString *)inspectid ItemId:(NSString *)itemId value:(int)value Level:(int)level;
 {
-  
+    
     [self SetChildItemCancel:inspectid ItemId:itemId value:value Level:level];
     [self SetParentItemCancel:inspectid ItemId:itemId value:value Level:level];
-
+    
 }
 
 -(void) SetParentItemCancel:(NSString *)inspectid ItemId:(NSString *)itemId value:(int)value Level:(int)level
@@ -192,7 +192,7 @@
 
 -(void) SetChildItemCancel:(NSString *)inspectid ItemId:(NSString *)itemId value:(int)value Level:(int)level;
 {
-
+    
     if(level==1)
     {
         NSString * updatesql1=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where InspectItemId='%@'",value,itemId];
@@ -250,7 +250,7 @@
         [ScoreItems addObject:scoreModel];
     }
     sqlite3_finalize(statement);
-
+    
     //更新第3层的Total
     
     //--update inspectitem set isCancel=(select abs(sum(selected)-1) from inspectscore where --inspectscore.inspectitemid=inspectitem.inspectitemid)
@@ -261,7 +261,7 @@
     
     for(ScoreItemModel *sm in ScoreItems)
     {
-    NSString * updateSql3=[[NSString alloc] initWithFormat:@"UPDATE InspectItem SET Total=Score * %f WHERE InspectItemId='%@'",sm.Score.floatValue, inspectId];
+        NSString * updateSql3=[[NSString alloc] initWithFormat:@"UPDATE InspectItem SET Total=Score * %f WHERE InspectItemId='%@'",sm.Score.floatValue, inspectId];
         [databaseHelper ExecuteNonQuery:updateSql3];
     }
     //计算第2层
@@ -274,27 +274,27 @@
     InspectItemModel *level2Model;
     while (sqlite3_step(statement2)==SQLITE_ROW) {
         level2Model = [[InspectItemModel alloc] init];
-//        level2Model.InspectItemID=;
-//        level2Model.PItemTempID=;
+        //        level2Model.InspectItemID=;
+        //        level2Model.PItemTempID=;
     }
     //计算第1层
 }
 
 -(int) InspectItemScoreComplete:(NSString *) itemId
 {
-
+    
     //创建一个视图
     //NSString * CreateViewSql = @"CREATE  VIEW  IF NOT EXISTS V_VerifyInspect AS select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
     //[databaseHelper ExecuteNonQuery:CreateViewSql];
-
+    
     NSString * UnCompletedSql=[[NSString alloc] initWithFormat: @"select count(1) from V_VerifyInspect where InspectItemId in(select InspectItemId from inspectitem b where Exists(select inspectItemid from inspectitem a where a.inspectItemId='%@' and a.ItemTempId=b.PItemTempId and a.inspectid=b.inspectid)) and selected+isCancel=0;",itemId ];
     sqlite3_stmt * statement = [databaseHelper ExecSql:UnCompletedSql];
- 
+    
     int count = 0;
     if (sqlite3_step(statement)==SQLITE_ROW) {
         count = sqlite3_column_int(statement, 0);
     }
-               
+    
     sqlite3_finalize(statement);
     
     return count;
@@ -324,12 +324,13 @@
         NSException *exception =[NSException exceptionWithName:@"提醒" reason:@"至少为一张检查表打分！" userInfo:nil];
         
         @throw exception;
+        
     }
     
     NSString *Sql2=[[NSString alloc] initWithFormat: @"select InspectWay from InspectActivity where InspectActivityID='%@'",acitvityId ];
     sqlite3_stmt * statement2 = [databaseHelper ExecSql:Sql2];
     
-
+    
     
     //所有表中至少有一个打分项，即count(Selected=1)>0
     NSString * inspectWay=@"";
@@ -338,18 +339,18 @@
     }
     sqlite3_reset(statement2);
     sqlite3_finalize(statement2);
-
+    
     
     if([inspectWay isEqualToString:@"定期检查"])
     {
         
-
+        
         for(InspectModel *inspect in Inspects)
         {
             //每一张表不能有未打分项，至少跳过。
             NSString *Sql3=[[NSString alloc] initWithFormat:@"select count(1) from V_VerifyInspect where inspectid='%@' and selected=0 and isCancel=0 ",inspect.InspectId];
             sqlite3_stmt * statement3 = [databaseHelper ExecSql:Sql3];
-        
+            
             NSString *Names=@"请为%@表打分或跳过!";
             Names=[NSString stringWithFormat:Names,inspect.Name];
             //count=0;
@@ -359,31 +360,34 @@
             //                Names = [Names stringByAppendingFormat:@"%@,",tablename];
             //                count++;
             //            }
-
+            
             if (sqlite3_step(statement3)==SQLITE_ROW) {
                 count=sqlite3_column_int(statement3, 0);
             }
-        if(count>0)
-        {
-            NSException *exception =[NSException exceptionWithName:@"提醒" reason:Names userInfo:nil];
             
-            @throw exception;
-        }
-        sqlite3_reset(statement3);
-        sqlite3_finalize(statement3);
-
+            sqlite3_reset(statement3);
+            sqlite3_finalize(statement3);
+            if(count>0)
+            {
+                NSException *exception =[NSException exceptionWithName:@"提醒" reason:Names userInfo:nil];
+                
+                @throw exception;
+ 
+            }
+            
+            
         }
     }
-
+    
     return  true;
 }
 
 -(void) InspectActivityComplete:(NSString *)acitvityId
 {
-
+    
     NSString * updateSql=[[NSString alloc] initWithFormat:@"UPDATE InspectActivity SET Finished=1 WHERE InspectActivityId='%@'",acitvityId];
     [databaseHelper ExecuteNonQuery:updateSql];
-
+    
 }
 
 - (void)dealloc
