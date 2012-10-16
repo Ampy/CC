@@ -191,12 +191,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return;
     dispatch_async(queue, ^{
         
         dispatch_sync(dispatch_get_main_queue(),^{
-            //MaskWebView.hidden=false;
-            //[MaskWebView setNeedsDisplay];
+            WaitWebView.hidden=false;
+            [WaitWebView setNeedsDisplay];
         });
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -219,8 +218,8 @@
         
         dispatch_async(dispatch_get_main_queue(),^{
             //int i=[SecondItemTableView.visibleCells count];
-            //MaskWebView.hidden=true;
-            //[MaskWebView setNeedsDisplay];
+            WaitWebView.hidden=true;
+            [WaitWebView setNeedsDisplay];
         });
         
     });

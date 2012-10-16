@@ -15,6 +15,8 @@
 		050CECEA15F600410044CCB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE915F600410044CCB9 /* AppDelegate.m */; };
 		0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A4E4160810ED00309253 /* MCSegmentedControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0579A4E81608132100309253 /* inspectTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A4E71608132100309253 /* inspectTable.png */; };
+		057E2BEE162BE2D50063ECD0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057E2BEC162BE2D50063ECD0 /* SettingsViewController.m */; };
+		057E2BEF162BE2D50063ECD0 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057E2BED162BE2D50063ECD0 /* SettingsViewController.xib */; };
 		05A08054160725B000EF52BC /* LogicBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08043160725B000EF52BC /* LogicBase.m */; };
 		05A08055160725B000EF52BC /* CellService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08044160725B000EF52BC /* CellService.m */; };
 		05A08056160725B000EF52BC /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08046160725B000EF52BC /* DatabaseHelper.m */; };
@@ -114,6 +116,9 @@
 		0579A4E3160810ED00309253 /* MCSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSegmentedControl.h; sourceTree = "<group>"; };
 		0579A4E4160810ED00309253 /* MCSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSegmentedControl.m; sourceTree = "<group>"; };
 		0579A4E71608132100309253 /* inspectTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = inspectTable.png; path = Images/inspectTable.png; sourceTree = "<group>"; };
+		057E2BEB162BE2D50063ECD0 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Configuration/SettingsViewController.h; sourceTree = "<group>"; };
+		057E2BEC162BE2D50063ECD0 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Configuration/SettingsViewController.m; sourceTree = "<group>"; };
+		057E2BED162BE2D50063ECD0 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = Configuration/SettingsViewController.xib; sourceTree = "<group>"; };
 		05A08043160725B000EF52BC /* LogicBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogicBase.m; path = Class/LogicBase.m; sourceTree = "<group>"; };
 		05A08044160725B000EF52BC /* CellService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellService.m; path = Class/CellService.m; sourceTree = "<group>"; };
 		05A08045160725B000EF52BC /* LogicBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogicBase.h; path = Class/LogicBase.h; sourceTree = "<group>"; };
@@ -279,6 +284,7 @@
 		050CECDF15F600410044CCB9 /* CC */ = {
 			isa = PBXGroup;
 			children = (
+				057E2BE9162BE28C0063ECD0 /* Configuration */,
 				05AF33D8160ADBA300A8B64E /* config.plist */,
 				05A0806D160725FC00EF52BC /* Controls */,
 				050CECE815F600410044CCB9 /* AppDelegate.h */,
@@ -312,6 +318,16 @@
 				0579A4E4160810ED00309253 /* MCSegmentedControl.m */,
 			);
 			path = MCSegmentedControl;
+			sourceTree = "<group>";
+		};
+		057E2BE9162BE28C0063ECD0 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				057E2BEB162BE2D50063ECD0 /* SettingsViewController.h */,
+				057E2BEC162BE2D50063ECD0 /* SettingsViewController.m */,
+				057E2BED162BE2D50063ECD0 /* SettingsViewController.xib */,
+			);
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 		05A0806D160725FC00EF52BC /* Controls */ = {
@@ -585,6 +601,7 @@
 				05E03D1A16105BCF00BA0367 /* ItemComplete.png in Resources */,
 				A631793C161196D700014D07 /* btn2.png in Resources */,
 				A631793E16119C7A00014D07 /* up.gif in Resources */,
+				057E2BEF162BE2D50063ECD0 /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +643,7 @@
 				05A08079160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				05A0807A160725FC00EF52BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */,
+				057E2BEE162BE2D50063ECD0 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
