@@ -157,6 +157,34 @@
         
     });
     
+//    dispatch_async(queue, ^{
+//        
+//        dispatch_sync(dispatch_get_main_queue(),^{
+//            MaskView.hidden=false;
+//            WaitWebView.hidden=false;
+//            [WaitWebView setNeedsDisplay];
+//            ((UIButton *) sender).enabled=false;
+//            
+//        });
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if([Common ExceptionHandler:[LogicBase BuildCheckData]])
+//                return;
+//        });
+//        
+//        dispatch_async(dispatch_get_main_queue(),^{
+//            MaskView.hidden=true;
+//            WaitWebView.hidden=true;
+//            NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
+//            InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
+//            [self.navigationController pushViewController:inspectview animated:YES];
+//            //int i=[SecondItemTableView.visibleCells count];
+//            //MaskWebView.hidden=true;
+//            //MaskWebView setNeedsDisplay];
+//        });
+//        
+//    });
+    
     
 }
 

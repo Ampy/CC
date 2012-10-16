@@ -308,7 +308,7 @@
     //var activity = dbContext.InspectActivity.GetEntity(activityId);
     /*提交前的校验检查*/
     
-    NSString *Sql=[[NSString alloc] initWithFormat: @"select sum(selected+IsCancel) from V_VerifyInspect where InspectActivityID='%@'",acitvityId ];
+    NSString *Sql=[[NSString alloc] initWithFormat: @"select sum(selected) from V_VerifyInspect where InspectActivityID='%@'",acitvityId ];
     sqlite3_stmt * statement = [databaseHelper ExecSql:Sql];
     
     int count = 0;
