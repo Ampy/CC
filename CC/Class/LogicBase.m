@@ -97,6 +97,9 @@
         returnCode = [u UpdateAll:arr];
         if(returnCode!=1) return returnCode;
         
+        returnCode = [u GetAccord];
+        if(returnCode!=1) return returnCode;
+        
         NSString *sql = @"select SiteID from V_Site where SiteID not in (select a.SiteID  from V_Site a inner join V_Site_H b on a.SiteID=b.SiteID and a.Version=b.Version )";
         
         NSMutableArray * arr = [self SqlToArray:sql FieldCount:1];

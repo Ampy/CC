@@ -12,10 +12,14 @@
 #import "LoginViewController.h"
 
 @interface HomeViewController : UIViewController
+{
+    UIView *bgView;
+    UIWebView * webView;
+}
 
 - (IBAction)clickButton:(id)sender;
-//- (IBAction)clickButton:(id)sender;
-//- (IBAction)clickButton:(id)sender;
-//- (IBAction)clickButton:(id)sender;
+- (IBAction)Logout:(id)sender;
+- (IBAction)Update:(id)sender;
+
 
 @end

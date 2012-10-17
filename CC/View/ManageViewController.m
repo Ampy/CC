@@ -48,7 +48,7 @@
     upButton =[UIButton buttonWithType:UIButtonTypeCustom];
     [upButton setFrame:CGRectMake(400, 50, 54, 31)];
     [upButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
-    [upButton setTitle:@"同步" forState:UIControlStateNormal];
+    [upButton setTitle:@"提交" forState:UIControlStateNormal];
     [self.view addSubview:upButton];
     [upButton addTarget:self  action:@selector(updateToService:) forControlEvents:UIControlEventTouchUpInside];
     

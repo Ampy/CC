@@ -55,30 +55,19 @@
 //    [button4 setBackgroundImage:[UIImage imageNamed:@"inspect2.png"] forState:UIControlStateNormal];
 //    [self.view addSubview:button4];
     
-    UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [outButton setFrame:CGRectMake(950, 5, 54, 31)];
-    [outButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
-    [outButton setTitle:@"登出" forState:UIControlStateNormal];
-    [self.view addSubview:outButton];
+//    UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
+//    [outButton setFrame:CGRectMake(900, 5, 96, 32)];
+//    [outButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
+//    [outButton setTitle:@"联网更新" forState:UIControlStateNormal];
+//    [self.view addSubview:outButton];
     
 //    [button1 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
 //    [button2 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
 //    [button3 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside]; 
 //    [button4 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-    [outButton addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
+//    [outButton addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
-}
-
--(void)outButton:(id)sender 
-{
-    LoginViewController *view = [[LoginViewController alloc] init];
-    [UIView  beginAnimations:nil context:NULL];  
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];  
-    [UIView setAnimationDuration:0.75];  
-    [self.navigationController pushViewController:view animated:NO];  
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];  
-    [UIView commitAnimations];
 }
 
 - (void)viewDidUnload
@@ -133,6 +122,46 @@
         [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.navigationController.view cache:NO];  
         [UIView commitAnimations];  
     }
+}
+
+- (IBAction)Logout:(id)sender
+{
+    LoginViewController *view = [[LoginViewController alloc] init];
+    [UIView  beginAnimations:nil context:NULL];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.75];
+    [self.navigationController pushViewController:view animated:NO];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+    [UIView commitAnimations];
+
+}
+
+- (IBAction)Update:(id)sender
+{
+    bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
+    bgView.backgroundColor = [UIColor whiteColor];
+    bgView.alpha = 0.6;
+    [self.view addSubview:bgView];
+    
+    webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 180, 198, 181)];
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+    webView.userInteractionEnabled = NO;
+    webView.backgroundColor = [UIColor clearColor];
+    webView.opaque = NO;
+    [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    [self.view addSubview:webView];
+    
+    [self performSelectorInBackground: @selector(updataByServer:) withObject:@"" ];
+}
+
+- (IBAction)updataByServer:(NSString *)strI
+{
+    if(![Common ExceptionHandler:[Common CheckNetworkStatus]])
+    {
+        [Common ExceptionHandler:[LogicBase UpdateByService]];
+    }
+    [webView removeFromSuperview];
+    [bgView removeFromSuperview];
 }
 
 

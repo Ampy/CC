@@ -96,6 +96,30 @@
     return 1;
 }
 
+-(int)GetAccord
+{
+    DatabaseHelper *db = [[DatabaseHelper alloc] init];
+    [db OpenDB:[Settings Instance].DatabaseName];
+    [db BeginTransaction];
+    
+    CellService * cs = [[CellService alloc] init];
+    NSString * sqls = [cs CellWeb:[@"IOS/GetAccord" stringByAppendingString:@"" ]];
+    
+    if(!sqls) return 22;
+    
+    NSArray * array = [sqls componentsSeparatedByString:@"|$|"];
+    for(id sql in array)
+    {
+        [db ExecSql:sql];
+        [db Setp];
+        [db Final];
+    }
+    [db Commit];
+    [db CloseDB];
+    
+    return 1;
+}
+
 -(int)GetTableStructs:(NSArray *)tableNames
 {
     int returnCode = 1;

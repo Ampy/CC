@@ -47,6 +47,7 @@
 		A631793E16119C7A00014D07 /* up.gif in Resources */ = {isa = PBXBuildFile; fileRef = A631793D16119C7A00014D07 /* up.gif */; };
 		A6A8F5FD15FDA98300E29A1E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */; };
 		A6A8F61515FDDE0800E29A1E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */; };
+		A6A96902162E536200C2E07D /* exit.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A96901162E536200C2E07D /* exit.png */; };
 		A6C6FCDE160721F600AA3685 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C6FCDA160721F600AA3685 /* down.png */; };
 		A6C6FCDF160721F600AA3685 /* down2.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C6FCDB160721F600AA3685 /* down2.png */; };
 		A6C6FCE0160721F600AA3685 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C6FCDC160721F600AA3685 /* up.png */; };
@@ -162,6 +163,7 @@
 		A631793D16119C7A00014D07 /* up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = up.gif; path = Images/up.gif; sourceTree = "<group>"; };
 		A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A6A8F61415FDDE0800E29A1E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A6A96901162E536200C2E07D /* exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = exit.png; path = Images/exit.png; sourceTree = "<group>"; };
 		A6C6FCDA160721F600AA3685 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = Images/down.png; sourceTree = "<group>"; };
 		A6C6FCDB160721F600AA3685 /* down2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down2.png; path = Images/down2.png; sourceTree = "<group>"; };
 		A6C6FCDC160721F600AA3685 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = Images/up.png; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 		A6790F6C15FD8DCE00F2655E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A6A96901162E536200C2E07D /* exit.png */,
 				A631793D16119C7A00014D07 /* up.gif */,
 				A631793A161196D700014D07 /* btn2.png */,
 				05E03D1916105BCF00BA0367 /* ItemComplete.png */,
@@ -602,6 +605,7 @@
 				A631793C161196D700014D07 /* btn2.png in Resources */,
 				A631793E16119C7A00014D07 /* up.gif in Resources */,
 				057E2BEF162BE2D50063ECD0 /* SettingsViewController.xib in Resources */,
+				A6A96902162E536200C2E07D /* exit.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
