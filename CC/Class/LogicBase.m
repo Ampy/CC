@@ -48,9 +48,9 @@
 {
     int returnCode = 1;
     
-    NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",nil];
+    NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",@"UserLine",nil];
     
-    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",nil];
+    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"UserLine",nil];
     //struct
     NSArray * structTables = [NSArray arrayWithObjects:@"Inspect",@"InspectItem",@"InspectScore",@"InspectActivity",@"V_Site_H",nil];
     Update *u = [[Update alloc] init];
@@ -159,7 +159,26 @@
 +(NSMutableArray *)GetLine
 {
     //NSString * sql = [NSString stringWithFormat:@"select * from V_Line where UserId='%@'",[Config GetPlistInfo:@"LoginUserId"]];
-    NSString * sql = [NSString stringWithFormat:@"select * from V_Line"];
+    NSString * sql3 = @"";
+
+    NSString * sql2 = [NSString stringWithFormat:@"SELECT LineID FROM UserLine where UserID in (select UserID from Sys_User where Name='%@')" ,[Config GetPlistInfo:@"LoginName"]];
+    DatabaseHelper *db = [[DatabaseHelper alloc] init];
+    [db OpenDB:[Settings Instance].DatabaseName];
+    sqlite3_stmt * stmt= [db ExecSql:sql2];
+    while(sqlite3_step(stmt) == SQLITE_ROW)
+    {
+        sql3 =[ sql3 stringByAppendingPathComponent:[NSString stringWithFormat:@"%@','",[NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt, 0)]]];
+    }
+    [db Setp];
+    [db Final];
+
+    NSString *where =@"";
+    if(![sql3 isEqualToString: @""])
+    {
+        where = [NSString stringWithFormat:@" where LineID in ('%@') ",sql3];
+    }
+    
+    NSString * sql = [NSString stringWithFormat:@"select * from V_Line %@" ,where];
     return[self SqlToArray:sql FieldCount:4];
 }
 
