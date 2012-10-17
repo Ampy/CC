@@ -144,7 +144,7 @@
     [self.view addSubview:bgView];
     
     webView = [[UIWebView alloc]initWithFrame:CGRectMake(410, 180, 198, 181)];
-    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"weit" ofType:@"gif"]];
     webView.userInteractionEnabled = NO;
     webView.backgroundColor = [UIColor clearColor];
     webView.opaque = NO;
