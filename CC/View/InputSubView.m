@@ -18,41 +18,42 @@
     self = [super initWithFrame:frame];
     if (self) {
         NSArray * nib = [[NSBundle mainBundle] loadNibNamed:@"InputSubView" owner:self options:nil];
-        UIView * tmp = [nib objectAtIndex:0];        
+        UIView * tmp = [nib objectAtIndex:0];
         [self addSubview:tmp];
-    }
-    
-    UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [outButton setFrame:CGRectMake(260, 5, 54, 31)];
-    [outButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
-    [outButton setTitle:@"关闭" forState:UIControlStateNormal];
-    [self addSubview:outButton];
-    [outButton addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.userInteractionEnabled = YES;
-    
-    index = i;
-    if(index==0)
-    {
-        lists = [LogicBase GetLine];
-    }
-    else 
-    {
-        lists = [LogicBase GetSite];
+        
+        
+        UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
+        [outButton setFrame:CGRectMake(260, 5, 54, 31)];
+        [outButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
+        [outButton setTitle:@"关闭" forState:UIControlStateNormal];
+        [self addSubview:outButton];
+        [outButton addTarget:self  action:@selector(outButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.userInteractionEnabled = YES;
+        
+        index = i;
+        if(index==0)
+        {
+            lists = [LogicBase GetLine];
+        }
+        else
+        {
+            lists = [LogicBase GetSite];
+        }
     }
     return self;
 }
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
--(void)outButton:(id)sender 
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
+-(void)outButton:(id)sender
 {
     [delegate SubVewClose];
 }
@@ -66,7 +67,7 @@
     return [lists count];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @""] ;
     NSMutableArray * arr = [lists objectAtIndex:indexPath.row];
@@ -85,7 +86,7 @@
             img.image = [UIImage imageNamed:@"up.png"];
             [cell.contentView addSubview:img];
         }
-        else 
+        else
         {
             UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(270,10,22,22)];
             img.tag = 99;
@@ -97,7 +98,7 @@
         
         
     }
-    else 
+    else
     {
         cell.textLabel.text = [@"        " stringByAppendingString: [arr objectAtIndex:0]];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -128,22 +129,22 @@
             
             [[lists objectAtIndex:indexPath.row] setObject:@"Y" atIndex:3];
             
-            NSMutableArray *insertion = [[NSMutableArray alloc] init] ; 
+            NSMutableArray *insertion = [[NSMutableArray alloc] init] ;
             int row;
-            for (int i = 1; i <= listSegment.count; ++i) 
-            { 
+            for (int i = 1; i <= listSegment.count; ++i)
+            {
                 row = indexPath.row+i;
-                [lists insertObject:[listSegment objectAtIndex:i-1] atIndex:row]; 
-                [insertion addObject:[NSIndexPath indexPathForRow:row inSection:0]]; 
-            }  
-            [tableView insertRowsAtIndexPaths:insertion withRowAnimation:UITableViewRowAnimationAutomatic]; 
-
+                [lists insertObject:[listSegment objectAtIndex:i-1] atIndex:row];
+                [insertion addObject:[NSIndexPath indexPathForRow:row inSection:0]];
+            }
+            [tableView insertRowsAtIndexPaths:insertion withRowAnimation:UITableViewRowAnimationAutomatic];
+            
         }
-        else 
+        else
         {
             [Config SetPlistInfo:@"LineID" Value:[arr objectAtIndex:1]];
             listSegment = [LogicBase GetSegment];
-
+            
             UITableViewCell *oneCell = [tableView cellForRowAtIndexPath: indexPath];
             for(id x in [oneCell.contentView subviews])
             {
@@ -156,25 +157,25 @@
             
             [[lists objectAtIndex:indexPath.row] setObject:@"N" atIndex:3];
             
-            NSMutableArray *insertion = [[NSMutableArray alloc] init] ; 
+            NSMutableArray *insertion = [[NSMutableArray alloc] init] ;
             int row;
-            for (int i = 1; i <= listSegment.count; ++i) 
-            { 
+            for (int i = 1; i <= listSegment.count; ++i)
+            {
                 row = indexPath.row+i;
-                [lists removeObjectAtIndex:indexPath.row+1]; 
-                [insertion addObject:[NSIndexPath indexPathForRow:row inSection:0]]; 
-            }  
-            [tableView deleteRowsAtIndexPaths:insertion withRowAnimation:UITableViewRowAnimationAutomatic]; 
+                [lists removeObjectAtIndex:indexPath.row+1];
+                [insertion addObject:[NSIndexPath indexPathForRow:row inSection:0]];
+            }
+            [tableView deleteRowsAtIndexPaths:insertion withRowAnimation:UITableViewRowAnimationAutomatic];
             
         }
     }
-    else 
+    else
     {
         if(index==0)
         {
             [Config SetPlistInfo:@"SegmentID" Value:[arr objectAtIndex:1]];
         }
-        else 
+        else
         {
             [Config SetPlistInfo:@"SiteID" Value:[arr objectAtIndex:1]];
         }

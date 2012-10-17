@@ -18,9 +18,10 @@
     if(self)
     {
         databaseHelper = [[DatabaseHelper alloc] init];
+        dbName = [NSString stringWithString:[Settings Instance].DatabaseName];
+        [databaseHelper OpenDB:dbName];
     }
-    dbName = [NSString stringWithString:[Settings Instance].DatabaseName];
-    [databaseHelper OpenDB:dbName];
+
     return self;
 }
 
@@ -302,8 +303,7 @@
 
 -(BOOL) CanCommitInspectActivity:(NSString *)acitvityId
 {
-    NSMutableArray *Inspects =  [NSMutableArray arrayWithCapacity:0];
-    Inspects = [self GetInspects:acitvityId];
+
     
     //var activity = dbContext.InspectActivity.GetEntity(activityId);
     /*提交前的校验检查*/
@@ -343,8 +343,7 @@
     
     if([inspectWay isEqualToString:@"定期检查"])
     {
-        
-        
+        NSMutableArray *Inspects = [self GetInspects:acitvityId];
         for(InspectModel *inspect in Inspects)
         {
             //每一张表不能有未打分项，至少跳过。
