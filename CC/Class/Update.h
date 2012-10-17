@@ -18,4 +18,5 @@
 -(int)UpdateAll:(NSArray *)tableNames;
 
 -(int)GetSiteInspect:(NSString *)sID;
+-(int)GetAccord;
 @end

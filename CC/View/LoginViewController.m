@@ -42,17 +42,17 @@
     
     self.view.userInteractionEnabled = YES;
     
-    NSString * isRemember = [Config GetPlistInfo:@"LoginIsRemember"];
-    if([isRemember isEqualToString: @"T"])
-    {
-        [remember setOn:true animated:NO];
+//    NSString * isRemember = [Config GetPlistInfo:@"LoginIsRemember"];
+//    if([isRemember isEqualToString: @"T"])
+//    {
+//        [remember setOn:true animated:NO];
         name.text = [Config GetPlistInfo:@"LoginName"];
-        password.text = [Config GetPlistInfo:@"LoginPassword"];
-    }
-    else 
-    {
-        [remember setOn:false animated:NO];
-    }
+//        password.text = [Config GetPlistInfo:@"LoginPassword"];
+//    }
+//    else 
+//    {
+//        [remember setOn:false animated:NO];
+//    }
     
     
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -78,16 +78,16 @@
 
 - (IBAction)UserLogin:(id)sender {
     
-    if(remember.isOn)
-    {
+//    if(remember.isOn)
+//    {
         [Config SetPlistInfo:@"LoginName" Value:name.text];
-        [Config SetPlistInfo:@"LoginPassword" Value:password.text];
-        [Config SetPlistInfo:@"LoginIsRemember" Value:@"T"];
-    }
-    else
-    {
-        [Config SetPlistInfo:@"LoginIsRemember" Value:@"F"];
-    }
+//        [Config SetPlistInfo:@"LoginPassword" Value:password.text];
+//        [Config SetPlistInfo:@"LoginIsRemember" Value:@"T"];
+//    }
+//    else
+//    {
+//        [Config SetPlistInfo:@"LoginIsRemember" Value:@"F"];
+//    }
     
     NSMutableArray *loginArr = [LogicBase Login:name.text Password:password.text];
     

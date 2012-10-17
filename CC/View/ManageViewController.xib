@@ -165,7 +165,7 @@
 					<object class="IBUILabel" id="900341188">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{37, 51}, {67, 30}}</string>
+						<string key="NSFrame">{{41, 51}, {67, 30}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSNextKeyView" ref="383345629"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -174,7 +174,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">打分完成</string>
+						<string key="IBUIText">待提交</string>
 						<reference key="IBUITextColor" ref="837668949"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -203,7 +203,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">未完成</string>
+						<string key="IBUIText">未提交</string>
 						<reference key="IBUITextColor" ref="837668949"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>

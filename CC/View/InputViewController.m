@@ -76,9 +76,9 @@
     [listArr addObject:list2];
     
     NSMutableArray *list3 = [[NSMutableArray alloc] init];
-    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"建设单位",@"未选单位",@"",@"",nil]];
-    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"施工单位",@"未选单位",@"",@"",nil]];
-    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"监理单位",@"未选单位",@"",@"",nil]];
+    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"建设单位",@"",@"",@"",nil]];
+    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"施工单位",@"",@"",@"",nil]];
+    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"监理单位",@"",@"",@"",nil]];
     
     [listArr addObject:list3];
     
