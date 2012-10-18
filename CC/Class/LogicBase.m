@@ -432,7 +432,7 @@
     sqlite3_finalize(stmt);
     
     //InspectScore
-    sql = [NSString stringWithFormat:@"select * from InspectScore where InspectID in (select InspectID from Inspect where InspectActivityID='%@')",InspectActivityId];
+    sql = [NSString stringWithFormat:@"select * from InspectScore where InspectID in (select InspectID from Inspect where InspectActivityID='%@') and inspectitemid is not null",InspectActivityId];
     stmt= [db ExecSql:sql];
     while (sqlite3_step(stmt) == SQLITE_ROW)
     {
