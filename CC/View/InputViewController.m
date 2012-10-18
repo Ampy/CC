@@ -122,14 +122,37 @@
     
     //开始检查
     //[Common Alert:@"开始检查"];
-    
-    if([Common ExceptionHandler:[LogicBase BuildCheckData]])
-        return;
-    
-    NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
-    InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
-    [self.navigationController pushViewController:inspectview animated:YES];
-
+        
+    dispatch_async(queue, ^{
+        
+        dispatch_sync(dispatch_get_main_queue(),^{
+            MaskView.hidden=false;
+            WaitWebView.hidden=false;
+            [WaitWebView setNeedsDisplay];
+            ((UIButton *) sender).enabled=false;
+            
+        });
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([Common ExceptionHandler:[LogicBase BuildCheckData]])
+                return;
+            [Config SetPlistInfo:@"CreateTable" Value:@"T"];
+        });
+        
+        dispatch_async(dispatch_get_main_queue(),^{
+            [Config SetPlistInfo:@"popviewbegin" Value:@"T"];
+            MaskView.hidden=true;
+            WaitWebView.hidden=true;
+            NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
+            InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
+            [self.navigationController pushViewController:inspectview animated:YES];
+            [Config SetPlistInfo:@"popviewend" Value:@"T"];
+            //int i=[SecondItemTableView.visibleCells count];
+            //MaskWebView.hidden=true;
+            //MaskWebView setNeedsDisplay];
+        });
+        
+    });
     
 //    dispatch_async(queue, ^{
 //        
