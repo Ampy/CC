@@ -167,7 +167,7 @@
     sqlite3_stmt * stmt= [db ExecSql:sql2];
     while(sqlite3_step(stmt) == SQLITE_ROW)
     {
-        sql3 =[ sql3 stringByAppendingPathComponent:[NSString stringWithFormat:@"%@','",[NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt, 0)]]];
+        sql3 =[ sql3 stringByAppendingString:[NSString stringWithFormat:@"%@','",[NSString stringWithUTF8String:(char*)sqlite3_column_text(stmt, 0)]]];
     }
     [db Setp];
     [db Final];
