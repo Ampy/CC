@@ -47,7 +47,7 @@
 //    {
 //        [remember setOn:true animated:NO];
         name.text = [Config GetPlistInfo:@"LoginName"];
-//        password.text = [Config GetPlistInfo:@"LoginPassword"];
+        password.text = [Config GetPlistInfo:@"LoginPassword"];
 //    }
 //    else 
 //    {
