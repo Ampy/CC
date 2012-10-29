@@ -2,12 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ServiceUrl3</key>
+	<string>http://wmsg.telsafe.com.cn/</string>
+	<key>ServiceUrl2</key>
+	<string>http://192.168.1.218:8077/</string>
 	<key>DataBaseName</key>
 	<string>Info.sqlite</string>
 	<key>ServiceUrl</key>
 	<string>http://wmsg.telsafe.com.cn/</string>
 	<key>IsInit</key>
-	<string>T</string>
+	<string>F</string>
 	<key>LoginName</key>
 	<string></string>
 	<key>LoginPassword</key>

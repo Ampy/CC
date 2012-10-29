@@ -1,4 +1,4 @@
-		//
+//
 //  Settings.m
 //  CC
 //
@@ -8,50 +8,100 @@
 
 #import "Settings.h"
 
-static Settings *globalSettings = nil;
 @implementation Settings
-@synthesize ServiceUrl;
-@synthesize DatabaseName;
-@synthesize LoginName;
-@synthesize dic;
 
-+(Settings *)Instance{
-    @synchronized(self){
-        if(globalSettings == nil){
-            globalSettings=[[self alloc] init];
-        }
-    }
-    return globalSettings;
-}
 
-+(id)allocWithZone:(NSZone *)zone{
-    @synchronized(self){
-        if (globalSettings == nil) {
-            globalSettings = [super allocWithZone:zone];
-            
-            //读取配置表Settings.plist
-            NSDictionary *dictionary = [Config GetPlist];
-            globalSettings.ServiceUrl = [NSString stringWithFormat:@"%@", [dictionary objectForKey: @"ServiceUrl"]];               
-            globalSettings.DatabaseName = [NSString stringWithFormat:@"%@", [dictionary objectForKey: @"DataBaseName"]];
-            return  globalSettings;
-        }
-    }
-    return nil;
-}
+NSString *fileName=@"config";
 
-+(void)AddLoginName:(NSString *)Name
++(NSString *) ServiceUrl
 {
-    globalSettings.LoginName = Name;
+    return [Plist GetValue:fileName Path:@"ServiceUrl"];
+}
++(NSString *) DatabaseName
+{
+    return [Plist GetValue:fileName Path:@"DataBaseName"];
 }
 
-+(void)Add:(NSString *)Name KeyName:(NSString *)Key
++(NSString *) IsInit
 {
-    [globalSettings.dic setObject:Name forKey:Key];
+    return [Plist GetValue:fileName Path:@"IsInit"];
+}
++(NSString *) LineID
+{
+    return [Plist GetValue:fileName Path:@"LineID"];
+}
++(NSString *) SegmentID
+{
+    return [Plist GetValue:fileName Path:@"SegmentID"];
+}
++(NSString *) SiteID
+{
+    return [Plist GetValue:fileName Path:@"SiteID"];
+}
++(NSString *) InspectWay
+{
+    return [Plist GetValue:fileName Path:@"InspectWay"];
+}
++(NSString *) InspectDate
+{
+    return [Plist GetValue:fileName Path:@"InspectDate"];
+}
++(NSString *) LoginUserName
+{
+    return [Plist GetValue:fileName Path:@"LoginUserName"];
+}
++(NSString *) LoginUserId
+{
+    return [Plist GetValue:fileName Path:@"LoginUserId"];
+}
++(NSString *) InspectActivityID
+{
+    return [Plist GetValue:fileName Path:@"InspectActivityID"];
 }
 
-+(NSString *)GetNameByKey:(NSString *)Key
++(void)setLineID:(NSString *)lineID
 {
-    return [globalSettings.dic objectForKey:Key];
+    [Plist SetValue:fileName SectionPath:@"LineID" SectionValue:lineID];
 }
+
++(void)setSegmentID:(NSString *)segmentID
+{
+    [Plist SetValue:fileName SectionPath:@"SegmentID" SectionValue:segmentID];
+}
+
++(void)setSiteID:(NSString *)siteID
+{
+    [Plist SetValue:fileName SectionPath:@"SiteID" SectionValue:siteID];
+}
+
++(void)setIsInit:(NSString *)isInit
+{
+    [Plist SetValue:fileName SectionPath:@"IsInit" SectionValue:isInit];
+}
+
++(void)setInspectActivityID:(NSString *)inspectActivityID;
+{
+    [Plist SetValue:fileName SectionPath:@"InspectActivityID" SectionValue:inspectActivityID];  
+}
+
++(void)setLoginUserName:(NSString *)loginUserName
+{
+    [Plist SetValue:fileName SectionPath:@"LoginUserName" SectionValue:loginUserName];     
+}
+
++(void)setInspectWay:(NSString *)inspectWay
+{
+    [Plist SetValue:fileName SectionPath:@"InspectWay" SectionValue:inspectWay];    
+}
++(void)setInspectDate:(NSString *)inspectDate
+{
+    [Plist SetValue:fileName SectionPath:@"InspectDate" SectionValue:inspectDate];    
+}
+
++(void)setLoginUserId:(NSString *)loginUserId
+{
+    [Plist SetValue:fileName SectionPath:@"LoginUserId" SectionValue:loginUserId];     
+}
+
 
 @end

@@ -15,7 +15,7 @@
     NSMutableArray *mArray = [[NSMutableArray alloc]init];
     
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     sqlite3_stmt * stmt= [db ExecSql:sql];
     while (sqlite3_step(stmt) == SQLITE_ROW)
     {
@@ -56,10 +56,10 @@
     Update *u = [[Update alloc] init];
     
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     
     //init db
-    if([@"F" isEqualToString:[Config GetPlistInfo:@"IsInit"]])
+    if([@"F" isEqualToString:[Settings IsInit]])
     {
         
         returnCode = [u UpdateAll:fullArr];
@@ -80,7 +80,8 @@
         [db Setp];
         [db Final];
         
-        [Config SetPlistInfo:@"IsInit" Value:@"T"];
+        //[Config SetPlistInfo:@"IsInit" Value:@"T"];
+        [Settings setIsInit:@"T"];
     }
     else
     {
@@ -132,7 +133,7 @@
     NSString * sql = [[NSString alloc] initWithFormat:@"select UserId,UserName from Sys_User where Name='%@' and Password='%@' ",name,[Common MD5:pwd]];
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     //Settings *st =[Settings Instance];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     sqlite3_stmt * stmt= [db ExecSql:sql];
     if(sqlite3_step(stmt) == SQLITE_ROW)
     {
@@ -146,13 +147,13 @@
 
 +(NSMutableArray *)GetInspectList1
 {
-    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished='1' and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
+    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished='1' and Recorder='%@'",[Settings LoginUserId]];
     return [self SqlToArray:sql FieldCount:7];
 }
 
 +(NSMutableArray *)GetInspectList2
 {
-    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished is null and Recorder='%@'",[Config GetPlistInfo:@"LoginUserId"]];
+    NSString * sql = [NSString stringWithFormat:@"select LineName,SegmentName,SiteName,InspectWay,InspectDate,Total,InspectActivityID from V_InspectActivity where Finished is null and Recorder='%@'",[Settings LoginUserId]];
     return [self SqlToArray:sql FieldCount:7];
 }
 
@@ -161,9 +162,9 @@
     //NSString * sql = [NSString stringWithFormat:@"select * from V_Line where UserId='%@'",[Config GetPlistInfo:@"LoginUserId"]];
     NSString * sql3 = @"";
 
-    NSString * sql2 = [NSString stringWithFormat:@"SELECT LineID FROM UserLine where UserID in (select UserID from Sys_User where Name='%@')" ,[Config GetPlistInfo:@"LoginName"]];
+    NSString * sql2 = [NSString stringWithFormat:@"SELECT LineID FROM UserLine where UserID in (select UserID from Sys_User where Name='%@')" ,[Settings LoginUserName]];
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     sqlite3_stmt * stmt= [db ExecSql:sql2];
     while(sqlite3_step(stmt) == SQLITE_ROW)
     {
@@ -184,13 +185,13 @@
 
 +(NSMutableArray *)GetSegment
 {
-    NSString * sql = [NSString stringWithFormat:@"select * from V_Segment where LineID='%@'",[Config GetPlistInfo:@"LineID"]];
+    NSString * sql = [NSString stringWithFormat:@"select * from V_Segment where LineID='%@'",[Settings LineID]];
     return [self SqlToArray:sql FieldCount:4];
 }
 
 +(NSMutableArray *)GetSite
 {
-    NSString * sql = [NSString stringWithFormat:@"select * from V_Site where SegmentID='%@'",[Config GetPlistInfo:@"SegmentID"]];
+    NSString * sql = [NSString stringWithFormat:@"select * from V_Site where SegmentID='%@'",[Settings SegmentID]];
     return [self SqlToArray:sql FieldCount:6];
 }
 
@@ -199,19 +200,19 @@
     int returnCode = 1;
     //@try {
     
-    NSString * SiteID = [NSString stringWithString:[Config GetPlistInfo:@"SiteID"]];
-    NSString * InspectDate = [NSString stringWithString:[Config GetPlistInfo:@"InspectDate"]];
+    NSString * SiteID = [Settings SiteID];
+    NSString * InspectDate = [Settings InspectDate];
     NSString * InspectActivityID = [Common GetGuid];
-    NSString * InspectWay = [NSString stringWithString:[Config GetPlistInfo:@"InspectWay"]];
-    NSString * Inspecter = [NSString stringWithString:[Config GetPlistInfo:@"LoginUserName"]];
-    NSString * Recorder = [NSString stringWithString:[Config GetPlistInfo:@"LoginUserId"]];
+    NSString * InspectWay = [Settings InspectWay];
+    NSString * Inspecter =[Settings LoginUserName];
+    NSString * Recorder = [Settings LoginUserId];
     NSString * InspectID;
     NSString * SiteInspectID;
     //
-    [Config SetPlistInfo:@"InspectActivityID" Value:InspectActivityID];
+    [Settings setInspectActivityID:InspectActivityID];
     //check Site
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     NSString *checkSql = [NSString stringWithFormat:@"select count(*) from SiteInspTemp where SiteID='%@'",SiteID];
     sqlite3_stmt * checkStmt= [db ExecSql:checkSql];
     sqlite3_step(checkStmt);
@@ -337,7 +338,7 @@
     NSString * delSQL = @"";
     
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     
     NSString * sql = [NSString stringWithFormat:@"select * from InspectActivity where InspectActivityId='%@'",InspectActivityId];
     sqlite3_stmt * stmt= [db ExecSql:sql];

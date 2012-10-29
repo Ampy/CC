@@ -23,8 +23,6 @@
 		05A08057160725B000EF52BC /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08047160725B000EF52BC /* Update.m */; };
 		05A08058160725B000EF52BC /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0804A160725B000EF52BC /* Common.m */; };
 		05A08059160725B000EF52BC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0804E160725B000EF52BC /* Settings.m */; };
-		05A0805A160725B000EF52BC /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08050160725B000EF52BC /* Config.m */; };
-		05A0805B160725B000EF52BC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08053160725B000EF52BC /* Reachability.m */; };
 		05A08077160725FC00EF52BC /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08070160725FC00EF52BC /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		05A08078160725FC00EF52BC /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08072160725FC00EF52BC /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		05A08079160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08074160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -42,6 +40,8 @@
 		05A08090160726F500EF52BC /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A08087160726F500EF52BC /* close.png */; };
 		05A08092160726FE00EF52BC /* inspect2.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A08091160726FE00EF52BC /* inspect2.png */; };
 		05AF33D9160ADBA400A8B64E /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05AF33D8160ADBA300A8B64E /* config.plist */; };
+		05C35899163E2310008D455F /* Plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C35895163E2310008D455F /* Plist.m */; };
+		05C3589A163E2310008D455F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C35898163E2310008D455F /* Reachability.m */; };
 		05E03D1A16105BCF00BA0367 /* ItemComplete.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E03D1916105BCF00BA0367 /* ItemComplete.png */; };
 		A631793C161196D700014D07 /* btn2.png in Resources */ = {isa = PBXBuildFile; fileRef = A631793A161196D700014D07 /* btn2.png */; };
 		A631793E16119C7A00014D07 /* up.gif in Resources */ = {isa = PBXBuildFile; fileRef = A631793D16119C7A00014D07 /* up.gif */; };
@@ -134,10 +134,6 @@
 		05A0804D160725B000EF52BC /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Class/Settings.h; sourceTree = "<group>"; };
 		05A0804E160725B000EF52BC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Class/Settings.m; sourceTree = "<group>"; };
 		05A0804F160725B000EF52BC /* CellService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellService.h; path = Class/CellService.h; sourceTree = "<group>"; };
-		05A08050160725B000EF52BC /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Config.m; path = Class/Config.m; sourceTree = "<group>"; };
-		05A08051160725B000EF52BC /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = Class/Config.h; sourceTree = "<group>"; };
-		05A08052160725B000EF52BC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Class/Reachability.h; sourceTree = "<group>"; };
-		05A08053160725B000EF52BC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Class/Reachability.m; sourceTree = "<group>"; };
 		05A0806F160725FC00EF52BC /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
 		05A08070160725FC00EF52BC /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
 		05A08071160725FC00EF52BC /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
@@ -159,6 +155,10 @@
 		05A08087160726F500EF52BC /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = Images/close.png; sourceTree = "<group>"; };
 		05A08091160726FE00EF52BC /* inspect2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = inspect2.png; path = Images/inspect2.png; sourceTree = "<group>"; };
 		05AF33D8160ADBA300A8B64E /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		05C35894163E2310008D455F /* Plist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plist.h; sourceTree = "<group>"; };
+		05C35895163E2310008D455F /* Plist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plist.m; sourceTree = "<group>"; };
+		05C35897163E2310008D455F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		05C35898163E2310008D455F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		05E03D1916105BCF00BA0367 /* ItemComplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ItemComplete.png; path = Images/ItemComplete.png; sourceTree = "<group>"; };
 		A631793A161196D700014D07 /* btn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn2.png; path = Images/btn2.png; sourceTree = "<group>"; };
 		A631793D16119C7A00014D07 /* up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = up.gif; path = Images/up.gif; sourceTree = "<group>"; };
@@ -257,6 +257,7 @@
 		050CECCA15F600410044CCB9 = {
 			isa = PBXGroup;
 			children = (
+				05C35892163E2310008D455F /* CoreCode */,
 				A6E42F06160C0F5C002FE59C /* icon.png */,
 				050CECDF15F600410044CCB9 /* CC */,
 				050CECD815F600410044CCB9 /* Frameworks */,
@@ -358,6 +359,33 @@
 			path = Switch;
 			sourceTree = "<group>";
 		};
+		05C35892163E2310008D455F /* CoreCode */ = {
+			isa = PBXGroup;
+			children = (
+				05C35893163E2310008D455F /* Configuration */,
+				05C35896163E2310008D455F /* Net */,
+			);
+			path = CoreCode;
+			sourceTree = "<group>";
+		};
+		05C35893163E2310008D455F /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				05C35894163E2310008D455F /* Plist.h */,
+				05C35895163E2310008D455F /* Plist.m */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		05C35896163E2310008D455F /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				05C35897163E2310008D455F /* Reachability.h */,
+				05C35898163E2310008D455F /* Reachability.m */,
+			);
+			path = Net;
+			sourceTree = "<group>";
+		};
 		A6790F6C15FD8DCE00F2655E /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,14 +468,10 @@
 				05A08044160725B000EF52BC /* CellService.m */,
 				05A08049160725B000EF52BC /* Common.h */,
 				05A0804A160725B000EF52BC /* Common.m */,
-				05A08051160725B000EF52BC /* Config.h */,
-				05A08050160725B000EF52BC /* Config.m */,
 				05A08048160725B000EF52BC /* DatabaseHelper.h */,
 				05A08046160725B000EF52BC /* DatabaseHelper.m */,
 				05A08045160725B000EF52BC /* LogicBase.h */,
 				05A08043160725B000EF52BC /* LogicBase.m */,
-				05A08052160725B000EF52BC /* Reachability.h */,
-				05A08053160725B000EF52BC /* Reachability.m */,
 				05A0804D160725B000EF52BC /* Settings.h */,
 				05A0804E160725B000EF52BC /* Settings.m */,
 				05A0804B160725B000EF52BC /* Update.h */,
@@ -644,14 +668,14 @@
 				05A08057160725B000EF52BC /* Update.m in Sources */,
 				05A08058160725B000EF52BC /* Common.m in Sources */,
 				05A08059160725B000EF52BC /* Settings.m in Sources */,
-				05A0805A160725B000EF52BC /* Config.m in Sources */,
-				05A0805B160725B000EF52BC /* Reachability.m in Sources */,
 				05A08077160725FC00EF52BC /* DCRoundSwitch.m in Sources */,
 				05A08078160725FC00EF52BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				05A08079160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				05A0807A160725FC00EF52BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */,
 				057E2BEE162BE2D50063ECD0 /* SettingsViewController.m in Sources */,
+				05C35899163E2310008D455F /* Plist.m in Sources */,
+				05C3589A163E2310008D455F /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,7 +752,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CC/CC-Prefix.pch";
 				INFOPLIST_FILE = "CC/CC-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -740,7 +764,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CC/CC-Prefix.pch";
 				INFOPLIST_FILE = "CC/CC-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

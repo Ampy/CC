@@ -34,11 +34,11 @@
 //    [self.navigationController setNavigationBarHidden:YES animated:YES];
 //    [self.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed: @"login.jpg"]]];
     
-    UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [outButton setFrame:CGRectMake(580, 474, 98, 32)];
-    [outButton setBackgroundImage:[UIImage imageNamed:@"login_sumit.png"] forState:UIControlStateNormal];
-    [self.view addSubview:outButton];
-    [outButton addTarget:self  action:@selector(UserLogin:) forControlEvents:UIControlEventTouchUpInside];
+    //UIButton *outButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    //[outButton setFrame:CGRectMake(580, 474, 98, 32)];
+    //[outButton setBackgroundImage:[UIImage imageNamed:@"login_sumit.png"] forState:UIControlStateNormal];
+    //[self.view addSubview:outButton];
+    //[outButton addTarget:self  action:@selector(UserLogin:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
     
@@ -46,7 +46,7 @@
 //    if([isRemember isEqualToString: @"T"])
 //    {
 //        [remember setOn:true animated:NO];
-        name.text = [Config GetPlistInfo:@"LoginName"];
+        name.text = [Settings LoginUserName];
         //password.text = [Config GetPlistInfo:@"LoginPassword"];
 //    }
 //    else 
@@ -80,7 +80,7 @@
     
 //    if(remember.isOn)
 //    {
-        [Config SetPlistInfo:@"LoginName" Value:name.text];
+    [Settings setLoginUserName:name.text];
 //        [Config SetPlistInfo:@"LoginPassword" Value:password.text];
 //        [Config SetPlistInfo:@"LoginIsRemember" Value:@"T"];
 //    }
@@ -99,8 +99,8 @@
     else 
     {
         
-        [Config SetPlistInfo:@"LoginUserId" Value:[loginArr objectAtIndex:0] ];
-        [Config SetPlistInfo:@"LoginUserName" Value:[loginArr objectAtIndex:1] ];
+        [Settings setLoginUserId:[loginArr objectAtIndex:0] ];
+        [Settings setLoginUserName:[loginArr objectAtIndex:1] ];
         HomeViewController *view = [[HomeViewController alloc] init];
         //[self.navigationController pushViewController:view animated:YES];
         [UIView  beginAnimations:nil context:NULL];  
