@@ -13,20 +13,14 @@
 		050CECE415F600410044CCB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 050CECE215F600410044CCB9 /* InfoPlist.strings */; };
 		050CECE615F600410044CCB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE515F600410044CCB9 /* main.m */; };
 		050CECEA15F600410044CCB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CECE915F600410044CCB9 /* AppDelegate.m */; };
-		0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A4E4160810ED00309253 /* MCSegmentedControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0579A4E81608132100309253 /* inspectTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A4E71608132100309253 /* inspectTable.png */; };
 		057E2BEE162BE2D50063ECD0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057E2BEC162BE2D50063ECD0 /* SettingsViewController.m */; };
 		057E2BEF162BE2D50063ECD0 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057E2BED162BE2D50063ECD0 /* SettingsViewController.xib */; };
 		05A08054160725B000EF52BC /* LogicBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08043160725B000EF52BC /* LogicBase.m */; };
 		05A08055160725B000EF52BC /* CellService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08044160725B000EF52BC /* CellService.m */; };
-		05A08056160725B000EF52BC /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08046160725B000EF52BC /* DatabaseHelper.m */; };
 		05A08057160725B000EF52BC /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08047160725B000EF52BC /* Update.m */; };
 		05A08058160725B000EF52BC /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0804A160725B000EF52BC /* Common.m */; };
 		05A08059160725B000EF52BC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0804E160725B000EF52BC /* Settings.m */; };
-		05A08077160725FC00EF52BC /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08070160725FC00EF52BC /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		05A08078160725FC00EF52BC /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08072160725FC00EF52BC /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		05A08079160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08074160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		05A0807A160725FC00EF52BC /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A08076160725FC00EF52BC /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		05A0807C1607265D00EF52BC /* login.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05A0807B1607265D00EF52BC /* login.jpg */; };
 		05A0807E160726D700EF52BC /* bg_inst.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A0807D160726D700EF52BC /* bg_inst.png */; };
 		05A08088160726F500EF52BC /* btn_submit.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A0807F160726F500EF52BC /* btn_submit.png */; };
@@ -43,6 +37,24 @@
 		05C35899163E2310008D455F /* Plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C35895163E2310008D455F /* Plist.m */; };
 		05C3589A163E2310008D455F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C35898163E2310008D455F /* Reachability.m */; };
 		05E03D1A16105BCF00BA0367 /* ItemComplete.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E03D1916105BCF00BA0367 /* ItemComplete.png */; };
+		05E66541163E71D900FF4677 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E66533163E71D900FF4677 /* DatabaseHelper.m */; };
+		05E66542163E71D900FF4677 /* MCSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E66537163E71D900FF4677 /* MCSegmentedControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		05E66543163E71D900FF4677 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6653A163E71D900FF4677 /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		05E66544163E71D900FF4677 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6653C163E71D900FF4677 /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		05E66545163E71D900FF4677 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6653E163E71D900FF4677 /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		05E66546163E71D900FF4677 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E66540163E71D900FF4677 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		05E6655A163E773000FF4677 /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E66549163E773000FF4677 /* InputViewController.m */; };
+		05E6655B163E773000FF4677 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6654A163E773000FF4677 /* LoginViewController.m */; };
+		05E6655C163E773000FF4677 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6654B163E773000FF4677 /* WelcomeViewController.m */; };
+		05E6655D163E773000FF4677 /* InputSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6654E163E773000FF4677 /* InputSubView.m */; };
+		05E6655E163E773000FF4677 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6654F163E773000FF4677 /* LoginViewController.xib */; };
+		05E6655F163E773000FF4677 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E66550163E773000FF4677 /* HomeViewController.xib */; };
+		05E66560163E773000FF4677 /* ManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E66551163E773000FF4677 /* ManageViewController.xib */; };
+		05E66561163E773000FF4677 /* ManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E66552163E773000FF4677 /* ManageViewController.m */; };
+		05E66562163E773000FF4677 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E66553163E773000FF4677 /* InputViewController.xib */; };
+		05E66563163E773000FF4677 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E66555163E773000FF4677 /* HomeViewController.m */; };
+		05E66564163E773000FF4677 /* InputSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E66556163E773000FF4677 /* InputSubView.xib */; };
+		05E66565163E773000FF4677 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E66559163E773000FF4677 /* WelcomeViewController.xib */; };
 		A631793C161196D700014D07 /* btn2.png in Resources */ = {isa = PBXBuildFile; fileRef = A631793A161196D700014D07 /* btn2.png */; };
 		A631793E16119C7A00014D07 /* up.gif in Resources */ = {isa = PBXBuildFile; fileRef = A631793D16119C7A00014D07 /* up.gif */; };
 		A6A8F5FD15FDA98300E29A1E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */; };
@@ -115,8 +127,6 @@
 		050CECE715F600410044CCB9 /* CC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CC-Prefix.pch"; sourceTree = "<group>"; };
 		050CECE815F600410044CCB9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		050CECE915F600410044CCB9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0579A4E3160810ED00309253 /* MCSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSegmentedControl.h; sourceTree = "<group>"; };
-		0579A4E4160810ED00309253 /* MCSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSegmentedControl.m; sourceTree = "<group>"; };
 		0579A4E71608132100309253 /* inspectTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = inspectTable.png; path = Images/inspectTable.png; sourceTree = "<group>"; };
 		057E2BEB162BE2D50063ECD0 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Configuration/SettingsViewController.h; sourceTree = "<group>"; };
 		057E2BEC162BE2D50063ECD0 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Configuration/SettingsViewController.m; sourceTree = "<group>"; };
@@ -124,9 +134,7 @@
 		05A08043160725B000EF52BC /* LogicBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogicBase.m; path = Class/LogicBase.m; sourceTree = "<group>"; };
 		05A08044160725B000EF52BC /* CellService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellService.m; path = Class/CellService.m; sourceTree = "<group>"; };
 		05A08045160725B000EF52BC /* LogicBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogicBase.h; path = Class/LogicBase.h; sourceTree = "<group>"; };
-		05A08046160725B000EF52BC /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseHelper.m; path = Class/DatabaseHelper.m; sourceTree = "<group>"; };
 		05A08047160725B000EF52BC /* Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Update.m; path = Class/Update.m; sourceTree = "<group>"; };
-		05A08048160725B000EF52BC /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseHelper.h; path = Class/DatabaseHelper.h; sourceTree = "<group>"; };
 		05A08049160725B000EF52BC /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = Class/Common.h; sourceTree = "<group>"; };
 		05A0804A160725B000EF52BC /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Common.m; path = Class/Common.m; sourceTree = "<group>"; };
 		05A0804B160725B000EF52BC /* Update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Update.h; path = Class/Update.h; sourceTree = "<group>"; };
@@ -134,14 +142,6 @@
 		05A0804D160725B000EF52BC /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Class/Settings.h; sourceTree = "<group>"; };
 		05A0804E160725B000EF52BC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Class/Settings.m; sourceTree = "<group>"; };
 		05A0804F160725B000EF52BC /* CellService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellService.h; path = Class/CellService.h; sourceTree = "<group>"; };
-		05A0806F160725FC00EF52BC /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
-		05A08070160725FC00EF52BC /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
-		05A08071160725FC00EF52BC /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
-		05A08072160725FC00EF52BC /* DCRoundSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchKnobLayer.m; sourceTree = "<group>"; };
-		05A08073160725FC00EF52BC /* DCRoundSwitchOutlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchOutlineLayer.h; sourceTree = "<group>"; };
-		05A08074160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
-		05A08075160725FC00EF52BC /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
-		05A08076160725FC00EF52BC /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
 		05A0807B1607265D00EF52BC /* login.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login.jpg; path = Images/login.jpg; sourceTree = "<group>"; };
 		05A0807D160726D700EF52BC /* bg_inst.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_inst.png; path = Images/bg_inst.png; sourceTree = "<group>"; };
 		05A0807F160726F500EF52BC /* btn_submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_submit.png; path = Images/btn_submit.png; sourceTree = "<group>"; };
@@ -160,6 +160,35 @@
 		05C35897163E2310008D455F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		05C35898163E2310008D455F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		05E03D1916105BCF00BA0367 /* ItemComplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ItemComplete.png; path = Images/ItemComplete.png; sourceTree = "<group>"; };
+		05E66532163E71D900FF4677 /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseHelper.h; sourceTree = "<group>"; };
+		05E66533163E71D900FF4677 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
+		05E66536163E71D900FF4677 /* MCSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSegmentedControl.h; sourceTree = "<group>"; };
+		05E66537163E71D900FF4677 /* MCSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSegmentedControl.m; sourceTree = "<group>"; };
+		05E66539163E71D900FF4677 /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
+		05E6653A163E71D900FF4677 /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
+		05E6653B163E71D900FF4677 /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
+		05E6653C163E71D900FF4677 /* DCRoundSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchKnobLayer.m; sourceTree = "<group>"; };
+		05E6653D163E71D900FF4677 /* DCRoundSwitchOutlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchOutlineLayer.h; sourceTree = "<group>"; };
+		05E6653E163E71D900FF4677 /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
+		05E6653F163E71D900FF4677 /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
+		05E66540163E71D900FF4677 /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
+		05E66549163E773000FF4677 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputViewController.m; path = Views/InputViewController.m; sourceTree = "<group>"; };
+		05E6654A163E773000FF4677 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Views/LoginViewController.m; sourceTree = "<group>"; };
+		05E6654B163E773000FF4677 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WelcomeViewController.m; path = Views/WelcomeViewController.m; sourceTree = "<group>"; };
+		05E6654C163E773000FF4677 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputViewController.h; path = Views/InputViewController.h; sourceTree = "<group>"; };
+		05E6654D163E773000FF4677 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Views/LoginViewController.h; sourceTree = "<group>"; };
+		05E6654E163E773000FF4677 /* InputSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputSubView.m; path = Views/InputSubView.m; sourceTree = "<group>"; };
+		05E6654F163E773000FF4677 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Views/LoginViewController.xib; sourceTree = "<group>"; };
+		05E66550163E773000FF4677 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = Views/HomeViewController.xib; sourceTree = "<group>"; };
+		05E66551163E773000FF4677 /* ManageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ManageViewController.xib; path = Views/ManageViewController.xib; sourceTree = "<group>"; };
+		05E66552163E773000FF4677 /* ManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManageViewController.m; path = Views/ManageViewController.m; sourceTree = "<group>"; };
+		05E66553163E773000FF4677 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InputViewController.xib; path = Views/InputViewController.xib; sourceTree = "<group>"; };
+		05E66554163E773000FF4677 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Views/HomeViewController.h; sourceTree = "<group>"; };
+		05E66555163E773000FF4677 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Views/HomeViewController.m; sourceTree = "<group>"; };
+		05E66556163E773000FF4677 /* InputSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InputSubView.xib; path = Views/InputSubView.xib; sourceTree = "<group>"; };
+		05E66557163E773000FF4677 /* ManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManageViewController.h; path = Views/ManageViewController.h; sourceTree = "<group>"; };
+		05E66558163E773000FF4677 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WelcomeViewController.h; path = Views/WelcomeViewController.h; sourceTree = "<group>"; };
+		05E66559163E773000FF4677 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomeViewController.xib; path = Views/WelcomeViewController.xib; sourceTree = "<group>"; };
 		A631793A161196D700014D07 /* btn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn2.png; path = Images/btn2.png; sourceTree = "<group>"; };
 		A631793D16119C7A00014D07 /* up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = up.gif; path = Images/up.gif; sourceTree = "<group>"; };
 		A6A8F5FC15FDA98300E29A1E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -289,9 +318,9 @@
 		050CECDF15F600410044CCB9 /* CC */ = {
 			isa = PBXGroup;
 			children = (
+				05E66548163E76CB00FF4677 /* Controllers */,
 				057E2BE9162BE28C0063ECD0 /* Configuration */,
 				05AF33D8160ADBA300A8B64E /* config.plist */,
-				05A0806D160725FC00EF52BC /* Controls */,
 				050CECE815F600410044CCB9 /* AppDelegate.h */,
 				050CECE915F600410044CCB9 /* AppDelegate.m */,
 				A6790FB615FD8F9A00F2655E /* Class */,
@@ -300,7 +329,7 @@
 				A6D3E0C01603226A0013BF4C /* Models */,
 				A6D3E0C71603226A0013BF4C /* Services */,
 				050CECE015F600410044CCB9 /* Supporting Files */,
-				A6790F6E15FD8DE100F2655E /* View */,
+				A6790F6E15FD8DE100F2655E /* Views */,
 			);
 			path = CC;
 			sourceTree = "<group>";
@@ -316,15 +345,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0579A4E2160810ED00309253 /* MCSegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-				0579A4E3160810ED00309253 /* MCSegmentedControl.h */,
-				0579A4E4160810ED00309253 /* MCSegmentedControl.m */,
-			);
-			path = MCSegmentedControl;
-			sourceTree = "<group>";
-		};
 		057E2BE9162BE28C0063ECD0 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,33 +355,11 @@
 			name = Configuration;
 			sourceTree = "<group>";
 		};
-		05A0806D160725FC00EF52BC /* Controls */ = {
-			isa = PBXGroup;
-			children = (
-				0579A4E2160810ED00309253 /* MCSegmentedControl */,
-				05A0806E160725FC00EF52BC /* Switch */,
-			);
-			path = Controls;
-			sourceTree = "<group>";
-		};
-		05A0806E160725FC00EF52BC /* Switch */ = {
-			isa = PBXGroup;
-			children = (
-				05A0806F160725FC00EF52BC /* DCRoundSwitch.h */,
-				05A08070160725FC00EF52BC /* DCRoundSwitch.m */,
-				05A08071160725FC00EF52BC /* DCRoundSwitchKnobLayer.h */,
-				05A08072160725FC00EF52BC /* DCRoundSwitchKnobLayer.m */,
-				05A08073160725FC00EF52BC /* DCRoundSwitchOutlineLayer.h */,
-				05A08074160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m */,
-				05A08075160725FC00EF52BC /* DCRoundSwitchToggleLayer.h */,
-				05A08076160725FC00EF52BC /* DCRoundSwitchToggleLayer.m */,
-			);
-			path = Switch;
-			sourceTree = "<group>";
-		};
 		05C35892163E2310008D455F /* CoreCode */ = {
 			isa = PBXGroup;
 			children = (
+				05E66531163E71D900FF4677 /* DataBase */,
+				05E66534163E71D900FF4677 /* Controls */,
 				05C35893163E2310008D455F /* Configuration */,
 				05C35896163E2310008D455F /* Net */,
 			);
@@ -384,6 +382,55 @@
 				05C35898163E2310008D455F /* Reachability.m */,
 			);
 			path = Net;
+			sourceTree = "<group>";
+		};
+		05E66531163E71D900FF4677 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				05E66532163E71D900FF4677 /* DatabaseHelper.h */,
+				05E66533163E71D900FF4677 /* DatabaseHelper.m */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		05E66534163E71D900FF4677 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				05E66535163E71D900FF4677 /* MCSegmentedControl */,
+				05E66538163E71D900FF4677 /* Switch */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		05E66535163E71D900FF4677 /* MCSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				05E66536163E71D900FF4677 /* MCSegmentedControl.h */,
+				05E66537163E71D900FF4677 /* MCSegmentedControl.m */,
+			);
+			path = MCSegmentedControl;
+			sourceTree = "<group>";
+		};
+		05E66538163E71D900FF4677 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				05E66539163E71D900FF4677 /* DCRoundSwitch.h */,
+				05E6653A163E71D900FF4677 /* DCRoundSwitch.m */,
+				05E6653B163E71D900FF4677 /* DCRoundSwitchKnobLayer.h */,
+				05E6653C163E71D900FF4677 /* DCRoundSwitchKnobLayer.m */,
+				05E6653D163E71D900FF4677 /* DCRoundSwitchOutlineLayer.h */,
+				05E6653E163E71D900FF4677 /* DCRoundSwitchOutlineLayer.m */,
+				05E6653F163E71D900FF4677 /* DCRoundSwitchToggleLayer.h */,
+				05E66540163E71D900FF4677 /* DCRoundSwitchToggleLayer.m */,
+			);
+			path = Switch;
+			sourceTree = "<group>";
+		};
+		05E66548163E76CB00FF4677 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		A6790F6C15FD8DCE00F2655E /* Images */ = {
@@ -436,9 +483,26 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		A6790F6E15FD8DE100F2655E /* View */ = {
+		A6790F6E15FD8DE100F2655E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				05E66549163E773000FF4677 /* InputViewController.m */,
+				05E6654A163E773000FF4677 /* LoginViewController.m */,
+				05E6654B163E773000FF4677 /* WelcomeViewController.m */,
+				05E6654C163E773000FF4677 /* InputViewController.h */,
+				05E6654D163E773000FF4677 /* LoginViewController.h */,
+				05E6654E163E773000FF4677 /* InputSubView.m */,
+				05E6654F163E773000FF4677 /* LoginViewController.xib */,
+				05E66550163E773000FF4677 /* HomeViewController.xib */,
+				05E66551163E773000FF4677 /* ManageViewController.xib */,
+				05E66552163E773000FF4677 /* ManageViewController.m */,
+				05E66553163E773000FF4677 /* InputViewController.xib */,
+				05E66554163E773000FF4677 /* HomeViewController.h */,
+				05E66555163E773000FF4677 /* HomeViewController.m */,
+				05E66556163E773000FF4677 /* InputSubView.xib */,
+				05E66557163E773000FF4677 /* ManageViewController.h */,
+				05E66558163E773000FF4677 /* WelcomeViewController.h */,
+				05E66559163E773000FF4677 /* WelcomeViewController.xib */,
 				A6D3E073160321C70013BF4C /* HomeViewController.h */,
 				A6D3E06D160321C70013BF4C /* HomeViewController.m */,
 				A6D3E06C160321C70013BF4C /* HomeViewController.xib */,
@@ -458,7 +522,7 @@
 				A6D3E069160321C70013BF4C /* WelcomeViewController.m */,
 				A6D3E074160321C70013BF4C /* WelcomeViewController.xib */,
 			);
-			name = View;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		A6790FB615FD8F9A00F2655E /* Class */ = {
@@ -468,8 +532,6 @@
 				05A08044160725B000EF52BC /* CellService.m */,
 				05A08049160725B000EF52BC /* Common.h */,
 				05A0804A160725B000EF52BC /* Common.m */,
-				05A08048160725B000EF52BC /* DatabaseHelper.h */,
-				05A08046160725B000EF52BC /* DatabaseHelper.m */,
 				05A08045160725B000EF52BC /* LogicBase.h */,
 				05A08043160725B000EF52BC /* LogicBase.m */,
 				05A0804D160725B000EF52BC /* Settings.h */,
@@ -634,6 +696,12 @@
 				057E2BEF162BE2D50063ECD0 /* SettingsViewController.xib in Resources */,
 				A6A96902162E536200C2E07D /* exit.png in Resources */,
 				A6A96905162E59E700C2E07D /* weit.gif in Resources */,
+				05E6655E163E773000FF4677 /* LoginViewController.xib in Resources */,
+				05E6655F163E773000FF4677 /* HomeViewController.xib in Resources */,
+				05E66560163E773000FF4677 /* ManageViewController.xib in Resources */,
+				05E66562163E773000FF4677 /* InputViewController.xib in Resources */,
+				05E66564163E773000FF4677 /* InputSubView.xib in Resources */,
+				05E66565163E773000FF4677 /* WelcomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,18 +732,24 @@
 				A6D3E0DD1603226A0013BF4C /* InspectService.m in Sources */,
 				05A08054160725B000EF52BC /* LogicBase.m in Sources */,
 				05A08055160725B000EF52BC /* CellService.m in Sources */,
-				05A08056160725B000EF52BC /* DatabaseHelper.m in Sources */,
 				05A08057160725B000EF52BC /* Update.m in Sources */,
 				05A08058160725B000EF52BC /* Common.m in Sources */,
 				05A08059160725B000EF52BC /* Settings.m in Sources */,
-				05A08077160725FC00EF52BC /* DCRoundSwitch.m in Sources */,
-				05A08078160725FC00EF52BC /* DCRoundSwitchKnobLayer.m in Sources */,
-				05A08079160725FC00EF52BC /* DCRoundSwitchOutlineLayer.m in Sources */,
-				05A0807A160725FC00EF52BC /* DCRoundSwitchToggleLayer.m in Sources */,
-				0579A4E5160810ED00309253 /* MCSegmentedControl.m in Sources */,
 				057E2BEE162BE2D50063ECD0 /* SettingsViewController.m in Sources */,
 				05C35899163E2310008D455F /* Plist.m in Sources */,
 				05C3589A163E2310008D455F /* Reachability.m in Sources */,
+				05E66541163E71D900FF4677 /* DatabaseHelper.m in Sources */,
+				05E66542163E71D900FF4677 /* MCSegmentedControl.m in Sources */,
+				05E66543163E71D900FF4677 /* DCRoundSwitch.m in Sources */,
+				05E66544163E71D900FF4677 /* DCRoundSwitchKnobLayer.m in Sources */,
+				05E66545163E71D900FF4677 /* DCRoundSwitchOutlineLayer.m in Sources */,
+				05E66546163E71D900FF4677 /* DCRoundSwitchToggleLayer.m in Sources */,
+				05E6655A163E773000FF4677 /* InputViewController.m in Sources */,
+				05E6655B163E773000FF4677 /* LoginViewController.m in Sources */,
+				05E6655C163E773000FF4677 /* WelcomeViewController.m in Sources */,
+				05E6655D163E773000FF4677 /* InputSubView.m in Sources */,
+				05E66561163E773000FF4677 /* ManageViewController.m in Sources */,
+				05E66563163E773000FF4677 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
