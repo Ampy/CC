@@ -136,7 +136,7 @@
     [UIView beginAnimations:nil context:NULL]; 
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:0.3f];   
-    CGRect rect = CGRectMake(0.0f, -100,width,height);
+    CGRect rect = CGRectMake(0.0f, -150,width,height);
     self.view.frame = rect;
     [UIView commitAnimations];
  
@@ -153,7 +153,7 @@
     float height = self.view.frame.size.height;
     if(offset>0)
     {
-    CGRect rect = CGRectMake(0.0f, -100,width,height);
+    CGRect rect = CGRectMake(0.0f, -150,width,height);
     self.view.frame = rect;
     }
     [UIView commitAnimations];
