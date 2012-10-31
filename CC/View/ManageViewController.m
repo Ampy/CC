@@ -87,7 +87,7 @@
 
 -(void)updateToService:(id)sender
 {
-    if(![Common ExceptionHandler:[Common CheckNetworkStatus]])
+    if(![Common ExceptionHandler:[Common networkState]])
     {
         if(lists.count>0)
         {
