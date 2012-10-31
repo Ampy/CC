@@ -183,7 +183,6 @@
 		05E66593163E79C800FF4677 /* CellService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellService.m; sourceTree = "<group>"; };
 		05E66594163E79C800FF4677 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		05E66595163E79C800FF4677 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
-		05E66596163E79C800FF4677 /* InputSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputSubView.h; sourceTree = "<group>"; };
 		05E66597163E79C800FF4677 /* LogicBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogicBase.h; sourceTree = "<group>"; };
 		05E66598163E79C800FF4677 /* LogicBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogicBase.m; sourceTree = "<group>"; };
 		05E66599163E79C800FF4677 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -222,7 +221,6 @@
 		A6D3E04C160320BB0013BF4C /* title_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = title_header.png; path = Images/title_header.png; sourceTree = "<group>"; };
 		A6D3E04D160320BB0013BF4C /* title1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = title1.png; path = Images/title1.png; sourceTree = "<group>"; };
 		A6D3E04E160320BB0013BF4C /* update.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = update.gif; path = Images/update.gif; sourceTree = "<group>"; };
-		A6D3E08F160321DC0013BF4C /* InputSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputSubView.h; path = Class/InputSubView.h; sourceTree = "<group>"; };
 		A6D3E0C11603226A0013BF4C /* InspectItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectItemModel.h; sourceTree = "<group>"; };
 		A6D3E0C21603226A0013BF4C /* InspectItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectItemModel.m; sourceTree = "<group>"; };
 		A6D3E0C31603226A0013BF4C /* InspectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectModel.h; sourceTree = "<group>"; };
@@ -255,9 +253,9 @@
 		050CECCA15F600410044CCB9 = {
 			isa = PBXGroup;
 			children = (
-				05C35892163E2310008D455F /* CoreCode */,
 				A6E42F06160C0F5C002FE59C /* icon.png */,
 				050CECDF15F600410044CCB9 /* CC */,
+				05C35892163E2310008D455F /* CoreCode */,
 				050CECD815F600410044CCB9 /* Frameworks */,
 				050CECD615F600410044CCB9 /* Products */,
 			);
@@ -385,31 +383,31 @@
 		05E66548163E76CB00FF4677 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				055AEC771640F02D002EC8CE /* InputSubView.h */,
-				05E6657F163E794800FF4677 /* ThirdLevelTableViewCell.m */,
-				05E66580163E794800FF4677 /* InspectTableViewCell.h */,
-				05E66581163E794800FF4677 /* PopViewController.m */,
-				05E66582163E794800FF4677 /* InspectViewController.m */,
-				05E66583163E794800FF4677 /* SecondItemViewController.m */,
-				05E66584163E794800FF4677 /* SecondItemViewController.h */,
-				05E66585163E794800FF4677 /* FirstItemViewController.m */,
 				05E66586163E794800FF4677 /* FirstItemViewController.h */,
-				05E66587163E794800FF4677 /* InspectViewController.h */,
-				05E66588163E794800FF4677 /* InspectTableViewCell.m */,
-				05E66589163E794800FF4677 /* ThirdLevelTableViewCell.h */,
-				05E6658A163E794800FF4677 /* PopViewController.h */,
-				05E6658B163E794800FF4677 /* SwitchDelegate.h */,
-				05E66566163E77FA00FF4677 /* InputViewController.m */,
-				05E66567163E77FA00FF4677 /* LoginViewController.m */,
-				05E66568163E77FA00FF4677 /* WelcomeViewController.m */,
-				05E66569163E77FA00FF4677 /* InputViewController.h */,
-				05E6656A163E77FA00FF4677 /* LoginViewController.h */,
-				05E6656B163E77FA00FF4677 /* InputSubView.m */,
-				05E6656C163E77FA00FF4677 /* ManageViewController.m */,
+				05E66585163E794800FF4677 /* FirstItemViewController.m */,
 				05E6656D163E77FA00FF4677 /* HomeViewController.h */,
 				05E6656E163E77FA00FF4677 /* HomeViewController.m */,
+				055AEC771640F02D002EC8CE /* InputSubView.h */,
+				05E6656B163E77FA00FF4677 /* InputSubView.m */,
+				05E66569163E77FA00FF4677 /* InputViewController.h */,
+				05E66566163E77FA00FF4677 /* InputViewController.m */,
+				05E66580163E794800FF4677 /* InspectTableViewCell.h */,
+				05E66588163E794800FF4677 /* InspectTableViewCell.m */,
+				05E66587163E794800FF4677 /* InspectViewController.h */,
+				05E66582163E794800FF4677 /* InspectViewController.m */,
+				05E6656A163E77FA00FF4677 /* LoginViewController.h */,
+				05E66567163E77FA00FF4677 /* LoginViewController.m */,
 				05E6656F163E77FA00FF4677 /* ManageViewController.h */,
+				05E6656C163E77FA00FF4677 /* ManageViewController.m */,
+				05E6658A163E794800FF4677 /* PopViewController.h */,
+				05E66581163E794800FF4677 /* PopViewController.m */,
+				05E66584163E794800FF4677 /* SecondItemViewController.h */,
+				05E66583163E794800FF4677 /* SecondItemViewController.m */,
+				05E6658B163E794800FF4677 /* SwitchDelegate.h */,
+				05E66589163E794800FF4677 /* ThirdLevelTableViewCell.h */,
+				05E6657F163E794800FF4677 /* ThirdLevelTableViewCell.m */,
 				05E66570163E77FA00FF4677 /* WelcomeViewController.h */,
+				05E66568163E77FA00FF4677 /* WelcomeViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -477,7 +475,6 @@
 				05E66553163E773000FF4677 /* InputViewController.xib */,
 				05E66556163E773000FF4677 /* InputSubView.xib */,
 				05E66559163E773000FF4677 /* WelcomeViewController.xib */,
-				A6D3E08F160321DC0013BF4C /* InputSubView.h */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -502,7 +499,6 @@
 				05E66593163E79C800FF4677 /* CellService.m */,
 				05E66594163E79C800FF4677 /* Common.h */,
 				05E66595163E79C800FF4677 /* Common.m */,
-				05E66596163E79C800FF4677 /* InputSubView.h */,
 				05E66597163E79C800FF4677 /* LogicBase.h */,
 				05E66598163E79C800FF4677 /* LogicBase.m */,
 				05E66599163E79C800FF4677 /* Settings.h */,

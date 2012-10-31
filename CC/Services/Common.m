@@ -46,9 +46,8 @@
 
 +(int) CheckNetworkStatus
 {
-  
-    Reachability *r = [Reachability reachabilityWithHostname:[Settings ServiceUrl]];
 
+    Reachability *r = [Reachability reachabilityForLocalWiFi];
     if ([r currentReachabilityStatus]==NotReachable)
     {
         NSLog(@"%@ 网络无法到达",[Settings ServiceUrl]);

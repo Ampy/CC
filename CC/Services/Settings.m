@@ -103,5 +103,8 @@ NSString *fileName=@"config";
     [Plist SetValue:fileName SectionPath:@"LoginUserId" SectionValue:loginUserId];     
 }
 
-
++(void)setServiceUrl:(NSString *)serviceUrl
+{
+    [Plist SetValue:fileName SectionPath:@"ServiceUrl" SectionValue:serviceUrl]; 
+}
 @end

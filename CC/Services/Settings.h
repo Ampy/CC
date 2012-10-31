@@ -46,5 +46,6 @@
 +(void)setLoginUserId:(NSString *)loginUserId;
 +(void)setInspectWay:(NSString *)inspectWay;
 +(void)setInspectDate:(NSString *)inspectDate;
++(void)setServiceUrl:(NSString *)serviceUrl;
 
 @end
