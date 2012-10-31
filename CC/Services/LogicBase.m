@@ -48,6 +48,11 @@
 {
     int returnCode = 1;
     
+    CellService * cs = [[CellService alloc] init];
+    NSString * url = [cs CellWeb:@"IOS/GetServiceUrl"];
+    if([url length]<50)
+        [Settings setServiceUrl:url];
+    
     NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",@"UserLine",nil];
     
     NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"UserLine",nil];
