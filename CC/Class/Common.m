@@ -7,6 +7,7 @@
 //
 
 #import "Common.h"
+#import <SystemConfiguration/SystemConfiguration.h> 
 
 @implementation Common
 +(NSString *) CStringToNSString:(char *) string
@@ -54,6 +55,32 @@
     {	
         return 1;
     }
+}
+
++ (int)networkState
+{
+    struct sockaddr_in zeroAddress;
+    bzero(&zeroAddress, sizeof(zeroAddress));
+    zeroAddress.sin_len = sizeof(zeroAddress);
+    zeroAddress.sin_family = AF_INET;
+    
+    // 以下objc相关函数、类型需要添加System Configuration 框架
+    // 用0.0.0.0来判断本机网络状态
+    SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr*)&zeroAddress);
+    SCNetworkReachabilityFlags flags;
+    BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability,&flags);
+    CFRelease(defaultRouteReachability);
+    
+    if (!didRetrieveFlags)
+    {
+        return -1;
+    }
+    
+    BOOL isReachable = flags & kSCNetworkFlagsReachable;
+    
+    BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
+    
+    return (isReachable && !needsConnection) ? 1 : 0;
 }
 
 +(bool)ExceptionHandler:(int)returnCode
