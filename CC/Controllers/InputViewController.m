@@ -60,11 +60,11 @@
     [formatter setDateFormat:@"YYYY-MM-dd"];
     NSString *locationString=[formatter stringFromDate: [NSDate date]];
     
-    [Config SetPlistInfo:@"InspectWay" Value:checkType];
-    [Config SetPlistInfo:@"InspectDate" Value:locationString];
+    [Settings setInspectWay:checkType];
+    [Settings setInspectDate:locationString];
     
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkTypeName,nil]];
-    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Config GetPlistInfo:@"LoginUserName"],nil]];
+    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Settings LoginUserName],nil]];
     [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查时间",locationString,nil]];
     
     [listArr addObject:list1];
@@ -136,60 +136,25 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if([Common ExceptionHandler:[LogicBase BuildCheckData]])
                 return;
-            [Config SetPlistInfo:@"CreateTable" Value:@"T"];
         });
         
         dispatch_async(dispatch_get_main_queue(),^{
-            [Config SetPlistInfo:@"popviewbegin" Value:@"T"];
             MaskView.hidden=true;
             WaitWebView.hidden=true;
-            NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
+            NSString * mid = [Settings InspectActivityID];
             InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
             [self.navigationController pushViewController:inspectview animated:YES];
-            [Config SetPlistInfo:@"popviewend" Value:@"T"];
-            //int i=[SecondItemTableView.visibleCells count];
-            //MaskWebView.hidden=true;
-            //MaskWebView setNeedsDisplay];
         });
         
     });
-    
-//    dispatch_async(queue, ^{
-//        
-//        dispatch_sync(dispatch_get_main_queue(),^{
-//            MaskView.hidden=false;
-//            WaitWebView.hidden=false;
-//            [WaitWebView setNeedsDisplay];
-//            ((UIButton *) sender).enabled=false;
-//            
-//        });
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            if([Common ExceptionHandler:[LogicBase BuildCheckData]])
-//                return;
-//        });
-//        
-//        dispatch_async(dispatch_get_main_queue(),^{
-//            MaskView.hidden=true;
-//            WaitWebView.hidden=true;
-//            NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
-//            InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
-//            [self.navigationController pushViewController:inspectview animated:YES];
-//            //int i=[SecondItemTableView.visibleCells count];
-//            //MaskWebView.hidden=true;
-//            //MaskWebView setNeedsDisplay];
-//        });
-//        
-//    });
-    
-    
+        
 }
 
 -(void) LoadInspectView
 {
     if([Common ExceptionHandler:[LogicBase BuildCheckData]])
         return;
-    NSString * mid = [Config GetPlistInfo:@"InspectActivityID"];
+    NSString * mid = [Settings InspectActivityID];
     InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
     [self.navigationController pushViewController:inspectview animated:YES];
 }
@@ -276,7 +241,7 @@
     if(indexPath.section==1)
     {
         int iRow = indexPath.row;
-        if([[Config GetPlistInfo:@"SegmentID"] isEqualToString:@""])
+        if([[Settings SegmentID] isEqualToString:@""])
         {
             iRow = 0;
         }

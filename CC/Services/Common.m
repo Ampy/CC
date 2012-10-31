@@ -46,9 +46,12 @@
 
 +(int) CheckNetworkStatus
 {
-    Reachability *r = [Reachability reachabilityWithHostname:[Settings Instance].ServiceUrl ];
+  
+    Reachability *r = [Reachability reachabilityWithHostname:[Settings ServiceUrl]];
+
     if ([r currentReachabilityStatus]==NotReachable)
     {
+        NSLog(@"%@ 网络无法到达",[Settings ServiceUrl]);
         return 21;
     }
     else 
@@ -91,7 +94,9 @@
     }
     else 
     {
-        [self Alert:[Config GetPlistInfo:[NSString stringWithFormat:@"%d",returnCode]]];
+        Plist *plist = [[Plist alloc]initWithFileName:@"config"];
+        [self Alert:[plist GetValueByPath:[NSString stringWithFormat:@"%d",returnCode]]];
+        //[self Alert:[Config GetPlistInfo:[NSString stringWithFormat:@"%d",returnCode]]];
         return YES;
     }
 }

@@ -13,7 +13,7 @@
 -(int)GetTableStruct:(NSString *)tableName
 {
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     //[db BeginTransaction];
     
     CellService * cs = [[CellService alloc] init];
@@ -33,7 +33,7 @@
 -(int)GetTableData:(NSString *)tableName
 {
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     @try {
         NSString *delSql = [[NSString alloc] initWithFormat:@"DROP TABLE IF EXISTS %@ ",tableName];
         [db ExecSql:delSql];
@@ -75,7 +75,7 @@
 -(int)GetSiteInspect:(NSString *)sID
 {
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     [db BeginTransaction];
     
     CellService * cs = [[CellService alloc] init];
@@ -99,7 +99,7 @@
 -(int)GetAccord
 {
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings Instance].DatabaseName];
+    [db OpenDB:[Settings DatabaseName]];
     [db BeginTransaction];
     
     CellService * cs = [[CellService alloc] init];

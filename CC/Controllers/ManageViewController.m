@@ -39,18 +39,18 @@
     //    [self.view addSubview:button1];
     //    [button1 addTarget:self  action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(20, 10, 68, 26)];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
-    [self.view addSubview:backButton];
-    [backButton addTarget:self  action:@selector(backButton:) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
+//    [backButton setFrame:CGRectMake(20, 10, 68, 26)];
+//    [backButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
+//    [self.view addSubview:backButton];
+//    [backButton addTarget:self  action:@selector(backButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    upButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [upButton setFrame:CGRectMake(400, 50, 54, 31)];
-    [upButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
-    [upButton setTitle:@"提交" forState:UIControlStateNormal];
-    [self.view addSubview:upButton];
-    [upButton addTarget:self  action:@selector(updateToService:) forControlEvents:UIControlEventTouchUpInside];
+//    upButton =[UIButton buttonWithType:UIButtonTypeCustom];
+//    [upButton setFrame:CGRectMake(400, 50, 54, 31)];
+//    [upButton setBackgroundImage:[UIImage imageNamed:@"btn.png"] forState:UIControlStateNormal];
+//    [upButton setTitle:@"提交" forState:UIControlStateNormal];
+//    [self.view addSubview:upButton];
+//    [upButton addTarget:self  action:@selector(updateToService:) forControlEvents:UIControlEventTouchUpInside];
     
     self.view.userInteractionEnabled = YES;
     
@@ -78,14 +78,14 @@
 //
 //}
 
--(void)backButton:(id)sender
+-(IBAction)backButton:(id)sender
 {
     //[self.navigationController popViewControllerAnimated:YES];
     HomeViewController *ctrl = [[HomeViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];
 }
 
--(void)updateToService:(id)sender
+-(IBAction)updateToService:(id)sender
 {
     if(![Common ExceptionHandler:[Common networkState]])
     {

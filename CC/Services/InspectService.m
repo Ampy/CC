@@ -18,7 +18,7 @@
     if(self)
     {
         databaseHelper = [[DatabaseHelper alloc] init];
-        dbName = [NSString stringWithString:[Settings Instance].DatabaseName];
+        dbName = [Settings DatabaseName];
         [databaseHelper OpenDB:dbName];
     }
 

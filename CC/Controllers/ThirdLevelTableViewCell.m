@@ -7,7 +7,7 @@
 //
 
 #import "ThirdLevelTableViewCell.h"
-#import "../Controls/Switch/DCRoundSwitch.h"
+#import "DCRoundSwitch.h"
 
 @interface ThirdLevelTableViewCell ()
 

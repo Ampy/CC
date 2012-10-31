@@ -114,7 +114,9 @@
     {
         if([[arr objectAtIndex:3] isEqualToString:@"N"])
         {
-            [Config SetPlistInfo:@"LineID" Value:[arr objectAtIndex:1]];
+            //[Config SetPlistInfo:@"LineID" Value:[arr objectAtIndex:1]];            
+            [Settings setLineID :[arr objectAtIndex:1]];
+            
             listSegment = [LogicBase GetSegment];
             
             UITableViewCell *oneCell = [tableView cellForRowAtIndexPath: indexPath];
@@ -142,7 +144,8 @@
         }
         else
         {
-            [Config SetPlistInfo:@"LineID" Value:[arr objectAtIndex:1]];
+            //[Config SetPlistInfo:@"LineID" Value:[arr objectAtIndex:1]];
+            [Settings setLineID:[arr objectAtIndex:1]];
             listSegment = [LogicBase GetSegment];
             
             UITableViewCell *oneCell = [tableView cellForRowAtIndexPath: indexPath];
@@ -173,11 +176,14 @@
     {
         if(index==0)
         {
-            [Config SetPlistInfo:@"SegmentID" Value:[arr objectAtIndex:1]];
+            //[Config SetPlistInfo:@"SegmentID" Value:[arr objectAtIndex:1]];
+            [Settings setSegmentID:[arr objectAtIndex:1]];
+            
         }
         else
         {
-            [Config SetPlistInfo:@"SiteID" Value:[arr objectAtIndex:1]];
+            [Settings setSiteID:[arr objectAtIndex:1]];
+            //[Config SetPlistInfo:@"SiteID" Value:[arr objectAtIndex:1]];
         }
         
         [delegate passValue:arr arrayIndex:index];

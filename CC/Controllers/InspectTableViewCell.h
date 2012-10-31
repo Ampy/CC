@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "../Controls/Switch/DCRoundSwitch.h"
+#import "DCRoundSwitch.h"
 
 @interface InspectTableViewCell : UITableViewCell
 {

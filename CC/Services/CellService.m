@@ -12,7 +12,7 @@
 
 -(NSString *) CellWeb:(NSString *)url
 {
-    NSString * fullUrl = [[Settings Instance].ServiceUrl stringByAppendingString:url];
+    NSString * fullUrl = [[Settings ServiceUrl] stringByAppendingString:url];
     fullUrl = [fullUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     //apiUrlStr = [apiUrlStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL* apiUrl = [NSURL URLWithString:fullUrl];
@@ -31,7 +31,7 @@
 
 -(NSData *) CellWeb:(NSString *)url Data:(NSData *) postData
 {
-    NSString * fullUrl = [[Settings Instance].ServiceUrl stringByAppendingString:url];
+    NSString * fullUrl = [[Settings ServiceUrl] stringByAppendingString:url];
     //NSString *data = [[NSString alloc] initWithFormat:@"message=%@",@"hello,world."];
     //NSData *postData = [data dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     //NSData* postData = [data dataUsingEncoding:NSUTF8StringEncoding];
@@ -49,7 +49,7 @@
 
 -(NSData *) CellWebData:(NSString *)url
 {
-    NSString * fullUrl = [[Settings Instance].ServiceUrl stringByAppendingString:url];
+    NSString * fullUrl = [[Settings ServiceUrl] stringByAppendingString:url];
     fullUrl = [fullUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL* apiUrl = [NSURL URLWithString:fullUrl];
     NSData* data = [NSData dataWithContentsOfURL:apiUrl ];

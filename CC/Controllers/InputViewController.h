@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "HomeViewController.h"
-#import "Config.h"
 #import "ViewDelegate.h"
 #import "InputSubView.h"
 #import "InspectViewController.h"
