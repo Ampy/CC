@@ -9,9 +9,9 @@
 	<key>DataBaseName</key>
 	<string>Info.sqlite</string>
 	<key>ServiceUrl</key>
-	<string>http://wmsg.telsafe.com.cn/</string>
+	<string>http://192.168.1.218:8077/</string>
 	<key>IsInit</key>
-	<string>T</string>
+	<string>F</string>
 	<key>LoginName</key>
 	<string></string>
 	<key>LoginPassword</key>

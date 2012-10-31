@@ -113,6 +113,7 @@
 		050CECE715F600410044CCB9 /* CC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CC-Prefix.pch"; sourceTree = "<group>"; };
 		050CECE815F600410044CCB9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		050CECE915F600410044CCB9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		055AEC771640F02D002EC8CE /* InputSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputSubView.h; path = Controllers/InputSubView.h; sourceTree = "<group>"; };
 		0579A4E71608132100309253 /* inspectTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = inspectTable.png; path = Images/inspectTable.png; sourceTree = "<group>"; };
 		05A0807B1607265D00EF52BC /* login.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login.jpg; path = Images/login.jpg; sourceTree = "<group>"; };
 		05A0807D160726D700EF52BC /* bg_inst.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_inst.png; path = Images/bg_inst.png; sourceTree = "<group>"; };
@@ -384,6 +385,7 @@
 		05E66548163E76CB00FF4677 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				055AEC771640F02D002EC8CE /* InputSubView.h */,
 				05E6657F163E794800FF4677 /* ThirdLevelTableViewCell.m */,
 				05E66580163E794800FF4677 /* InspectTableViewCell.h */,
 				05E66581163E794800FF4677 /* PopViewController.m */,
