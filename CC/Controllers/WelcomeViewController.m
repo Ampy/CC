@@ -33,10 +33,9 @@
     webView.userInteractionEnabled = NO;
     [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
     
-    //NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-    //[queue addOperationWithBlock:UpdateAndGoto];
-    //dispatch_queue_t newThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //dispatch_async(newThread, ^{ [self UpdateAndGoto]; });
+    //将config.plist复制到Documents目录下，以便读写
+    [self copyPlistFile];
+
     if([@"F" isEqualToString:[Settings IsInit]])
     {
         [Common Alert:@"数据初始化，不同的网络情况需要5~10分钟。请耐心等待！切勿关闭或退出！！！"];
@@ -72,6 +71,25 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return ((interfaceOrientation ==UIDeviceOrientationLandscapeLeft)||(interfaceOrientation ==UIDeviceOrientationLandscapeRight));
+}
+
+-(void)copyPlistFile
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *documentLibraryFolderPath = [documentsDirectory stringByAppendingPathComponent:@"config.plist"];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:documentLibraryFolderPath]) {
+        
+        NSLog(@"文件已经存在了");
+    }else {
+        //    NSString *plistPath = [[NSBundle mainBundle] pathForResource:fullPathToFile ofType:@"plist"];
+        
+        NSString *resourceSampleImagesFolderPath =[[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
+        NSData *mainBundleFile = [NSData dataWithContentsOfFile:resourceSampleImagesFolderPath];
+        [[NSFileManager defaultManager] createFileAtPath:documentLibraryFolderPath contents:mainBundleFile attributes:nil];
+    }
+    
 }
 
 @end

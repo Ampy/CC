@@ -735,6 +735,7 @@
 		050CECEE15F600410044CCB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ren fengyi (V23DN7ZPC5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CC/CC-Prefix.pch";
 				INFOPLIST_FILE = "CC/CC-Info.plist";
@@ -748,6 +749,7 @@
 		050CECEF15F600410044CCB9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ren fengyi (V23DN7ZPC5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CC/CC-Prefix.pch";
 				INFOPLIST_FILE = "CC/CC-Info.plist";
