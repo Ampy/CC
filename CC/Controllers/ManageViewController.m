@@ -87,8 +87,8 @@
 
 -(IBAction)updateToService:(id)sender
 {
-    if(![Common ExceptionHandler:[Common networkState]])
-    {
+//    if(![Common ExceptionHandler:[Common networkState]])
+//    {
         if(lists.count>0)
         {
             bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
@@ -110,7 +110,7 @@
             NSString *strI = [NSString stringWithFormat:@"%d",i];
             [self performSelectorInBackground: @selector(updataByOne:) withObject:strI];
         }
-    }
+//    }
 }
 
 -(void)updataByOne:(NSString *)strI
