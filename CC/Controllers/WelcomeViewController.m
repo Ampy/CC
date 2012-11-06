@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     // Do any additional setup after loading the view from its nib.
     NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"update" ofType:@"gif"]];
@@ -49,10 +50,10 @@
 {
     //[NSThread sleepForTimeInterval:1];
     
-    //if(![Common ExceptionHandler:[Common CheckNetworkStatus]])
-    //{
+    if(![Common ExceptionHandler:[Common CheckNetworkStatus]])
+    {
         [Common ExceptionHandler:[LogicBase UpdateByService]];
-    //}
+    }
     LoginViewController *ctrl = [[LoginViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];
     //HomeViewController *ctrl = [[HomeViewController alloc] init];
