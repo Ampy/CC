@@ -23,7 +23,7 @@
 //@property (nonatomic, retain) NSString* LoginUserId;
 //@property (nonatomic, retain) NSString* InspectActivityID;
 
-@property (nonatomic, retain) NSMutableDictionary * dic;
+//@property (nonatomic, retain) NSMutableDictionary * dic;
 
 +(NSString *) ServiceUrl;
 +(NSString *) DatabaseName;

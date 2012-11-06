@@ -11,100 +11,109 @@
 @implementation Settings
 
 
-NSString *fileName=@"config";
+//NSString *fileName ;
+
++(NSString *) GetFileFullPath
+{
+    NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *docPath = [ doc objectAtIndex:0 ]; // 字典集合。
+    
+    return [docPath stringByAppendingPathComponent:@"config.plist"];
+}
 
 +(NSString *) ServiceUrl
 {
-    return [Plist GetValue:fileName Path:@"ServiceUrl"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"ServiceUrl"];
 }
 +(NSString *) DatabaseName
 {
-    return [Plist GetValue:fileName Path:@"DataBaseName"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"DataBaseName"];
 }
 
 +(NSString *) IsInit
 {
-    return [Plist GetValue:fileName Path:@"IsInit"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"IsInit"];
 }
 +(NSString *) LineID
 {
-    return [Plist GetValue:fileName Path:@"LineID"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"LineID"];
 }
 +(NSString *) SegmentID
 {
-    return [Plist GetValue:fileName Path:@"SegmentID"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"SegmentID"];
 }
 +(NSString *) SiteID
 {
-    return [Plist GetValue:fileName Path:@"SiteID"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"SiteID"];
 }
 +(NSString *) InspectWay
 {
-    return [Plist GetValue:fileName Path:@"InspectWay"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"InspectWay"];
 }
 +(NSString *) InspectDate
 {
-    return [Plist GetValue:fileName Path:@"InspectDate"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"InspectDate"];
 }
 +(NSString *) LoginUserName
 {
-    return [Plist GetValue:fileName Path:@"LoginUserName"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"LoginUserName"];
 }
 +(NSString *) LoginUserId
 {
-    return [Plist GetValue:fileName Path:@"LoginUserId"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"LoginUserId"];
 }
 +(NSString *) InspectActivityID
 {
-    return [Plist GetValue:fileName Path:@"InspectActivityID"];
+    return [Plist GetValue:[self GetFileFullPath] Path:@"InspectActivityID"];
 }
 
 +(void)setLineID:(NSString *)lineID
 {
-    [Plist SetValue:fileName SectionPath:@"LineID" SectionValue:lineID];
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"LineID" SectionValue:lineID];
 }
 
 +(void)setSegmentID:(NSString *)segmentID
 {
-    [Plist SetValue:fileName SectionPath:@"SegmentID" SectionValue:segmentID];
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"SegmentID" SectionValue:segmentID];
 }
 
 +(void)setSiteID:(NSString *)siteID
 {
-    [Plist SetValue:fileName SectionPath:@"SiteID" SectionValue:siteID];
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"SiteID" SectionValue:siteID];
 }
 
 +(void)setIsInit:(NSString *)isInit
 {
-    [Plist SetValue:fileName SectionPath:@"IsInit" SectionValue:isInit];
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"IsInit" SectionValue:isInit];
 }
 
 +(void)setInspectActivityID:(NSString *)inspectActivityID;
 {
-    [Plist SetValue:fileName SectionPath:@"InspectActivityID" SectionValue:inspectActivityID];  
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"InspectActivityID" SectionValue:inspectActivityID];  
 }
 
 +(void)setLoginUserName:(NSString *)loginUserName
 {
-    [Plist SetValue:fileName SectionPath:@"LoginUserName" SectionValue:loginUserName];     
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"LoginUserName" SectionValue:loginUserName];     
 }
 
 +(void)setInspectWay:(NSString *)inspectWay
 {
-    [Plist SetValue:fileName SectionPath:@"InspectWay" SectionValue:inspectWay];    
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"InspectWay" SectionValue:inspectWay];    
 }
 +(void)setInspectDate:(NSString *)inspectDate
 {
-    [Plist SetValue:fileName SectionPath:@"InspectDate" SectionValue:inspectDate];    
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"InspectDate" SectionValue:inspectDate];    
 }
 
 +(void)setLoginUserId:(NSString *)loginUserId
 {
-    [Plist SetValue:fileName SectionPath:@"LoginUserId" SectionValue:loginUserId];     
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"LoginUserId" SectionValue:loginUserId];     
 }
 
 +(void)setServiceUrl:(NSString *)serviceUrl
 {
-    [Plist SetValue:fileName SectionPath:@"ServiceUrl" SectionValue:serviceUrl]; 
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"ServiceUrl" SectionValue:serviceUrl]; 
 }
 @end

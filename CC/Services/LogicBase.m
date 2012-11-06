@@ -61,7 +61,8 @@
     Update *u = [[Update alloc] init];
     
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
-    [db OpenDB:[Settings DatabaseName]];
+    NSString *n=[Settings DatabaseName];
+    [db OpenDB:n];
     
     //init db
     if([@"F" isEqualToString:[Settings IsInit]])
