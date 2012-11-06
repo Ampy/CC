@@ -99,8 +99,8 @@
     else 
     {
         
-        [Settings setLoginUserId:[loginArr objectAtIndex:0] ];
-        [Settings setLoginUserName:[loginArr objectAtIndex:1] ];
+        //[Settings setLoginUserId:[loginArr objectAtIndex:0] ];
+        //[Settings setLoginUserName:[loginArr objectAtIndex:1] ];
         HomeViewController *view = [[HomeViewController alloc] init];
         //[self.navigationController pushViewController:view animated:YES];
         [UIView  beginAnimations:nil context:NULL];  
