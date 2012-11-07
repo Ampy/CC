@@ -49,14 +49,10 @@
 -(void) UpdateAndGoto
 {
     //[NSThread sleepForTimeInterval:1];
-    
-    //if(![Common ExceptionHandler:[Common CheckNetworkStatus]])
-    //{
-//    NSLog(@"%d",[Common networkState]);
 //    if(![Common ExceptionHandler:[Common networkState]])
 //    {
         [Common ExceptionHandler:[LogicBase UpdateByService]];
-    //}
+
 //    }
     LoginViewController *ctrl = [[LoginViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];
