@@ -46,7 +46,7 @@
 //    if([isRemember isEqualToString: @"T"])
 //    {
 //        [remember setOn:true animated:NO];
-        name.text = [Settings LoginUserName];
+        //name.text = [Settings LoginUserName];
         //password.text = [Config GetPlistInfo:@"LoginPassword"];
 //    }
 //    else 
@@ -80,7 +80,7 @@
     
 //    if(remember.isOn)
 //    {
-    [Settings setLoginUserName:name.text];
+    //[Settings setLoginUserName:name.text];
 //        [Config SetPlistInfo:@"LoginPassword" Value:password.text];
 //        [Config SetPlistInfo:@"LoginIsRemember" Value:@"T"];
 //    }
@@ -99,8 +99,8 @@
     else 
     {
         
-        //[Settings setLoginUserId:[loginArr objectAtIndex:0] ];
-        //[Settings setLoginUserName:[loginArr objectAtIndex:1] ];
+        [Settings setLoginUserId:[loginArr objectAtIndex:0] ];
+        [Settings setLoginUserName:[loginArr objectAtIndex:1] ];
         HomeViewController *view = [[HomeViewController alloc] init];
         //[self.navigationController pushViewController:view animated:YES];
         [UIView  beginAnimations:nil context:NULL];  
