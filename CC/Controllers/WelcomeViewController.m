@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     // Do any additional setup after loading the view from its nib.
     NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"update" ofType:@"gif"]];
@@ -85,7 +86,7 @@
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:documentLibraryFolderPath]) {
         
-        NSLog(@"文件已经存在了");
+        //NSLog(@"文件已经存在了");
     }else {
         //    NSString *plistPath = [[NSBundle mainBundle] pathForResource:fullPathToFile ofType:@"plist"];
         
