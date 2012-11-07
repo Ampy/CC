@@ -89,6 +89,14 @@
 {
 //    if(![Common ExceptionHandler:[Common networkState]])
 //    {
+    CellService * cs = [[CellService alloc] init];
+    NSString * url = [cs CellWeb:@"IOS/GetServiceUrl"];
+    if(!url)
+    {
+        [Common Alert:@"网络异常！"];
+        return;
+    }
+
         if(lists.count>0)
         {
             bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
