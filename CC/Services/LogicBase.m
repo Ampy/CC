@@ -65,7 +65,8 @@
     [db OpenDB:n];
     
     //init db
-    if([@"F" isEqualToString:[Settings IsInit]])
+    NSString *init=[Settings IsInit];
+    if([@"F" isEqualToString:init])
     {
         
         returnCode = [u UpdateAll:fullArr];
@@ -346,12 +347,12 @@
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings DatabaseName]];
     
-    NSString * sql = [NSString stringWithFormat:@"select * from InspectActivity where InspectActivityId='%@'",InspectActivityId];
+    NSString * sql = [NSString stringWithFormat:@"select InspectActivityID,InspectCode,InspectWay,SiteID,Name,Remarks,Sort,Total,Score,Finished,Inspecter,InspectDate,Recorder,RecordDate,RealInspectDate,Unqualified,isScoring from InspectActivity where InspectActivityId='%@'",InspectActivityId];
     sqlite3_stmt * stmt= [db ExecSql:sql];
     while (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        NSString * updateSQL = @" insert into InspectActivity VALUES(";
-        int count = 15;
+        NSString * updateSQL = @" insert into InspectActivity(InspectActivityID,InspectCode,InspectWay,SiteID,Name,Remarks,Sort,Total,Score,Finished,Inspecter,InspectDate,Recorder,RecordDate,RealInspectDate,Unqualified,isScoring) VALUES(";
+        int count = 17;
         for(int i=0;i<count;i++)
         {
             NSString * value = @"0";
@@ -377,11 +378,11 @@
     sqlite3_finalize(stmt);
     
     //Inspect
-    sql = [NSString stringWithFormat:@"select * from Inspect where InspectActivityID='%@'",InspectActivityId];
+    sql = [NSString stringWithFormat:@"select InspectID,InspectCode,InspectWay,SiteInspTempID,SiteID,InspTempID,Name,Optional,InspType,Remarks,Sort,invalid,Total,Score,Finished,Inspecter,InspectDate,Recorder,RecordDate,InspectActivityID,InspTempWeight,InspCategory,IsCancel from Inspect where InspectActivityID='%@'",InspectActivityId];
     stmt= [db ExecSql:sql];
     while (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        NSString * updateSQL = @" insert into Inspect VALUES(";
+        NSString * updateSQL = @" insert into Inspect(InspectID,InspectCode,InspectWay,SiteInspTempID,SiteID,InspTempID,Name,Optional,InspType,Remarks,Sort,invalid,Total,Score,Finished,Inspecter,InspectDate,Recorder,RecordDate,InspectActivityID,InspTempWeight,InspCategory,IsCancel) VALUES(";
         int count = 23;
         for(int i=0;i<count;i++)
         {
@@ -408,11 +409,11 @@
     sqlite3_finalize(stmt);
     
     //InspectItem
-    sql = [NSString stringWithFormat:@"select * from InspectItem where InspectID in (select InspectID from Inspect where InspectActivityID='%@')",InspectActivityId];
+    sql = [NSString stringWithFormat:@"select InspectItemID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,InspectID,Total,IsCancel from InspectItem where InspectID in (select InspectID from Inspect where InspectActivityID='%@')",InspectActivityId];
     stmt= [db ExecSql:sql];
     while (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        NSString * updateSQL = @" insert into InspectItem VALUES(";
+        NSString * updateSQL = @" insert into InspectItem(InspectItemID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,InspectID,Total,IsCancel) VALUES(";
         int count = 14;
         for(int i=0;i<count;i++)
         {
@@ -439,11 +440,11 @@
     sqlite3_finalize(stmt);
     
     //InspectScore
-    sql = [NSString stringWithFormat:@"select * from InspectScore where InspectID in (select InspectID from Inspect where InspectActivityID='%@') and inspectitemid is not null",InspectActivityId];
+    sql = [NSString stringWithFormat:@"select ScoreID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,InspectItemID,InspectID,Selected,Qualified from InspectScore where InspectID in (select InspectID from Inspect where InspectActivityID='%@') and inspectitemid is not null",InspectActivityId];
     stmt= [db ExecSql:sql];
     while (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        NSString * updateSQL = @" insert into InspectScore VALUES(";
+        NSString * updateSQL = @" insert into InspectScore(ScoreID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,InspectItemID,InspectID,Selected,Qualified) VALUES(";
         int count = 15;
         for(int i=0;i<count;i++)
         {

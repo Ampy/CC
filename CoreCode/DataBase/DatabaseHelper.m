@@ -78,9 +78,9 @@
 {
     sqlite3_close(database);
     //取得数据库文件cc.sqlite在模拟器/真机上的真实路径
-    //NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    //NSString *realPath = documentPath;
-    //NSLog(@"数据库所在路径：%@", realPath);
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *realPath = documentPath;
+    NSLog(@"数据库所在路径：%@", realPath);
 }
 
 @end
