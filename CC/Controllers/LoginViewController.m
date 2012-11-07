@@ -46,7 +46,7 @@
 //    if([isRemember isEqualToString: @"T"])
 //    {
 //        [remember setOn:true animated:NO];
-        name.text = [Settings LoginUserName];
+        name.text = [Settings LoginUser];
         //password.text = [Config GetPlistInfo:@"LoginPassword"];
 //    }
 //    else 
@@ -80,7 +80,7 @@
     
 //    if(remember.isOn)
 //    {
-    [Settings setLoginUserName:name.text];
+      [Settings setLoginUser:name.text];
 //        [Config SetPlistInfo:@"LoginPassword" Value:password.text];
 //        [Config SetPlistInfo:@"LoginIsRemember" Value:@"T"];
 //    }

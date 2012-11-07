@@ -156,10 +156,10 @@
 
 - (IBAction)updataByServer:(NSString *)strI
 {
-    if(![Common ExceptionHandler:[Common CheckNetworkStatus]])
-    {
+//    if(![Common ExceptionHandler:[Common networkState]])
+//    {
         [Common ExceptionHandler:[LogicBase UpdateByService]];
-    }
+//    }
     [webView removeFromSuperview];
     [bgView removeFromSuperview];
 }

@@ -48,4 +48,7 @@
 +(void)setInspectDate:(NSString *)inspectDate;
 +(void)setServiceUrl:(NSString *)serviceUrl;
 
++(NSString *) LoginUser;
++(void)setLoginUser:(NSString *)loginUser;
+
 @end

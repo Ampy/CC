@@ -59,6 +59,10 @@
 {
     return [Plist GetValue:[self GetFileFullPath] Path:@"LoginUserName"];
 }
++(NSString *) LoginUser
+{
+    return [Plist GetValue:[self GetFileFullPath] Path:@"LoginUser"];
+}
 +(NSString *) LoginUserId
 {
     return [Plist GetValue:[self GetFileFullPath] Path:@"LoginUserId"];
@@ -96,6 +100,11 @@
 +(void)setLoginUserName:(NSString *)loginUserName
 {
     [Plist SetValue:[self GetFileFullPath] SectionPath:@"LoginUserName" SectionValue:loginUserName];     
+}
+
++(void)setLoginUser:(NSString *)loginUser
+{
+    [Plist SetValue:[self GetFileFullPath] SectionPath:@"LoginUser" SectionValue:loginUser];
 }
 
 +(void)setInspectWay:(NSString *)inspectWay

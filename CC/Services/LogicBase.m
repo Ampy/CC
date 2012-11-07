@@ -50,6 +50,7 @@
     
     CellService * cs = [[CellService alloc] init];
     NSString * url = [cs CellWeb:@"IOS/GetServiceUrl"];
+    if(!url) return 0;
     if([url length]<50)
         [Settings setServiceUrl:url];
     
