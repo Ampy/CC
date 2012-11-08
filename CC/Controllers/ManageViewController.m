@@ -89,6 +89,7 @@
 {
 //    if(![Common ExceptionHandler:[Common networkState]])
 //    {
+    submitCount=0;
     CellService * cs = [[CellService alloc] init];
     NSString * url = [cs CellWeb:@"IOS/GetServiceUrl"];
     if(!url)
@@ -118,6 +119,7 @@
             NSString *strI = [NSString stringWithFormat:@"%d",i];
             [self performSelectorInBackground: @selector(updataByOne:) withObject:strI];
         }
+  
 //    }
 }
 
@@ -213,12 +215,16 @@
         
         if(![[arr objectAtIndex:5] isEqualToString:@""])
         {
-            UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(380,20,16,14)];
+            if([arr objectAtIndex:5]!=@"提交失败")
+            {
+            UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(370,20,16,14)];
             img.image = [UIImage imageNamed:@"ok.png"];
             [cell.contentView addSubview:img];
+            }
+            UILabel *imgLabel= [[UILabel alloc] initWithFrame:CGRectMake(390,10,110,30)];
             
-            UILabel *imgLabel= [[UILabel alloc] initWithFrame:CGRectMake(400,10,100,30)];
             imgLabel.text = [arr objectAtIndex:5];
+ 
             [cell.contentView addSubview:imgLabel];
         }
     }

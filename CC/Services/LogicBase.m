@@ -480,10 +480,13 @@
     //
     //NSData *sqlData = [NSKeyedArchiver archivedDataWithRootObject:sqlArray];
     
+    NSInteger mm = [sqlData  length];
+    if(mm==0) return @"已提交";
+    
     NSString * url = [NSString stringWithFormat:@"IOS/UpdateInspect?ID=%@",InspectActivityId];
     CellService *cs = [[CellService alloc]init];
     NSData * data =[cs CellWeb:url Data:sqlData];
-    
+
     //将NSData转成字符，然后再转成浮点，然后再格式化输出
     NSString *tmp = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
     float i = [tmp floatValue];
@@ -503,6 +506,10 @@
             [db Final];
             [NSThread sleepForTimeInterval:1];
         }
+    }
+    else
+    {
+        result=@"上传失败";
     }
     [db CloseDB];
     [NSThread sleepForTimeInterval:2];
