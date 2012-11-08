@@ -490,17 +490,22 @@
 
     NSString *result = [[NSString alloc] initWithFormat:@"%.2f",i];
     //NSString *result = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
-    
-    NSArray * array = [delSQL componentsSeparatedByString:@"|$|"];
-    for(int i=array.count-1;i>=0;i--)
+    if(i>-1)
     {
-        [db ExecSql:[array objectAtIndex:i]];
-        [db Setp];
-        [db Final];
+        NSArray * array = [delSQL componentsSeparatedByString:@"|$|"];
+        for(int i=array.count-1;i>=0;i--)
+        {
+            NSString * msql = [array objectAtIndex:i];
+            
+            //NSLog(@"%@",msql);
+            [db ExecSql:msql];
+            [db Setp];
+            [db Final];
+            [NSThread sleepForTimeInterval:1];
+        }
     }
-    
     [db CloseDB];
-    
+    [NSThread sleepForTimeInterval:2];
     return result;
 }
 

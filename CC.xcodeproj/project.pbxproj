@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05006C65164B578700D3FA15 /* btn1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05006C64164B578700D3FA15 /* btn1.png */; };
 		050CECDA15F600410044CCB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050CECD915F600410044CCB9 /* UIKit.framework */; };
 		050CECDC15F600410044CCB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050CECDB15F600410044CCB9 /* Foundation.framework */; };
 		050CECDE15F600410044CCB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050CECDD15F600410044CCB9 /* CoreGraphics.framework */; };
@@ -103,6 +104,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05006C64164B578700D3FA15 /* btn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn1.png; path = Images/btn1.png; sourceTree = "<group>"; };
 		050CECD515F600410044CCB9 /* CC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		050CECD915F600410044CCB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		050CECDB15F600410044CCB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -415,6 +417,7 @@
 		A6790F6C15FD8DCE00F2655E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				05006C64164B578700D3FA15 /* btn1.png */,
 				A6A96904162E59E700C2E07D /* weit.gif */,
 				A6A96901162E536200C2E07D /* exit.png */,
 				A631793D16119C7A00014D07 /* up.gif */,
@@ -619,6 +622,7 @@
 				05E6657C163E793300FF4677 /* InspectViewController.xib in Resources */,
 				05E6657D163E793300FF4677 /* ThirdLevelTableViewCell.xib in Resources */,
 				05E6657E163E793300FF4677 /* PopViewController.xib in Resources */,
+				05006C65164B578700D3FA15 /* btn1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
