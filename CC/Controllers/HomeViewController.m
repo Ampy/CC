@@ -154,7 +154,7 @@
     [self performSelectorInBackground: @selector(updataByServer:) withObject:@"" ];
 }
 
-- (IBAction)updataByServer:(NSString *)strI
+-(void) updataByServer:(NSString *)strI
 {
 //    if(![Common ExceptionHandler:[Common networkState]])
 //    {
