@@ -50,13 +50,17 @@
     
     CellService * cs = [[CellService alloc] init];
     NSString * url = [cs CellWeb:@"IOS/GetServiceUrl"];
-    if(!url) return 0;
-    if([url length]<50)
+    //if(!url) return 0;
+    if([url length]<50 && [url length]>0)
     {
         NSString *mp = [url substringFromIndex:[url length]-1];
         if(![mp isEqualToString:@"/"])
             url =  [url stringByAppendingString:@"/"];
         [Settings setServiceUrl:url];
+    }
+    else
+    {
+        [Settings setServiceUrl:@"http://wmsg.telsafe.com.cn/"];
     }
     NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",@"UserLine",nil];
     

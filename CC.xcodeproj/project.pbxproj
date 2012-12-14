@@ -776,7 +776,7 @@
 				050CECEC15F600410044CCB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		050CECED15F600410044CCB9 /* Build configuration list for PBXNativeTarget "CC" */ = {
 			isa = XCConfigurationList;
@@ -785,7 +785,7 @@
 				050CECEF15F600410044CCB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
