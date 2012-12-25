@@ -62,9 +62,9 @@
     {
         [Settings setServiceUrl:@"http://wmsg.telsafe.com.cn/"];
     }
-    NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",@"UserLine",nil];
+    NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",@"UserLine",@"UserSegment",nil];
     
-    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"UserLine",nil];
+    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"UserLine",@"UserSegment",nil];
     //struct
     NSArray * structTables = [NSArray arrayWithObjects:@"Inspect",@"InspectItem",@"InspectScore",@"InspectActivity",@"V_Site_H",nil];
     Update *u = [[Update alloc] init];
@@ -87,6 +87,8 @@
         NSString *sql = @"CREATE view IF NOT EXISTS V_InspectActivity as select a.InspectActivityID,a.InspectCode,a.Name,a.SiteID,a.InspectWay,a.InspectDate,a.Total,a.Score,a.Finished,a.Inspecter,a.Recorder,a.RecordDate,b.Name SiteName,c.SegmentID,c.Name SegmentName,d.LineID,d.Name LineName from inspectactivity a left join V_Site b on a.SiteID = b.SiteID left join V_segment c on b.SegmentID = c.segmentid left join V_Line d on c.LineID=d.LineID ";
         
         NSString *sql2=@"CREATE view IF NOT EXISTS  V_VerifyInspect as select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
+      
+        //NSString *sql3=@"CREATE view IF NOT EXISTS  V_UserSegment as ";
         
         [db ExecSql:sql];
         [db Setp];
@@ -177,8 +179,8 @@
 {
     //NSString * sql = [NSString stringWithFormat:@"select * from V_Line where UserId='%@'",[Config GetPlistInfo:@"LoginUserId"]];
     NSString * sql3 = @"";
-
-    NSString * sql2 = [NSString stringWithFormat:@"SELECT LineID FROM UserLine where UserID in (select UserID from Sys_User where Name='%@')" ,[Settings LoginUserName]];
+    //下面的逻辑是，如果用户和Line关联了，就获取关联的Line，如果没有任何关联记录，认为用户有获取所有Line的权限
+    NSString * sql2 = [NSString stringWithFormat:@"SELECT LineID FROM UserLine where UserID in (select UserID from Sys_User where Name='%@')" ,[Settings LoginUser]];
     DatabaseHelper *db = [[DatabaseHelper alloc] init];
     [db OpenDB:[Settings DatabaseName]];
     sqlite3_stmt * stmt= [db ExecSql:sql2];
@@ -194,13 +196,20 @@
     {
         where = [NSString stringWithFormat:@" where LineID in ('%@') ",sql3];
     }
-    
-    NSString * sql = [NSString stringWithFormat:@"select * from V_Line %@" ,where];
+  
+    //获取关联的Line，通过关联的Segment获取关联的Line，两个Line集合进行UNION合并
+    NSString * sql = [NSString stringWithFormat:@"select * from V_Line %@ UNION SELECT * FROM V_Line WHERE LineID IN (SELECT LineID FROM V_UserSegment WHERE UserID='%@')" ,where,[Settings LoginUserId]];
+  
     return[self SqlToArray:sql FieldCount:4];
 }
 
 +(NSMutableArray *)GetSegment
 {
+    //从V_UserSegment里查看有没有相应的Segment
+    //"SELECT Count(1) FROM V_UserSegment WHERE UserID='%@' AND LineID='%@'";
+    //有就获取相应的Segment
+    //"SELECT * FROM V_Segment WHERE SegmentID in (SELECT SegmentID FROM V_UserSegment WHERE UserID='%@' AND LineID='%@')"
+    //没有就获取线路下的所有标段
     NSString * sql = [NSString stringWithFormat:@"select * from V_Segment where LineID='%@'",[Settings LineID]];
     return [self SqlToArray:sql FieldCount:4];
 }
