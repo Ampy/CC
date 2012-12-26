@@ -120,7 +120,7 @@
         [db Setp];
         [db Final];
         
-        NSString *backSql = @"insert into V_Site_H select * from V_Site";
+        NSString *backSql = @"insert into V_Site_H select * from V_Site ";
         [db ExecSql:backSql];
         [db Setp];
         [db Final];
