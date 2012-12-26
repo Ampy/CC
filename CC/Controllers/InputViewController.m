@@ -245,18 +245,30 @@
         {
             iRow = 0;
         }
-        
         int iHeight = 160;
         if(iRow==0)
         {
             iHeight = 110;
         }
+
+        if ([[[[listArr objectAtIndex:1] objectAtIndex:0] objectAtIndex:2]isEqualToString:@""]) {
+            if(iRow==0){
+                subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
+                subView.delegate = self;
+                //subView.index = iRow;
+                [self.view addSubview:subView];
+                IsOpenSubView = YES;
+            }else{
+                [Common Alert:@"请选择标段！"];
+            }
+        }else{
+            subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
+            subView.delegate = self;
+            //subView.index = iRow;
+            [self.view addSubview:subView];
+            IsOpenSubView = YES;
+        }
         
-        subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
-        subView.delegate = self;
-        //subView.index = iRow;
-        [self.view addSubview:subView];
-        IsOpenSubView = YES;
     }
 }
 
@@ -272,7 +284,7 @@
     {
         [[[listArr objectAtIndex:2] objectAtIndex:0] setObject:[valueArr objectAtIndex:2] atIndex:2];
         [[[listArr objectAtIndex:2] objectAtIndex:0] setObject:[valueArr objectAtIndex:3] atIndex:3];
-        
+        NSLog(@"%@",[valueArr objectAtIndex:0]);
         [[[listArr objectAtIndex:1] objectAtIndex:1] setObject:@"" atIndex:2];
         [[[listArr objectAtIndex:1] objectAtIndex:1] setObject:@"" atIndex:3];
         [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:@"" atIndex:2];
