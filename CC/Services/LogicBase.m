@@ -233,7 +233,8 @@
     }
     [db Setp];
     [db Final];
-    if (count == 0) {//有就获取相应的Segment//"SELECT * FROM V_Segment WHERE SegmentID in (SELECT SegmentID FROM V_UserSegment WHERE UserID='%@' AND LineID='%@')"
+    if (count == 0) {
+      //有就获取相应的Segment//"SELECT * FROM V_Segment WHERE SegmentID in (SELECT SegmentID FROM V_UserSegment WHERE UserID='%@' AND LineID='%@')"
         NSString * sql = [NSString stringWithFormat:@"select * from V_Segment where LineID='%@'",[Settings LineID]];
         return [self SqlToArray:sql FieldCount:4];
     }else{//没有就获取线路下的所有标段
