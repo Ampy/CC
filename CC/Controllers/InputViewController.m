@@ -110,12 +110,12 @@
 {
     if([[[[listArr objectAtIndex:1] objectAtIndex:0] objectAtIndex:2] isEqualToString:@""])
     {
-        [Common Alert:@"请选择标段！"];
+        [Common Alert:@"请选择标段."];
         return;
     }
     if([[[[listArr objectAtIndex:1] objectAtIndex:1] objectAtIndex:2] isEqualToString:@""])
     {
-        [Common Alert:@"请选择工程！"];
+        [Common Alert:@"请选择工程."];
         return;
     }
     
@@ -259,7 +259,7 @@
                 [self.view addSubview:subView];
                 IsOpenSubView = YES;
             }else{
-                [Common Alert:@"请选择标段！"];
+                [Common Alert:@"请选择线路标段."];
             }
         }else{
             subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
