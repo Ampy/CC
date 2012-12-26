@@ -90,6 +90,9 @@
     NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",@"UserLine",@"UserSegment",nil];
     
     NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"UserLine",@"UserSegment",nil];
+//    NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",nil];
+//    
+//    NSArray * arr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",nil];
     //struct
     NSArray * structTables = [NSArray arrayWithObjects:@"Inspect",@"InspectItem",@"InspectScore",@"InspectActivity",@"V_Site_H",nil];
     Update *u = [[Update alloc] init];
@@ -219,12 +222,25 @@
 +(NSMutableArray *)GetSegment
 {
     //从V_UserSegment里查看有没有相应的Segment
-    //"SELECT Count(1) FROM V_UserSegment WHERE UserID='%@' AND LineID='%@'";
-    //有就获取相应的Segment
-    //"SELECT * FROM V_Segment WHERE SegmentID in (SELECT SegmentID FROM V_UserSegment WHERE UserID='%@' AND LineID='%@')"
-    //没有就获取线路下的所有标段
-    NSString * sql = [NSString stringWithFormat:@"select * from V_Segment where LineID='%@'",[Settings LineID]];
-    return [self SqlToArray:sql FieldCount:4];
+    NSString* sql1 = [NSString stringWithFormat:@"SELECT Count(1) FROM V_UserSegment WHERE UserID='%@' AND LineID='%@'",[Settings LoginUserId],[Settings LineID]];
+    DatabaseHelper *db = [[DatabaseHelper alloc] init];
+    [db OpenDB:[Settings DatabaseName]];
+    sqlite3_stmt * stmt= [db ExecSql:sql1];
+    int count;
+    while(sqlite3_step(stmt) == SQLITE_ROW)
+    {
+        count = sqlite3_column_int(stmt, 0);
+    }
+    [db Setp];
+    [db Final];
+    if (count == 0) {//有就获取相应的Segment//"SELECT * FROM V_Segment WHERE SegmentID in (SELECT SegmentID FROM V_UserSegment WHERE UserID='%@' AND LineID='%@')"
+        NSString * sql = [NSString stringWithFormat:@"select * from V_Segment where LineID='%@'",[Settings LineID]];
+        return [self SqlToArray:sql FieldCount:4];
+    }else{//没有就获取线路下的所有标段
+        NSString * sql = [NSString stringWithFormat:@"SELECT * FROM V_Segment WHERE SegmentID in (SELECT SegmentID FROM V_UserSegment WHERE UserID='%@' AND LineID='%@')",[Settings LoginUserId],[Settings LineID]];
+        return [self SqlToArray:sql FieldCount:4];
+    }
+    
 }
 
 +(NSMutableArray *)GetSite
