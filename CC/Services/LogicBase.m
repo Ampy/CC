@@ -44,10 +44,35 @@
     [[[arr objectAtIndex:l1] objectAtIndex:l2] setObject:value atIndex:l3];
 }
 
++(void) scriptIterativeUpdate
+{
+  DatabaseHelper *db = [[DatabaseHelper alloc] init];
+  [db OpenDB:[Settings DatabaseName]];
+  
+  NSString *sql = @"CREATE VIEW IF NOT EXISTS V_InspectActivity as select a.InspectActivityID,a.InspectCode,a.Name,a.SiteID,a.InspectWay,a.InspectDate,a.Total,a.Score,a.Finished,a.Inspecter,a.Recorder,a.RecordDate,b.Name SiteName,c.SegmentID,c.Name SegmentName,d.LineID,d.Name LineName from inspectactivity a left join V_Site b on a.SiteID = b.SiteID left join V_segment c on b.SegmentID = c.segmentid left join V_Line d on c.LineID=d.LineID ";
+  
+  NSString *sql2=@"CREATE VIEW IF NOT EXISTS V_VerifyInspect as select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
+  
+  NSString *sql3=@"CREATE VIEW IF NOT EXISTS V_UserSegment as       SELECT UserSegment.UserID,UserSegment.SegmentID,V_Segment.LineID FROM UserSegment LEFT JOIN V_Segment ON UserSegment.SegmentID=V_Segment.SegmentID";
+  
+  [db ExecSql:sql];
+  [db Setp];
+  [db Final];
+  
+  [db ExecSql:sql2];
+  [db Setp];
+  [db Final];
+  
+  [db ExecSql:sql3];
+  [db Setp];
+  [db Final];
+  [db CloseDB];
+}
+
 +(int)UpdateByService
 {
     int returnCode = 1;
-    
+  
     CellService * cs = [[CellService alloc] init];
     NSString * url = [cs CellWeb:@"IOS/GetServiceUrl"];
     //if(!url) return 0;
@@ -60,7 +85,7 @@
     }
     else
     {
-        [Settings setServiceUrl:@"http://wmsg.telsafe.com.cn/"];
+        //[Settings setServiceUrl:@"http://wmsg.telsafe.com.cn/"];
     }
     NSArray * fullArr = [NSArray arrayWithObjects:@"V_Line",@"V_Site",@"V_Segment",@"Sys_User",@"V_Inspect",@"SiteInspTemp",@"SiteInspItemTemp",@"SiteScoreTemp",@"UserLine",@"UserSegment",nil];
     
@@ -84,20 +109,7 @@
         returnCode = [u GetTableStructs:structTables];
         if(returnCode!=1) return returnCode;
         
-        NSString *sql = @"CREATE view IF NOT EXISTS V_InspectActivity as select a.InspectActivityID,a.InspectCode,a.Name,a.SiteID,a.InspectWay,a.InspectDate,a.Total,a.Score,a.Finished,a.Inspecter,a.Recorder,a.RecordDate,b.Name SiteName,c.SegmentID,c.Name SegmentName,d.LineID,d.Name LineName from inspectactivity a left join V_Site b on a.SiteID = b.SiteID left join V_segment c on b.SegmentID = c.segmentid left join V_Line d on c.LineID=d.LineID ";
-        
-        NSString *sql2=@"CREATE view IF NOT EXISTS  V_VerifyInspect as select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
       
-        //NSString *sql3=@"CREATE view IF NOT EXISTS  V_UserSegment as ";
-        
-        [db ExecSql:sql];
-        [db Setp];
-        [db Final];
-        
-        [db ExecSql:sql2];
-        [db Setp];
-        [db Final];
-        
         //[Config SetPlistInfo:@"IsInit" Value:@"T"];
         [Settings setIsInit:@"T"];
     }
@@ -142,6 +154,7 @@
     }
     
     [db CloseDB];
+    [self scriptIterativeUpdate];
     return 1;
 }
 
