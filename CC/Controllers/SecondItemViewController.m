@@ -53,7 +53,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    dispatch_release(queue);
+    //dispatch_release(queue);
     // Release any retained subviews of the main view.
 }
 

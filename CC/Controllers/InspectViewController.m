@@ -81,7 +81,7 @@ static NSString *CellIdentifier = @"Inspects";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     InspectModel *model = (InspectModel*)[InspectList objectAtIndex:indexPath.row];
-    
+
     InspectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.InspectId];
     if (cell == nil) {
         

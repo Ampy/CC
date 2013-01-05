@@ -22,152 +22,151 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    // Custom initialization
+  }
+  return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    queue = dispatch_queue_create("ampy",nil);
-    MaskView.hidden=true;
-    
-    
-    UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(20, 10, 68, 26)];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
-    [self.view addSubview:backButton];
-    [backButton addTarget:self  action:@selector(backButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *beginButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [beginButton setFrame:CGRectMake(400, 620, 221, 52)];
-    [beginButton setBackgroundImage:[UIImage imageNamed:@"btn_inspect.png"] forState:UIControlStateNormal];
-    [beginButton addTarget:self  action:@selector(beginCheck:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:beginButton];
-    
-    self.view.userInteractionEnabled = YES;
-    
-    
-    listArr = [[NSMutableArray alloc] init];
-    
-    NSMutableArray *list1 = [[NSMutableArray alloc] init];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYY-MM-dd"];
-    NSString *locationString=[formatter stringFromDate: [NSDate date]];
-    
-    [Settings setInspectWay:checkType];
-    [Settings setInspectDate:locationString];
-    
-    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkTypeName,nil]];
-    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Settings LoginUserName],nil]];
-    [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查时间",locationString,nil]];
-    
-    [listArr addObject:list1];
-    
-    NSMutableArray *list2 = [[NSMutableArray alloc] init];
-    [list2 addObject:[[NSMutableArray alloc]initWithObjects:@"检查标段",@"未选标段",@"",@"",nil]];
-    [list2 addObject:[[NSMutableArray alloc]initWithObjects:@"检查工程",@"未选工程",@"",@"",nil]];
-    
-    [listArr addObject:list2];
-    
-    NSMutableArray *list3 = [[NSMutableArray alloc] init];
-    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"建设单位",@"",@"",@"",nil]];
-    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"施工单位",@"",@"",@"",nil]];
-    [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"监理单位",@"",@"",@"",nil]];
-    
-    [listArr addObject:list3];
-    
-    [tableView setBackgroundView:nil];
-    
-
-    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
-    WaitWebView.userInteractionEnabled = NO;
-    WaitWebView.backgroundColor = [UIColor clearColor];
-    WaitWebView.opaque = NO;
-    [WaitWebView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-    WaitWebView.hidden=true;
-    [WaitWebView setNeedsDisplay];
+  [super viewDidLoad];
+  // Do any additional setup after loading the view from its nib.
+  queue = dispatch_queue_create("ampy",nil);
+  MaskView.hidden=true;
+  
+  
+  UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
+  [backButton setFrame:CGRectMake(20, 10, 68, 26)];
+  [backButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
+  [self.view addSubview:backButton];
+  [backButton addTarget:self  action:@selector(backButton:) forControlEvents:UIControlEventTouchUpInside];
+  
+  //UIButton *beginButton =[UIButton buttonWithType:UIButtonTypeCustom];
+  //[beginButton setFrame:CGRectMake(400, 620, 221, 52)];
+  //[beginButton setBackgroundImage:[UIImage imageNamed:@"btn_inspect.png"] forState:UIControlStateNormal];
+  //[beginButton addTarget:self  action:@selector(beginCheck:) forControlEvents:UIControlEventTouchUpInside];
+  //[self.view addSubview:beginButton];
+  
+  self.view.userInteractionEnabled = YES;
+  
+  
+  listArr = [[NSMutableArray alloc] init];
+  
+  NSMutableArray *list1 = [[NSMutableArray alloc] init];
+  
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  [formatter setDateFormat:@"YYYY-MM-dd"];
+  NSString *locationString=[formatter stringFromDate: [NSDate date]];
+  
+  [Settings setInspectWay:checkType];
+  [Settings setInspectDate:locationString];
+  
+  [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查类型",checkTypeName,nil]];
+  [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查人",[Settings LoginUserName],nil]];
+  [list1 addObject:[[NSMutableArray alloc]initWithObjects:@"检查时间",locationString,nil]];
+  
+  [listArr addObject:list1];
+  
+  NSMutableArray *list2 = [[NSMutableArray alloc] init];
+  [list2 addObject:[[NSMutableArray alloc]initWithObjects:@"检查标段",@"未选标段",@"",@"",nil]];
+  [list2 addObject:[[NSMutableArray alloc]initWithObjects:@"检查工程",@"未选工程",@"",@"",nil]];
+  
+  [listArr addObject:list2];
+  
+  NSMutableArray *list3 = [[NSMutableArray alloc] init];
+  [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"建设单位",@"",@"",@"",nil]];
+  [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"施工单位",@"",@"",@"",nil]];
+  [list3 addObject:[[NSMutableArray alloc]initWithObjects:@"监理单位",@"",@"",@"",nil]];
+  
+  [listArr addObject:list3];
+  
+  [tableView setBackgroundView:nil];
+  
+  
+  NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"up" ofType:@"gif"]];
+  WaitWebView.userInteractionEnabled = NO;
+  WaitWebView.backgroundColor = [UIColor clearColor];
+  WaitWebView.opaque = NO;
+  [WaitWebView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+  WaitWebView.hidden=true;
+  [WaitWebView setNeedsDisplay];
 }
 
 -(void)backButton:(id)sender
 {
-    //[self.navigationController popViewControllerAnimated:YES];
-    HomeViewController *ctrl = [[HomeViewController alloc] init];
-    [UIView  beginAnimations:nil context:NULL];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.75];
-    [self.navigationController pushViewController:ctrl animated:NO];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
-    [UIView commitAnimations];
+  //[self.navigationController popViewControllerAnimated:YES];
+  HomeViewController *ctrl = [[HomeViewController alloc] init];
+  [UIView  beginAnimations:nil context:NULL];
+  [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+  [UIView setAnimationDuration:0.75];
+  [self.navigationController pushViewController:ctrl animated:NO];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
+  [UIView commitAnimations];
+}
+- (IBAction)beginCheck:(id)sender {
+  if([[[[listArr objectAtIndex:1] objectAtIndex:0] objectAtIndex:2] isEqualToString:@""])
+  {
+    [Common Alert:@"请选择标段."];
+    return;
+  }
+  if([[[[listArr objectAtIndex:1] objectAtIndex:1] objectAtIndex:2] isEqualToString:@""])
+  {
+    [Common Alert:@"请选择工程."];
+    return;
+  }
+  
+  
+  //开始检查
+  //[Common Alert:@"开始检查"];
+  
+  dispatch_async(queue, ^{
+    
+    dispatch_sync(dispatch_get_main_queue(),^{
+      MaskView.hidden=false;
+      WaitWebView.hidden=false;
+      [WaitWebView setNeedsDisplay];
+      ((UIButton *) sender).enabled=false;
+      
+    });
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if([Common ExceptionHandler:[LogicBase BuildCheckData]])
+        return;
+    });
+    
+    dispatch_async(dispatch_get_main_queue(),^{
+      MaskView.hidden=true;
+      WaitWebView.hidden=true;
+      NSString * mid = [Settings InspectActivityID];
+      InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
+      [self.navigationController pushViewController:inspectview animated:YES];
+    });
+    
+  });
+
 }
 
--(void)beginCheck:(id)sender
-{
-    if([[[[listArr objectAtIndex:1] objectAtIndex:0] objectAtIndex:2] isEqualToString:@""])
-    {
-        [Common Alert:@"请选择标段."];
-        return;
-    }
-    if([[[[listArr objectAtIndex:1] objectAtIndex:1] objectAtIndex:2] isEqualToString:@""])
-    {
-        [Common Alert:@"请选择工程."];
-        return;
-    }
-    
-    
-    //开始检查
-    //[Common Alert:@"开始检查"];
-        
-    dispatch_async(queue, ^{
-        
-        dispatch_sync(dispatch_get_main_queue(),^{
-            MaskView.hidden=false;
-            WaitWebView.hidden=false;
-            [WaitWebView setNeedsDisplay];
-            ((UIButton *) sender).enabled=false;
-            
-        });
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if([Common ExceptionHandler:[LogicBase BuildCheckData]])
-                return;
-        });
-        
-        dispatch_async(dispatch_get_main_queue(),^{
-            MaskView.hidden=true;
-            WaitWebView.hidden=true;
-            NSString * mid = [Settings InspectActivityID];
-            InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
-            [self.navigationController pushViewController:inspectview animated:YES];
-        });
-        
-    });
-        
-}
 
 -(void) LoadInspectView
 {
-    if([Common ExceptionHandler:[LogicBase BuildCheckData]])
-        return;
-    NSString * mid = [Settings InspectActivityID];
-    InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
-    [self.navigationController pushViewController:inspectview animated:YES];
+  if([Common ExceptionHandler:[LogicBase BuildCheckData]])
+    return;
+  NSString * mid = [Settings InspectActivityID];
+  InspectViewController * inspectview = [[InspectViewController alloc] initWithInspectActivityId:mid];
+  [self.navigationController pushViewController:inspectview animated:YES];
 }
 
 - (void)viewDidUnload
 {
-    [self setTableView:nil];
-    [self setMaskView:nil];
-    [self setWaitWebView:nil];
-    [super viewDidUnload];
-    dispatch_release(queue);
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  [self setTableView:nil];
+  [self setMaskView:nil];
+  [self setWaitWebView:nil];
+  [super viewDidUnload];
+  //dispatch_release(queue);
+  // Release any retained subviews of the main view.
+  // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -178,136 +177,136 @@
 #pragma mark -- Table view
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [listArr count];
+  return [listArr count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return [[listArr objectAtIndex:section] count];
+  
+  return [[listArr objectAtIndex:section] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @""] ;
-    
-    NSMutableArray * arr = [[listArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.textLabel.text= [arr objectAtIndex:0];
-    
-    if(indexPath.section==1)
+  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: @""] ;
+  
+  NSMutableArray * arr = [[listArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+  cell.textLabel.text= [arr objectAtIndex:0];
+  
+  if(indexPath.section==1)
+  {
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
+  
+  if(indexPath.section==0)
+  {
+    UILabel *tLable= [[UILabel alloc] initWithFrame:CGRectMake(140,5,200,30)];
+    tLable.text = [arr objectAtIndex:1];
+    tLable.font = [UIFont fontWithName: @"Helvetica" size: 14 ];
+    tLable.textColor = [ UIColor redColor ];
+    tLable.textAlignment = UITextAlignmentRight;
+    [tLable setBackgroundColor:[UIColor clearColor]];
+    [cell.contentView addSubview:tLable];
+  }
+  else
+  {
+    UILabel *tLable= [[UILabel alloc] initWithFrame:CGRectMake(140,5,200,30)];
+    if([[arr objectAtIndex:2] isEqualToString: @""])
     {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    if(indexPath.section==0)
-    {
-        UILabel *tLable= [[UILabel alloc] initWithFrame:CGRectMake(140,5,200,30)];
-        tLable.text = [arr objectAtIndex:1];
-        tLable.font = [UIFont fontWithName: @"Helvetica" size: 14 ];
-        tLable.textColor = [ UIColor redColor ];
-        tLable.textAlignment = UITextAlignmentRight;
-        [tLable setBackgroundColor:[UIColor clearColor]];
-        [cell.contentView addSubview:tLable];
+      tLable.text = [arr objectAtIndex:1];
+      tLable.textColor = [ UIColor grayColor ];
+      
     }
     else
     {
-        UILabel *tLable= [[UILabel alloc] initWithFrame:CGRectMake(140,5,200,30)];
-        if([[arr objectAtIndex:2] isEqualToString: @""])
-        {
-            tLable.text = [arr objectAtIndex:1];
-            tLable.textColor = [ UIColor grayColor ];
-            
-        }
-        else
-        {
-            tLable.text = [arr objectAtIndex:2];
-            tLable.textColor = [ UIColor redColor ];
-        }
-        //tLable.text = [arr objectAtIndex:1];
-        tLable.font = [UIFont fontWithName: @"Helvetica" size: 14 ];
-        
-        tLable.textAlignment = UITextAlignmentRight;
-        [tLable setBackgroundColor:[UIColor clearColor]];
-        [cell.contentView addSubview:tLable];
-    }
-    return cell;
+      tLable.text = [arr objectAtIndex:2];
+      tLable.textColor = [ UIColor redColor ];
+   }
+    //tLable.text = [arr objectAtIndex:1];
+    tLable.font = [UIFont fontWithName: @"Helvetica" size: 14 ];
+    
+    tLable.textAlignment = UITextAlignmentRight;
+    [tLable setBackgroundColor:[UIColor clearColor]];
+    [cell.contentView addSubview:tLable];
+  }
+  return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(IsOpenSubView)
+  if(IsOpenSubView)
+  {
+    [subView removeFromSuperview];
+  }
+  if(indexPath.section==1)
+  {
+    int iRow = indexPath.row;
+    if([[Settings SegmentID] isEqualToString:@""])
     {
-        [subView removeFromSuperview];
+      iRow = 0;
     }
-    if(indexPath.section==1)
+    int iHeight = 160;
+    if(iRow==0)
     {
-        int iRow = indexPath.row;
-        if([[Settings SegmentID] isEqualToString:@""])
-        {
-            iRow = 0;
-        }
-        int iHeight = 160;
-        if(iRow==0)
-        {
-            iHeight = 110;
-        }
-
-        if ([[[[listArr objectAtIndex:1] objectAtIndex:0] objectAtIndex:2]isEqualToString:@""]) {
-            if(iRow==0){
-                subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
-                subView.delegate = self;
-                //subView.index = iRow;
-                [self.view addSubview:subView];
-                IsOpenSubView = YES;
-            }else{
-                [Common Alert:@"请选择线路标段."];
-            }
-        }else{
-            subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
-            subView.delegate = self;
-            //subView.index = iRow;
-            [self.view addSubview:subView];
-            IsOpenSubView = YES;
-        }
-        
+      iHeight = 110;
     }
+    
+    if ([[[[listArr objectAtIndex:1] objectAtIndex:0] objectAtIndex:2]isEqualToString:@""]) {
+      if(iRow==0){
+        subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
+        subView.delegate = self;
+        //subView.index = iRow;
+        [self.view addSubview:subView];
+        IsOpenSubView = YES;
+      }else{
+        [Common Alert:@"请选择线路标段."];
+      }
+    }else{
+      subView = [[InputSubView alloc]initWithFrame:CGRectMake(470, iHeight, 400, 420) index:iRow];
+      subView.delegate = self;
+      //subView.index = iRow;
+      [self.view addSubview:subView];
+      IsOpenSubView = YES;
+    }
+    
+  }
 }
 
 
 //
 -(void)passValue:(NSMutableArray *)valueArr arrayIndex:(int) index
 {
-    //[LogicBase SetArrayLevel3:listArr Value:[valueArr objectAtIndex:0] Level1:1 Level2:index Level3:2];
-    [[[listArr objectAtIndex:1] objectAtIndex:index] setObject:[valueArr objectAtIndex:0] atIndex:2];
-    [[[listArr objectAtIndex:1] objectAtIndex:index] setObject:[valueArr objectAtIndex:1] atIndex:3];
-    
-    if(index==0)
-    {
-        [[[listArr objectAtIndex:2] objectAtIndex:0] setObject:[valueArr objectAtIndex:2] atIndex:2];
-        [[[listArr objectAtIndex:2] objectAtIndex:0] setObject:[valueArr objectAtIndex:3] atIndex:3];
-        NSLog(@"%@",[valueArr objectAtIndex:0]);
-        [[[listArr objectAtIndex:1] objectAtIndex:1] setObject:@"" atIndex:2];
-        [[[listArr objectAtIndex:1] objectAtIndex:1] setObject:@"" atIndex:3];
-        [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:@"" atIndex:2];
-        [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:@"" atIndex:3];
-        [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:@"" atIndex:2];
-        [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:@"" atIndex:3];
-    }
-    else
-    {
-        [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:[valueArr objectAtIndex:2] atIndex:2];
-        [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:[valueArr objectAtIndex:3] atIndex:3];
-        [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:[valueArr objectAtIndex:4] atIndex:2];
-        [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:[valueArr objectAtIndex:5] atIndex:3];
-    }
-    
-    [tableView reloadData];
-    
+  //[LogicBase SetArrayLevel3:listArr Value:[valueArr objectAtIndex:0] Level1:1 Level2:index Level3:2];
+  [[[listArr objectAtIndex:1] objectAtIndex:index] setObject:[valueArr objectAtIndex:0] atIndex:2];
+  [[[listArr objectAtIndex:1] objectAtIndex:index] setObject:[valueArr objectAtIndex:1] atIndex:3];
+  
+  if(index==0)
+  {
+    [[[listArr objectAtIndex:2] objectAtIndex:0] setObject:[valueArr objectAtIndex:2] atIndex:2];
+    [[[listArr objectAtIndex:2] objectAtIndex:0] setObject:[valueArr objectAtIndex:3] atIndex:3];
+    NSLog(@"%@",[valueArr objectAtIndex:0]);
+    [[[listArr objectAtIndex:1] objectAtIndex:1] setObject:@"" atIndex:2];
+    [[[listArr objectAtIndex:1] objectAtIndex:1] setObject:@"" atIndex:3];
+    [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:@"" atIndex:2];
+    [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:@"" atIndex:3];
+    [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:@"" atIndex:2];
+    [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:@"" atIndex:3];
+  }
+  else
+  {
+    [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:[valueArr objectAtIndex:2] atIndex:2];
+    [[[listArr objectAtIndex:2] objectAtIndex:1] setObject:[valueArr objectAtIndex:3] atIndex:3];
+    [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:[valueArr objectAtIndex:4] atIndex:2];
+    [[[listArr objectAtIndex:2] objectAtIndex:2] setObject:[valueArr objectAtIndex:5] atIndex:3];
+  }
+  
+  [tableView reloadData];
+  
 }
 
 -(void)SubVewClose
 {
-    IsOpenSubView = NO;
-    [subView removeFromSuperview];
+  IsOpenSubView = NO;
+  [subView removeFromSuperview];
 }
 
 

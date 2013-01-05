@@ -28,7 +28,7 @@
 -(NSMutableArray *)GetInspects:(NSString *)activityId
 {
     
-    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectActivityId,InspectCode,Name,InspectId,InspTempId FROM INSPECT WHERE InspectActivityId='%@' order by InspTempId",activityId];
+    NSString * sql = [NSString stringWithFormat:@"SELECT InspectActivityId,InspectCode,Name,InspectId,InspTempId FROM INSPECT WHERE InspectActivityId='%@' order by InspTempId",activityId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
     NSMutableArray *list = [NSMutableArray arrayWithCapacity:5];
@@ -51,7 +51,7 @@
 -(NSMutableArray *)GetInspectItems:(NSString *)inspectId ParentItemId:(NSString *)parentItemId
 {
     
-    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectItemID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,InspectID,Total,IsCancel FROM INSPECTITEM WHERE InspectId='%@' AND PItemTempID = '%@'",inspectId,parentItemId];
+    NSString * sql = [NSString stringWithFormat:@"SELECT InspectItemID,SiteInspItemTempID,ItemTempID,PItemTempID,Name,Remarks,SpecialItem,Score,Sort,InspTempID,SiteInspTempID,InspectID,Total,IsCancel FROM INSPECTITEM WHERE InspectId='%@' AND PItemTempID = '%@'",inspectId,parentItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
     NSMutableArray *list = [NSMutableArray arrayWithCapacity:5];
@@ -91,7 +91,7 @@
 -(NSMutableArray *)GetInspectScoreItems:(NSString *) inspectItemId
 {
     
-    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT ScoreID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,InspectItemID,InspectID,Selected,Qualified FROM INSPECTSCORE WHERE InspectItemId='%@' ORDER BY Sort",inspectItemId];
+    NSString * sql = [NSString stringWithFormat:@"SELECT ScoreID,SiteScoreTempID,InspScoreTempID,Name,Caption,Score,Sort,InspItemTempID,InspTempID,SiteInspItemTempID,SiteInspTempID,InspectItemID,InspectID,Selected,Qualified FROM INSPECTSCORE WHERE InspectItemId='%@' ORDER BY Sort",inspectItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     
     NSMutableArray *list = [NSMutableArray arrayWithCapacity:5];
@@ -123,7 +123,7 @@
 
 -(int) GetInspectSocreItemsCount:(NSString *)inspectItemId{
     
-    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT count(1) FROM INSPECTSCORE WHERE InspectItemId='%@'",inspectItemId];
+    NSString * sql = [NSString stringWithFormat:@"SELECT count(1) FROM INSPECTSCORE WHERE InspectItemId='%@'",inspectItemId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     int count = 0;
     if (sqlite3_step(statement)==SQLITE_ROW) {
@@ -138,19 +138,19 @@
 -(void) SelectInspectScoreItem:(NSString *)inspectScoreId value:(int)value
 {
     
-    NSString * sql = [[NSString alloc] initWithFormat:@"SELECT InspectItemId FROM INSPECTSCORE WHERE ScoreID='%@'",inspectScoreId];
+    NSString * sql = [NSString stringWithFormat:@"SELECT InspectItemId FROM INSPECTSCORE WHERE ScoreID='%@'",inspectScoreId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:sql];
     NSString *inspectItemId;
     if (sqlite3_step(statement)==SQLITE_ROW)
     {
         inspectItemId=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 0) encoding:NSUTF8StringEncoding];
         
-        NSString * sql2 = [[NSString alloc] initWithFormat:@"UPDATE INSPECTSCORE SET SELECTED=0 WHERE InspectItemId='%@'", inspectItemId];
+        NSString * sql2 = [NSString stringWithFormat:@"UPDATE INSPECTSCORE SET SELECTED=0 WHERE InspectItemId='%@'", inspectItemId];
         //statement = [databaseHelper ExecSql:sql2];
         [databaseHelper ExecuteNonQuery:sql2];
         //if(sqlite3_step(statement)==SQLITE_ROW)
         //{
-        NSString * sql3 = [[NSString alloc] initWithFormat:@"UPDATE INSPECTSCORE SET SELECTED=%d WHERE ScoreID='%@'",value,inspectScoreId];
+        NSString * sql3 = [NSString stringWithFormat:@"UPDATE INSPECTSCORE SET SELECTED=%d WHERE ScoreID='%@'",value,inspectScoreId];
         //statement = [databaseHelper ExecSql:sql3];
         [databaseHelper ExecuteNonQuery:sql3];
         //}
@@ -177,16 +177,16 @@
     
     if(level==2)
     {
-        NSString * updatesql1=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where ItemTempId In(select PItemTempId from InspectItem where InspectItemId='%@' and InspectId='%@') and InspectId='%@'",value,itemId,inspectid,inspectid];
+        NSString * updatesql1=[NSString stringWithFormat:@"update inspectItem set isCancel=%d  where ItemTempId In(select PItemTempId from InspectItem where InspectItemId='%@' and InspectId='%@') and InspectId='%@'",value,itemId,inspectid,inspectid];
         [databaseHelper ExecuteNonQuery:updatesql1];
     }
     
     if(level==3)
     {
-        NSString * updatesql1=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where ItemTempId In(select PItemTempId from InspectItem where InspectItemId='%@' and InspectId='%@') and InspectId='%@'",value,itemId,inspectid,inspectid];
+        NSString * updatesql1=[NSString stringWithFormat:@"update inspectItem set isCancel=%d  where ItemTempId In(select PItemTempId from InspectItem where InspectItemId='%@' and InspectId='%@') and InspectId='%@'",value,itemId,inspectid,inspectid];
         [databaseHelper ExecuteNonQuery:updatesql1];
         
-        NSString * updatesql2=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d where ItemTempId in (select PItemTempId From InspectItem where ItemTempId In(select PItemTempId from InspectItem where InspectItemId='%@' and InspectId='%@') and InspectId='%@')  and InspectId='%@'",value,itemId,inspectid,inspectid,inspectid];
+        NSString * updatesql2=[NSString stringWithFormat:@"update inspectItem set isCancel=%d where ItemTempId in (select PItemTempId From InspectItem where ItemTempId In(select PItemTempId from InspectItem where InspectItemId='%@' and InspectId='%@') and InspectId='%@')  and InspectId='%@'",value,itemId,inspectid,inspectid,inspectid];
         [databaseHelper ExecuteNonQuery:updatesql2];
     }
 }
@@ -196,39 +196,39 @@
     
     if(level==1)
     {
-        NSString * updatesql1=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where InspectItemId='%@'",value,itemId];
+        NSString * updatesql1=[NSString stringWithFormat:@"update inspectItem set isCancel=%d  where InspectItemId='%@'",value,itemId];
         [databaseHelper ExecuteNonQuery:updatesql1];
         
         
-        NSString * updatesql2=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where PitemTempId in(select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@') and inspectid='%@'",value,inspectid,itemId,inspectid];
+        NSString * updatesql2=[NSString stringWithFormat:@"update inspectItem set isCancel=%d  where PitemTempId in(select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@') and inspectid='%@'",value,inspectid,itemId,inspectid];
         [databaseHelper ExecuteNonQuery:updatesql2];
         
-        NSString * updatesql3=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d where PItemTempId in( select ItemTempId from InspectItem where PitemTempId in(select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@') and inspectid='%@') and inspectid='%@'",value,inspectid,itemId,inspectid,inspectid];
+        NSString * updatesql3=[NSString stringWithFormat:@"update inspectItem set isCancel=%d where PItemTempId in( select ItemTempId from InspectItem where PitemTempId in(select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@') and inspectid='%@') and inspectid='%@'",value,inspectid,itemId,inspectid,inspectid];
         [databaseHelper ExecuteNonQuery:updatesql3];
         
-        NSString * updateScoresql=[[NSString alloc] initWithFormat:@"update inspectscore set Selected=0  where InspectItemId in (select InspectItemid from InspectItem where PItemTempId in (select ItemTempId from inspectitem where PItemTempId in (select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@')))",inspectid,itemId];
+        NSString * updateScoresql=[NSString stringWithFormat:@"update inspectscore set Selected=0  where InspectItemId in (select InspectItemid from InspectItem where PItemTempId in (select ItemTempId from inspectitem where PItemTempId in (select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@')))",inspectid,itemId];
         [databaseHelper ExecuteNonQuery:updateScoresql];
         
     }
     if(level==2)
     {
-        NSString * updatesql1=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where InspectItemId='%@'",value,itemId];
+        NSString * updatesql1=[NSString stringWithFormat:@"update inspectItem set isCancel=%d  where InspectItemId='%@'",value,itemId];
         [databaseHelper ExecuteNonQuery:updatesql1];
         
         
-        NSString * updatesql2=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where PitemTempId in(select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@') and inspectid='%@'",value,inspectid,itemId,inspectid];
+        NSString * updatesql2=[NSString stringWithFormat:@"update inspectItem set isCancel=%d  where PitemTempId in(select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@') and inspectid='%@'",value,inspectid,itemId,inspectid];
         [databaseHelper ExecuteNonQuery:updatesql2];
         
-        NSString * updateScoresql=[[NSString alloc] initWithFormat:@"update inspectscore set Selected=0  where InspectItemId in (select inspectitemid from inspectitem where PItemTempId in (select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@'))",inspectid,itemId];
+        NSString * updateScoresql=[NSString stringWithFormat:@"update inspectscore set Selected=0  where InspectItemId in (select inspectitemid from inspectitem where PItemTempId in (select ItemTempId from InspectItem where inspectid='%@' and inspectitemid='%@'))",inspectid,itemId];
         [databaseHelper ExecuteNonQuery:updateScoresql];
     }
     
     if(level==3)
     {
-        NSString * updatesql1=[[NSString alloc] initWithFormat:@"update inspectItem set isCancel=%d  where InspectItemId='%@'",value,itemId];
+        NSString * updatesql1=[NSString stringWithFormat:@"update inspectItem set isCancel=%d  where InspectItemId='%@'",value,itemId];
         [databaseHelper ExecuteNonQuery:updatesql1];
         
-        NSString * updateScoresql=[[NSString alloc] initWithFormat:@"update inspectscore set Selected=0  where InspectItemId='%@'",itemId];
+        NSString * updateScoresql=[NSString stringWithFormat:@"update inspectscore set Selected=0  where InspectItemId='%@'",itemId];
         [databaseHelper ExecuteNonQuery:updateScoresql];
     }
     
@@ -239,7 +239,7 @@
     //计算第3层
     
     //找出勾选的项
-    NSString * selectScoreSql=[[NSString alloc] initWithFormat:@"SELECT InspectItemId,Score FROM InspectScore WHERE InspectId='%@' AND Selected=1",inspectId];
+    NSString * selectScoreSql=[NSString stringWithFormat:@"SELECT InspectItemId,Score FROM InspectScore WHERE InspectId='%@' AND Selected=1",inspectId];
     sqlite3_stmt * statement = [databaseHelper ExecSql:selectScoreSql];
     
     NSMutableArray *ScoreItems=[NSMutableArray arrayWithCapacity:0];
@@ -262,13 +262,13 @@
     
     for(ScoreItemModel *sm in ScoreItems)
     {
-        NSString * updateSql3=[[NSString alloc] initWithFormat:@"UPDATE InspectItem SET Total=Score * %f WHERE InspectItemId='%@'",sm.Score.floatValue, inspectId];
+        NSString * updateSql3=[NSString stringWithFormat:@"UPDATE InspectItem SET Total=Score * %f WHERE InspectItemId='%@'",sm.Score.floatValue, inspectId];
         [databaseHelper ExecuteNonQuery:updateSql3];
     }
     //计算第2层
     
     //找出第二层所有项
-    NSString * selectsql2=[[NSString alloc] initWithFormat:@"SELECT InspectItemId,PItemTempId FROM InspectItem where ItemTempId in (select PItemTempId From InspectItem where ItemTempId In(select PItemTempId from InspectItem where InspectItemId in (select InspectItemId from InspectScore where inspectid='%@' group by InspectItemId) and InspectId='%@') and InspectId='%@')  and InspectId='%@'",inspectId,inspectId,inspectId,inspectId];
+    NSString * selectsql2=[NSString stringWithFormat:@"SELECT InspectItemId,PItemTempId FROM InspectItem where ItemTempId in (select PItemTempId From InspectItem where ItemTempId In(select PItemTempId from InspectItem where InspectItemId in (select InspectItemId from InspectScore where inspectid='%@' group by InspectItemId) and InspectId='%@') and InspectId='%@')  and InspectId='%@'",inspectId,inspectId,inspectId,inspectId];
     sqlite3_stmt * statement2 = [databaseHelper ExecSql:selectsql2];
     
     //NSMutableArray *Level2Items=[NSMutableArray arrayWithCapacity:0];
@@ -288,7 +288,7 @@
     //NSString * CreateViewSql = @"CREATE  VIEW  IF NOT EXISTS V_VerifyInspect AS select c.InspectActivityID,a.inspectid,a.inspectitemid,a.Selected,b.IsCancel from (select inspectid,inspectitemid,sum(selected) selected from InspectScore group by inspectid,inspectitemid) a left join  InspectItem b on a.inspectitemid = b.inspectitemid left join inspect c on b.inspectid = c.inspectid";
     //[databaseHelper ExecuteNonQuery:CreateViewSql];
     
-    NSString * UnCompletedSql=[[NSString alloc] initWithFormat: @"select count(1) from V_VerifyInspect where InspectItemId in(select InspectItemId from inspectitem b where Exists(select inspectItemid from inspectitem a where a.inspectItemId='%@' and a.ItemTempId=b.PItemTempId and a.inspectid=b.inspectid)) and selected+isCancel=0;",itemId ];
+    NSString * UnCompletedSql=[NSString stringWithFormat: @"select count(1) from V_VerifyInspect where InspectItemId in(select InspectItemId from inspectitem b where Exists(select inspectItemid from inspectitem a where a.inspectItemId='%@' and a.ItemTempId=b.PItemTempId and a.inspectid=b.inspectid)) and selected+isCancel=0;",itemId ];
     sqlite3_stmt * statement = [databaseHelper ExecSql:UnCompletedSql];
     
     int count = 0;
@@ -308,7 +308,7 @@
     //var activity = dbContext.InspectActivity.GetEntity(activityId);
     /*提交前的校验检查*/
     
-    NSString *Sql=[[NSString alloc] initWithFormat: @"select sum(selected) from V_VerifyInspect where InspectActivityID='%@'",acitvityId ];
+    NSString *Sql=[NSString stringWithFormat: @"select sum(selected) from V_VerifyInspect where InspectActivityID='%@'",acitvityId ];
     sqlite3_stmt * statement = [databaseHelper ExecSql:Sql];
     
     int count = 0;
@@ -327,7 +327,7 @@
         
     }
     
-    NSString *Sql2=[[NSString alloc] initWithFormat: @"select InspectWay from InspectActivity where InspectActivityID='%@'",acitvityId ];
+    NSString *Sql2=[NSString stringWithFormat: @"select InspectWay from InspectActivity where InspectActivityID='%@'",acitvityId ];
     sqlite3_stmt * statement2 = [databaseHelper ExecSql:Sql2];
     
     
@@ -347,7 +347,7 @@
         for(InspectModel *inspect in Inspects)
         {
             //每一张表不能有未打分项，至少跳过。
-            NSString *Sql3=[[NSString alloc] initWithFormat:@"select count(1) from V_VerifyInspect where inspectid='%@' and selected=0 and isCancel=0 ",inspect.InspectId];
+            NSString *Sql3=[NSString stringWithFormat:@"select count(1) from V_VerifyInspect where inspectid='%@' and selected=0 and isCancel=0 ",inspect.InspectId];
             sqlite3_stmt * statement3 = [databaseHelper ExecSql:Sql3];
             
             NSString *Names=@"请为%@表打分或跳过!";
@@ -384,7 +384,7 @@
 -(void) InspectActivityComplete:(NSString *)acitvityId
 {
     
-    NSString * updateSql=[[NSString alloc] initWithFormat:@"UPDATE InspectActivity SET Finished=1 WHERE InspectActivityId='%@'",acitvityId];
+    NSString * updateSql=[NSString stringWithFormat:@"UPDATE InspectActivity SET Finished=1 WHERE InspectActivityId='%@'",acitvityId];
     [databaseHelper ExecuteNonQuery:updateSql];
     
 }
